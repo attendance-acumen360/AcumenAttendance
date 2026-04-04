@@ -57,6 +57,8 @@
     letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--mid); margin-bottom: 8px;
   }
+  /* FIX: Added inputmode="numeric" in HTML for Android numeric keyboard.
+     font-size >= 16px prevents iOS auto-zoom on focus. */
   input[type="tel"] {
     width: 100%;
     padding: 13px 16px;
@@ -89,9 +91,9 @@
   .error-msg.visible { display: block; }
   .state-loading { display: none; }
   .state-loading.active { display: block; }
-  .state-success { display: none; text-align: center; padding: 40px 28px; }
+  .state-success { display: none; text-align: center; padding: 40px 28px 32px; }
   .state-success.active { display: block; }
-  .state-duplicate { display: none; text-align: center; padding: 40px 28px; }
+  .state-duplicate { display: none; text-align: center; padding: 40px 28px 32px; }
   .state-duplicate.active { display: block; }
   .checkmark {
     width: 56px; height: 56px; background: var(--ink);
@@ -112,6 +114,17 @@
   }
   .success-sub { font-size: 14px; color: var(--mid); line-height: 1.6; }
   .success-name { font-weight: 600; color: var(--accent); }
+  /* FIX: Reset link shown after success/duplicate so the page is reusable */
+  .reset-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--mid);
+    text-decoration: underline;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  .reset-link:hover { color: var(--ink); }
   .dot-loader {
     display: flex; justify-content: center;
     gap: 6px; padding: 24px 0;
@@ -139,8 +152,14 @@
   <div class="card-body" id="formState">
     <div class="field">
       <label>Your Phone Number</label>
+      <!--
+        FIX: inputmode="numeric" ensures a numeric keypad on Android (type="tel"
+        alone is not always sufficient). autocomplete="off" prevents the browser
+        from pre-filling a saved number that doesn't belong to the current student.
+      -->
       <input type="tel" id="phoneInput" placeholder="Enter phone number"
-        maxlength="15" oninput="onInput()" onkeydown="onKey(event)" />
+        maxlength="15" inputmode="numeric" autocomplete="off"
+        oninput="onInput()" onkeydown="onKey(event)" />
     </div>
     <div class="error-msg" id="errorMsg"></div>
     <button class="btn" id="submitBtn" disabled onclick="submitForm()">Mark Attendance</button>
@@ -164,6 +183,8 @@
       <span class="success-name" id="successName"></span><br>
       your attendance has been recorded.
     </div>
+    <!-- FIX: Reset link so another student can mark attendance on the same device -->
+    <span class="reset-link" onclick="resetForm()">Mark for another student</span>
   </div>
 
   <div class="state-duplicate" id="duplicateState">
@@ -173,13 +194,14 @@
       <span class="success-name" id="dupName"></span><br>
       your attendance was already recorded for today.
     </div>
+    <!-- FIX: Reset link so another student can mark attendance on the same device -->
+    <span class="reset-link" onclick="resetForm()">Mark for another student</span>
   </div>
 </div>
 
 <script>
   var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 
-  // FIX: prevent double-submit
   var isSubmitting = false;
 
   function onInput() {
@@ -193,21 +215,24 @@
   function jsonp(url, cb) {
     var id = 'jsonp_' + Date.now();
     window[id] = function(data) {
-      try { document.body.removeChild(document.getElementById(id)); } catch(err) {}
-      delete window[id]; cb(data);
+      var s = document.getElementById(id);
+      if (s) { try { document.body.removeChild(s); } catch(err) {} }
+      delete window[id];
+      cb(data);
     };
     var s = document.createElement('script');
     s.id = id;
     s.src = url + '&callback=' + id;
     s.onerror = function() {
-      try { document.body.removeChild(s); } catch(err) {}
-      delete window[id]; cb(null);
+      var el = document.getElementById(id);
+      if (el) { try { document.body.removeChild(el); } catch(err) {} }
+      delete window[id];
+      cb(null);
     };
     document.body.appendChild(s);
   }
 
   function submitForm() {
-    // FIX: prevent double-tap
     if (isSubmitting) return;
     var phone = document.getElementById('phoneInput').value.trim();
     if (phone.length < 10) return;
@@ -216,7 +241,6 @@
     document.getElementById('formState').style.display = 'none';
     document.getElementById('loadingState').classList.add('active');
 
-    // FIX: 20 second timeout so spinner doesn't run forever
     var timedOut = false;
     var timeout = setTimeout(function() {
       timedOut = true;
@@ -225,9 +249,10 @@
       showForm("Request timed out. Please check your connection and try again.");
     }, 20000);
 
-    jsonp(APPS_SCRIPT_URL + '?action=submitAttendance&phone=' + encodeURIComponent(phone),
+    jsonp(
+      APPS_SCRIPT_URL + '?action=submitAttendance&phone=' + encodeURIComponent(phone),
       function(data) {
-        if (timedOut) return; // arrived after timeout, ignore
+        if (timedOut) return;
         clearTimeout(timeout);
         isSubmitting = false;
         document.getElementById('loadingState').classList.remove('active');
@@ -247,7 +272,22 @@
   function showForm(msg) {
     document.getElementById('formState').style.display = 'block';
     var el = document.getElementById('errorMsg');
-    el.textContent = msg; el.classList.add('visible');
+    el.textContent = msg;
+    el.classList.add('visible');
+  }
+
+  // FIX: Resets the entire UI back to the blank input state so another
+  // student can mark their attendance on the same device/browser tab.
+  function resetForm() {
+    document.getElementById('successState').classList.remove('active');
+    document.getElementById('duplicateState').classList.remove('active');
+    document.getElementById('loadingState').classList.remove('active');
+    document.getElementById('errorMsg').classList.remove('visible');
+    var input = document.getElementById('phoneInput');
+    input.value = '';
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('formState').style.display = 'block';
+    input.focus();
   }
 </script>
 </body>
