@@ -57,8 +57,18 @@
     letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--mid); margin-bottom: 8px;
   }
-  /* FIX: Added inputmode="numeric" in HTML for Android numeric keyboard.
-     font-size >= 16px prevents iOS auto-zoom on focus. */
+  /*
+    ISSUE 6 FIX:
+    - autocomplete="one-time-code" replaces autocomplete="off".
+      "off" is ignored by Chrome and Safari for type="tel" since ~2022.
+      "one-time-code" signals a transient value to browsers and reliably
+      suppresses autofill pre-population across Chrome, Safari, and Firefox.
+    - The onfocus handler in JS additionally clears any value that was
+      auto-populated before the user interacts, as a belt-and-suspenders
+      defence against browsers that ignore autocomplete hints entirely.
+    - font-size >= 16px prevents iOS Safari auto-zoom on focus.
+    - inputmode="numeric" gives Android users a numeric keypad.
+  */
   input[type="tel"] {
     width: 100%;
     padding: 13px 16px;
@@ -114,7 +124,7 @@
   }
   .success-sub { font-size: 14px; color: var(--mid); line-height: 1.6; }
   .success-name { font-weight: 600; color: var(--accent); }
-  /* FIX: Reset link shown after success/duplicate so the page is reusable */
+  /* Reset link shown after success/duplicate so the page is reusable */
   .reset-link {
     display: inline-block;
     margin-top: 20px;
@@ -153,13 +163,18 @@
     <div class="field">
       <label>Your Phone Number</label>
       <!--
-        FIX: inputmode="numeric" ensures a numeric keypad on Android (type="tel"
-        alone is not always sufficient). autocomplete="off" prevents the browser
-        from pre-filling a saved number that doesn't belong to the current student.
+        ISSUE 6 FIX:
+        - autocomplete="one-time-code": reliably suppresses browser autofill
+          pre-population on Chrome and Safari for tel fields (autocomplete="off"
+          has been ignored by these browsers for type="tel" since ~2022).
+        - onfocus handler in JS clears any auto-populated value as a
+          belt-and-suspenders defence for browsers that ignore the hint.
+        - inputmode="numeric": numeric keypad on Android.
+        - font-size 18px: prevents iOS Safari auto-zoom on focus.
       -->
       <input type="tel" id="phoneInput" placeholder="Enter phone number"
-        maxlength="15" inputmode="numeric" autocomplete="off"
-        oninput="onInput()" onkeydown="onKey(event)" />
+        maxlength="15" inputmode="numeric" autocomplete="one-time-code"
+        oninput="onInput()" onkeydown="onKey(event)" onfocus="onFocus()" />
     </div>
     <div class="error-msg" id="errorMsg"></div>
     <button class="btn" id="submitBtn" disabled onclick="submitForm()">Mark Attendance</button>
@@ -183,7 +198,7 @@
       <span class="success-name" id="successName"></span><br>
       your attendance has been recorded.
     </div>
-    <!-- FIX: Reset link so another student can mark attendance on the same device -->
+    <!-- Reset link so another student can mark attendance on the same device -->
     <span class="reset-link" onclick="resetForm()">Mark for another student</span>
   </div>
 
@@ -194,7 +209,7 @@
       <span class="success-name" id="dupName"></span><br>
       your attendance was already recorded for today.
     </div>
-    <!-- FIX: Reset link so another student can mark attendance on the same device -->
+    <!-- Reset link so another student can mark attendance on the same device -->
     <span class="reset-link" onclick="resetForm()">Mark for another student</span>
   </div>
 </div>
@@ -204,7 +219,20 @@
 
   var isSubmitting = false;
 
+  // ISSUE 6 FIX: Clear any browser-autofilled value on focus so a
+  // previous student's number cannot be silently pre-populated.
+  // We only clear if the field was not touched by the user (i.e. the
+  // value was set programmatically by the browser, not typed).
+  var _userHasTyped = false;
+  function onFocus() {
+    if (!_userHasTyped && document.getElementById('phoneInput').value.length > 0) {
+      document.getElementById('phoneInput').value = '';
+      document.getElementById('submitBtn').disabled = true;
+    }
+  }
+
   function onInput() {
+    _userHasTyped = true;
     var val = document.getElementById('phoneInput').value.trim();
     document.getElementById('submitBtn').disabled = val.length < 10;
     document.getElementById('errorMsg').classList.remove('visible');
@@ -212,24 +240,43 @@
 
   function onKey(e) { if (e.key === 'Enter') submitForm(); }
 
+  /*
+   * ISSUE 7 FIX: jsonp() now returns a cleanup function.  Both the
+   * timeout handler and the normal callback path call cleanup() to:
+   *   1. Remove the injected <script> tag from the DOM.
+   *   2. Delete the window[id] callback property.
+   * This prevents a late-arriving Apps Script response (after timeout)
+   * from calling a stale callback on a form that has already been reset,
+   * and eliminates the memory leak on every timeout.
+   */
   function jsonp(url, cb) {
     var id = 'jsonp_' + Date.now();
-    window[id] = function(data) {
+
+    function cleanup() {
       var s = document.getElementById(id);
-      if (s) { try { document.body.removeChild(s); } catch(err) {} }
-      delete window[id];
+      if (s) {
+        try { document.body.removeChild(s); } catch(err) {}
+      }
+      // Delete the global callback so a late response is a no-op.
+      try { delete window[id]; } catch(err) { window[id] = undefined; }
+    }
+
+    window[id] = function(data) {
+      cleanup();
       cb(data);
     };
+
     var s = document.createElement('script');
     s.id = id;
     s.src = url + '&callback=' + id;
     s.onerror = function() {
-      var el = document.getElementById(id);
-      if (el) { try { document.body.removeChild(el); } catch(err) {} }
-      delete window[id];
+      cleanup();
       cb(null);
     };
     document.body.appendChild(s);
+
+    // Return cleanup so callers (e.g. the timeout handler) can call it.
+    return cleanup;
   }
 
   function submitForm() {
@@ -242,17 +289,25 @@
     document.getElementById('loadingState').classList.add('active');
 
     var timedOut = false;
+    var cleanupJsonp = null;  // ISSUE 7 FIX: hold reference to cleanup fn
+
     var timeout = setTimeout(function() {
       timedOut = true;
       isSubmitting = false;
+
+      // ISSUE 7 FIX: Remove the <script> tag and delete window[id] so
+      // a late Apps Script response cannot fire on a reset form.
+      if (cleanupJsonp) cleanupJsonp();
+
       document.getElementById('loadingState').classList.remove('active');
       showForm("Request timed out. Please check your connection and try again.");
     }, 20000);
 
-    jsonp(
+    // ISSUE 7 FIX: capture the returned cleanup function.
+    cleanupJsonp = jsonp(
       APPS_SCRIPT_URL + '?action=submitAttendance&phone=' + encodeURIComponent(phone),
       function(data) {
-        if (timedOut) return;
+        if (timedOut) return;  // timeout already fired — UI already reset
         clearTimeout(timeout);
         isSubmitting = false;
         document.getElementById('loadingState').classList.remove('active');
@@ -276,7 +331,7 @@
     el.classList.add('visible');
   }
 
-  // FIX: Resets the entire UI back to the blank input state so another
+  // Resets the entire UI back to the blank input state so another
   // student can mark their attendance on the same device/browser tab.
   function resetForm() {
     document.getElementById('successState').classList.remove('active');
@@ -285,6 +340,7 @@
     document.getElementById('errorMsg').classList.remove('visible');
     var input = document.getElementById('phoneInput');
     input.value = '';
+    _userHasTyped = false;  // ISSUE 6 FIX: reset typed flag for next student
     document.getElementById('submitBtn').disabled = true;
     document.getElementById('formState').style.display = 'block';
     input.focus();
