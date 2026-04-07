@@ -58,16 +58,14 @@
     color: var(--mid); margin-bottom: 8px;
   }
   /*
-    ISSUE 6 FIX:
-    - autocomplete="one-time-code" replaces autocomplete="off".
-      "off" is ignored by Chrome and Safari for type="tel" since ~2022.
-      "one-time-code" signals a transient value to browsers and reliably
-      suppresses autofill pre-population across Chrome, Safari, and Firefox.
-    - The onfocus handler in JS additionally clears any value that was
-      auto-populated before the user interacts, as a belt-and-suspenders
-      defence against browsers that ignore autocomplete hints entirely.
-    - font-size >= 16px prevents iOS Safari auto-zoom on focus.
-    - inputmode="numeric" gives Android users a numeric keypad.
+    autocomplete="one-time-code" replaces autocomplete="off".
+    "off" is ignored by Chrome and Safari for type="tel" since ~2022.
+    "one-time-code" signals a transient value to browsers and reliably
+    suppresses autofill pre-population across Chrome, Safari, and Firefox.
+    The onfocus handler in JS additionally clears any auto-populated value
+    as a belt-and-suspenders defence against browsers that ignore the hint.
+    font-size >= 16px prevents iOS Safari auto-zoom on focus.
+    inputmode="numeric" gives Android users a numeric keypad.
   */
   input[type="tel"] {
     width: 100%;
@@ -124,10 +122,18 @@
   }
   .success-sub { font-size: 14px; color: var(--mid); line-height: 1.6; }
   .success-name { font-weight: 600; color: var(--accent); }
-  /* Reset link shown after success/duplicate so the page is reusable */
+  /* Auto-reset countdown shown under the success/duplicate message */
+  .auto-reset-note {
+    display: block;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--mid);
+    letter-spacing: 0.03em;
+  }
+  /* Manual reset link shown alongside the countdown */
   .reset-link {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 8px;
     font-size: 12px;
     color: var(--mid);
     text-decoration: underline;
@@ -163,14 +169,12 @@
     <div class="field">
       <label>Your Phone Number</label>
       <!--
-        ISSUE 6 FIX:
-        - autocomplete="one-time-code": reliably suppresses browser autofill
-          pre-population on Chrome and Safari for tel fields (autocomplete="off"
-          has been ignored by these browsers for type="tel" since ~2022).
-        - onfocus handler in JS clears any auto-populated value as a
-          belt-and-suspenders defence for browsers that ignore the hint.
-        - inputmode="numeric": numeric keypad on Android.
-        - font-size 18px: prevents iOS Safari auto-zoom on focus.
+        autocomplete="one-time-code": reliably suppresses browser autofill
+        pre-population on Chrome and Safari for tel fields.
+        onfocus handler in JS clears any auto-populated value as a
+        belt-and-suspenders defence for browsers that ignore the hint.
+        inputmode="numeric": numeric keypad on Android.
+        font-size 18px: prevents iOS Safari auto-zoom on focus.
       -->
       <input type="tel" id="phoneInput" placeholder="Enter phone number"
         maxlength="15" inputmode="numeric" autocomplete="one-time-code"
@@ -198,7 +202,7 @@
       <span class="success-name" id="successName"></span><br>
       your attendance has been recorded.
     </div>
-    <!-- Reset link so another student can mark attendance on the same device -->
+    <span class="auto-reset-note" id="successCountdown"></span>
     <span class="reset-link" onclick="resetForm()">Mark for another student</span>
   </div>
 
@@ -209,7 +213,7 @@
       <span class="success-name" id="dupName"></span><br>
       your attendance was already recorded for today.
     </div>
-    <!-- Reset link so another student can mark attendance on the same device -->
+    <span class="auto-reset-note" id="duplicateCountdown"></span>
     <span class="reset-link" onclick="resetForm()">Mark for another student</span>
   </div>
 </div>
@@ -217,12 +221,49 @@
 <script>
   var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 
-  var isSubmitting = false;
+  // Auto-reset after this many seconds of showing success/duplicate state.
+  // In a classroom/shared-device setting this prevents the previous
+  // student's name from remaining on screen for the next person.
+  var AUTO_RESET_SECONDS = 12;
 
-  // ISSUE 6 FIX: Clear any browser-autofilled value on focus so a
-  // previous student's number cannot be silently pre-populated.
-  // We only clear if the field was not touched by the user (i.e. the
-  // value was set programmatically by the browser, not typed).
+  var isSubmitting    = false;
+  var autoResetTimer  = null;   // setTimeout handle for the auto-reset
+  var countdownTimer  = null;   // setInterval handle for the countdown display
+
+  // Clear any running auto-reset and countdown timers.
+  function clearAutoResetTimers() {
+    if (autoResetTimer)  { clearTimeout(autoResetTimer);   autoResetTimer  = null; }
+    if (countdownTimer)  { clearInterval(countdownTimer);  countdownTimer  = null; }
+  }
+
+  // Start the auto-reset countdown. countdownEl is the element to update
+  // with the remaining seconds text.
+  function startAutoReset(countdownEl) {
+    clearAutoResetTimers();
+
+    var remaining = AUTO_RESET_SECONDS;
+    countdownEl.textContent = "Resetting in " + remaining + "s…";
+
+    countdownTimer = setInterval(function() {
+      remaining -= 1;
+      if (remaining > 0) {
+        countdownEl.textContent = "Resetting in " + remaining + "s…";
+      } else {
+        countdownEl.textContent = "";
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+      }
+    }, 1000);
+
+    autoResetTimer = setTimeout(function() {
+      autoResetTimer = null;
+      resetForm();
+    }, AUTO_RESET_SECONDS * 1000);
+  }
+
+  // Clear any browser-autofilled value on focus so a previous student's
+  // number cannot be silently pre-populated. Only clears if the user has
+  // not yet typed (i.e. the value was set programmatically by the browser).
   var _userHasTyped = false;
   function onFocus() {
     if (!_userHasTyped && document.getElementById('phoneInput').value.length > 0) {
@@ -241,8 +282,8 @@
   function onKey(e) { if (e.key === 'Enter') submitForm(); }
 
   /*
-   * ISSUE 7 FIX: jsonp() now returns a cleanup function.  Both the
-   * timeout handler and the normal callback path call cleanup() to:
+   * jsonp() returns a cleanup function. Both the timeout handler and the
+   * normal callback path call cleanup() to:
    *   1. Remove the injected <script> tag from the DOM.
    *   2. Delete the window[id] callback property.
    * This prevents a late-arriving Apps Script response (after timeout)
@@ -257,7 +298,6 @@
       if (s) {
         try { document.body.removeChild(s); } catch(err) {}
       }
-      // Delete the global callback so a late response is a no-op.
       try { delete window[id]; } catch(err) { window[id] = undefined; }
     }
 
@@ -275,7 +315,6 @@
     };
     document.body.appendChild(s);
 
-    // Return cleanup so callers (e.g. the timeout handler) can call it.
     return cleanup;
   }
 
@@ -288,26 +327,21 @@
     document.getElementById('formState').style.display = 'none';
     document.getElementById('loadingState').classList.add('active');
 
-    var timedOut = false;
-    var cleanupJsonp = null;  // ISSUE 7 FIX: hold reference to cleanup fn
+    var timedOut     = false;
+    var cleanupJsonp = null;
 
     var timeout = setTimeout(function() {
       timedOut = true;
       isSubmitting = false;
-
-      // ISSUE 7 FIX: Remove the <script> tag and delete window[id] so
-      // a late Apps Script response cannot fire on a reset form.
       if (cleanupJsonp) cleanupJsonp();
-
       document.getElementById('loadingState').classList.remove('active');
       showForm("Request timed out. Please check your connection and try again.");
     }, 20000);
 
-    // ISSUE 7 FIX: capture the returned cleanup function.
     cleanupJsonp = jsonp(
       APPS_SCRIPT_URL + '?action=submitAttendance&phone=' + encodeURIComponent(phone),
       function(data) {
-        if (timedOut) return;  // timeout already fired — UI already reset
+        if (timedOut) return;
         clearTimeout(timeout);
         isSubmitting = false;
         document.getElementById('loadingState').classList.remove('active');
@@ -316,9 +350,14 @@
         if (data.duplicate) {
           document.getElementById('dupName').textContent = data.studentName;
           document.getElementById('duplicateState').classList.add('active');
+          // FIX — auto-reset: start countdown so the next student is not
+          // shown the previous student's name on a shared device.
+          startAutoReset(document.getElementById('duplicateCountdown'));
         } else {
           document.getElementById('successName').textContent = data.studentName;
           document.getElementById('successState').classList.add('active');
+          // FIX — auto-reset
+          startAutoReset(document.getElementById('successCountdown'));
         }
       }
     );
@@ -334,13 +373,19 @@
   // Resets the entire UI back to the blank input state so another
   // student can mark their attendance on the same device/browser tab.
   function resetForm() {
+    // Cancel any pending auto-reset so a manual click doesn't double-reset
+    clearAutoResetTimers();
+
     document.getElementById('successState').classList.remove('active');
     document.getElementById('duplicateState').classList.remove('active');
     document.getElementById('loadingState').classList.remove('active');
     document.getElementById('errorMsg').classList.remove('visible');
+    document.getElementById('successCountdown').textContent   = '';
+    document.getElementById('duplicateCountdown').textContent = '';
+
     var input = document.getElementById('phoneInput');
     input.value = '';
-    _userHasTyped = false;  // ISSUE 6 FIX: reset typed flag for next student
+    _userHasTyped = false;
     document.getElementById('submitBtn').disabled = true;
     document.getElementById('formState').style.display = 'block';
     input.focus();
