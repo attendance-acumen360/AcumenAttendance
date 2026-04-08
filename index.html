@@ -3,278 +3,780 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mark Attendance</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Mark Attendance — Acumen360</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink: #0f1117; --paper: #f5f3ee; --accent: #d4400a;
-    --mid: #6b6660; --card: #ffffff; --border: #e2ddd8;
-  }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    padding: 24px 16px;
-  }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    width: 100%; max-width: 420px;
-    overflow: hidden;
-    box-shadow: 0 2px 24px rgba(0,0,0,0.07);
-  }
-  .card-header {
-    background: var(--ink);
-    padding: 28px 28px 28px;
-    position: relative;
-  }
-  .card-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 60px; height: 3px;
-    background: var(--accent);
-  }
-  .brand {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); margin-bottom: 8px;
-  }
-  .card-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px; font-weight: 800;
-    color: #fff; line-height: 1.2;
-  }
-  .card-body { padding: 28px; }
-  .field { margin-bottom: 20px; }
-  label {
-    display: block;
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--mid); margin-bottom: 8px;
-  }
-  /*
-    autocomplete="one-time-code" replaces autocomplete="off".
-    "off" is ignored by Chrome and Safari for type="tel" since ~2022.
-    "one-time-code" signals a transient value to browsers and reliably
-    suppresses autofill pre-population across Chrome, Safari, and Firefox.
-    The onfocus handler in JS additionally clears any auto-populated value
-    as a belt-and-suspenders defence against browsers that ignore the hint.
-    font-size >= 16px prevents iOS Safari auto-zoom on focus.
-    inputmode="numeric" gives Android users a numeric keypad.
-  */
-  input[type="tel"] {
-    width: 100%;
-    padding: 13px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 3px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 18px; color: var(--ink);
-    background: #fff;
-    letter-spacing: 0.05em;
-    transition: border-color 0.15s;
-  }
-  input[type="tel"]:focus { outline: none; border-color: var(--accent); }
-  .btn {
-    width: 100%; padding: 15px;
-    background: var(--ink); color: #fff;
-    border: none; border-radius: 3px;
-    font-family: 'Syne', sans-serif;
-    font-size: 14px; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    cursor: pointer; transition: background 0.15s; margin-top: 8px;
-  }
-  .btn:hover { background: #1e2330; }
-  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .error-msg {
-    background: #fff0ee; border: 1px solid #ffc9bf;
-    border-radius: 3px; padding: 12px 16px;
-    font-size: 13px; color: var(--accent);
-    margin-top: 12px; display: none; line-height: 1.5;
-  }
-  .error-msg.visible { display: block; }
-  .state-loading { display: none; }
-  .state-loading.active { display: block; }
-  .state-success { display: none; text-align: center; padding: 40px 28px 32px; }
-  .state-success.active { display: block; }
-  .state-duplicate { display: none; text-align: center; padding: 40px 28px 32px; }
-  .state-duplicate.active { display: block; }
-  .checkmark {
-    width: 56px; height: 56px; background: var(--ink);
-    border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; margin: 0 auto 20px;
-  }
-  .checkmark svg { width: 26px; height: 26px; }
-  .warn-icon {
-    width: 56px; height: 56px; background: #b45309;
-    border-radius: 50%; display: flex;
-    align-items: center; justify-content: center;
-    margin: 0 auto 20px; font-size: 24px;
-  }
-  .success-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px; font-weight: 800;
-    color: var(--ink); margin-bottom: 8px;
-  }
-  .success-sub { font-size: 14px; color: var(--mid); line-height: 1.6; }
-  .success-name { font-weight: 600; color: var(--accent); }
-  /* Auto-reset countdown shown under the success/duplicate message */
-  .auto-reset-note {
-    display: block;
-    margin-top: 16px;
-    font-size: 12px;
-    color: var(--mid);
-    letter-spacing: 0.03em;
-  }
-  /* Manual reset link shown alongside the countdown */
-  .reset-link {
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 12px;
-    color: var(--mid);
-    text-decoration: underline;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-  }
-  .reset-link:hover { color: var(--ink); }
-  .dot-loader {
-    display: flex; justify-content: center;
-    gap: 6px; padding: 24px 0;
-  }
-  .dot {
-    width: 8px; height: 8px;
-    background: var(--ink); border-radius: 50%;
-    animation: bounce 0.9s infinite;
-  }
-  .dot:nth-child(2) { animation-delay: 0.15s; }
-  .dot:nth-child(3) { animation-delay: 0.3s; }
-  @keyframes bounce {
-    0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
-    40% { transform: translateY(-8px); opacity: 1; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #0a0a0a;
+  --red:     #D0261A;
+  --red-dk:  #a81e14;
+  --red-lt:  #ff3b2e;
+  --white:   #ffffff;
+  --off:     #f7f5f2;
+  --gray:    #999490;
+  --border:  #e8e4e0;
+  --card-sh: 0 8px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+html { height: 100%; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--off);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 40px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── background geometry ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(208,38,26,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(208,38,26,0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* diagonal rule top-left */
+body::after {
+  content: '';
+  position: fixed;
+  top: -120px; left: -120px;
+  width: 440px; height: 440px;
+  border: 1px solid rgba(208,38,26,0.10);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── main card ── */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--card-sh);
+  animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── header ── */
+.card-header {
+  background: var(--black);
+  padding: 32px 28px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* large decorative "A" watermark */
+.card-header::before {
+  content: '360°';
+  position: absolute;
+  right: -12px; top: -14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -2px;
+}
+
+/* red accent bar */
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--red) 0%, var(--red-lt) 60%, transparent 100%);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* logo mark — geometric A */
+.logo-mark {
+  width: 36px; height: 36px;
+  background: var(--red);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.logo-mark svg {
+  width: 20px; height: 20px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+.logo-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  line-height: 1;
+}
+.logo-tagline {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.header-divider {
+  width: 32px; height: 1px;
+  background: rgba(255,255,255,0.12);
+  margin-bottom: 14px;
+}
+
+.header-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: var(--white);
+}
+
+.header-title span {
+  display: block;
+  color: rgba(255,255,255,0.45);
+  font-size: 30px;
+}
+
+/* ── body ── */
+.card-body {
+  padding: 28px 28px 24px;
+}
+
+/* instruction pill */
+.instruction {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(208,38,26,0.06);
+  border: 1px solid rgba(208,38,26,0.12);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 24px;
+}
+.instruction-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.instruction-text {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--red-dk);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+/* field */
+.field { margin-bottom: 8px; }
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+.field-label svg {
+  width: 12px; height: 12px;
+  opacity: 0.5;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  color: var(--gray);
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+input[type="tel"] {
+  width: 100%;
+  padding: 15px 16px 15px 46px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--black);
+  background: var(--off);
+  letter-spacing: 0.08em;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+input[type="tel"]::placeholder {
+  color: #c4bfba;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+input[type="tel"]:focus {
+  outline: none;
+  border-color: var(--red);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(208,38,26,0.08);
+}
+input[type="tel"]:focus + .input-border-glow {
+  opacity: 1;
+}
+.input-wrap:focus-within .input-icon {
+  color: var(--red);
+}
+
+/* character counter */
+.char-hint {
+  text-align: right;
+  font-size: 11px;
+  color: #c4bfba;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+  height: 14px;
+  transition: color 0.2s;
+}
+.char-hint.ready { color: var(--red); font-weight: 500; }
+
+/* submit button */
+.btn {
+  width: 100%;
+  padding: 17px 16px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 19px;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  margin-top: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+.btn:not(:disabled):hover::before { transform: scaleX(1); }
+.btn:not(:disabled):active { transform: scale(0.98); }
+.btn-text, .btn-icon { position: relative; z-index: 1; }
+.btn-icon {
+  width: 18px; height: 18px;
+  transition: transform 0.2s;
+}
+.btn:not(:disabled):hover .btn-icon { transform: translateX(3px); }
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* error */
+.error-msg {
+  background: rgba(208,38,26,0.06);
+  border: 1px solid rgba(208,38,26,0.2);
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--red-dk);
+  margin-top: 14px;
+  display: none;
+  line-height: 1.5;
+  animation: slideDown 0.2s ease;
+}
+.error-msg.visible { display: block; }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── loading ── */
+.state-loading { display: none; padding: 32px 28px; }
+.state-loading.active { display: block; }
+
+.loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.spinner-ring {
+  width: 48px; height: 48px;
+  position: relative;
+}
+.spinner-ring svg {
+  width: 100%; height: 100%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-label {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+/* ── success / duplicate ── */
+.state-success,
+.state-duplicate {
+  display: none;
+  padding: 36px 28px 32px;
+  text-align: center;
+  animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.state-success.active,
+.state-duplicate.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* icon badge */
+.status-badge {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  position: relative;
+}
+.status-badge::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  opacity: 0.2;
+  animation: ringPop 0.5s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes ringPop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1); opacity: 0.2; }
+}
+.status-badge.success {
+  background: var(--black);
+  color: var(--white);
+}
+.status-badge.duplicate {
+  background: rgba(208,38,26,0.1);
+  color: var(--red);
+}
+.status-badge svg { width: 30px; height: 30px; }
+
+.status-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.status-eyebrow.success { color: var(--red); }
+.status-eyebrow.duplicate { color: var(--gray); }
+
+.status-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.status-sub {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+.status-name {
+  font-weight: 600;
+  color: var(--black);
+}
+
+/* countdown + reset */
+.auto-reset-note {
+  display: block;
+  margin-top: 18px;
+  font-size: 11px;
+  color: #c4bfba;
+  letter-spacing: 0.04em;
+}
+
+.reset-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.reset-link:hover { color: var(--black); border-color: var(--black); }
+.reset-link svg { width: 12px; height: 12px; }
+
+/* ── footer strip ── */
+.card-footer {
+  background: var(--off);
+  border-top: 1px solid var(--border);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-left {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c4bfba;
+}
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #c4bfba;
+  letter-spacing: 0.04em;
+}
+.footer-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34,197,94,0.2);
+}
+
+/* date badge below card */
+.date-badge {
+  margin-top: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: cardIn 0.55s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.date-badge svg { width: 12px; height: 12px; opacity: 0.5; }
+
+/* ── mobile touch refinements ── */
+@media (max-width: 440px) {
+  body { padding: 16px 12px 32px; }
+  .card { border-radius: 16px; }
+  .card-header { padding: 28px 22px 24px; }
+  .card-body { padding: 22px 22px 20px; }
+  .card-footer { padding: 12px 22px; }
+  .state-success, .state-duplicate { padding: 28px 22px 24px; }
+}
 </style>
 </head>
 <body>
+
 <div class="card">
+
+  <!-- ══ HEADER ══ -->
   <div class="card-header">
-    <div class="brand">Acumen GATE Academy</div>
-    <div class="card-title">Mark Your<br>Attendance</div>
+    <div class="header-top">
+      <div class="logo-mark">
+        <!-- geometric 360 mark -->
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2 L17 6 L17 14 L10 18 L3 14 L3 6 Z" stroke="white" stroke-width="1.5" fill="none"/>
+          <circle cx="10" cy="10" r="2.5" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">ACUMEN 360°</span>
+        <span class="logo-tagline">Empower to Excel</span>
+      </div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-eyebrow">GATE Academy</div>
+    <div class="header-title">
+      Mark Your
+      <span>Attendance</span>
+    </div>
   </div>
 
+  <!-- ══ FORM STATE ══ -->
   <div class="card-body" id="formState">
+    <div class="instruction">
+      <div class="instruction-dot"></div>
+      <div class="instruction-text">Enter your registered 10-digit mobile number below</div>
+    </div>
+
     <div class="field">
-      <label>Your Phone Number</label>
-      <!--
-        autocomplete="one-time-code": reliably suppresses browser autofill
-        pre-population on Chrome and Safari for tel fields.
-        onfocus handler in JS clears any auto-populated value as a
-        belt-and-suspenders defence for browsers that ignore the hint.
-        inputmode="numeric": numeric keypad on Android.
-        font-size 18px: prevents iOS Safari auto-zoom on focus.
-      -->
-      <input type="tel" id="phoneInput" placeholder="Enter phone number"
-        maxlength="15" inputmode="numeric" autocomplete="one-time-code"
-        oninput="onInput()" onkeydown="onKey(event)" onfocus="onFocus()" />
+      <div class="field-label">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="0.5" width="8" height="11" rx="1.5"/>
+          <line x1="4.5" y1="9" x2="7.5" y2="9"/>
+        </svg>
+        Mobile Number
+      </div>
+      <div class="input-wrap">
+        <svg class="input-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3.5" y="1" width="11" height="16" rx="2"/>
+          <line x1="7" y1="13.5" x2="11" y2="13.5"/>
+        </svg>
+        <!--
+          autocomplete="one-time-code": suppresses browser autofill on tel fields.
+          onfocus handler clears any auto-populated value as a backup defence.
+          inputmode="numeric": numeric keypad on Android.
+          font-size 18px: prevents iOS Safari auto-zoom on focus.
+        -->
+        <input type="tel" id="phoneInput" placeholder="98765 43210"
+          maxlength="15" inputmode="numeric" autocomplete="one-time-code"
+          oninput="onInput()" onkeydown="onKey(event)" onfocus="onFocus()" />
+      </div>
+      <div class="char-hint" id="charHint">10 digits required</div>
     </div>
+
     <div class="error-msg" id="errorMsg"></div>
-    <button class="btn" id="submitBtn" disabled onclick="submitForm()">Mark Attendance</button>
+
+    <button class="btn" id="submitBtn" disabled onclick="submitForm()">
+      <span class="btn-text">Mark Attendance</span>
+      <svg class="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="9" x2="15" y2="9"/>
+        <polyline points="10 4 15 9 10 14"/>
+      </svg>
+    </button>
   </div>
 
+  <!-- ══ LOADING ══ -->
   <div class="state-loading" id="loadingState">
-    <div class="dot-loader">
-      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="loading-inner">
+      <div class="spinner-ring">
+        <svg viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="20" stroke="#e8e4e0" stroke-width="3"/>
+          <path d="M24 4 A20 20 0 0 1 44 24" stroke="#D0261A" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="loading-label">Verifying…</span>
     </div>
   </div>
 
+  <!-- ══ SUCCESS ══ -->
   <div class="state-success" id="successState">
-    <div class="checkmark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"
-           stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12"/>
+    <div class="status-badge success">
+      <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 15 12 21 24 9"/>
       </svg>
     </div>
-    <div class="success-title">Attendance Marked</div>
-    <div class="success-sub">
-      <span class="success-name" id="successName"></span><br>
-      your attendance has been recorded.
+    <div class="status-eyebrow success">Recorded</div>
+    <div class="status-title">Attendance Marked!</div>
+    <div class="status-sub">
+      Welcome, <span class="status-name" id="successName"></span>.<br>
+      Your attendance has been recorded for today.
     </div>
     <span class="auto-reset-note" id="successCountdown"></span>
-    <span class="reset-link" onclick="resetForm()">Mark for another student</span>
+    <br>
+    <span class="reset-link" onclick="resetForm()">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M9 2 L3 6 L9 10"/>
+      </svg>
+      Mark for another student
+    </span>
   </div>
 
+  <!-- ══ DUPLICATE ══ -->
   <div class="state-duplicate" id="duplicateState">
-    <div class="warn-icon">⚠</div>
-    <div class="success-title">Already Marked</div>
-    <div class="success-sub">
-      <span class="success-name" id="dupName"></span><br>
+    <div class="status-badge duplicate">
+      <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="15" cy="15" r="11"/>
+        <line x1="15" y1="10" x2="15" y2="16"/>
+        <circle cx="15" cy="20" r="0.5" fill="currentColor" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="status-eyebrow duplicate">Already Submitted</div>
+    <div class="status-title">Already Marked</div>
+    <div class="status-sub">
+      <span class="status-name" id="dupName"></span>,<br>
       your attendance was already recorded for today.
     </div>
     <span class="auto-reset-note" id="duplicateCountdown"></span>
-    <span class="reset-link" onclick="resetForm()">Mark for another student</span>
+    <br>
+    <span class="reset-link" onclick="resetForm()">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M9 2 L3 6 L9 10"/>
+      </svg>
+      Mark for another student
+    </span>
   </div>
+
+  <!-- ══ FOOTER STRIP ══ -->
+  <div class="card-footer">
+    <span class="footer-left">Acumen GATE Academy</span>
+    <span class="footer-right">
+      <span class="footer-dot"></span>
+      System Online
+    </span>
+  </div>
+
+</div>
+
+<!-- date shown below card -->
+<div class="date-badge" id="dateBadge">
+  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="1" y="2" width="10" height="9" rx="1.5"/>
+    <line x1="4" y1="1" x2="4" y2="3"/>
+    <line x1="8" y1="1" x2="8" y2="3"/>
+    <line x1="1" y1="5" x2="11" y2="5"/>
+  </svg>
+  <span id="todayDate"></span>
 </div>
 
 <script>
   var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 
   // Auto-reset after this many seconds of showing success/duplicate state.
-  // In a classroom/shared-device setting this prevents the previous
-  // student's name from remaining on screen for the next person.
   var AUTO_RESET_SECONDS = 12;
 
-  var isSubmitting    = false;
-  var autoResetTimer  = null;   // setTimeout handle for the auto-reset
-  var countdownTimer  = null;   // setInterval handle for the countdown display
+  var isSubmitting   = false;
+  var autoResetTimer = null;
+  var countdownTimer = null;
 
-  // Clear any running auto-reset and countdown timers.
+  // Populate today's date badge
+  (function() {
+    var d = new Date();
+    var opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    document.getElementById('todayDate').textContent = d.toLocaleDateString('en-IN', opts);
+  })();
+
   function clearAutoResetTimers() {
-    if (autoResetTimer)  { clearTimeout(autoResetTimer);   autoResetTimer  = null; }
-    if (countdownTimer)  { clearInterval(countdownTimer);  countdownTimer  = null; }
+    if (autoResetTimer) { clearTimeout(autoResetTimer);  autoResetTimer = null; }
+    if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
   }
 
-  // Start the auto-reset countdown. countdownEl is the element to update
-  // with the remaining seconds text.
   function startAutoReset(countdownEl) {
     clearAutoResetTimers();
-
     var remaining = AUTO_RESET_SECONDS;
-    countdownEl.textContent = "Resetting in " + remaining + "s…";
-
+    countdownEl.textContent = "Resetting in " + remaining + "s\u2026";
     countdownTimer = setInterval(function() {
       remaining -= 1;
       if (remaining > 0) {
-        countdownEl.textContent = "Resetting in " + remaining + "s…";
+        countdownEl.textContent = "Resetting in " + remaining + "s\u2026";
       } else {
         countdownEl.textContent = "";
         clearInterval(countdownTimer);
         countdownTimer = null;
       }
     }, 1000);
-
     autoResetTimer = setTimeout(function() {
       autoResetTimer = null;
       resetForm();
     }, AUTO_RESET_SECONDS * 1000);
   }
 
-  // Clear any browser-autofilled value on focus so a previous student's
-  // number cannot be silently pre-populated. Only clears if the user has
-  // not yet typed (i.e. the value was set programmatically by the browser).
+  // Clear any browser-autofilled value on focus.
   var _userHasTyped = false;
   function onFocus() {
     if (!_userHasTyped && document.getElementById('phoneInput').value.length > 0) {
       document.getElementById('phoneInput').value = '';
       document.getElementById('submitBtn').disabled = true;
+      updateCharHint(0);
+    }
+  }
+
+  function updateCharHint(len) {
+    var hint = document.getElementById('charHint');
+    if (len === 0) {
+      hint.textContent = '10 digits required';
+      hint.className = 'char-hint';
+    } else if (len < 10) {
+      hint.textContent = (10 - len) + ' more digit' + (10 - len === 1 ? '' : 's') + ' needed';
+      hint.className = 'char-hint';
+    } else {
+      hint.textContent = '\u2713 Ready to submit';
+      hint.className = 'char-hint ready';
     }
   }
 
   function onInput() {
     _userHasTyped = true;
     var val = document.getElementById('phoneInput').value.trim();
+    var digits = val.replace(/\D/g, '');
+    updateCharHint(digits.length);
     document.getElementById('submitBtn').disabled = val.length < 10;
     document.getElementById('errorMsg').classList.remove('visible');
   }
@@ -286,35 +788,20 @@
    * normal callback path call cleanup() to:
    *   1. Remove the injected <script> tag from the DOM.
    *   2. Delete the window[id] callback property.
-   * This prevents a late-arriving Apps Script response (after timeout)
-   * from calling a stale callback on a form that has already been reset,
-   * and eliminates the memory leak on every timeout.
    */
   function jsonp(url, cb) {
     var id = 'jsonp_' + Date.now();
-
     function cleanup() {
       var s = document.getElementById(id);
-      if (s) {
-        try { document.body.removeChild(s); } catch(err) {}
-      }
+      if (s) { try { document.body.removeChild(s); } catch(err) {} }
       try { delete window[id]; } catch(err) { window[id] = undefined; }
     }
-
-    window[id] = function(data) {
-      cleanup();
-      cb(data);
-    };
-
+    window[id] = function(data) { cleanup(); cb(data); };
     var s = document.createElement('script');
     s.id = id;
     s.src = url + '&callback=' + id;
-    s.onerror = function() {
-      cleanup();
-      cb(null);
-    };
+    s.onerror = function() { cleanup(); cb(null); };
     document.body.appendChild(s);
-
     return cleanup;
   }
 
@@ -327,7 +814,7 @@
     document.getElementById('formState').style.display = 'none';
     document.getElementById('loadingState').classList.add('active');
 
-    var timedOut     = false;
+    var timedOut = false;
     var cleanupJsonp = null;
 
     var timeout = setTimeout(function() {
@@ -350,13 +837,10 @@
         if (data.duplicate) {
           document.getElementById('dupName').textContent = data.studentName;
           document.getElementById('duplicateState').classList.add('active');
-          // FIX — auto-reset: start countdown so the next student is not
-          // shown the previous student's name on a shared device.
           startAutoReset(document.getElementById('duplicateCountdown'));
         } else {
           document.getElementById('successName').textContent = data.studentName;
           document.getElementById('successState').classList.add('active');
-          // FIX — auto-reset
           startAutoReset(document.getElementById('successCountdown'));
         }
       }
@@ -370,22 +854,18 @@
     el.classList.add('visible');
   }
 
-  // Resets the entire UI back to the blank input state so another
-  // student can mark their attendance on the same device/browser tab.
   function resetForm() {
-    // Cancel any pending auto-reset so a manual click doesn't double-reset
     clearAutoResetTimers();
-
     document.getElementById('successState').classList.remove('active');
     document.getElementById('duplicateState').classList.remove('active');
     document.getElementById('loadingState').classList.remove('active');
     document.getElementById('errorMsg').classList.remove('visible');
-    document.getElementById('successCountdown').textContent   = '';
+    document.getElementById('successCountdown').textContent = '';
     document.getElementById('duplicateCountdown').textContent = '';
-
     var input = document.getElementById('phoneInput');
     input.value = '';
     _userHasTyped = false;
+    updateCharHint(0);
     document.getElementById('submitBtn').disabled = true;
     document.getElementById('formState').style.display = 'block';
     input.focus();
