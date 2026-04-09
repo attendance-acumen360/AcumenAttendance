@@ -758,13 +758,13 @@ input[type="tel"]:focus + .input-border-glow {
     }
   }
 
-  function updateCharHint(len) {
+  function updateCharHint(digitCount) {
     var hint = document.getElementById('charHint');
-    if (len === 0) {
+    if (digitCount === 0) {
       hint.textContent = '10 digits required';
       hint.className = 'char-hint';
-    } else if (len < 10) {
-      hint.textContent = (10 - len) + ' more digit' + (10 - len === 1 ? '' : 's') + ' needed';
+    } else if (digitCount < 10) {
+      hint.textContent = (10 - digitCount) + ' more digit' + (10 - digitCount === 1 ? '' : 's') + ' needed';
       hint.className = 'char-hint';
     } else {
       hint.textContent = '\u2713 Ready to submit';
@@ -772,12 +772,31 @@ input[type="tel"]:focus + .input-border-glow {
     }
   }
 
+  // FIX (Issue 2): Count DIGITS only, not raw string length.
+  //
+  // Previously: document.getElementById('submitBtn').disabled = val.length < 10;
+  // This used the raw input string length, so "+91 98765" (10 chars) would
+  // enable the button even though it contains only 8 digits after stripping.
+  // The backend cleanPhone() strips non-digits and requires exactly 10, so
+  // a mismatched frontend count produced a confusing server-side error.
+  //
+  // Fix: strip non-digit characters first (matching cleanPhone logic), then
+  // compare digit count. The button enables if and only if exactly 10 digits
+  // are present — the same condition cleanPhone() will accept.
+  //
+  // updateCharHint already received the digit count correctly before this fix.
+  // The submitBtn disable logic now uses the same digits variable, so both
+  // the hint text and the button state are always derived from the same value.
   function onInput() {
     _userHasTyped = true;
-    var val = document.getElementById('phoneInput').value.trim();
+    var val    = document.getElementById('phoneInput').value;
     var digits = val.replace(/\D/g, '');
+
     updateCharHint(digits.length);
-    document.getElementById('submitBtn').disabled = val.length < 10;
+
+    // Enable only when exactly 10 digits are present — mirrors cleanPhone() on backend.
+    document.getElementById('submitBtn').disabled = (digits.length !== 10);
+
     document.getElementById('errorMsg').classList.remove('visible');
   }
 
@@ -807,8 +826,18 @@ input[type="tel"]:focus + .input-border-glow {
 
   function submitForm() {
     if (isSubmitting) return;
-    var phone = document.getElementById('phoneInput').value.trim();
-    if (phone.length < 10) return;
+
+    // Guard: re-extract digits from current input value.
+    // Prevents submitting if somehow the button was clicked with fewer digits
+    // (e.g. rapid autofill edge cases on certain Android browsers).
+    var rawVal = document.getElementById('phoneInput').value;
+    var digits = rawVal.replace(/\D/g, '');
+    if (digits.length !== 10) return;
+
+    // Send the raw value; the backend cleanPhone() will strip non-digits
+    // and validate. We send rawVal (not just digits) to preserve the
+    // exact string the user typed, consistent with the original behaviour.
+    var phone = rawVal.trim();
 
     isSubmitting = true;
     document.getElementById('formState').style.display = 'none';
