@@ -396,9 +396,9 @@ function renderDashboard(data) {
   renderTodayBanner(data.classesToday || []);
   renderStats(data.stats);
   populateFilters(data.students, data.absentees, data.facultyStats);
-  renderStudents(data.students);
-  renderAbsentees(data.absentees);
-  renderFaculty(data.facultyStats);
+  applyStudentFilters();
+  applyAbsentFilters();
+  applyFacFilters();
 
   document.getElementById('dashPage').style.display = 'block';
 }
