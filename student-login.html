@@ -9,477 +9,112 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  
 :root {
-  --black:   #0a0a0a;
-  --red:     #D0261A;
-  --red-dk:  #a81e14;
-  --red-lt:  #ff3b2e;
-  --white:   #ffffff;
-  --off:     #f7f5f2;
-  --gray:    #999490;
-  --border:  #e8e4e0;
-  --card-sh: 0 8px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  --black:#0a0a0a; --red:#D0261A; --red-dk:#a81e14; --red-lt:#ff3b2e;
+  --white:#ffffff; --off:#f7f5f2; --gray:#999490; --border:#e8e4e0;
+  --card-sh:0 8px 40px rgba(0,0,0,0.10),0 2px 8px rgba(0,0,0,0.06);
 }
+html { height:100%; }
+body { font-family:'Outfit',sans-serif;background:var(--off);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 40px;position:relative;overflow-x:hidden; }
+body::before { content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(208,38,26,.08) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 100% 100%,rgba(208,38,26,.05) 0%,transparent 60%);pointer-events:none;z-index:0; }
+body::after { content:'';position:fixed;top:-120px;left:-120px;width:440px;height:440px;border:1px solid rgba(208,38,26,.10);border-radius:50%;pointer-events:none;z-index:0; }
 
-html { height: 100%; }
+.card { position:relative;z-index:1;width:100%;max-width:420px;background:var(--white);border-radius:20px;overflow:hidden;box-shadow:var(--card-sh);animation:cardIn .55s cubic-bezier(.22,1,.36,1) both; }
+@keyframes cardIn { from{opacity:0;transform:translateY(28px) scale(.97)} to{opacity:1;transform:translateY(0) scale(1)} }
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--off);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px 16px 40px;
-  position: relative;
-  overflow-x: hidden;
-}
+/* HEADER */
+.card-header { background:var(--black);padding:32px 28px 28px;position:relative;overflow:hidden; }
+.card-header::before { content:'360°';position:absolute;right:-12px;top:-14px;font-family:'Bebas Neue',sans-serif;font-size:120px;color:rgba(255,255,255,.04);line-height:1;user-select:none;pointer-events:none; }
+.card-header::after { content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--red) 0%,var(--red-lt) 60%,transparent 100%); }
+.header-top { display:flex;align-items:center;gap:10px;margin-bottom:20px; }
+.logo-mark { width:36px;height:36px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+.logo-mark svg { width:20px;height:20px; }
+.logo-text { display:flex;flex-direction:column; }
+.logo-name { font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.06em;color:var(--white);line-height:1; }
+.logo-tagline { font-size:9px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:2px; }
+.header-divider { width:32px;height:1px;background:rgba(255,255,255,.12);margin-bottom:14px; }
+.header-eyebrow { font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:6px; }
+.header-title { font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:.95;letter-spacing:.02em;color:var(--white); }
+.header-title span { display:block;color:rgba(255,255,255,.45);font-size:30px; }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(208,38,26,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(208,38,26,0.05) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
+/* STEPS */
+.steps { display:flex;align-items:center;gap:8px;padding:16px 28px;border-bottom:1px solid var(--border);background:var(--off); }
+.step { display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#c4bfba;transition:color .3s; }
+.step.active { color:var(--black); }
+.step.done   { color:var(--red); }
+.step-num { width:20px;height:20px;border-radius:50%;background:#e8e4e0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#c4bfba;transition:background .3s,color .3s;flex-shrink:0; }
+.step.active .step-num { background:var(--black);color:var(--white); }
+.step.done   .step-num { background:var(--red);color:var(--white); }
+.step-line { flex:1;height:1px;background:var(--border); }
 
-body::after {
-  content: '';
-  position: fixed;
-  top: -120px; left: -120px;
-  width: 440px; height: 440px;
-  border: 1px solid rgba(208,38,26,0.10);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
+/* BODY */
+.card-body { padding:28px 28px 24px; }
+.instruction { display:flex;align-items:flex-start;gap:8px;background:rgba(208,38,26,.06);border:1px solid rgba(208,38,26,.12);border-radius:8px;padding:10px 14px;margin-bottom:24px; }
+.instruction-dot { width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:4px;animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+.instruction-text { font-size:12px;color:var(--red-dk);line-height:1.5; }
+.field { margin-bottom:8px; }
+.field-label { display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:8px; }
+.input-wrap { position:relative; }
+.input-icon { position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--gray);pointer-events:none;transition:color .2s; }
+.input-wrap:focus-within .input-icon { color:var(--red); }
+input[type="tel"],input[type="text"] { width:100%;padding:15px 16px 15px 46px;border:1.5px solid var(--border);border-radius:12px;font-family:'Outfit',sans-serif;font-size:18px;font-weight:500;color:var(--black);background:var(--off);letter-spacing:.08em;transition:border-color .2s,background .2s,box-shadow .2s;-webkit-appearance:none; }
+input::placeholder { color:#c4bfba;font-weight:400;letter-spacing:.02em; }
+input:focus { outline:none;border-color:var(--red);background:var(--white);box-shadow:0 0 0 4px rgba(208,38,26,.08); }
+.otp-input { text-align:center;letter-spacing:.3em!important;font-size:24px!important;padding:15px 16px!important; }
+.char-hint { text-align:right;font-size:11px;color:#c4bfba;margin-top:6px;height:14px;transition:color .2s; }
+.char-hint.ready { color:var(--red);font-weight:500; }
+.resend-row { display:flex;align-items:center;justify-content:space-between;margin-top:10px; }
+.resend-note { font-size:11px;color:var(--gray); }
+.resend-btn { font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--red);background:none;border:none;cursor:pointer;padding:0;opacity:.4;transition:opacity .2s; }
+.resend-btn.enabled { opacity:1; }
+.resend-btn:disabled { cursor:not-allowed; }
 
-.card {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 420px;
-  background: var(--white);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--card-sh);
-  animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
+/* BUTTON */
+.btn { width:100%;padding:17px 16px;background:var(--black);color:var(--white);border:none;border-radius:12px;font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.12em;cursor:pointer;margin-top:16px;position:relative;overflow:hidden;transition:transform .1s;display:flex;align-items:center;justify-content:center;gap:10px; }
+.btn::before { content:'';position:absolute;inset:0;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.22,1,.36,1);z-index:0; }
+.btn:not(:disabled):hover::before { transform:scaleX(1); }
+.btn:not(:disabled):active { transform:scale(.98); }
+.btn-text,.btn-icon { position:relative;z-index:1; }
+.btn-icon { width:18px;height:18px;transition:transform .2s; }
+.btn:not(:disabled):hover .btn-icon { transform:translateX(3px); }
+.btn:disabled { opacity:.35;cursor:not-allowed; }
 
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(28px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
+/* MESSAGES */
+.msg { border-radius:8px;padding:12px 14px;font-size:13px;margin-top:14px;display:none;line-height:1.5;animation:slideDown .2s ease; }
+.msg.visible { display:block; }
+.msg.error   { background:rgba(208,38,26,.06);border:1px solid rgba(208,38,26,.2);border-left:3px solid var(--red);color:var(--red-dk); }
+.msg.success { background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-left:3px solid #22c55e;color:#15803d; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
 
-/* ── HEADER ── */
-.card-header {
-  background: var(--black);
-  padding: 32px 28px 28px;
-  position: relative;
-  overflow: hidden;
-}
-.card-header::before {
-  content: '360°';
-  position: absolute;
-  right: -12px; top: -14px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 120px;
-  color: rgba(255,255,255,0.04);
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
-}
-.card-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 100%; height: 3px;
-  background: linear-gradient(90deg, var(--red) 0%, var(--red-lt) 60%, transparent 100%);
-}
+/* LOADING */
+.state-loading { display:none;padding:36px 28px; }
+.state-loading.active { display:block; }
+.loading-inner { display:flex;flex-direction:column;align-items:center;gap:16px; }
+.spinner-ring { width:48px;height:48px; }
+.spinner-ring svg { width:100%;height:100%;animation:spin 1s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.loading-label { font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500; }
 
-.header-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.logo-mark {
-  width: 36px; height: 36px;
-  background: var(--red);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.logo-mark svg { width: 20px; height: 20px; }
-.logo-text { display: flex; flex-direction: column; }
-.logo-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 17px;
-  letter-spacing: 0.06em;
-  color: var(--white);
-  line-height: 1;
-}
-.logo-tagline {
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
-  margin-top: 2px;
-}
-.header-divider {
-  width: 32px; height: 1px;
-  background: rgba(255,255,255,0.12);
-  margin-bottom: 14px;
-}
-.header-eyebrow {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 6px;
-}
-.header-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 42px;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  color: var(--white);
-}
-.header-title span {
-  display: block;
-  color: rgba(255,255,255,0.45);
-  font-size: 30px;
-}
+/* OTP step phone display */
+.phone-display { background:var(--off);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between; }
+.phone-display-num { font-size:15px;font-weight:600;letter-spacing:.06em;color:var(--black); }
+.phone-edit-btn { font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:none;border:none;cursor:pointer;padding:0; }
 
-/* ── STEP INDICATOR ── */
-.steps {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 28px;
-  border-bottom: 1px solid var(--border);
-  background: var(--off);
-}
-.step {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #c4bfba;
-  transition: color 0.3s;
-}
-.step.active { color: var(--black); }
-.step.done   { color: var(--red); }
-.step-num {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: #e8e4e0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  color: #c4bfba;
-  transition: background 0.3s, color 0.3s;
-  flex-shrink: 0;
-}
-.step.active .step-num { background: var(--black); color: var(--white); }
-.step.done .step-num   { background: var(--red); color: var(--white); }
-.step-line { flex: 1; height: 1px; background: var(--border); }
+/* FOOTER */
+.card-footer { background:var(--off);border-top:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between; }
+.footer-left { font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#c4bfba; }
+.footer-right { display:flex;align-items:center;gap:4px;font-size:10px;color:#c4bfba; }
+.footer-dot { width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,.2); }
+.date-badge { margin-top:16px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);display:flex;align-items:center;gap:6px;z-index:1; }
+.date-badge svg { width:12px;height:12px;opacity:.5; }
 
-/* ── BODY ── */
-.card-body { padding: 28px 28px 24px; }
-
-.instruction {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  background: rgba(208,38,26,0.06);
-  border: 1px solid rgba(208,38,26,0.12);
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 24px;
-}
-.instruction-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--red);
-  flex-shrink: 0;
-  margin-top: 4px;
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.8); }
-}
-.instruction-text {
-  font-size: 12px;
-  color: var(--red-dk);
-  line-height: 1.5;
-}
-
-.field { margin-bottom: 8px; }
-.field-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 8px;
-}
-.input-wrap { position: relative; }
-.input-icon {
-  position: absolute;
-  left: 16px; top: 50%;
-  transform: translateY(-50%);
-  width: 18px; height: 18px;
-  color: var(--gray);
-  pointer-events: none;
-  transition: color 0.2s;
-}
-.input-wrap:focus-within .input-icon { color: var(--red); }
-
-input[type="tel"], input[type="text"] {
-  width: 100%;
-  padding: 15px 16px 15px 46px;
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--black);
-  background: var(--off);
-  letter-spacing: 0.08em;
-  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-  -webkit-appearance: none;
-}
-input::placeholder { color: #c4bfba; font-weight: 400; letter-spacing: 0.02em; }
-input:focus {
-  outline: none;
-  border-color: var(--red);
-  background: var(--white);
-  box-shadow: 0 0 0 4px rgba(208,38,26,0.08);
-}
-
-/* OTP input special — larger, centered */
-.otp-input {
-  text-align: center;
-  letter-spacing: 0.3em !important;
-  font-size: 24px !important;
-  padding: 15px 16px !important;
-}
-
-.char-hint {
-  text-align: right;
-  font-size: 11px;
-  color: #c4bfba;
-  margin-top: 6px;
-  height: 14px;
-  transition: color 0.2s;
-}
-.char-hint.ready { color: var(--red); font-weight: 500; }
-
-.resend-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-.resend-note {
-  font-size: 11px;
-  color: var(--gray);
-}
-.resend-btn {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--red);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  opacity: 0.4;
-  transition: opacity 0.2s;
-}
-.resend-btn.enabled { opacity: 1; }
-.resend-btn:disabled { cursor: not-allowed; }
-
-/* ── BUTTON ── */
-.btn {
-  width: 100%;
-  padding: 17px 16px;
-  background: var(--black);
-  color: var(--white);
-  border: none;
-  border-radius: 12px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 19px;
-  letter-spacing: 0.12em;
-  cursor: pointer;
-  margin-top: 16px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 0;
-}
-.btn:not(:disabled):hover::before { transform: scaleX(1); }
-.btn:not(:disabled):active { transform: scale(0.98); }
-.btn-text, .btn-icon { position: relative; z-index: 1; }
-.btn-icon { width: 18px; height: 18px; transition: transform 0.2s; }
-.btn:not(:disabled):hover .btn-icon { transform: translateX(3px); }
-.btn:disabled { opacity: 0.35; cursor: not-allowed; }
-
-/* ── MESSAGES ── */
-.msg {
-  border-radius: 8px;
-  padding: 12px 14px;
-  font-size: 13px;
-  margin-top: 14px;
-  display: none;
-  line-height: 1.5;
-  animation: slideDown 0.2s ease;
-}
-.msg.visible { display: block; }
-.msg.error {
-  background: rgba(208,38,26,0.06);
-  border: 1px solid rgba(208,38,26,0.2);
-  border-left: 3px solid var(--red);
-  color: var(--red-dk);
-}
-.msg.success {
-  background: rgba(34,197,94,0.06);
-  border: 1px solid rgba(34,197,94,0.2);
-  border-left: 3px solid #22c55e;
-  color: #15803d;
-}
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── LOADING ── */
-.state-loading { display: none; padding: 36px 28px; }
-.state-loading.active { display: block; }
-.loading-inner { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.spinner-ring { width: 48px; height: 48px; }
-.spinner-ring svg { width: 100%; height: 100%; animation: spin 1s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-label {
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray);
-  font-weight: 500;
-}
-
-/* ── PHONE DISPLAY in OTP step ── */
-.phone-display {
-  background: var(--off);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.phone-display-num {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--black);
-}
-.phone-edit-btn {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--red);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-/* ── FOOTER ── */
-.card-footer {
-  background: var(--off);
-  border-top: 1px solid var(--border);
-  padding: 12px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.footer-left {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #c4bfba;
-}
-.footer-right {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  color: #c4bfba;
-}
-.footer-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 2px rgba(34,197,94,0.2);
-}
-
-.date-badge {
-  margin-top: 16px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gray);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  z-index: 1;
-}
-.date-badge svg { width: 12px; height: 12px; opacity: 0.5; }
-
-@media (max-width: 440px) {
-  body { padding: 16px 12px 32px; }
-  .card { border-radius: 16px; }
-  .card-header, .card-body { padding-left: 20px; padding-right: 20px; }
-  .steps { padding: 14px 20px; }
-  .card-footer { padding: 12px 20px; }
+@media (max-width:440px) {
+  body { padding:16px 12px 32px; }
+  .card { border-radius:16px; }
+  .card-header,.card-body { padding-left:20px;padding-right:20px; }
+  .steps { padding:14px 20px; }
+  .card-footer { padding:12px 20px; }
 }
 </style>
 </head>
@@ -487,7 +122,6 @@ input:focus {
 
 <div class="card">
 
-  <!-- HEADER -->
   <div class="card-header">
     <div class="header-top">
       <div class="logo-mark">
@@ -503,66 +137,41 @@ input:focus {
     </div>
     <div class="header-divider"></div>
     <div class="header-eyebrow">Student Portal</div>
-    <div class="header-title">
-      View Your
-      <span>Attendance</span>
-    </div>
+    <div class="header-title">View Your<span>Attendance</span></div>
   </div>
 
-  <!-- STEP INDICATOR -->
   <div class="steps">
-    <div class="step active" id="step1Indicator">
-      <div class="step-num">1</div>
-      Phone
-    </div>
+    <div class="step active" id="step1Indicator"><div class="step-num">1</div>Phone</div>
     <div class="step-line"></div>
-    <div class="step" id="step2Indicator">
-      <div class="step-num">2</div>
-      Verify OTP
-    </div>
+    <div class="step" id="step2Indicator"><div class="step-num">2</div>Verify OTP</div>
   </div>
 
-  <!-- ── STEP 1: Phone entry ── -->
+  <!-- STEP 1 -->
   <div id="step1" class="card-body">
     <div class="instruction">
       <div class="instruction-dot"></div>
-      <div class="instruction-text">
-        Enter your registered mobile number. We'll send a one-time password to your WhatsApp.
-      </div>
+      <div class="instruction-text">Enter your registered mobile number. We'll send a one-time password to your WhatsApp.</div>
     </div>
-
     <div class="field">
       <div class="field-label">
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="2" y="0.5" width="8" height="11" rx="1.5"/>
-          <line x1="4.5" y1="9" x2="7.5" y2="9"/>
-        </svg>
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y=".5" width="8" height="11" rx="1.5"/><line x1="4.5" y1="9" x2="7.5" y2="9"/></svg>
         Mobile Number
       </div>
       <div class="input-wrap">
-        <svg class="input-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="3.5" y="1" width="11" height="16" rx="2"/>
-          <line x1="7" y1="13.5" x2="11" y2="13.5"/>
-        </svg>
-        <input type="tel" id="phoneInput" placeholder="98765 43210"
-          maxlength="15" inputmode="numeric" autocomplete="one-time-code"
-          oninput="onPhoneInput()" onkeydown="onPhoneKey(event)" onfocus="onPhoneFocus()" />
+        <svg class="input-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="1" width="11" height="16" rx="2"/><line x1="7" y1="13.5" x2="11" y2="13.5"/></svg>
+        <input type="tel" id="phoneInput" placeholder="98765 43210" maxlength="15" inputmode="numeric"
+          autocomplete="one-time-code" oninput="onPhoneInput()" onkeydown="onPhoneKey(event)" onfocus="onPhoneFocus()" />
       </div>
       <div class="char-hint" id="charHint">10 digits required</div>
     </div>
-
     <div class="msg error" id="step1Error"></div>
-
     <button class="btn" id="sendOtpBtn" disabled onclick="sendOTP()">
       <span class="btn-text">Send OTP on WhatsApp</span>
-      <svg class="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="9" x2="15" y2="9"/>
-        <polyline points="10 4 15 9 10 14"/>
-      </svg>
+      <svg class="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="9" x2="15" y2="9"/><polyline points="10 4 15 9 10 14"/></svg>
     </button>
   </div>
 
-  <!-- ── LOADING ── -->
+  <!-- LOADING -->
   <div class="state-loading" id="loadingState">
     <div class="loading-inner">
       <div class="spinner-ring">
@@ -575,294 +184,267 @@ input:focus {
     </div>
   </div>
 
-  <!-- ── STEP 2: OTP entry ── -->
+  <!-- STEP 2 -->
   <div id="step2" class="card-body" style="display:none;">
     <div class="phone-display">
       <span class="phone-display-num" id="phoneDisplayNum"></span>
       <button class="phone-edit-btn" onclick="goBackToPhone()">Change</button>
     </div>
-
     <div class="instruction">
       <div class="instruction-dot"></div>
-      <div class="instruction-text">
-        Check your WhatsApp for the 6-digit OTP. Valid for 10 minutes.
-      </div>
+      <div class="instruction-text">Check your WhatsApp for the 6-digit OTP. Valid for 10 minutes.</div>
     </div>
-
     <div class="field">
       <div class="field-label">
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="1" y="4" width="10" height="7" rx="1"/>
-          <path d="M4 4 V3 a2 2 0 0 1 4 0 v1"/>
-        </svg>
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="10" height="7" rx="1"/><path d="M4 4 V3 a2 2 0 0 1 4 0 v1"/></svg>
         One-Time Password
       </div>
       <div class="input-wrap">
-        <svg class="input-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="2" y="7" width="14" height="10" rx="2"/>
-          <path d="M6 7 V5 a3 3 0 0 1 6 0 v2"/>
-          <circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-        </svg>
-        <input type="text" id="otpInput" class="otp-input" placeholder="• • • • • •"
-          maxlength="6" inputmode="numeric" autocomplete="one-time-code"
-          oninput="onOtpInput()" onkeydown="onOtpKey(event)" />
+        <svg class="input-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="14" height="10" rx="2"/><path d="M6 7 V5 a3 3 0 0 1 6 0 v2"/><circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>
+        <input type="text" id="otpInput" class="otp-input" placeholder="• • • • • •" maxlength="6"
+          inputmode="numeric" autocomplete="one-time-code" oninput="onOtpInput()" onkeydown="onOtpKey(event)" />
       </div>
       <div class="resend-row">
         <span class="resend-note" id="resendNote">Resend available in <strong id="resendCountdown">30s</strong></span>
         <button class="resend-btn" id="resendBtn" disabled onclick="resendOTP()">Resend OTP</button>
       </div>
     </div>
-
     <div class="msg error"   id="step2Error"></div>
     <div class="msg success" id="step2Success"></div>
-
     <button class="btn" id="verifyBtn" disabled onclick="verifyOTP()">
-      <span class="btn-text">Verify & View Dashboard</span>
-      <svg class="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="4 9 8 13 14 6"/>
-      </svg>
+      <span class="btn-text">Verify &amp; View Dashboard</span>
+      <svg class="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 8 13 14 6"/></svg>
     </button>
   </div>
 
-  <!-- FOOTER -->
   <div class="card-footer">
     <span class="footer-left">Acumen GATE Academy</span>
-    <span class="footer-right">
-      <span class="footer-dot"></span>
-      Secure Login
-    </span>
+    <span class="footer-right"><span class="footer-dot"></span>Secure Login</span>
   </div>
 
 </div>
 
 <div class="date-badge">
-  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-    <rect x="1" y="2" width="10" height="9" rx="1.5"/>
-    <line x1="4" y1="1" x2="4" y2="3"/>
-    <line x1="8" y1="1" x2="8" y2="3"/>
-    <line x1="1" y1="5" x2="11" y2="5"/>
-  </svg>
+  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="10" height="9" rx="1.5"/><line x1="4" y1="1" x2="4" y2="3"/><line x1="8" y1="1" x2="8" y2="3"/><line x1="1" y1="5" x2="11" y2="5"/></svg>
   <span id="todayDate"></span>
 </div>
 
 <script>
-  // ── CONFIG ───────────────────────────────────────────────
-  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
-  var DASHBOARD_URL   = "student-dashboard.html";
+var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
+var DASHBOARD_URL   = "student-dashboard.html";
 
-  // ── STATE ────────────────────────────────────────────────
-  var currentPhone    = "";
-  var isBusy          = false;
-  var resendTimer     = null;
-  var resendSeconds   = 30;
-  var _userHasTyped   = false;
+var currentPhone  = "";
+var isBusy        = false;
+var resendTimer   = null;
+var resendSeconds = 30;
+var _userHasTyped = false;
 
-  // ── INIT ─────────────────────────────────────────────────
-  (function init() {
-    var d = new Date();
-    document.getElementById('todayDate').textContent =
-      d.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+(function init() {
+  var d = new Date();
+  document.getElementById('todayDate').textContent =
+    d.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  var token = sessionStorage.getItem('student_token');
+  if (token) { window.location.href = DASHBOARD_URL; }
+})();
 
-    // If already logged in today, skip to dashboard
-    var token = sessionStorage.getItem('student_token');
-    if (token) {
-      window.location.href = DASHBOARD_URL;
-    }
-  })();
-
-  // ── PHONE STEP ───────────────────────────────────────────
-  function onPhoneFocus() {
-    if (!_userHasTyped && document.getElementById('phoneInput').value.length > 0) {
-      document.getElementById('phoneInput').value = '';
-      document.getElementById('sendOtpBtn').disabled = true;
-      updateCharHint(0);
-    }
+function onPhoneFocus() {
+  if (!_userHasTyped && document.getElementById('phoneInput').value.length > 0) {
+    document.getElementById('phoneInput').value = '';
+    document.getElementById('sendOtpBtn').disabled = true;
+    updateCharHint(0);
   }
+}
+function updateCharHint(n) {
+  var el = document.getElementById('charHint');
+  if (n === 0)      { el.textContent = '10 digits required'; el.className = 'char-hint'; }
+  else if (n < 10)  { el.textContent = (10-n) + ' more digit' + (10-n===1?'':'s'); el.className = 'char-hint'; }
+  else              { el.textContent = '✓ Ready to send OTP'; el.className = 'char-hint ready'; }
+}
+function onPhoneInput() {
+  _userHasTyped = true;
+  var digits = document.getElementById('phoneInput').value.replace(/\D/g, '');
+  updateCharHint(digits.length);
+  document.getElementById('sendOtpBtn').disabled = digits.length !== 10;
+  hideMsg('step1Error');
+}
+function onPhoneKey(e) { if (e.key === 'Enter') sendOTP(); }
 
-  function updateCharHint(n) {
-    var el = document.getElementById('charHint');
-    if (n === 0) { el.textContent = '10 digits required'; el.className = 'char-hint'; }
-    else if (n < 10) { el.textContent = (10 - n) + ' more digit' + (10 - n === 1 ? '' : 's'); el.className = 'char-hint'; }
-    else { el.textContent = '✓ Ready to send OTP'; el.className = 'char-hint ready'; }
-  }
+function sendOTP() {
+  if (isBusy) return;
+  var raw    = document.getElementById('phoneInput').value;
+  var digits = raw.replace(/\D/g, '');
+  if (digits.length !== 10) return;
+  currentPhone = digits;
+  isBusy = true;
+  showLoading("Sending OTP…");
+  jsonp(APPS_SCRIPT_URL + '?action=sendOTP&phone=' + encodeURIComponent(raw), function(data) {
+    isBusy = false;
+    hideLoading();
+    if (!data) { showMsg('step1Error', 'Connection failed. Please try again.'); return; }
+    if (!data.success) { showMsg('step1Error', data.error || 'Failed to send OTP.'); return; }
+    goToStep2();
+  });
+}
 
-  function onPhoneInput() {
-    _userHasTyped = true;
-    var digits = document.getElementById('phoneInput').value.replace(/\D/g, '');
-    updateCharHint(digits.length);
-    document.getElementById('sendOtpBtn').disabled = digits.length !== 10;
-    hideMsg('step1Error');
-  }
+function goToStep2() {
+  document.getElementById('step1').style.display = 'none';
+  document.getElementById('step2').style.display = 'block';
+  document.getElementById('step1Indicator').className = 'step done';
+  document.getElementById('step2Indicator').className = 'step active';
+  document.getElementById('phoneDisplayNum').textContent = currentPhone.slice(0,5) + ' ' + currentPhone.slice(5);
+  document.getElementById('otpInput').focus();
+  startResendCountdown();
+}
 
-  function onPhoneKey(e) { if (e.key === 'Enter') sendOTP(); }
+function goBackToPhone() {
+  stopResendCountdown();
+  document.getElementById('step2').style.display = 'none';
+  document.getElementById('step1').style.display = 'block';
+  document.getElementById('step1Indicator').className = 'step active';
+  document.getElementById('step2Indicator').className = 'step';
+  document.getElementById('otpInput').value = '';
+  document.getElementById('verifyBtn').disabled = true;
+  hideMsg('step2Error'); hideMsg('step2Success');
+}
 
-  function sendOTP() {
-    if (isBusy) return;
-    var raw    = document.getElementById('phoneInput').value;
-    var digits = raw.replace(/\D/g, '');
-    if (digits.length !== 10) return;
+function onOtpInput() {
+  var v = document.getElementById('otpInput').value.replace(/\D/g, '');
+  document.getElementById('otpInput').value = v;
+  document.getElementById('verifyBtn').disabled = v.length !== 6;
+  hideMsg('step2Error'); hideMsg('step2Success');
+}
+function onOtpKey(e) { if (e.key === 'Enter') verifyOTP(); }
 
-    currentPhone = digits;
-    isBusy = true;
-    showLoading("Sending OTP…");
-
-    jsonp(APPS_SCRIPT_URL + '?action=sendOTP&phone=' + encodeURIComponent(raw), function(data) {
-      isBusy = false;
-      hideLoading();
-      if (!data) { showMsg('step1Error', 'Connection failed. Please try again.'); return; }
-      if (!data.success) { showMsg('step1Error', data.error || 'Failed to send OTP.'); return; }
-      goToStep2();
-    });
-  }
-
-  function goToStep2() {
-    document.getElementById('step1').style.display = 'none';
-    document.getElementById('step2').style.display = 'block';
-    document.getElementById('step1Indicator').className = 'step done';
-    document.getElementById('step2Indicator').className = 'step active';
-    document.getElementById('phoneDisplayNum').textContent = formatPhone(currentPhone);
-    document.getElementById('otpInput').focus();
-    startResendCountdown();
-  }
-
-  function goBackToPhone() {
-    stopResendCountdown();
-    document.getElementById('step2').style.display = 'none';
-    document.getElementById('step1').style.display = 'block';
-    document.getElementById('step1Indicator').className = 'step active';
-    document.getElementById('step2Indicator').className = 'step';
-    document.getElementById('otpInput').value = '';
-    document.getElementById('verifyBtn').disabled = true;
-    hideMsg('step2Error'); hideMsg('step2Success');
-  }
-
-  function formatPhone(p) { return p.slice(0, 5) + ' ' + p.slice(5); }
-
-  // ── OTP STEP ─────────────────────────────────────────────
-  function onOtpInput() {
-    var v = document.getElementById('otpInput').value.replace(/\D/g, '');
-    document.getElementById('otpInput').value = v;
-    document.getElementById('verifyBtn').disabled = v.length !== 6;
-    hideMsg('step2Error'); hideMsg('step2Success');
-  }
-
-  function onOtpKey(e) { if (e.key === 'Enter') verifyOTP(); }
-
-  function verifyOTP() {
-    if (isBusy) return;
-    var code = document.getElementById('otpInput').value.replace(/\D/g, '');
-    if (code.length !== 6) return;
-
-    isBusy = true;
-    showLoading("Verifying OTP…");
-
-    jsonp(
-      APPS_SCRIPT_URL + '?action=verifyOTP&phone=' + encodeURIComponent(currentPhone) +
-      '&code=' + encodeURIComponent(code),
-      function(data) {
-        isBusy = false;
-        hideLoading();
-        if (!data) { document.getElementById('step2').style.display = 'block'; showMsg('step2Error', 'Connection failed. Try again.'); return; }
-        if (!data.success) { document.getElementById('step2').style.display = 'block'; showMsg('step2Error', data.error || 'Verification failed.'); return; }
-        // Store token and redirect
-        sessionStorage.setItem('student_token', data.token);
-        sessionStorage.setItem('student_phone', data.phone);
-        document.getElementById('step2').style.display = 'block';
-        showMsg('step2Success', '✓ Verified! Loading your dashboard…');
-        stopResendCountdown();
-        setTimeout(function() { window.location.href = DASHBOARD_URL; }, 800);
-      }
-    );
-  }
-
-  function resendOTP() {
-    if (isBusy) return;
-    isBusy = true;
-    document.getElementById('step2').style.display = 'none';
-    showLoading("Resending OTP…");
-
-    jsonp(APPS_SCRIPT_URL + '?action=sendOTP&phone=' + encodeURIComponent(currentPhone), function(data) {
+function verifyOTP() {
+  if (isBusy) return;
+  var code = document.getElementById('otpInput').value.replace(/\D/g, '');
+  if (code.length !== 6) return;
+  isBusy = true;
+  showLoading("Verifying OTP…");
+  jsonp(
+    APPS_SCRIPT_URL + '?action=verifyOTP&phone=' + encodeURIComponent(currentPhone) +
+    '&code=' + encodeURIComponent(code),
+    function(data) {
       isBusy = false;
       hideLoading();
       document.getElementById('step2').style.display = 'block';
-      if (!data || !data.success) {
-        showMsg('step2Error', (data && data.error) || 'Failed to resend OTP.');
-      } else {
-        showMsg('step2Success', 'New OTP sent to your WhatsApp!');
-        document.getElementById('otpInput').value = '';
-        document.getElementById('verifyBtn').disabled = true;
-        startResendCountdown();
-      }
-    });
-  }
+      if (!data) { showMsg('step2Error', 'Connection failed. Try again.'); return; }
+      if (!data.success) { showMsg('step2Error', data.error || 'Verification failed.'); return; }
+      sessionStorage.setItem('student_token', data.token);
+      sessionStorage.setItem('student_phone', data.phone);
+      showMsg('step2Success', '✓ Verified! Loading your dashboard…');
+      stopResendCountdown();
+      setTimeout(function() { window.location.href = DASHBOARD_URL; }, 800);
+    }
+  );
+}
 
-  // ── RESEND COUNTDOWN ─────────────────────────────────────
-  function startResendCountdown() {
-    stopResendCountdown();
-    resendSeconds = 30;
-    updateResendUI();
-    resendTimer = setInterval(function() {
-      resendSeconds--;
-      updateResendUI();
-      if (resendSeconds <= 0) stopResendCountdown();
-    }, 1000);
-  }
-
-  function stopResendCountdown() {
-    if (resendTimer) { clearInterval(resendTimer); resendTimer = null; }
-  }
-
-  function updateResendUI() {
-    var btn  = document.getElementById('resendBtn');
-    var note = document.getElementById('resendNote');
-    var cd   = document.getElementById('resendCountdown');
-    if (resendSeconds > 0) {
-      btn.disabled = true;
-      btn.className = 'resend-btn';
-      note.style.display = 'block';
-      cd.textContent = resendSeconds + 's';
+function resendOTP() {
+  if (isBusy) return;
+  isBusy = true;
+  document.getElementById('step2').style.display = 'none';
+  showLoading("Resending OTP…");
+  jsonp(APPS_SCRIPT_URL + '?action=sendOTP&phone=' + encodeURIComponent(currentPhone), function(data) {
+    isBusy = false;
+    hideLoading();
+    document.getElementById('step2').style.display = 'block';
+    if (!data || !data.success) {
+      showMsg('step2Error', (data && data.error) || 'Failed to resend OTP.');
     } else {
-      btn.disabled = false;
-      btn.className = 'resend-btn enabled';
-      note.style.display = 'none';
+      showMsg('step2Success', 'New OTP sent to your WhatsApp!');
+      document.getElementById('otpInput').value = '';
+      document.getElementById('verifyBtn').disabled = true;
+      startResendCountdown();
     }
+  });
+}
+
+function startResendCountdown() {
+  stopResendCountdown();
+  resendSeconds = 30;
+  updateResendUI();
+  resendTimer = setInterval(function() {
+    resendSeconds--;
+    updateResendUI();
+    if (resendSeconds <= 0) stopResendCountdown();
+  }, 1000);
+}
+function stopResendCountdown() {
+  if (resendTimer) { clearInterval(resendTimer); resendTimer = null; }
+}
+function updateResendUI() {
+  var btn  = document.getElementById('resendBtn');
+  var note = document.getElementById('resendNote');
+  var cd   = document.getElementById('resendCountdown');
+  if (resendSeconds > 0) {
+    btn.disabled = true;
+    btn.className = 'resend-btn';
+    note.style.display = 'block';
+    cd.textContent = resendSeconds + 's';
+  } else {
+    btn.disabled = false;
+    btn.className = 'resend-btn enabled';
+    note.style.display = 'none';
+  }
+}
+
+function showLoading(msg) {
+  document.getElementById('loadingLabel').textContent = msg || 'Loading…';
+  document.getElementById('loadingState').classList.add('active');
+}
+function hideLoading() {
+  document.getElementById('loadingState').classList.remove('active');
+}
+function showMsg(id, text) {
+  var el = document.getElementById(id);
+  el.textContent = text;
+  el.classList.add('visible');
+}
+function hideMsg(id) { document.getElementById(id).classList.remove('visible'); }
+
+// FIX: Correct JSONP — single fired guard prevents double-callback.
+// Previously the timeout wrapper overwrote window[id] after the script
+// tag was already injected, creating a race where an early response
+// could fire the un-guarded first version and then the timeout fired
+// a second time calling cb(null). Now window[id] is set exactly once
+// and a `fired` boolean prevents any second invocation.
+function jsonp(url, cb) {
+  var id    = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
+  var t     = null;
+  var fired = false;
+
+  function cleanup() {
+    if (t) { clearTimeout(t); t = null; }
+    var s = document.getElementById(id);
+    if (s) { try { document.body.removeChild(s); } catch(e) {} }
+    try { delete window[id]; } catch(e) { window[id] = undefined; }
   }
 
-  // ── UI HELPERS ───────────────────────────────────────────
-  function showLoading(msg) {
-    document.getElementById('loadingLabel').textContent = msg || 'Loading…';
-    document.getElementById('loadingState').classList.add('active');
-  }
-  function hideLoading() {
-    document.getElementById('loadingState').classList.remove('active');
-  }
-  function showMsg(id, text) {
-    var el = document.getElementById(id);
-    el.textContent = text;
-    el.classList.add('visible');
-  }
-  function hideMsg(id) {
-    document.getElementById(id).classList.remove('visible');
-  }
+  window[id] = function(data) {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(data);
+  };
 
-  // ── JSONP ────────────────────────────────────────────────
-  function jsonp(url, cb) {
-    var id = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 9999);
-    function cleanup() {
-      var s = document.getElementById(id);
-      if (s) { try { document.body.removeChild(s); } catch(e) {} }
-      try { delete window[id]; } catch(e) { window[id] = undefined; }
-    }
-    window[id] = function(data) { cleanup(); cb(data); };
-    var s = document.createElement('script');
-    s.id  = id;
-    s.src = url + '&callback=' + id;
-    s.onerror = function() { cleanup(); cb(null); };
-    document.body.appendChild(s);
-    var t = setTimeout(function() { cleanup(); cb(null); }, 20000);
-    var origWin = window[id];
-    window[id] = function(data) { clearTimeout(t); origWin(data); };
-  }
+  t = setTimeout(function() {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(null);
+  }, 20000);
+
+  var s = document.createElement('script');
+  s.id  = id;
+  s.src = url + '&callback=' + id;
+  s.onerror = function() {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(null);
+  };
+  document.body.appendChild(s);
+}
 </script>
 </body>
 </html>
