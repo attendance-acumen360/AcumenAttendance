@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Attendance — Acumen360</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0a0a0a;
+  --red:      #D0261A;
+  --red-dk:   #a81e14;
+  --red-lt:   #ff3b2e;
+  --white:    #ffffff;
+  --off:      #f7f5f2;
+  --gray:     #999490;
+  --border:   #e8e4e0;
+  --green:    #22c55e;
+  --green-bg: rgba(34,197,94,0.08);
+  --red-bg:   rgba(208,38,26,0.07);
+  --amber:    #f59e0b;
+  --amber-bg: rgba(245,158,11,0.08);
+  --card-sh:  0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05);
+}
+
+html { height: 100%; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--off);
+  min-height: 100vh;
+  color: var(--black);
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--black);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.topbar-logo {
+  width: 28px; height: 28px;
+  background: var(--red);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topbar-logo svg { width: 15px; height: 15px; }
+.topbar-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.topbar-student-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.02em;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.logout-btn {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  background: none;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.logout-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+/* ── PAGE ── */
+.page { max-width: 860px; margin: 0 auto; padding: 24px 16px 60px; }
+
+/* ── LOADING FULL ── */
+.full-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+  gap: 16px;
+}
+.spinner-ring { width: 48px; height: 48px; }
+.spinner-ring svg { width: 100%; height: 100%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-label { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); font-weight: 500; }
+
+/* ── HERO CARD ── */
+.hero-card {
+  background: var(--black);
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(208,38,26,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--red) 0%, transparent 100%);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.6);
+}
+.hero-badge-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.hero-stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--white);
+}
+.hero-stat-val.good   { color: var(--green); }
+.hero-stat-val.warn   { color: var(--amber); }
+.hero-stat-val.bad    { color: var(--red-lt); }
+.hero-stat-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── ALERT BANNER ── */
+.alert-banner {
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: fadeUp 0.5s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+}
+.alert-banner.low {
+  background: rgba(208,38,26,0.07);
+  border: 1px solid rgba(208,38,26,0.2);
+}
+.alert-banner.consecutive {
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.2);
+}
+.alert-icon { font-size: 18px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+.alert-text { font-size: 13px; line-height: 1.5; }
+.alert-text strong { font-weight: 600; }
+.alert-banner.low .alert-text        { color: var(--red-dk); }
+.alert-banner.consecutive .alert-text { color: #92400e; }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  margin-top: 24px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--black);
+}
+.section-count {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
+  background: var(--border);
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+/* ── SUBJECT CARDS ── */
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 4px;
+  animation: fadeUp 0.5s 0.25s cubic-bezier(0.22,1,0.36,1) both;
+}
+.subj-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--card-sh);
+  border: 1.5px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.subj-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+.subj-card.low-card { border-color: rgba(208,38,26,0.3); background: rgba(208,38,26,0.02); }
+
+.subj-pct-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 3px;
+  border-radius: 0 0 14px 14px;
+  transition: width 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.subj-pct-bar.good { background: var(--green); }
+.subj-pct-bar.warn { background: var(--amber); }
+.subj-pct-bar.bad  { background: var(--red); }
+
+.subj-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.subj-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.3;
+}
+.subj-pct-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.subj-pct-badge.good { color: var(--green); }
+.subj-pct-badge.warn { color: var(--amber); }
+.subj-pct-badge.bad  { color: var(--red); }
+
+.subj-faculty {
+  font-size: 11px;
+  color: var(--gray);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.subj-counts {
+  display: flex;
+  gap: 8px;
+}
+.subj-count-item {
+  flex: 1;
+  background: var(--off);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+.subj-count-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--black);
+  line-height: 1;
+}
+.subj-count-lbl {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+/* ── DATE LOG ── */
+.date-log-wrap {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--card-sh);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: fadeUp 0.5s 0.35s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.date-log-filters {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-btn {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 5px 12px;
+  border: 1.5px solid var(--border);
+  background: none;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-btn.active {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+.filter-btn.present-btn.active { background: #15803d; border-color: #15803d; }
+.filter-btn.absent-btn.active  { background: var(--red); border-color: var(--red); }
+
+.date-log-list { max-height: 480px; overflow-y: auto; }
+.date-log-list::-webkit-scrollbar { width: 4px; }
+.date-log-list::-webkit-scrollbar-track { background: transparent; }
+.date-log-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.date-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.date-row:last-child { border-bottom: none; }
+.date-row:hover { background: var(--off); }
+
+.date-row-indicator {
+  width: 4px;
+  flex-shrink: 0;
+}
+.date-row-indicator.present { background: var(--green); }
+.date-row-indicator.absent  { background: var(--red); }
+
+.date-row-content {
+  flex: 1;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.date-row-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  white-space: nowrap;
+  min-width: 100px;
+}
+.date-row-date-sub {
+  font-size: 10px;
+  color: var(--gray);
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+
+.date-row-slots {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: flex-end;
+}
+.slot-pill {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border-radius: 20px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.slot-pill.present {
+  background: var(--green-bg);
+  color: #15803d;
+  border: 1px solid rgba(34,197,94,0.2);
+}
+.slot-pill.absent {
+  background: var(--red-bg);
+  color: var(--red-dk);
+  border: 1px solid rgba(208,38,26,0.2);
+}
+
+.date-log-empty {
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--gray);
+  font-style: italic;
+}
+
+/* ── ERROR STATE ── */
+.error-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+.error-state-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+.error-state-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+.error-state-sub { font-size: 14px; color: var(--gray); line-height: 1.5; margin-bottom: 20px; }
+.btn-small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.btn-small:hover { background: var(--red); }
+
+@media (max-width: 600px) {
+  .hero-stats { grid-template-columns: repeat(3, 1fr); }
+  .hero-name  { font-size: 28px; }
+  .subjects-grid { grid-template-columns: 1fr; }
+  .date-row-date { min-width: 80px; }
+  .topbar-student-name { max-width: 90px; }
+  .page { padding: 16px 12px 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d="M10 2 L17 6 L17 14 L10 18 L3 14 L3 6 Z" stroke="white" stroke-width="1.5" fill="none"/>
+        <circle cx="10" cy="10" r="2.5" fill="white"/>
+      </svg>
+    </div>
+    <span class="topbar-name">ACUMEN 360°</span>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-student-name" id="topbarName">Loading…</span>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page" id="mainPage" style="display:none;">
+  <!-- Hero -->
+  <div class="hero-card" id="heroCard">
+    <div class="hero-meta">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span id="heroBatch">—</span>
+      </div>
+      <div class="hero-badge" id="heroBranch" style="display:none;"></div>
+    </div>
+    <div class="hero-name" id="heroName">Loading…</div>
+    <div class="hero-sub" id="heroSub"></div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="statTotal">—</div>
+        <div class="hero-stat-label">Total Classes</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="statAttended">—</div>
+        <div class="hero-stat-label">Attended</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="statPct">—</div>
+        <div class="hero-stat-label">Attendance %</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert banners (injected by JS) -->
+  <div id="alertArea"></div>
+
+  <!-- Subject Breakdown -->
+  <div class="section-header">
+    <div class="section-title">Subject Breakdown</div>
+    <div class="section-count" id="subjectCount">0 Subjects</div>
+  </div>
+  <div class="subjects-grid" id="subjectsGrid"></div>
+
+  <!-- Date Log -->
+  <div class="section-header">
+    <div class="section-title">Class History</div>
+    <div class="section-count" id="dateLogCount">0 Classes</div>
+  </div>
+  <div class="date-log-wrap">
+    <div class="date-log-filters">
+      <button class="filter-btn active"       onclick="setFilter('all')"       id="filterAll">All</button>
+      <button class="filter-btn present-btn"  onclick="setFilter('present')"   id="filterPresent">Present</button>
+      <button class="filter-btn absent-btn"   onclick="setFilter('absent')"    id="filterAbsent">Absent</button>
+    </div>
+    <div class="date-log-list" id="dateLogList"></div>
+  </div>
+</div>
+
+<!-- Full-page loading -->
+<div class="full-loading" id="fullLoading">
+  <div class="spinner-ring">
+    <svg viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="20" stroke="#e8e4e0" stroke-width="3"/>
+      <path d="M24 4 A20 20 0 0 1 44 24" stroke="#D0261A" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <span class="loading-label">Loading your attendance…</span>
+</div>
+
+<!-- Error state -->
+<div class="full-loading" id="errorState" style="display:none;">
+  <div class="error-state">
+    <div class="error-state-icon">⚠️</div>
+    <div class="error-state-title" id="errorTitle">Session Expired</div>
+    <div class="error-state-sub" id="errorSub">Your session has ended. Please log in again to view your attendance.</div>
+    <a class="btn-small" href="student-login.html">
+      Log In Again
+    </a>
+  </div>
+</div>
+
+<script>
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
+  var LOGIN_URL       = "student-login.html";
+
+  var allDateLogs  = [];
+  var activeFilter = 'all';
+
+  // ── INIT ─────────────────────────────────────────────────
+  (function init() {
+    var token = sessionStorage.getItem('student_token');
+    if (!token) {
+      window.location.href = LOGIN_URL;
+      return;
+    }
+    loadDashboard(token);
+  })();
+
+  function loadDashboard(token) {
+    jsonp(APPS_SCRIPT_URL + '?action=getStudentSummary&token=' + encodeURIComponent(token),
+      function(data) {
+        document.getElementById('fullLoading').style.display = 'none';
+
+        if (!data) {
+          showError('Connection Failed', 'Could not load your data. Please check your connection and try again.');
+          return;
+        }
+        if (!data.success) {
+          if (data.expired) {
+            sessionStorage.removeItem('student_token');
+            sessionStorage.removeItem('student_phone');
+          }
+          showError(data.expired ? 'Session Expired' : 'Error', data.error || 'Failed to load data.');
+          return;
+        }
+
+        renderDashboard(data);
+      }
+    );
+  }
+
+  // ── RENDER ───────────────────────────────────────────────
+  function renderDashboard(data) {
+    var s  = data.student;
+    var ov = data.overview;
+
+    // Topbar
+    document.getElementById('topbarName').textContent = s.name.split(' ')[0];
+
+    // Hero
+    document.getElementById('heroName').textContent = s.name;
+    document.getElementById('heroBatch').textContent = s.batch;
+    var branchEl = document.getElementById('heroBranch');
+    if (s.branch) {
+      branchEl.textContent = s.branch;
+      branchEl.style.display = 'flex';
+    }
+    var examSub = s.examTarget ? 'Target: ' + s.examTarget : '';
+    document.getElementById('heroSub').textContent =
+      'DOJ: ' + formatDate(s.doj) + (examSub ? '  ·  ' + examSub : '');
+
+    // Stats
+    document.getElementById('statTotal').textContent    = ov.total || 0;
+    document.getElementById('statAttended').textContent = ov.attended || 0;
+
+    var pctEl = document.getElementById('statPct');
+    pctEl.textContent = (ov.pct || 0) + '%';
+    pctEl.className   = 'hero-stat-val ' + pctClass(ov.pct);
+
+    // Alerts
+    var alertArea = document.getElementById('alertArea');
+    alertArea.innerHTML = '';
+    if (ov.low) {
+      alertArea.innerHTML += '<div class="alert-banner low">' +
+        '<div class="alert-icon">⚠️</div>' +
+        '<div class="alert-text">Your attendance is <strong>' + ov.pct + '%</strong>, below the required <strong>65%</strong>. ' +
+        'You need to attend more classes to avoid being flagged.</div></div>';
+    }
+    if (ov.consecutiveFlag) {
+      alertArea.innerHTML += '<div class="alert-banner consecutive">' +
+        '<div class="alert-icon">🔴</div>' +
+        '<div class="alert-text">You have been absent for <strong>' + ov.consecutive + ' consecutive classes</strong>. ' +
+        'Please attend your next class soon.</div></div>';
+    }
+
+    // Subjects
+    renderSubjects(data.subjects);
+
+    // Date log
+    allDateLogs = data.dateLogs || [];
+    document.getElementById('dateLogCount').textContent = allDateLogs.length + ' Classes';
+    renderDateLog('all');
+
+    // Show page
+    document.getElementById('mainPage').style.display = 'block';
+  }
+
+  function renderSubjects(subjects) {
+    var grid = document.getElementById('subjectsGrid');
+    document.getElementById('subjectCount').textContent = subjects.length + ' Subject' + (subjects.length !== 1 ? 's' : '');
+
+    if (!subjects.length) {
+      grid.innerHTML = '<div style="color:var(--gray);font-size:13px;padding:16px 0;">No subjects found.</div>';
+      return;
+    }
+
+    grid.innerHTML = subjects.map(function(s) {
+      var pc = pctClass(s.pct);
+      return '<div class="subj-card' + (s.low ? ' low-card' : '') + '">' +
+        '<div class="subj-header">' +
+          '<div class="subj-name">' + esc(s.subject) + '</div>' +
+          '<div class="subj-pct-badge ' + pc + '">' + s.pct + '%</div>' +
+        '</div>' +
+        '<div class="subj-faculty">' + esc(s.faculty) + '</div>' +
+        '<div class="subj-counts">' +
+          '<div class="subj-count-item"><div class="subj-count-num">' + s.total    + '</div><div class="subj-count-lbl">Total</div></div>' +
+          '<div class="subj-count-item"><div class="subj-count-num">' + s.attended + '</div><div class="subj-count-lbl">Present</div></div>' +
+          '<div class="subj-count-item"><div class="subj-count-num">' + (s.total - s.attended) + '</div><div class="subj-count-lbl">Absent</div></div>' +
+        '</div>' +
+        '<div class="subj-pct-bar ' + pc + '" style="width:' + Math.min(s.pct, 100) + '%"></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function setFilter(f) {
+    activeFilter = f;
+    document.getElementById('filterAll').className     = 'filter-btn'           + (f === 'all'     ? ' active' : '');
+    document.getElementById('filterPresent').className = 'filter-btn present-btn' + (f === 'present' ? ' active' : '');
+    document.getElementById('filterAbsent').className  = 'filter-btn absent-btn'  + (f === 'absent'  ? ' active' : '');
+    renderDateLog(f);
+  }
+
+  function renderDateLog(filter) {
+    var list = document.getElementById('dateLogList');
+    var rows = allDateLogs.filter(function(r) {
+      if (filter === 'present') return r.present;
+      if (filter === 'absent')  return !r.present;
+      return true;
+    });
+
+    if (!rows.length) {
+      list.innerHTML = '<div class="date-log-empty">No records for this filter.</div>';
+      return;
+    }
+
+    list.innerHTML = rows.map(function(r) {
+      var indicatorClass = r.present ? 'present' : 'absent';
+      var slots = (r.slots || []).map(function(sl) {
+        return '<span class="slot-pill ' + (sl.present ? 'present' : 'absent') + '">' + esc(sl.subject) + '</span>';
+      }).join('');
+
+      var dayName = getDayName(r.dateIso);
+      return '<div class="date-row">' +
+        '<div class="date-row-indicator ' + indicatorClass + '"></div>' +
+        '<div class="date-row-content">' +
+          '<div>' +
+            '<div class="date-row-date">' + esc(r.dateDisp) + '</div>' +
+            '<div class="date-row-date-sub">' + dayName + '</div>' +
+          '</div>' +
+          '<div class="date-row-slots">' + slots + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ── HELPERS ──────────────────────────────────────────────
+  function pctClass(pct) {
+    if (pct >= 75) return 'good';
+    if (pct >= 65) return 'warn';
+    return 'bad';
+  }
+
+  function formatDate(iso) {
+    if (!iso || iso === '0000-00-00') return '—';
+    var p = iso.split('-');
+    return p[2] + '-' + p[1] + '-' + p[0];
+  }
+
+  function getDayName(iso) {
+    if (!iso) return '';
+    try {
+      var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var d    = new Date(iso + 'T12:00:00');
+      return days[d.getDay()];
+    } catch(e) { return ''; }
+  }
+
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function showError(title, sub) {
+    document.getElementById('errorTitle').textContent = title;
+    document.getElementById('errorSub').textContent   = sub;
+    document.getElementById('errorState').style.display = 'flex';
+  }
+
+  function logout() {
+    sessionStorage.removeItem('student_token');
+    sessionStorage.removeItem('student_phone');
+    window.location.href = LOGIN_URL;
+  }
+
+  // ── JSONP ────────────────────────────────────────────────
+  function jsonp(url, cb) {
+    var id = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 9999);
+    var t;
+    function cleanup() {
+      clearTimeout(t);
+      var s = document.getElementById(id);
+      if (s) { try { document.body.removeChild(s); } catch(e) {} }
+      try { delete window[id]; } catch(e) { window[id] = undefined; }
+    }
+    window[id] = function(data) { cleanup(); cb(data); };
+    var s = document.createElement('script');
+    s.id  = id;
+    s.src = url + '&callback=' + id;
+    s.onerror = function() { cleanup(); cb(null); };
+    document.body.appendChild(s);
+    t = setTimeout(function() { cleanup(); cb(null); }, 25000);
+  }
+</script>
+</body>
+</html>
