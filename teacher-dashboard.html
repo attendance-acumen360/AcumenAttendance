@@ -10,10 +10,10 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --black:   #0a0a0a; --red: #D0261A; --red-dk: #a81e14; --red-lt: #ff3b2e;
-  --white:   #ffffff; --off: #f7f5f2; --gray: #999490; --border: #e8e4e0;
-  --green:   #22c55e; --amber: #f59e0b;
-  --card-sh: 0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  --black:#0a0a0a; --red:#D0261A; --red-dk:#a81e14; --red-lt:#ff3b2e;
+  --white:#ffffff; --off:#f7f5f2; --gray:#999490; --border:#e8e4e0;
+  --green:#22c55e; --amber:#f59e0b;
+  --card-sh:0 4px 24px rgba(0,0,0,0.07),0 1px 4px rgba(0,0,0,0.04);
 }
 html,body { height:100%; }
 body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh; color:var(--black); }
@@ -21,7 +21,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 /* TOPBAR */
 .topbar { background:var(--black); padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:200; }
 .topbar-brand { display:flex; align-items:center; gap:10px; }
-.topbar-logo { width:30px;height:30px;background:var(--red);border-radius:7px;display:flex;align-items:center;justify-content:center; }
+.topbar-logo { width:30px;height:30px;background:var(--red);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
 .topbar-logo svg { width:16px;height:16px; }
 .topbar-title { font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.07em;color:var(--white); }
 .topbar-subtitle { font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-left:4px; }
@@ -41,7 +41,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .login-title span { color:rgba(255,255,255,.4);font-size:26px;display:block; }
 .login-body { padding:24px; }
 .input-wrap { position:relative;margin-bottom:8px; }
-.input-icon { position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--gray);pointer-events:none;transition:color .2s; }
+.input-icon { position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--gray);pointer-events:none;transition:color .2s;flex-shrink:0; }
 .input-wrap:focus-within .input-icon { color:var(--red); }
 input[type="password"] { width:100%;padding:14px 14px 14px 42px;border:1.5px solid var(--border);border-radius:10px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:500;color:var(--black);background:var(--off);transition:border-color .2s,box-shadow .2s;-webkit-appearance:none; }
 input[type="password"]:focus { outline:none;border-color:var(--red);background:var(--white);box-shadow:0 0 0 4px rgba(208,38,26,.08); }
@@ -63,37 +63,37 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .loading-label { font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500; }
 
 /* PAGE */
-.page { max-width:1140px;margin:0 auto;padding:24px 20px 60px; }
+.page { max-width:1160px;margin:0 auto;padding:24px 20px 60px; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
 
 /* TODAY BANNER */
-.today-banner { background:var(--black);border-radius:14px;padding:18px 20px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both; }
-.today-banner-label { font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4); }
+.today-banner { background:var(--black);border-radius:14px;padding:16px 20px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both; }
+.today-banner-label { font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);flex-shrink:0; }
 .today-pill { display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;color:rgba(255,255,255,.7); }
-.today-pill-dot { width:5px;height:5px;border-radius:50%;background:var(--green); }
+.today-pill-dot { width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0; }
 
 /* STATS ROW */
-.stats-row { display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px;animation:fadeUp .5s .05s cubic-bezier(.22,1,.36,1) both; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+.stats-row { display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px;animation:fadeUp .5s .05s cubic-bezier(.22,1,.36,1) both; }
 .stat-card { background:var(--white);border-radius:12px;padding:16px 12px;box-shadow:var(--card-sh);border:1px solid var(--border);text-align:center; }
 .stat-val { font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.02em;line-height:1;color:var(--black);margin-bottom:4px; }
-.stat-val.danger { color:var(--red); }
+.stat-val.danger  { color:var(--red); }
 .stat-val.success { color:var(--green); }
-.stat-val.warn { color:var(--amber); }
+.stat-val.warn    { color:var(--amber); }
 .stat-label { font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray); }
 
 /* TABS */
-.tab-nav { display:flex;gap:4px;background:var(--white);border-radius:12px;padding:4px;box-shadow:var(--card-sh);border:1px solid var(--border);margin-bottom:20px;animation:fadeUp .5s .1s cubic-bezier(.22,1,.36,1) both;width:fit-content; }
+.tab-nav { display:flex;gap:4px;background:var(--white);border-radius:12px;padding:4px;box-shadow:var(--card-sh);border:1px solid var(--border);margin-bottom:16px;animation:fadeUp .5s .1s cubic-bezier(.22,1,.36,1) both;width:fit-content; }
 .tab-btn { font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);background:none;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;transition:all .15s;white-space:nowrap; }
 .tab-btn.active { background:var(--black);color:var(--white); }
 .tab-panel { display:none;animation:fadeUp .3s cubic-bezier(.22,1,.36,1) both; }
 .tab-panel.active { display:block; }
 
 /* FILTER BAR */
-.filter-bar { background:var(--white);border-radius:12px;padding:12px 16px;box-shadow:var(--card-sh);border:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px; }
+.filter-bar { background:var(--white);border-radius:12px;padding:10px 16px;box-shadow:var(--card-sh);border:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px; }
 .filter-bar label { font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray); }
-.filter-select { padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:var(--black);background:var(--off);cursor:pointer;transition:border-color .15s; }
+.filter-select { padding:5px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:var(--black);background:var(--off);cursor:pointer;transition:border-color .15s; }
 .filter-select:focus { outline:none;border-color:var(--red); }
-.search-input { flex:1;min-width:140px;padding:6px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--black);background:var(--off); }
+.search-input { flex:1;min-width:140px;padding:5px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--black);background:var(--off); }
 .search-input:focus { outline:none;border-color:var(--red); }
 .filter-count { margin-left:auto;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);background:var(--off);border:1px solid var(--border);border-radius:20px;padding:3px 10px;white-space:nowrap; }
 
@@ -104,11 +104,11 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .table-scroll::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
 .data-table { width:100%;border-collapse:collapse; }
 .data-table thead tr { background:var(--black); }
-.data-table thead th { padding:11px 12px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-align:left;white-space:nowrap; }
+.data-table thead th { padding:10px 12px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-align:left;white-space:nowrap; }
 .data-table tbody tr { border-bottom:1px solid var(--border);transition:background .1s; }
 .data-table tbody tr:last-child { border-bottom:none; }
 .data-table tbody tr:hover { background:var(--off); }
-.data-table tbody td { padding:10px 12px;font-size:12px;color:var(--black);vertical-align:middle; }
+.data-table tbody td { padding:9px 12px;font-size:12px;color:var(--black);vertical-align:middle; }
 .data-table tbody td.muted { color:var(--gray);font-size:11px; }
 .pct-cell { font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.02em; }
 .pct-cell.good { color:var(--green); }
@@ -117,33 +117,49 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .table-empty { padding:36px;text-align:center;font-size:13px;color:var(--gray);font-style:italic; }
 
 /* FLAGS */
-.flag-pill { display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;letter-spacing:.04em;border-radius:20px;padding:3px 8px;white-space:nowrap; }
-.flag-pill.low { background:rgba(208,38,26,.08);color:var(--red-dk);border:1px solid rgba(208,38,26,.2); }
+.flag-pill { display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;letter-spacing:.04em;border-radius:20px;padding:3px 7px;white-space:nowrap; }
+.flag-pill.low         { background:rgba(208,38,26,.08);color:var(--red-dk);border:1px solid rgba(208,38,26,.2); }
 .flag-pill.consecutive { background:rgba(245,158,11,.08);color:#92400e;border:1px solid rgba(245,158,11,.2); }
-.flag-pill.both { background:rgba(208,38,26,.08);color:var(--red-dk);border:1px solid rgba(208,38,26,.2); }
+.flag-pill.both        { background:rgba(208,38,26,.08);color:var(--red-dk);border:1px solid rgba(208,38,26,.2); }
 
 /* NEED badge */
 .need-badge { display:inline-block;background:rgba(208,38,26,.08);color:var(--red-dk);border:1px solid rgba(208,38,26,.15);border-radius:6px;padding:2px 6px;font-size:10px;font-weight:600; }
+.ok-badge   { display:inline-block;background:rgba(34,197,94,.08);color:#15803d;border:1px solid rgba(34,197,94,.15);border-radius:6px;padding:2px 6px;font-size:10px;font-weight:600; }
 
 /* ABSENTEES */
-.absent-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px; }
+.absent-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px; }
 .absent-card { background:var(--white);border-radius:12px;border:1.5px solid rgba(208,38,26,.2);padding:14px 16px;box-shadow:var(--card-sh);transition:transform .15s; }
 .absent-card:hover { transform:translateY(-1px); }
-.absent-name { font-size:14px;font-weight:600;color:var(--black);margin-bottom:3px; }
-.absent-meta { font-size:11px;color:var(--gray);margin-bottom:8px; }
+.absent-name { font-size:14px;font-weight:600;color:var(--black);margin-bottom:2px; }
+.absent-meta { font-size:11px;color:var(--gray);margin-bottom:3px; }
+.absent-phone { font-size:11px;color:var(--gray);margin-bottom:8px;font-family:monospace; }
 .absent-tags { display:flex;flex-wrap:wrap;gap:4px; }
 .absent-subject { display:inline-flex;align-items:center;gap:4px;background:rgba(208,38,26,.07);color:var(--red-dk);border:1px solid rgba(208,38,26,.2);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:500; }
-.empty-today { text-align:center;padding:48px 20px;font-size:15px;color:var(--gray); }
+.absent-flag-row { display:flex;gap:4px;margin-top:6px;flex-wrap:wrap; }
+
+.empty-today { text-align:center;padding:48px 20px; }
 .empty-today-icon { font-size:36px;margin-bottom:12px; }
 .empty-today-title { font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--black);margin-bottom:6px; }
 
-/* PROGRESS BAR MINI */
+/* PROGRESS BAR */
 .pct-bar-wrap { display:flex;align-items:center;gap:6px; }
-.pct-bar-bg { flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden;min-width:40px; }
+.pct-bar-bg   { flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden;min-width:40px; }
 .pct-bar-fill { height:100%;border-radius:4px;transition:width .4s; }
 .pct-bar-fill.good { background:var(--green); }
 .pct-bar-fill.warn { background:var(--amber); }
 .pct-bar-fill.bad  { background:var(--red); }
+
+/* STUDENT DETAIL EXPAND (tooltip-style) */
+.student-detail { font-size:10px;color:var(--gray);margin-top:2px;line-height:1.4; }
+
+/* ATTENDANCE SUMMARY CARDS (batch overview) */
+.batch-summary-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px;animation:fadeUp .3s cubic-bezier(.22,1,.36,1) both; }
+.batch-card { background:var(--white);border-radius:12px;padding:16px;box-shadow:var(--card-sh);border:1px solid var(--border); }
+.batch-card-title { font-size:12px;font-weight:600;color:var(--black);margin-bottom:2px; }
+.batch-card-sub { font-size:10px;color:var(--gray);margin-bottom:10px;letter-spacing:.04em; }
+.batch-stat-row { display:flex;justify-content:space-between;align-items:center;margin-bottom:6px; }
+.batch-stat-label { font-size:10px;color:var(--gray); }
+.batch-stat-val { font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.02em; }
 
 @media (max-width:900px) {
   .stats-row { grid-template-columns:repeat(3,1fr); }
@@ -168,7 +184,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     </div>
     <div class="login-body">
       <div class="input-wrap">
-        <svg class="input-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <svg class="input-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
           <rect x="1.5" y="6" width="13" height="9" rx="1.5"/>
           <path d="M5 6 V4.5 a3 3 0 0 1 6 0 V6"/>
           <circle cx="8" cy="10.5" r="1.5" fill="currentColor" stroke="none"/>
@@ -216,15 +232,13 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 <!-- DASHBOARD -->
 <div class="page" id="dashPage" style="display:none;">
 
-  <!-- Today's Classes Banner -->
   <div class="today-banner" id="todayBanner"></div>
-
-  <!-- Stats -->
-  <div class="stats-row" id="statsRow"></div>
+  <div class="stats-row"    id="statsRow"></div>
 
   <!-- Tabs -->
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchTab('students')">All Students</button>
+    <button class="tab-btn"        onclick="switchTab('batches')">Batch Overview</button>
     <button class="tab-btn"        onclick="switchTab('absentees')">Today's Absentees</button>
     <button class="tab-btn"        onclick="switchTab('faculty')">Faculty Stats</button>
   </div>
@@ -238,12 +252,15 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
       <select class="filter-select" id="fBatch"  onchange="applyStudentFilters()"><option value="">All</option></select>
       <label>Center</label>
       <select class="filter-select" id="fCenter" onchange="applyStudentFilters()"><option value="">All</option></select>
+      <label>Mode</label>
+      <select class="filter-select" id="fMode" onchange="applyStudentFilters()"><option value="">All</option></select>
       <label>Flag</label>
       <select class="filter-select" id="fFlag" onchange="applyStudentFilters()">
         <option value="">All</option>
         <option value="low">⚠️ Low Attendance</option>
         <option value="consecutive">🔴 Consecutive Absent</option>
         <option value="both">Both Flags</option>
+        <option value="ok">✅ On Track</option>
       </select>
       <input class="search-input" type="text" id="fSearch" placeholder="Search name, phone, college…" oninput="applyStudentFilters()" />
       <span class="filter-count" id="studentFilterCount">—</span>
@@ -252,14 +269,28 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
       <div class="table-scroll">
         <table class="data-table">
           <thead><tr>
-            <th>Name</th><th>Branch</th><th>Batch</th><th>Center</th>
-            <th>Total</th><th>Attended</th><th>%</th>
-            <th>Need</th><th>Last Seen</th><th>Flag</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Batch / Code</th>
+            <th>Center</th>
+            <th>Mode</th>
+            <th>Total</th>
+            <th>Attended</th>
+            <th>%</th>
+            <th>Need</th>
+            <th>Consec.</th>
+            <th>Last Seen</th>
+            <th>Flag</th>
           </tr></thead>
           <tbody id="studentTbody"></tbody>
         </table>
       </div>
     </div>
+  </div>
+
+  <!-- BATCH OVERVIEW TAB -->
+  <div class="tab-panel" id="tab-batches">
+    <div class="batch-summary-grid" id="batchGrid"></div>
   </div>
 
   <!-- ABSENTEES TAB -->
@@ -289,22 +320,29 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
       <div class="table-scroll">
         <table class="data-table">
           <thead><tr>
-            <th>Faculty</th><th>Subject</th><th>Branch</th><th>Batch</th>
-            <th>Conducted</th><th>Avg %</th><th>Actual / Possible</th>
+            <th>Faculty</th>
+            <th>Subject</th>
+            <th>Branch</th>
+            <th>Batch</th>
+            <th>Conducted</th>
+            <th>Students</th>
+            <th>Possible Slots</th>
+            <th>Actual</th>
+            <th>Avg %</th>
           </tr></thead>
           <tbody id="facTbody"></tbody>
         </table>
       </div>
     </div>
   </div>
+
 </div>
 
 <script>
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 
-// Teacher portal stores only an opaque server-issued token, never the raw password.
-var _dashData  = null;
-var _isBusy    = false;
+var _dashData = null;
+var _isBusy   = false;
 
 (function init() {
   var saved = sessionStorage.getItem('teacher_token');
@@ -314,7 +352,7 @@ var _isBusy    = false;
   }
 })();
 
-// ── LOGIN ────────────────────────────────────────────────────
+/* ── LOGIN ── */
 function doLogin() {
   if (_isBusy) return;
   var pw = document.getElementById('pwInput').value.trim();
@@ -334,7 +372,6 @@ function doLogin() {
         document.getElementById('loginOverlay').style.display = 'flex';
         return;
       }
-      // Store only the opaque token — password never touches storage
       sessionStorage.setItem('teacher_token', data.token);
       fetchDashboard(data.token);
     }
@@ -362,7 +399,6 @@ function fetchDashboard(token) {
         return;
       }
       if (!data.success) {
-        // Expired or invalid token — force re-login
         sessionStorage.removeItem('teacher_token');
         showLoginError(data.error || 'Session expired. Please log in again.');
         document.getElementById('loginOverlay').style.display = 'flex';
@@ -378,6 +414,7 @@ function showLoginError(msg) {
   var el = document.getElementById('loginError');
   el.textContent = msg;
   el.classList.add('visible');
+  document.getElementById('loginOverlay').style.display = 'flex';
 }
 function showLoading(msg) {
   document.getElementById('loadingLabel').textContent = msg || 'Loading\u2026';
@@ -387,7 +424,7 @@ function hideLoading() {
   document.getElementById('fullLoading').style.display = 'none';
 }
 
-// ── RENDER ───────────────────────────────────────────────────
+/* ── RENDER ── */
 function renderDashboard(data) {
   document.getElementById('topbar').style.display  = 'flex';
   document.getElementById('genTime').textContent   = 'Updated: ' + data.generatedAt;
@@ -395,6 +432,7 @@ function renderDashboard(data) {
   renderTodayBanner(data.classesToday || []);
   renderStats(data.stats);
   populateFilters(data.students, data.absentees, data.facultyStats);
+  renderBatchOverview(data.students);
   applyStudentFilters();
   applyAbsentFilters();
   applyFacFilters();
@@ -431,13 +469,68 @@ function statCard(val, label, cls) {
          '</div><div class="stat-label">' + label + '</div></div>';
 }
 
-// ── FILTER POPULATION ────────────────────────────────────────
+/* ── BATCH OVERVIEW ── */
+function renderBatchOverview(students) {
+  var batches = {};
+  students.forEach(function(s) {
+    var k = s.branch + ' \u00b7 ' + s.batch + (s.center ? ' \u00b7 ' + s.center : '');
+    if (!batches[k]) batches[k] = { branch: s.branch, batch: s.batch, center: s.center, students: [] };
+    batches[k].students.push(s);
+  });
+
+  var grid = document.getElementById('batchGrid');
+  var keys = Object.keys(batches).sort();
+
+  if (!keys.length) {
+    grid.innerHTML = '<div style="color:var(--gray);font-size:13px;padding:16px;">No student data.</div>';
+    return;
+  }
+
+  grid.innerHTML = keys.map(function(k) {
+    var b        = batches[k];
+    var total    = b.students.length;
+    var low      = b.students.filter(function(s){ return s.flag==='low'||s.flag==='both'; }).length;
+    var consec   = b.students.filter(function(s){ return s.flag==='consecutive'||s.flag==='both'; }).length;
+    var avgPct   = total > 0
+      ? (b.students.reduce(function(sum, s){ return sum + s.pct; }, 0) / total).toFixed(1)
+      : 0;
+    var pc = pctClass(parseFloat(avgPct));
+    var attended = b.students.reduce(function(sum,s){ return sum+s.attended; }, 0);
+    var ttlCls   = b.students.reduce(function(sum,s){ return sum+s.total;    }, 0);
+    var barW     = Math.min(parseFloat(avgPct), 100);
+
+    return '<div class="batch-card">' +
+      '<div class="batch-card-title">' + esc(b.branch) + ' \u2014 ' + esc(b.batch) + '</div>' +
+      '<div class="batch-card-sub">' + esc(b.center||'') + '</div>' +
+      '<div class="batch-stat-row">' +
+        '<span class="batch-stat-label">Students</span>' +
+        '<span class="batch-stat-val">' + total + '</span>' +
+      '</div>' +
+      '<div class="batch-stat-row">' +
+        '<span class="batch-stat-label">Avg Attendance</span>' +
+        '<span class="batch-stat-val pct-cell ' + pc + '">' + avgPct + '%</span>' +
+      '</div>' +
+      '<div class="pct-bar-wrap" style="margin-bottom:8px;">' +
+        '<div class="pct-bar-bg"><div class="pct-bar-fill ' + pc + '" style="width:' + barW + '%"></div></div>' +
+      '</div>' +
+      '<div class="batch-stat-row">' +
+        '<span class="batch-stat-label">Total slots attended</span>' +
+        '<span class="batch-stat-val" style="font-size:13px;font-family:\'Outfit\',sans-serif;font-weight:600;">' + attended + ' / ' + ttlCls + '</span>' +
+      '</div>' +
+      (low > 0 ? '<div style="margin-top:6px;"><span class="flag-pill low">⚠️ ' + low + ' low</span></div>' : '') +
+      (consec > 0 ? '<div style="margin-top:4px;"><span class="flag-pill consecutive">🔴 ' + consec + ' consec.</span></div>' : '') +
+    '</div>';
+  }).join('');
+}
+
+/* ── FILTER POPULATION ── */
 function populateFilters(students, absentees, faculty) {
-  var branches={}, batches={}, centers={};
+  var branches={}, batches={}, centers={}, modes={};
   students.forEach(function(s) {
     if (s.branch) branches[s.branch] = 1;
     if (s.batch)  batches[s.batch]   = 1;
     if (s.center) centers[s.center]  = 1;
+    if (s.mode)   modes[s.mode]      = 1;
   });
 
   function fill(id, vals) {
@@ -448,9 +541,10 @@ function populateFilters(students, absentees, faculty) {
       el.innerHTML += '<option value="'+esc(v)+'"'+(v===cur?' selected':'')+'>'+esc(v)+'</option>';
     });
   }
-  fill('fBranch',  Object.keys(branches).sort());
-  fill('fBatch',   Object.keys(batches).sort());
-  fill('fCenter',  Object.keys(centers).sort());
+  fill('fBranch', Object.keys(branches).sort());
+  fill('fBatch',  Object.keys(batches).sort());
+  fill('fCenter', Object.keys(centers).sort());
+  fill('fMode',   Object.keys(modes).sort());
 
   var abBr={}, abBt={};
   absentees.forEach(function(a) { if(a.branch)abBr[a.branch]=1; if(a.batch)abBt[a.batch]=1; });
@@ -463,12 +557,13 @@ function populateFilters(students, absentees, faculty) {
   fill('facBatch',  Object.keys(facBt).sort());
 }
 
-// ── STUDENTS ─────────────────────────────────────────────────
+/* ── STUDENTS ── */
 function applyStudentFilters() {
   if (!_dashData) return;
   var branch = document.getElementById('fBranch').value;
   var batch  = document.getElementById('fBatch').value;
   var center = document.getElementById('fCenter').value;
+  var mode   = document.getElementById('fMode').value;
   var flag   = document.getElementById('fFlag').value;
   var search = document.getElementById('fSearch').value.toLowerCase().trim();
 
@@ -476,13 +571,15 @@ function applyStudentFilters() {
     if (branch && s.branch !== branch) return false;
     if (batch  && s.batch  !== batch)  return false;
     if (center && s.center !== center) return false;
+    if (mode   && s.mode   !== mode)   return false;
     if (flag) {
       if (flag === 'low'         && s.flag !== 'low'         && s.flag !== 'both') return false;
       if (flag === 'consecutive' && s.flag !== 'consecutive' && s.flag !== 'both') return false;
       if (flag === 'both'        && s.flag !== 'both')                             return false;
+      if (flag === 'ok'          && s.flag !== '')                                 return false;
     }
     if (search) {
-      var hay = (s.name + ' ' + s.phone + ' ' + (s.college||'')).toLowerCase();
+      var hay = (s.name + ' ' + s.phone + ' ' + (s.college||'') + ' ' + (s.batchCode||'') + ' ' + (s.nativeCity||'')).toLowerCase();
       if (hay.indexOf(search) === -1) return false;
     }
     return true;
@@ -493,48 +590,60 @@ function applyStudentFilters() {
 
   var tbody = document.getElementById('studentTbody');
   if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="10" class="table-empty">No students match the current filters.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="12" class="table-empty">No students match the current filters.</td></tr>';
     return;
   }
 
   tbody.innerHTML = filtered.map(function(s) {
     var pc = pctClass(s.pct);
+
     var flagHtml = '';
-    if (s.flag === 'low')         flagHtml = '<span class="flag-pill low">\u26a0\ufe0f Low</span>';
-    if (s.flag === 'consecutive') flagHtml = '<span class="flag-pill consecutive">\ud83d\udd34 '+s.consecutive+'d</span>';
-    if (s.flag === 'both')        flagHtml = '<span class="flag-pill both">\u26a0\ufe0f+\ud83d\udd34 '+s.consecutive+'</span>';
+    if (s.flag === 'low')         flagHtml = '<span class="flag-pill low">⚠️ Low</span>';
+    if (s.flag === 'consecutive') flagHtml = '<span class="flag-pill consecutive">🔴 ' + s.consecutive + 'd</span>';
+    if (s.flag === 'both')        flagHtml = '<span class="flag-pill both">⚠️+🔴 ' + s.consecutive + '</span>';
+    if (s.flag === '')            flagHtml = '<span class="ok-badge">✅</span>';
 
     var needHtml = s.needToAttend > 0
-      ? '<span class="need-badge">+' + s.needToAttend + '</span>' : '\u2014';
+      ? '<span class="need-badge">+' + s.needToAttend + '</span>'
+      : '<span class="ok-badge">—</span>';
 
     var lastSeen = s.lastDate
       ? s.lastDate.split('-').reverse().join('-')
       : '<span style="color:var(--gray);font-style:italic;">Never</span>';
 
-    var barW  = Math.min(s.pct, 100);
+    var barW = Math.min(s.pct, 100);
     var pctDisplay = '<div class="pct-bar-wrap">' +
       '<span class="pct-cell ' + pc + '">' + s.pct + '%</span>' +
       '<div class="pct-bar-bg"><div class="pct-bar-fill ' + pc + '" style="width:' + barW + '%"></div></div>' +
-      '</div>';
+    '</div>';
+
+    var batchCell = esc(s.batch) + (s.batchCode ? '<div class="student-detail">' + esc(s.batchCode) + '</div>' : '');
 
     return '<tr>' +
       '<td><strong>' + esc(s.name) + '</strong>' +
-        (s.mode ? '<br><span class="muted" style="font-size:10px;">' + esc(s.mode) + '</span>' : '') +
+        (s.college    ? '<div class="student-detail">' + esc(s.college)    + '</div>' : '') +
+        (s.nativeCity ? '<div class="student-detail">' + esc(s.nativeCity) + '</div>' : '') +
       '</td>' +
       '<td class="muted">' + esc(s.branch) + '</td>' +
-      '<td class="muted">' + esc(s.batch)  + '</td>' +
+      '<td class="muted">' + batchCell     + '</td>' +
       '<td class="muted">' + esc(s.center || '\u2014') + '</td>' +
+      '<td class="muted">' + esc(s.mode   || '\u2014') + '</td>' +
       '<td>' + s.total    + '</td>' +
       '<td>' + s.attended + '</td>' +
       '<td>' + pctDisplay + '</td>' +
       '<td>' + needHtml   + '</td>' +
+      '<td class="muted" style="text-align:center;">' +
+        (s.consecutive > 0
+          ? '<span style="color:' + (s.consecutive>=3?'var(--red)':'var(--amber)') + ';font-weight:600;">' + s.consecutive + '</span>'
+          : '<span style="color:var(--green);">0</span>') +
+      '</td>' +
       '<td class="muted">' + lastSeen + '</td>' +
       '<td>' + flagHtml   + '</td>' +
     '</tr>';
   }).join('');
 }
 
-// ── ABSENTEES ────────────────────────────────────────────────
+/* ── ABSENTEES ── */
 function applyAbsentFilters() {
   if (!_dashData) return;
   var branch = document.getElementById('abBranch').value;
@@ -552,13 +661,15 @@ function applyAbsentFilters() {
   var content = document.getElementById('absentContent');
 
   if (!filtered.length) {
-    content.innerHTML = '<div class="empty-today"><div class="empty-today-icon">\ud83c\udf89</div>' +
+    content.innerHTML = '<div class="empty-today">' +
+      '<div class="empty-today-icon">🎉</div>' +
       '<div class="empty-today-title">All Present!</div>' +
-      '<p style="font-size:13px;color:var(--gray);">No absentees matching the current filter.</p></div>';
+      '<p style="font-size:13px;color:var(--gray);">No absentees matching the current filter.</p>' +
+    '</div>';
     return;
   }
 
-  // Group by student so multiple absent subjects appear on one card
+  // Group by student
   var byStudent = {};
   filtered.forEach(function(a) {
     var k = a.phone + '|' + a.branch + '|' + a.batch;
@@ -566,22 +677,47 @@ function applyAbsentFilters() {
     byStudent[k].subjects.push({ subject:a.subject, faculty:a.faculty });
   });
 
+  // Look up student flags from full students list (for flag pills on absentee cards)
+  var studentFlagMap = {};
+  if (_dashData.students) {
+    _dashData.students.forEach(function(s) {
+      studentFlagMap[s.phone + '|' + s.branch + '|' + s.batch] = s;
+    });
+  }
+
   content.innerHTML = '<div class="absent-grid">' +
-    Object.keys(byStudent).map(function(k) {
-      var st = byStudent[k];
+    Object.keys(byStudent).sort().map(function(k) {
+      var st  = byStudent[k];
+      var stu = studentFlagMap[k] || null;
       var tags = st.subjects.map(function(su) {
         return '<span class="absent-subject">\u274c ' + esc(su.subject) +
           ' <span style="opacity:.6;font-size:9px;">(' + esc(su.faculty) + ')</span></span>';
       }).join('');
+
+      var flagHtml = '';
+      if (stu) {
+        if (stu.flag === 'low' || stu.flag === 'both') {
+          flagHtml += '<span class="flag-pill low" style="font-size:9px;">⚠️ ' + stu.pct + '%</span>';
+        }
+        if (stu.flag === 'consecutive' || stu.flag === 'both') {
+          flagHtml += '<span class="flag-pill consecutive" style="font-size:9px;">🔴 ' + stu.consecutive + ' consec.</span>';
+        }
+        if (stu.needToAttend > 0) {
+          flagHtml += '<span class="need-badge" style="font-size:9px;">+' + stu.needToAttend + ' to recover</span>';
+        }
+      }
+
       return '<div class="absent-card">' +
         '<div class="absent-name">' + esc(st.name) + '</div>' +
-        '<div class="absent-meta">' + esc(st.branch) + ' \u00b7 ' + esc(st.batch) + ' \u00b7 ' + esc(st.phone) + '</div>' +
+        '<div class="absent-meta">' + esc(st.branch) + ' \u00b7 ' + esc(st.batch) + '</div>' +
+        '<div class="absent-phone">' + esc(st.phone) + '</div>' +
         '<div class="absent-tags">' + tags + '</div>' +
+        (flagHtml ? '<div class="absent-flag-row">' + flagHtml + '</div>' : '') +
       '</div>';
     }).join('') + '</div>';
 }
 
-// ── FACULTY ──────────────────────────────────────────────────
+/* ── FACULTY ── */
 function applyFacFilters() {
   if (!_dashData) return;
   var branch = document.getElementById('facBranch').value;
@@ -597,34 +733,46 @@ function applyFacFilters() {
 
   document.getElementById('facFilterCount').textContent =
     filtered.length + ' session' + (filtered.length !== 1 ? 's' : '');
-  var tbody = document.getElementById('facTbody');
 
+  var tbody = document.getElementById('facTbody');
   if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="7" class="table-empty">No faculty records found.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="9" class="table-empty">No faculty records found.</td></tr>';
     return;
+  }
+
+  // Compute students per batch for the table
+  var batchStudentCount = {};
+  if (_dashData.students) {
+    _dashData.students.forEach(function(s) {
+      var bk = s.branch + '||' + s.batch;
+      batchStudentCount[bk] = (batchStudentCount[bk] || 0) + 1;
+    });
   }
 
   tbody.innerHTML = filtered.map(function(f) {
     var pc   = pctClass(f.avgPct);
     var barW = Math.min(f.avgPct, 100);
+    var stuCount = batchStudentCount[f.branch + '||' + f.batch] || '—';
     return '<tr>' +
       '<td><strong>' + esc(f.faculty) + '</strong></td>' +
       '<td>' + esc(f.subject) + '</td>' +
       '<td class="muted">' + esc(f.branch) + '</td>' +
       '<td class="muted">' + esc(f.batch)  + '</td>' +
       '<td>' + f.conducted + '</td>' +
+      '<td class="muted" style="text-align:center;">' + stuCount + '</td>' +
+      '<td class="muted">' + f.totalPoss + '</td>' +
+      '<td>' + f.actual + '</td>' +
       '<td><div class="pct-bar-wrap">' +
         '<span class="pct-cell ' + pc + '">' + f.avgPct + '%</span>' +
         '<div class="pct-bar-bg"><div class="pct-bar-fill ' + pc + '" style="width:' + barW + '%"></div></div>' +
       '</div></td>' +
-      '<td class="muted">' + f.actual + ' / ' + f.totalPoss + '</td>' +
     '</tr>';
   }).join('');
 }
 
-// ── TABS ─────────────────────────────────────────────────────
+/* ── TABS ── */
 function switchTab(tab) {
-  var tabs = ['students','absentees','faculty'];
+  var tabs = ['students','batches','absentees','faculty'];
   var btns = document.querySelectorAll('.tab-btn');
   tabs.forEach(function(t, i) {
     btns[i].className = 'tab-btn' + (t === tab ? ' active' : '');
@@ -633,20 +781,13 @@ function switchTab(tab) {
   document.getElementById('tab-' + tab).className = 'tab-panel active';
 }
 
-// ── HELPERS ──────────────────────────────────────────────────
+/* ── HELPERS ── */
 function pctClass(p) { return p >= 75 ? 'good' : p >= 65 ? 'warn' : 'bad'; }
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── JSONP ────────────────────────────────────────────────────
-/*
- * JSONP with fired guard — single callback invocation guaranteed.
- * Fixes the race condition where the timeout could fire after the
- * response already arrived, or the response after the timeout,
- * causing cb() to be called twice. The `fired` boolean prevents
- * any second invocation regardless of which path fires first.
- */
+/* JSONP with fired guard */
 function jsonp(url, cb) {
   var id    = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
   var t     = null;
