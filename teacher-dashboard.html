@@ -149,10 +149,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .pct-bar-fill.warn { background:var(--amber); }
 .pct-bar-fill.bad  { background:var(--red); }
 
-/* STUDENT DETAIL EXPAND (tooltip-style) */
+/* STUDENT DETAIL EXPAND */
 .student-detail { font-size:10px;color:var(--gray);margin-top:2px;line-height:1.4; }
 
-/* ATTENDANCE SUMMARY CARDS (batch overview) */
+/* ATTENDANCE SUMMARY CARDS */
 .batch-summary-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px;animation:fadeUp .3s cubic-bezier(.22,1,.36,1) both; }
 .batch-card { background:var(--white);border-radius:12px;padding:16px;box-shadow:var(--card-sh);border:1px solid var(--border); }
 .batch-card-title { font-size:12px;font-weight:600;color:var(--black);margin-bottom:2px; }
@@ -352,17 +352,44 @@ var _isBusy   = false;
   }
 })();
 
-/* ── LOGIN ── */
-function doLogin() {
+// ── LOGIN
+//
+// FIX (Issue #1): Password is hashed client-side with SHA-256
+// before being sent as a URL query parameter. This prevents
+// the plaintext password from appearing in browser history,
+// server access logs, or network monitoring tools.
+//
+// crypto.subtle.digest is available in all modern browsers
+// over HTTPS. Apps Script web apps are always served over HTTPS.
+//
+// The server-side _portal_teacherLogin now compares the incoming
+// hash against a stored hash (set via setTeacherPasswordHashed).
+// ──
+async function doLogin() {
   if (_isBusy) return;
   var pw = document.getElementById('pwInput').value.trim();
   if (!pw) return;
+
+  // Hash the password before transmission.
+  var hashHex;
+  try {
+    var msgBuffer  = new TextEncoder().encode(pw);
+    var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    var hashArray  = Array.from(new Uint8Array(hashBuffer));
+    hashHex = hashArray.map(function(b) {
+      return b.toString(16).padStart(2, '0');
+    }).join('');
+  } catch (hashErr) {
+    showLoginError('Your browser does not support secure login. Please use a modern browser.');
+    return;
+  }
+
   _isBusy = true;
   document.getElementById('loginBtn').disabled = true;
   document.getElementById('loginOverlay').style.display = 'none';
   showLoading('Logging in\u2026');
 
-  jsonp(APPS_SCRIPT_URL + '?action=teacherLogin&password=' + encodeURIComponent(pw),
+  jsonp(APPS_SCRIPT_URL + '?action=teacherLogin&password=' + encodeURIComponent(hashHex),
     function(data) {
       _isBusy = false;
       hideLoading();
@@ -669,7 +696,6 @@ function applyAbsentFilters() {
     return;
   }
 
-  // Group by student
   var byStudent = {};
   filtered.forEach(function(a) {
     var k = a.phone + '|' + a.branch + '|' + a.batch;
@@ -677,7 +703,6 @@ function applyAbsentFilters() {
     byStudent[k].subjects.push({ subject:a.subject, faculty:a.faculty });
   });
 
-  // Look up student flags from full students list (for flag pills on absentee cards)
   var studentFlagMap = {};
   if (_dashData.students) {
     _dashData.students.forEach(function(s) {
@@ -740,7 +765,6 @@ function applyFacFilters() {
     return;
   }
 
-  // Compute students per batch for the table
   var batchStudentCount = {};
   if (_dashData.students) {
     _dashData.students.forEach(function(s) {
