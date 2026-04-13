@@ -22,31 +22,24 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 /* TOPBAR */
 .topbar { background:var(--black);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100; }
 .topbar-brand { display:flex;align-items:center;gap:8px; }
-.topbar-logo { width:28px;height:28px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center; }
+.topbar-logo { width:28px;height:28px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
 .topbar-logo svg { width:15px;height:15px; }
 .topbar-name { font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.08em;color:var(--white); }
 
-/* TOPBAR NAV TABS */
+/* TOPBAR NAV */
 .topbar-nav { display:flex;align-items:stretch;gap:2px;margin-left:14px; }
 .topbar-nav a {
   display:flex;align-items:center;gap:6px;
   padding:0 13px;height:56px;
   font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  text-decoration:none;
-  color:rgba(255,255,255,.4);
-  position:relative;
-  transition:color .15s;
-  white-space:nowrap;
+  text-decoration:none;color:rgba(255,255,255,.4);
+  position:relative;transition:color .15s;white-space:nowrap;
 }
 .topbar-nav a:hover { color:rgba(255,255,255,.75); }
 .topbar-nav a.active { color:var(--white); }
 .topbar-nav a.active::after {
-  content:'';
-  position:absolute;
-  bottom:0;left:0;
-  width:100%;height:2px;
-  background:var(--red);
-  border-radius:2px 2px 0 0;
+  content:'';position:absolute;bottom:0;left:0;
+  width:100%;height:2px;background:var(--red);border-radius:2px 2px 0 0;
 }
 .topbar-nav a svg { width:14px;height:14px;opacity:.7;flex-shrink:0; }
 .topbar-nav a.active svg { opacity:1; }
@@ -66,20 +59,22 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 @keyframes spin { to{transform:rotate(360deg)} }
 .loading-label { font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500; }
 
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
 /* HERO CARD */
-.hero-card { background:var(--black);border-radius:20px;padding:28px 28px 24px;margin-bottom:20px;position:relative;overflow:hidden;animation:fadeUp .5s .1s cubic-bezier(.22,1,.36,1) both; }
+.hero-card { background:var(--black);border-radius:20px;padding:28px 28px 24px;margin-bottom:16px;position:relative;overflow:hidden;animation:fadeUp .5s .1s cubic-bezier(.22,1,.36,1) both; }
 .hero-card::before { content:'';position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(208,38,26,.15) 0%,transparent 70%);pointer-events:none; }
 .hero-card::after { content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--red) 0%,transparent 100%); }
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 
 .hero-meta { display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px; }
 .hero-badges { display:flex;flex-wrap:wrap;gap:6px; }
 .hero-badge { display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:500;letter-spacing:.04em;color:rgba(255,255,255,.6); }
-.hero-badge-dot { width:5px;height:5px;border-radius:50%;background:var(--green); }
+.hero-badge-dot { width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0; }
 .freshness-note { font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.04em; }
 
 .hero-name { font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.03em;color:var(--white);line-height:1;margin-bottom:5px; }
-.hero-sub  { font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.05em;margin-bottom:6px; }
+.hero-sub  { font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.05em;margin-bottom:4px; }
 .hero-sub2 { font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.04em;margin-bottom:22px; }
 
 .hero-stats { display:grid;grid-template-columns:repeat(4,1fr);gap:10px; }
@@ -91,28 +86,49 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .hero-stat-label { font-size:8px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3); }
 
 /* NEED-TO-ATTEND strip */
-.need-strip { background:rgba(208,38,26,.12);border:1px solid rgba(208,38,26,.25);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;animation:fadeUp .5s .15s cubic-bezier(.22,1,.36,1) both; }
-.need-strip-icon { font-size:20px;flex-shrink:0; }
+.need-strip { background:rgba(208,38,26,.12);border:1px solid rgba(208,38,26,.25);border-radius:10px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px;animation:fadeUp .5s .15s cubic-bezier(.22,1,.36,1) both; }
+.need-strip-icon { font-size:18px;flex-shrink:0;line-height:1; }
 .need-strip-text { font-size:13px;color:var(--red-dk);line-height:1.5; }
 .need-strip-text strong { font-weight:700; }
 
 /* ALERT BANNERS */
-.alert-banner { border-radius:12px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:flex-start;gap:12px;animation:fadeUp .5s .2s cubic-bezier(.22,1,.36,1) both; }
+.alert-banner { border-radius:12px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;animation:fadeUp .5s .2s cubic-bezier(.22,1,.36,1) both; }
 .alert-banner.low { background:rgba(208,38,26,.07);border:1px solid rgba(208,38,26,.2); }
 .alert-banner.consecutive { background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2); }
-.alert-icon { font-size:18px;flex-shrink:0;line-height:1;margin-top:1px; }
+.alert-banner.ok { background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2); }
+.alert-icon { font-size:16px;flex-shrink:0;line-height:1;margin-top:1px; }
 .alert-text { font-size:13px;line-height:1.5; }
 .alert-text strong { font-weight:600; }
 .alert-banner.low .alert-text { color:var(--red-dk); }
 .alert-banner.consecutive .alert-text { color:#92400e; }
+.alert-banner.ok .alert-text { color:#15803d; }
 
 /* SECTION */
-.section-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;margin-top:24px; }
-.section-title { font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:var(--black); }
-.section-count { font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);background:var(--border);padding:3px 8px;border-radius:20px; }
+.section-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:22px; }
+.section-title { font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.04em;color:var(--black); }
+.section-count { font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);background:var(--border);padding:3px 8px;border-radius:20px; }
+
+/* OVERVIEW STRIP — quick stats below hero */
+.overview-strip { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;animation:fadeUp .5s .18s cubic-bezier(.22,1,.36,1) both; }
+.ov-card { background:var(--white);border-radius:12px;padding:14px 16px;box-shadow:var(--card-sh);border:1px solid var(--border);display:flex;align-items:center;gap:12px; }
+.ov-icon { width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px; }
+.ov-icon.red { background:rgba(208,38,26,.08); }
+.ov-icon.amber { background:rgba(245,158,11,.08); }
+.ov-icon.green { background:rgba(34,197,94,.08); }
+.ov-label { font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:2px; }
+.ov-val { font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.02em;color:var(--black);line-height:1; }
+.ov-val.bad { color:var(--red); }
+.ov-val.warn { color:var(--amber); }
+.ov-val.good { color:#15803d; }
+
+/* STUDENT INFO CARD */
+.info-card { background:var(--white);border-radius:14px;box-shadow:var(--card-sh);border:1px solid var(--border);padding:18px 20px;animation:fadeUp .5s .22s cubic-bezier(.22,1,.36,1) both; }
+.info-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px; }
+.info-item-label { font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:3px; }
+.info-item-val { font-size:13px;font-weight:500;color:var(--black);line-height:1.3; }
 
 /* SUBJECTS */
-.subjects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:4px;animation:fadeUp .5s .25s cubic-bezier(.22,1,.36,1) both; }
+.subjects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;animation:fadeUp .5s .25s cubic-bezier(.22,1,.36,1) both; }
 .subj-card { background:var(--white);border-radius:14px;padding:18px;box-shadow:var(--card-sh);border:1.5px solid var(--border);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s; }
 .subj-card:hover { transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.1); }
 .subj-card.low-card { border-color:rgba(208,38,26,.3);background:rgba(208,38,26,.02); }
@@ -120,7 +136,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .subj-pct-bar.good { background:var(--green); }
 .subj-pct-bar.warn { background:var(--amber); }
 .subj-pct-bar.bad  { background:var(--red); }
-.subj-header { display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px; }
+.subj-header { display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px; }
 .subj-name { font-size:14px;font-weight:600;color:var(--black);line-height:1.3; }
 .subj-pct-badge { font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.02em;flex-shrink:0;line-height:1; }
 .subj-pct-badge.good { color:var(--green); }
@@ -131,11 +147,12 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .subj-count-item { flex:1;background:var(--off);border-radius:8px;padding:7px;text-align:center; }
 .subj-count-num { font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--black);line-height:1; }
 .subj-count-lbl { font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:2px; }
-.subj-need { margin-top:8px;font-size:11px;color:var(--red-dk);background:rgba(208,38,26,.06);border-radius:6px;padding:4px 8px;display:inline-block; }
+.subj-need { margin-top:8px;font-size:11px;color:var(--red-dk);background:rgba(208,38,26,.06);border-radius:6px;padding:4px 8px;display:inline-block;line-height:1.4; }
+.subj-on-track { margin-top:8px;font-size:11px;color:#15803d;background:rgba(34,197,94,.06);border-radius:6px;padding:4px 8px;display:inline-block;line-height:1.4; }
 
 /* DATE LOG */
 .date-log-wrap { background:var(--white);border-radius:16px;box-shadow:var(--card-sh);border:1px solid var(--border);overflow:hidden;animation:fadeUp .5s .35s cubic-bezier(.22,1,.36,1) both; }
-.date-log-filters { padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;align-items:center; }
+.date-log-filters { padding:12px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;align-items:center; }
 .filter-btn { font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:5px 12px;border:1.5px solid var(--border);background:none;color:var(--gray);cursor:pointer;transition:all .15s; }
 .filter-btn.active { background:var(--black);border-color:var(--black);color:var(--white); }
 .filter-btn.present-btn.active { background:#15803d;border-color:#15803d; }
@@ -149,7 +166,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .date-row-indicator { width:4px;flex-shrink:0; }
 .date-row-indicator.present { background:var(--green); }
 .date-row-indicator.absent  { background:var(--red); }
-.date-row-content { flex:1;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px; }
+.date-row-content { flex:1;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px; }
 .date-row-date { font-size:13px;font-weight:600;color:var(--black);white-space:nowrap;min-width:100px; }
 .date-row-date-sub { font-size:10px;color:var(--gray);letter-spacing:.04em;margin-top:1px; }
 .date-row-slots { flex:1;display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end; }
@@ -157,12 +174,6 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .slot-pill.present { background:var(--green-bg);color:#15803d;border:1px solid rgba(34,197,94,.2); }
 .slot-pill.absent  { background:var(--red-bg);color:var(--red-dk);border:1px solid rgba(208,38,26,.2); }
 .date-log-empty { padding:32px;text-align:center;font-size:13px;color:var(--gray);font-style:italic; }
-
-/* STUDENT INFO CARD */
-.info-card { background:var(--white);border-radius:14px;box-shadow:var(--card-sh);border:1px solid var(--border);padding:18px 20px;margin-bottom:4px;animation:fadeUp .5s .3s cubic-bezier(.22,1,.36,1) both; }
-.info-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px; }
-.info-item-label { font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:3px; }
-.info-item-val { font-size:13px;font-weight:500;color:var(--black); }
 
 /* ERROR */
 .error-state { text-align:center;padding:60px 20px; }
@@ -172,16 +183,25 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .btn-small { display:inline-flex;align-items:center;gap:6px;padding:12px 20px;background:var(--black);color:var(--white);border:none;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;cursor:pointer;transition:background .2s;text-decoration:none; }
 .btn-small:hover { background:var(--red); }
 
+/* PROGRESS RING — small inline attendance gauge */
+.pct-ring-wrap { display:inline-flex;align-items:center;gap:8px; }
+.pct-ring { transform:rotate(-90deg); }
+.pct-ring-bg { fill:none;stroke:#e8e4e0;stroke-width:3; }
+.pct-ring-fill { fill:none;stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1); }
+.pct-ring-fill.good { stroke:var(--green); }
+.pct-ring-fill.warn { stroke:var(--amber); }
+.pct-ring-fill.bad  { stroke:var(--red); }
+
 @media (max-width:600px) {
   .hero-stats { grid-template-columns:repeat(2,1fr); }
   .hero-name  { font-size:28px; }
   .subjects-grid { grid-template-columns:1fr; }
+  .overview-strip { grid-template-columns:1fr; gap:8px; }
   .date-row-date { min-width:80px; }
   .topbar-student-name { max-width:80px; }
   .page { padding:16px 12px 48px; }
-  /* On mobile, hide nav tab labels, show icons only */
   .topbar-nav a { padding:0 10px;font-size:0;gap:0; }
-  .topbar-nav a svg { font-size:14px;opacity:.6;width:16px;height:16px; }
+  .topbar-nav a svg { opacity:.6;width:16px;height:16px; }
   .topbar-nav a.active svg { opacity:1; }
 }
 </style>
@@ -198,7 +218,6 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
       </svg>
     </div>
     <span class="topbar-name">ACUMEN 360°</span>
-    <!-- PAGE NAVIGATION TABS -->
     <nav class="topbar-nav">
       <a href="index.html">
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -234,6 +253,8 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
         <div class="hero-badge" id="heroBranch" style="display:none;"></div>
         <div class="hero-badge" id="heroCenter" style="display:none;"></div>
         <div class="hero-badge" id="heroMode"   style="display:none;"></div>
+        <div class="hero-badge" id="heroBatchCode" style="display:none;"></div>
+        <div class="hero-badge" id="heroTarget" style="display:none;"></div>
       </div>
       <span class="freshness-note" id="freshnessNote"></span>
     </div>
@@ -241,14 +262,26 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
     <div class="hero-sub"  id="heroSub"></div>
     <div class="hero-sub2" id="heroSub2"></div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-val" id="statTotal">—</div><div class="hero-stat-label">Total Classes</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" id="statAttended">—</div><div class="hero-stat-label">Attended</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" id="statAbsent">—</div><div class="hero-stat-label">Absent</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" id="statPct">—</div><div class="hero-stat-label">Attendance %</div></div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="statTotal">—</div>
+        <div class="hero-stat-label">Total Classes</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="statAttended">—</div>
+        <div class="hero-stat-label">Attended</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="statAbsent">—</div>
+        <div class="hero-stat-label">Absent</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="statPct">—</div>
+        <div class="hero-stat-label">Attendance %</div>
+      </div>
     </div>
   </div>
 
-  <!-- Need to attend strip (shown only when below threshold) -->
+  <!-- Need-to-attend strip -->
   <div class="need-strip" id="needStrip" style="display:none;">
     <div class="need-strip-icon">📈</div>
     <div class="need-strip-text" id="needStripText"></div>
@@ -257,8 +290,33 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
   <!-- Alert banners -->
   <div id="alertArea"></div>
 
-  <!-- Student Info -->
-  <div class="section-header">
+  <!-- Quick overview cards -->
+  <div class="overview-strip" id="overviewStrip" style="display:none;">
+    <div class="ov-card">
+      <div class="ov-icon amber">📅</div>
+      <div>
+        <div class="ov-label">Last Attended</div>
+        <div class="ov-val" id="ovLastDate">—</div>
+      </div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-icon red" id="ovStreakIcon">🔴</div>
+      <div>
+        <div class="ov-label">Consecutive Absent</div>
+        <div class="ov-val" id="ovStreak">0</div>
+      </div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-icon green">🎯</div>
+      <div>
+        <div class="ov-label">Target</div>
+        <div class="ov-val" id="ovThreshold">65%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student Details -->
+  <div class="section-header" style="margin-top:22px;">
     <div class="section-title">Student Details</div>
   </div>
   <div class="info-card">
@@ -285,6 +343,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
     </div>
     <div class="date-log-list" id="dateLogList"></div>
   </div>
+
 </div>
 
 <!-- Full-page loading -->
@@ -348,7 +407,7 @@ function renderDashboard(data) {
   // Topbar
   document.getElementById('topbarName').textContent = s.name.split(' ')[0];
 
-  // Hero badges
+  // Hero badges — show all available fields
   document.getElementById('heroBatch').textContent = s.batch;
   function setBadge(id, val) {
     if (val) {
@@ -357,22 +416,27 @@ function renderDashboard(data) {
       el.style.display = 'flex';
     }
   }
-  setBadge('heroBranch', s.branch);
-  setBadge('heroCenter',  s.center);
-  setBadge('heroMode',    s.mode);
+  setBadge('heroBranch',    s.branch);
+  setBadge('heroCenter',    s.center);
+  setBadge('heroMode',      s.mode);
+  setBadge('heroBatchCode', s.batchCode ? ('Code: ' + s.batchCode) : '');
+  setBadge('heroTarget',    s.examTarget ? ('Target: ' + s.examTarget) : '');
 
-  // Freshness note
+  // Freshness
   if (data.generatedAt) {
     document.getElementById('freshnessNote').textContent = 'Data as of ' + data.generatedAt;
   }
 
-  // Hero name + sub
+  // Hero name + sub lines
   document.getElementById('heroName').textContent = s.name;
   document.getElementById('heroSub').textContent  =
-    'DOJ: ' + formatDate(s.doj) + (s.examTarget ? '  \u00b7  Target: ' + s.examTarget : '');
+    'DOJ: ' + formatDate(s.doj) +
+    (s.examTarget ? '  \u00b7  Target: ' + s.examTarget : '') +
+    (s.mode       ? '  \u00b7  ' + s.mode                : '');
   document.getElementById('heroSub2').textContent =
-    'Last attended: ' + (ov.lastDate ? ov.lastDate.split('-').reverse().join('-') : '\u2014') +
-    (s.college ? '  \u00b7  ' + s.college : '');
+    'Last attended: ' + (ov.lastDate ? formatDate(ov.lastDate) : '\u2014') +
+    (s.college    ? '  \u00b7  ' + s.college    : '') +
+    (s.nativeCity ? '  \u00b7  ' + s.nativeCity : '');
 
   // Stats
   document.getElementById('statTotal').textContent    = ov.total    || 0;
@@ -388,41 +452,63 @@ function renderDashboard(data) {
     document.getElementById('needStripText').innerHTML =
       'You need to attend <strong>' + ov.needToAttend + ' more consecutive class' +
       (ov.needToAttend === 1 ? '' : 'es') +
-      '</strong> without missing any to reach <strong>' + ov.threshold + '%</strong> attendance.';
+      '</strong> without any absence to reach <strong>' + ov.threshold + '%</strong> attendance.';
     document.getElementById('needStrip').style.display = 'flex';
   }
 
   // Alert banners
   var alertArea = document.getElementById('alertArea');
   alertArea.innerHTML = '';
+
   if (ov.low) {
-    alertArea.innerHTML += '<div class="alert-banner low"><div class="alert-icon">\u26a0\ufe0f</div>' +
-      '<div class="alert-text">Your attendance is <strong>' + ov.pct + '%</strong>, ' +
-      'below the required <strong>' + ov.threshold + '%</strong>.</div></div>';
-  }
-  if (ov.consecutiveFlag) {
-    alertArea.innerHTML += '<div class="alert-banner consecutive"><div class="alert-icon">\ud83d\udd34</div>' +
-      '<div class="alert-text">You have been absent for <strong>' + ov.consecutive +
-      ' consecutive class' + (ov.consecutive === 1 ? '' : 'es') + '</strong>. Please attend soon.</div></div>';
+    alertArea.innerHTML += '<div class="alert-banner low"><div class="alert-icon">⚠️</div>' +
+      '<div class="alert-text">Your overall attendance is <strong>' + ov.pct + '%</strong> — ' +
+      'below the required <strong>' + ov.threshold + '%</strong>. ' +
+      (ov.needToAttend > 0
+        ? 'Attend <strong>' + ov.needToAttend + ' more class' + (ov.needToAttend===1?'':'es') + '</strong> consecutively to recover.'
+        : '') +
+      '</div></div>';
   }
 
-  // Student info grid
+  if (ov.consecutiveFlag) {
+    alertArea.innerHTML += '<div class="alert-banner consecutive"><div class="alert-icon">🔴</div>' +
+      '<div class="alert-text">You have been absent for <strong>' + ov.consecutive +
+      ' consecutive class' + (ov.consecutive === 1 ? '' : 'es') +
+      '</strong>. Please attend your next class as soon as possible.</div></div>';
+  }
+
+  if (!ov.low && !ov.consecutiveFlag && ov.total > 0) {
+    alertArea.innerHTML += '<div class="alert-banner ok"><div class="alert-icon">✅</div>' +
+      '<div class="alert-text">Attendance is <strong>' + ov.pct + '%</strong> — above the ' +
+      ov.threshold + '% threshold. Keep it up!</div></div>';
+  }
+
+  // Quick overview strip
+  document.getElementById('overviewStrip').style.display = 'grid';
+  document.getElementById('ovLastDate').textContent  = ov.lastDate ? formatDate(ov.lastDate) : 'Never';
+  document.getElementById('ovStreak').textContent    = ov.consecutive + (ov.consecutive === 1 ? ' class' : ' classes');
+  document.getElementById('ovStreak').className      = 'ov-val ' + (ov.consecutiveFlag ? 'bad' : (ov.consecutive > 0 ? 'warn' : 'good'));
+  document.getElementById('ovThreshold').textContent = ov.threshold + '%';
+
+  // Student info grid — show ALL available fields
   var infoItems = [
-    { label: 'Phone',      val: s.phone },
-    { label: 'Branch',     val: s.branch },
-    { label: 'Batch',      val: s.batch },
-    { label: 'Batch Code', val: s.batchCode },
-    { label: 'Center',     val: s.center },
-    { label: 'Mode',       val: s.mode },
-    { label: 'Exam Target',val: s.examTarget },
-    { label: 'College',    val: s.college },
-    { label: 'City',       val: s.nativeCity },
-    { label: 'DOJ',        val: formatDate(s.doj) }
-  ].filter(function(it) { return it.val; });
+    { label: 'Phone',           val: s.phone      },
+    { label: 'Branch',          val: s.branch     },
+    { label: 'Batch',           val: s.batch      },
+    { label: 'Batch Code',      val: s.batchCode  },
+    { label: 'Center',          val: s.center     },
+    { label: 'Mode',            val: s.mode       },
+    { label: 'Exam Target',     val: s.examTarget },
+    { label: 'College',         val: s.college    },
+    { label: 'City',            val: s.nativeCity },
+    { label: 'Date of Joining', val: formatDate(s.doj) }
+  ].filter(function(it) { return it.val && it.val !== '\u2014'; });
 
   document.getElementById('infoGrid').innerHTML = infoItems.map(function(it) {
-    return '<div><div class="info-item-label">' + esc(it.label) + '</div>' +
-           '<div class="info-item-val">' + esc(it.val) + '</div></div>';
+    return '<div>' +
+      '<div class="info-item-label">' + esc(it.label) + '</div>' +
+      '<div class="info-item-val">'   + esc(it.val)   + '</div>' +
+    '</div>';
   }).join('');
 
   // Subjects
@@ -430,7 +516,7 @@ function renderDashboard(data) {
 
   // Date log
   allDateLogs = data.dateLogs || [];
-  document.getElementById('dateLogCount').textContent = allDateLogs.length + ' Classes';
+  document.getElementById('dateLogCount').textContent = allDateLogs.length + ' Class' + (allDateLogs.length === 1 ? '' : 'es');
   renderDateLog('all');
 
   document.getElementById('mainPage').style.display = 'block';
@@ -445,24 +531,41 @@ function renderSubjects(subjects) {
     grid.innerHTML = '<div style="color:var(--gray);font-size:13px;padding:16px 0;">No subjects found.</div>';
     return;
   }
+
   grid.innerHTML = subjects.map(function(s) {
     var pc   = pctClass(s.pct);
     var barW = Math.min(s.pct, 100);
-    var needHtml = s.needToAttend > 0
-      ? '<div class="subj-need">\ud83d\udcc8 Need ' + s.needToAttend + ' more class' + (s.needToAttend===1?'':'es') + ' to reach threshold</div>'
-      : '';
+    var circumference = 2 * Math.PI * 14; // r=14
+    var dashoffset    = circumference * (1 - barW / 100);
+
+    var statusHtml = '';
+    if (s.needToAttend > 0) {
+      statusHtml = '<div class="subj-need">Need ' + s.needToAttend + ' more class' +
+        (s.needToAttend===1?'':'es') + ' to reach threshold</div>';
+    } else if (s.total > 0) {
+      statusHtml = '<div class="subj-on-track">On track — ' + s.pct + '% attendance</div>';
+    }
+
     return '<div class="subj-card' + (s.low ? ' low-card' : '') + '">' +
       '<div class="subj-header">' +
         '<div class="subj-name">' + esc(s.subject) + '</div>' +
-        '<div class="subj-pct-badge ' + pc + '">' + s.pct + '%</div>' +
+        '<div class="pct-ring-wrap">' +
+          '<svg class="pct-ring" width="36" height="36" viewBox="0 0 36 36">' +
+            '<circle class="pct-ring-bg" cx="18" cy="18" r="14" />' +
+            '<circle class="pct-ring-fill ' + pc + '" cx="18" cy="18" r="14"' +
+              ' stroke-dasharray="' + circumference.toFixed(1) + '"' +
+              ' stroke-dashoffset="' + dashoffset.toFixed(1) + '" />' +
+          '</svg>' +
+          '<span class="subj-pct-badge ' + pc + '">' + s.pct + '%</span>' +
+        '</div>' +
       '</div>' +
       '<div class="subj-faculty">' + esc(s.faculty) + '</div>' +
       '<div class="subj-counts">' +
-        '<div class="subj-count-item"><div class="subj-count-num">' + s.total   + '</div><div class="subj-count-lbl">Total</div></div>' +
+        '<div class="subj-count-item"><div class="subj-count-num">' + s.total    + '</div><div class="subj-count-lbl">Total</div></div>' +
         '<div class="subj-count-item"><div class="subj-count-num">' + s.attended + '</div><div class="subj-count-lbl">Present</div></div>' +
-        '<div class="subj-count-item"><div class="subj-count-num">' + s.absent  + '</div><div class="subj-count-lbl">Absent</div></div>' +
+        '<div class="subj-count-item"><div class="subj-count-num">' + s.absent   + '</div><div class="subj-count-lbl">Absent</div></div>' +
       '</div>' +
-      needHtml +
+      statusHtml +
       '<div class="subj-pct-bar ' + pc + '" style="width:' + barW + '%"></div>' +
     '</div>';
   }).join('');
@@ -470,7 +573,7 @@ function renderSubjects(subjects) {
 
 function setFilter(f) {
   activeFilter = f;
-  document.getElementById('filterAll').className     = 'filter-btn'            + (f === 'all'     ? ' active' : '');
+  document.getElementById('filterAll').className     = 'filter-btn'             + (f === 'all'     ? ' active' : '');
   document.getElementById('filterPresent').className = 'filter-btn present-btn' + (f === 'present' ? ' active' : '');
   document.getElementById('filterAbsent').className  = 'filter-btn absent-btn'  + (f === 'absent'  ? ' active' : '');
   renderDateLog(f);
@@ -479,7 +582,7 @@ function setFilter(f) {
 function renderDateLog(filter) {
   var list = document.getElementById('dateLogList');
   var rows = allDateLogs.filter(function(r) {
-    if (filter === 'present') return r.present;
+    if (filter === 'present') return  r.present;
     if (filter === 'absent')  return !r.present;
     return true;
   });
@@ -496,7 +599,7 @@ function renderDateLog(filter) {
       '<div class="date-row-indicator ' + ind + '"></div>' +
       '<div class="date-row-content">' +
         '<div>' +
-          '<div class="date-row-date">' + esc(r.dateDisp) + '</div>' +
+          '<div class="date-row-date">'     + esc(r.dateDisp)          + '</div>' +
           '<div class="date-row-date-sub">' + getDayName(r.dateIso) + '</div>' +
         '</div>' +
         '<div class="date-row-slots">' + slots + '</div>' +
@@ -505,12 +608,16 @@ function renderDateLog(filter) {
   }).join('');
 }
 
+/* ── helpers ── */
 function pctClass(p) { return p >= 75 ? 'good' : p >= 65 ? 'warn' : 'bad'; }
+
 function formatDate(iso) {
   if (!iso || iso === '0000-00-00') return '\u2014';
   var p = iso.split('-');
+  if (p.length !== 3) return iso;
   return p[2] + '-' + p[1] + '-' + p[0];
 }
+
 function getDayName(iso) {
   if (!iso) return '';
   try {
@@ -518,25 +625,24 @@ function getDayName(iso) {
     return days[new Date(iso + 'T12:00:00').getDay()];
   } catch(e) { return ''; }
 }
+
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
 function showError(title, sub) {
   document.getElementById('errorTitle').textContent = title;
   document.getElementById('errorSub').textContent   = sub;
   document.getElementById('errorState').style.display = 'flex';
 }
+
 function logout() {
   sessionStorage.removeItem('student_token');
   sessionStorage.removeItem('student_phone');
   window.location.href = LOGIN_URL;
 }
 
-/*
- * JSONP with fired guard — single callback invocation guaranteed.
- * Prevents double-callback race where timeout fires after response
- * already arrived, or response arrives after timeout already fired.
- */
+/* JSONP with fired guard */
 function jsonp(url, cb) {
   var id  = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
   var t   = null;
