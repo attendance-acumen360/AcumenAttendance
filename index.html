@@ -87,7 +87,7 @@ body::after {
   overflow: hidden;
 }
 
-/* large decorative "A" watermark */
+/* large decorative "360°" watermark */
 .card-header::before {
   content: '360°';
   position: absolute;
@@ -117,7 +117,7 @@ body::after {
   margin-bottom: 20px;
 }
 
-/* logo mark — geometric A */
+/* logo mark */
 .logo-mark {
   width: 36px; height: 36px;
   background: var(--red);
@@ -276,9 +276,6 @@ input[type="tel"]:focus {
   border-color: var(--red);
   background: var(--white);
   box-shadow: 0 0 0 4px rgba(208,38,26,0.08);
-}
-input[type="tel"]:focus + .input-border-glow {
-  opacity: 1;
 }
 .input-wrap:focus-within .input-icon {
   color: var(--red);
@@ -526,9 +523,50 @@ input[type="tel"]:focus + .input-border-glow {
   box-shadow: 0 0 0 2px rgba(34,197,94,0.2);
 }
 
-/* date badge below card */
+/* ── page nav pill (below card) ── */
+.page-nav {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 4px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 20px;
+  padding: 4px;
+  margin-top: 14px;
+  animation: cardIn 0.55s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-nav a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.page-nav a.active {
+  background: var(--black);
+  color: var(--white);
+}
+.page-nav a.inactive {
+  color: var(--gray);
+}
+.page-nav a.inactive:hover {
+  color: var(--black);
+}
+.page-nav svg {
+  width: 13px; height: 13px;
+  flex-shrink: 0;
+}
+
+/* date badge below nav */
 .date-badge {
-  margin-top: 16px;
+  margin-top: 12px;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -537,7 +575,9 @@ input[type="tel"]:focus + .input-border-glow {
   display: flex;
   align-items: center;
   gap: 6px;
-  animation: cardIn 0.55s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+  z-index: 1;
+  animation: cardIn 0.55s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .date-badge svg { width: 12px; height: 12px; opacity: 0.5; }
 
@@ -560,7 +600,6 @@ input[type="tel"]:focus + .input-border-glow {
   <div class="card-header">
     <div class="header-top">
       <div class="logo-mark">
-        <!-- geometric 360 mark -->
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 2 L17 6 L17 14 L10 18 L3 14 L3 6 Z" stroke="white" stroke-width="1.5" fill="none"/>
           <circle cx="10" cy="10" r="2.5" fill="white"/>
@@ -599,12 +638,6 @@ input[type="tel"]:focus + .input-border-glow {
           <rect x="3.5" y="1" width="11" height="16" rx="2"/>
           <line x1="7" y1="13.5" x2="11" y2="13.5"/>
         </svg>
-        <!--
-          autocomplete="one-time-code": suppresses browser autofill on tel fields.
-          onfocus handler clears any auto-populated value as a backup defence.
-          inputmode="numeric": numeric keypad on Android.
-          font-size 18px: prevents iOS Safari auto-zoom on focus.
-        -->
         <input type="tel" id="phoneInput" placeholder="98765 43210"
           maxlength="15" inputmode="numeric" autocomplete="one-time-code"
           oninput="onInput()" onkeydown="onKey(event)" onfocus="onFocus()" />
@@ -695,7 +728,26 @@ input[type="tel"]:focus + .input-border-glow {
 
 </div>
 
-<!-- date shown below card -->
+<!-- ══ PAGE NAVIGATION ══ -->
+<nav class="page-nav">
+  <a href="attendance.html" class="active">
+    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <line x1="2" y1="3.5" x2="12" y2="3.5"/>
+      <line x1="2" y1="7" x2="12" y2="7"/>
+      <line x1="2" y1="10.5" x2="7" y2="10.5"/>
+    </svg>
+    Mark Attendance
+  </a>
+  <a href="student-login.html" class="inactive">
+    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <circle cx="7" cy="5" r="2.5"/>
+      <path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5"/>
+    </svg>
+    My Attendance
+  </a>
+</nav>
+
+<!-- date shown below nav -->
 <div class="date-badge" id="dateBadge">
   <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
     <rect x="1" y="2" width="10" height="9" rx="1.5"/>
@@ -772,21 +824,6 @@ input[type="tel"]:focus + .input-border-glow {
     }
   }
 
-  // FIX (Issue 2): Count DIGITS only, not raw string length.
-  //
-  // Previously: document.getElementById('submitBtn').disabled = val.length < 10;
-  // This used the raw input string length, so "+91 98765" (10 chars) would
-  // enable the button even though it contains only 8 digits after stripping.
-  // The backend cleanPhone() strips non-digits and requires exactly 10, so
-  // a mismatched frontend count produced a confusing server-side error.
-  //
-  // Fix: strip non-digit characters first (matching cleanPhone logic), then
-  // compare digit count. The button enables if and only if exactly 10 digits
-  // are present — the same condition cleanPhone() will accept.
-  //
-  // updateCharHint already received the digit count correctly before this fix.
-  // The submitBtn disable logic now uses the same digits variable, so both
-  // the hint text and the button state are always derived from the same value.
   function onInput() {
     _userHasTyped = true;
     var val    = document.getElementById('phoneInput').value;
@@ -803,40 +840,52 @@ input[type="tel"]:focus + .input-border-glow {
   function onKey(e) { if (e.key === 'Enter') submitForm(); }
 
   /*
-   * jsonp() returns a cleanup function. Both the timeout handler and the
-   * normal callback path call cleanup() to:
-   *   1. Remove the injected <script> tag from the DOM.
-   *   2. Delete the window[id] callback property.
+   * jsonp() with fired guard to prevent double-callback race conditions.
+   * Returns a cleanup function used by the timeout handler.
    */
   function jsonp(url, cb) {
-    var id = 'jsonp_' + Date.now();
+    var id = 'jsonp_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
+    var fired = false;
+
     function cleanup() {
       var s = document.getElementById(id);
       if (s) { try { document.body.removeChild(s); } catch(err) {} }
       try { delete window[id]; } catch(err) { window[id] = undefined; }
     }
-    window[id] = function(data) { cleanup(); cb(data); };
+
+    window[id] = function(data) {
+      if (fired) return;
+      fired = true;
+      cleanup();
+      cb(data);
+    };
+
     var s = document.createElement('script');
     s.id = id;
     s.src = url + '&callback=' + id;
-    s.onerror = function() { cleanup(); cb(null); };
+    s.onerror = function() {
+      if (fired) return;
+      fired = true;
+      cleanup();
+      cb(null);
+    };
     document.body.appendChild(s);
-    return cleanup;
+
+    // Return a cancel function that the timeout can call
+    return function cancel() {
+      if (fired) return;
+      fired = true;
+      cleanup();
+    };
   }
 
   function submitForm() {
     if (isSubmitting) return;
 
-    // Guard: re-extract digits from current input value.
-    // Prevents submitting if somehow the button was clicked with fewer digits
-    // (e.g. rapid autofill edge cases on certain Android browsers).
     var rawVal = document.getElementById('phoneInput').value;
     var digits = rawVal.replace(/\D/g, '');
     if (digits.length !== 10) return;
 
-    // Send the raw value; the backend cleanPhone() will strip non-digits
-    // and validate. We send rawVal (not just digits) to preserve the
-    // exact string the user typed, consistent with the original behaviour.
     var phone = rawVal.trim();
 
     isSubmitting = true;
@@ -844,17 +893,17 @@ input[type="tel"]:focus + .input-border-glow {
     document.getElementById('loadingState').classList.add('active');
 
     var timedOut = false;
-    var cleanupJsonp = null;
+    var cancelJsonp = null;
 
     var timeout = setTimeout(function() {
       timedOut = true;
       isSubmitting = false;
-      if (cleanupJsonp) cleanupJsonp();
+      if (cancelJsonp) cancelJsonp();
       document.getElementById('loadingState').classList.remove('active');
       showForm("Request timed out. Please check your connection and try again.");
     }, 20000);
 
-    cleanupJsonp = jsonp(
+    cancelJsonp = jsonp(
       APPS_SCRIPT_URL + '?action=submitAttendance&phone=' + encodeURIComponent(phone),
       function(data) {
         if (timedOut) return;
