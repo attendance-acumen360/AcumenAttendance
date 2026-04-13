@@ -409,6 +409,7 @@ function onOtpInput() {
   document.getElementById('verifyBtn').disabled = v.length !== 6;
   hideMsg('step2Error'); hideMsg('step2Success');
 }
+  
 function onOtpKey(e) { if (e.key === 'Enter') verifyOTP(); }
 
 function verifyOTP() {
