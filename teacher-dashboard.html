@@ -302,8 +302,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 <script>
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 
-// FIX: store a server-issued token, NOT the raw password.
-// sessionStorage holds only the opaque token (8-hour expiry).
+// Teacher portal stores only an opaque server-issued token, never the raw password.
 var _dashData  = null;
 var _isBusy    = false;
 
@@ -323,7 +322,7 @@ function doLogin() {
   _isBusy = true;
   document.getElementById('loginBtn').disabled = true;
   document.getElementById('loginOverlay').style.display = 'none';
-  showLoading('Logging in…');
+  showLoading('Logging in\u2026');
 
   jsonp(APPS_SCRIPT_URL + '?action=teacherLogin&password=' + encodeURIComponent(pw),
     function(data) {
@@ -353,7 +352,7 @@ function doLogout() {
 }
 
 function fetchDashboard(token) {
-  showLoading('Loading dashboard…');
+  showLoading('Loading dashboard\u2026');
   jsonp(APPS_SCRIPT_URL + '?action=getTeacherDashboard&token=' + encodeURIComponent(token),
     function(data) {
       hideLoading();
@@ -381,7 +380,7 @@ function showLoginError(msg) {
   el.classList.add('visible');
 }
 function showLoading(msg) {
-  document.getElementById('loadingLabel').textContent = msg || 'Loading…';
+  document.getElementById('loadingLabel').textContent = msg || 'Loading\u2026';
   document.getElementById('fullLoading').style.display = 'flex';
 }
 function hideLoading() {
@@ -412,7 +411,7 @@ function renderTodayBanner(classes) {
   }
   var pills = classes.map(function(c) {
     return '<span class="today-pill"><span class="today-pill-dot"></span>' +
-      esc(c.branch) + ' · ' + esc(c.batch) + ' — ' + esc(c.subject) + ' (' + esc(c.faculty) + ')</span>';
+      esc(c.branch) + ' \u00b7 ' + esc(c.batch) + ' \u2014 ' + esc(c.subject) + ' (' + esc(c.faculty) + ')</span>';
   }).join('');
   el.innerHTML = '<span class="today-banner-label">Today\'s Classes</span>' + pills;
 }
@@ -501,12 +500,12 @@ function applyStudentFilters() {
   tbody.innerHTML = filtered.map(function(s) {
     var pc = pctClass(s.pct);
     var flagHtml = '';
-    if (s.flag === 'low')         flagHtml = '<span class="flag-pill low">⚠️ Low</span>';
-    if (s.flag === 'consecutive') flagHtml = '<span class="flag-pill consecutive">🔴 '+s.consecutive+'d</span>';
-    if (s.flag === 'both')        flagHtml = '<span class="flag-pill both">⚠️+🔴 '+s.consecutive+'</span>';
+    if (s.flag === 'low')         flagHtml = '<span class="flag-pill low">\u26a0\ufe0f Low</span>';
+    if (s.flag === 'consecutive') flagHtml = '<span class="flag-pill consecutive">\ud83d\udd34 '+s.consecutive+'d</span>';
+    if (s.flag === 'both')        flagHtml = '<span class="flag-pill both">\u26a0\ufe0f+\ud83d\udd34 '+s.consecutive+'</span>';
 
     var needHtml = s.needToAttend > 0
-      ? '<span class="need-badge">+' + s.needToAttend + '</span>' : '—';
+      ? '<span class="need-badge">+' + s.needToAttend + '</span>' : '\u2014';
 
     var lastSeen = s.lastDate
       ? s.lastDate.split('-').reverse().join('-')
@@ -524,7 +523,7 @@ function applyStudentFilters() {
       '</td>' +
       '<td class="muted">' + esc(s.branch) + '</td>' +
       '<td class="muted">' + esc(s.batch)  + '</td>' +
-      '<td class="muted">' + esc(s.center || '—') + '</td>' +
+      '<td class="muted">' + esc(s.center || '\u2014') + '</td>' +
       '<td>' + s.total    + '</td>' +
       '<td>' + s.attended + '</td>' +
       '<td>' + pctDisplay + '</td>' +
@@ -553,7 +552,7 @@ function applyAbsentFilters() {
   var content = document.getElementById('absentContent');
 
   if (!filtered.length) {
-    content.innerHTML = '<div class="empty-today"><div class="empty-today-icon">🎉</div>' +
+    content.innerHTML = '<div class="empty-today"><div class="empty-today-icon">\ud83c\udf89</div>' +
       '<div class="empty-today-title">All Present!</div>' +
       '<p style="font-size:13px;color:var(--gray);">No absentees matching the current filter.</p></div>';
     return;
@@ -571,12 +570,12 @@ function applyAbsentFilters() {
     Object.keys(byStudent).map(function(k) {
       var st = byStudent[k];
       var tags = st.subjects.map(function(su) {
-        return '<span class="absent-subject">❌ ' + esc(su.subject) +
+        return '<span class="absent-subject">\u274c ' + esc(su.subject) +
           ' <span style="opacity:.6;font-size:9px;">(' + esc(su.faculty) + ')</span></span>';
       }).join('');
       return '<div class="absent-card">' +
         '<div class="absent-name">' + esc(st.name) + '</div>' +
-        '<div class="absent-meta">' + esc(st.branch) + ' · ' + esc(st.batch) + ' · ' + esc(st.phone) + '</div>' +
+        '<div class="absent-meta">' + esc(st.branch) + ' \u00b7 ' + esc(st.batch) + ' \u00b7 ' + esc(st.phone) + '</div>' +
         '<div class="absent-tags">' + tags + '</div>' +
       '</div>';
     }).join('') + '</div>';
@@ -641,22 +640,49 @@ function esc(s) {
 }
 
 // ── JSONP ────────────────────────────────────────────────────
+/*
+ * JSONP with fired guard — single callback invocation guaranteed.
+ * Fixes the race condition where the timeout could fire after the
+ * response already arrived, or the response after the timeout,
+ * causing cb() to be called twice. The `fired` boolean prevents
+ * any second invocation regardless of which path fires first.
+ */
 function jsonp(url, cb) {
-  var id = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
-  var t;
+  var id    = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
+  var t     = null;
+  var fired = false;
+
   function cleanup() {
-    clearTimeout(t);
+    if (t) { clearTimeout(t); t = null; }
     var s = document.getElementById(id);
     if (s) { try { document.body.removeChild(s); } catch(e) {} }
     try { delete window[id]; } catch(e) { window[id] = undefined; }
   }
-  window[id] = function(data) { cleanup(); cb(data); };
+
+  window[id] = function(data) {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(data);
+  };
+
+  t = setTimeout(function() {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(null);
+  }, 30000);
+
   var s = document.createElement('script');
   s.id  = id;
   s.src = url + '&callback=' + id;
-  s.onerror = function() { cleanup(); cb(null); };
+  s.onerror = function() {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(null);
+  };
   document.body.appendChild(s);
-  t = setTimeout(function() { cleanup(); cb(null); }, 30000);
 }
 </script>
 </body>
