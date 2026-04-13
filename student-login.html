@@ -55,8 +55,27 @@ body::after { content:'';position:fixed;top:-120px;left:-120px;width:440px;heigh
 .instruction-text { font-size:12px;color:var(--red-dk);line-height:1.5; }
 .field { margin-bottom:8px; }
 .field-label { display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:8px; }
+/* FIX: field-label svg was previously inheriting large size — explicit 12px constraint */
+.field-label svg { width:12px;height:12px;opacity:.5;flex-shrink:0; }
 .input-wrap { position:relative; }
-.input-icon { position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--gray);pointer-events:none;transition:color .2s; }
+
+/* FIX: .input-icon was missing explicit size, causing the phone SVG to render
+   at its natural/inherited size (the input's font-size * line-height ≈ 30px+).
+   Pinning width and height to 18px matches the icon spec used on attendance.html. */
+.input-icon {
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:18px;
+  height:18px;
+  color:var(--gray);
+  pointer-events:none;
+  transition:color .2s;
+  /* Prevent SVG from stretching beyond declared size */
+  overflow:hidden;
+  flex-shrink:0;
+}
 .input-wrap:focus-within .input-icon { color:var(--red); }
 input[type="tel"],input[type="text"] { width:100%;padding:15px 16px 15px 46px;border:1.5px solid var(--border);border-radius:12px;font-family:'Outfit',sans-serif;font-size:18px;font-weight:500;color:var(--black);background:var(--off);letter-spacing:.08em;transition:border-color .2s,background .2s,box-shadow .2s;-webkit-appearance:none; }
 input::placeholder { color:#c4bfba;font-weight:400;letter-spacing:.02em; }
@@ -76,7 +95,8 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
 .btn:not(:disabled):hover::before { transform:scaleX(1); }
 .btn:not(:disabled):active { transform:scale(.98); }
 .btn-text,.btn-icon { position:relative;z-index:1; }
-.btn-icon { width:18px;height:18px;transition:transform .2s; }
+/* FIX: .btn-icon also constrained so it can't grow */
+.btn-icon { width:18px;height:18px;flex-shrink:0;transition:transform .2s; }
 .btn:not(:disabled):hover .btn-icon { transform:translateX(3px); }
 .btn:disabled { opacity:.35;cursor:not-allowed; }
 
@@ -107,49 +127,34 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
 .footer-right { display:flex;align-items:center;gap:4px;font-size:10px;color:#c4bfba; }
 .footer-dot { width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,.2); }
 
-/* ── page nav pill (below card) ── */
+/* PAGE NAV PILL */
 .page-nav {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  gap: 4px;
-  background: rgba(0,0,0,0.06);
-  border-radius: 20px;
-  padding: 4px;
-  margin-top: 14px;
-  animation: cardIn .55s .1s cubic-bezier(.22,1,.36,1) both;
+  position:relative;z-index:1;
+  display:flex;gap:4px;
+  background:rgba(0,0,0,0.06);
+  border-radius:20px;padding:4px;
+  margin-top:14px;
+  animation:cardIn .55s .1s cubic-bezier(.22,1,.36,1) both;
 }
 .page-nav a {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 16px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+  display:flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:16px;
+  font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+  transition:background .15s,color .15s;
 }
-.page-nav a.active {
-  background: var(--black);
-  color: var(--white);
-}
-.page-nav a.inactive {
-  color: var(--gray);
-}
-.page-nav a.inactive:hover {
-  color: var(--black);
-}
-.page-nav svg {
-  width: 13px; height: 13px;
-  flex-shrink: 0;
-}
+.page-nav a.active { background:var(--black);color:var(--white); }
+.page-nav a.inactive { color:var(--gray); }
+.page-nav a.inactive:hover { color:var(--black); }
+.page-nav svg { width:13px;height:13px;flex-shrink:0; }
 
-/* date badge below nav */
-.date-badge { margin-top:12px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);display:flex;align-items:center;gap:6px;z-index:1;position:relative; }
+/* DATE BADGE */
+.date-badge {
+  margin-top:12px;font-size:11px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--gray);
+  display:flex;align-items:center;gap:6px;z-index:1;position:relative;
+  animation:cardIn .55s .15s cubic-bezier(.22,1,.36,1) both;
+}
 .date-badge svg { width:12px;height:12px;opacity:.5; }
 
 @media (max-width:440px) {
@@ -197,11 +202,23 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
     </div>
     <div class="field">
       <div class="field-label">
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y=".5" width="8" height="11" rx="1.5"/><line x1="4.5" y1="9" x2="7.5" y2="9"/></svg>
+        <!-- FIX: svg has explicit width/height="12" matching .field-label svg CSS rule -->
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y=".5" width="8" height="11" rx="1.5"/>
+          <line x1="4.5" y1="9" x2="7.5" y2="9"/>
+        </svg>
         Mobile Number
       </div>
       <div class="input-wrap">
-        <svg class="input-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="1" width="11" height="16" rx="2"/><line x1="7" y1="13.5" x2="11" y2="13.5"/></svg>
+        <!-- FIX: svg has explicit width="18" height="18" and viewBox matches, preventing the
+             browser from rendering it at its intrinsic/inherited size. Previously the SVG
+             had no width/height attributes so it defaulted to 300×150 (SVG spec default)
+             and was only constrained by CSS — some browsers override that for inline SVGs
+             inside positioned containers, causing the oversized phone icon. -->
+        <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3.5" y="1" width="11" height="16" rx="2"/>
+          <line x1="7" y1="13.5" x2="11" y2="13.5"/>
+        </svg>
         <input type="tel" id="phoneInput" placeholder="98765 43210" maxlength="15" inputmode="numeric"
           autocomplete="one-time-code" oninput="onPhoneInput()" onkeydown="onPhoneKey(event)" onfocus="onPhoneFocus()" />
       </div>
@@ -210,7 +227,10 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
     <div class="msg error" id="step1Error"></div>
     <button class="btn" id="sendOtpBtn" disabled onclick="sendOTP()">
       <span class="btn-text">Send OTP on WhatsApp</span>
-      <svg class="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="9" x2="15" y2="9"/><polyline points="10 4 15 9 10 14"/></svg>
+      <svg class="btn-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="9" x2="15" y2="9"/>
+        <polyline points="10 4 15 9 10 14"/>
+      </svg>
     </button>
   </div>
 
@@ -239,11 +259,18 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
     </div>
     <div class="field">
       <div class="field-label">
-        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="10" height="7" rx="1"/><path d="M4 4 V3 a2 2 0 0 1 4 0 v1"/></svg>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="4" width="10" height="7" rx="1"/>
+          <path d="M4 4 V3 a2 2 0 0 1 4 0 v1"/>
+        </svg>
         One-Time Password
       </div>
       <div class="input-wrap">
-        <svg class="input-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="14" height="10" rx="2"/><path d="M6 7 V5 a3 3 0 0 1 6 0 v2"/><circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>
+        <svg class="input-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="7" width="14" height="10" rx="2"/>
+          <path d="M6 7 V5 a3 3 0 0 1 6 0 v2"/>
+          <circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
         <input type="text" id="otpInput" class="otp-input" placeholder="• • • • • •" maxlength="6"
           inputmode="numeric" autocomplete="one-time-code" oninput="onOtpInput()" onkeydown="onOtpKey(event)" />
       </div>
@@ -256,7 +283,9 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
     <div class="msg success" id="step2Success"></div>
     <button class="btn" id="verifyBtn" disabled onclick="verifyOTP()">
       <span class="btn-text">Verify &amp; View Dashboard</span>
-      <svg class="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 8 13 14 6"/></svg>
+      <svg class="btn-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 9 8 13 14 6"/>
+      </svg>
     </button>
   </div>
 
@@ -267,7 +296,7 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
 
 </div>
 
-<!-- ══ PAGE NAVIGATION ══ -->
+<!-- PAGE NAVIGATION -->
 <nav class="page-nav">
   <a href="index.html" class="inactive">
     <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -287,7 +316,12 @@ input:focus { outline:none;border-color:var(--red);background:var(--white);box-s
 </nav>
 
 <div class="date-badge">
-  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="10" height="9" rx="1.5"/><line x1="4" y1="1" x2="4" y2="3"/><line x1="8" y1="1" x2="8" y2="3"/><line x1="1" y1="5" x2="11" y2="5"/></svg>
+  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="1" y="2" width="10" height="9" rx="1.5"/>
+    <line x1="4" y1="1" x2="4" y2="3"/>
+    <line x1="8" y1="1" x2="8" y2="3"/>
+    <line x1="1" y1="5" x2="11" y2="5"/>
+  </svg>
   <span id="todayDate"></span>
 </div>
 
@@ -464,11 +498,7 @@ function showMsg(id, text) {
 }
 function hideMsg(id) { document.getElementById(id).classList.remove('visible'); }
 
-/*
- * JSONP with fired guard — single callback invocation guaranteed.
- * Prevents double-callback race where timeout fires after response
- * already arrived, or response arrives after timeout already fired.
- */
+/* JSONP with fired guard */
 function jsonp(url, cb) {
   var id    = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
   var t     = null;
