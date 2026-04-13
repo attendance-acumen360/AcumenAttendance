@@ -25,6 +25,32 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .topbar-logo { width:28px;height:28px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center; }
 .topbar-logo svg { width:15px;height:15px; }
 .topbar-name { font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.08em;color:var(--white); }
+
+/* TOPBAR NAV TABS */
+.topbar-nav { display:flex;align-items:stretch;gap:2px;margin-left:14px; }
+.topbar-nav a {
+  display:flex;align-items:center;gap:6px;
+  padding:0 13px;height:56px;
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;
+  color:rgba(255,255,255,.4);
+  position:relative;
+  transition:color .15s;
+  white-space:nowrap;
+}
+.topbar-nav a:hover { color:rgba(255,255,255,.75); }
+.topbar-nav a.active { color:var(--white); }
+.topbar-nav a.active::after {
+  content:'';
+  position:absolute;
+  bottom:0;left:0;
+  width:100%;height:2px;
+  background:var(--red);
+  border-radius:2px 2px 0 0;
+}
+.topbar-nav a svg { width:14px;height:14px;opacity:.7;flex-shrink:0; }
+.topbar-nav a.active svg { opacity:1; }
+
 .topbar-right { display:flex;align-items:center;gap:12px; }
 .topbar-student-name { font-size:12px;font-weight:500;color:rgba(255,255,255,.55);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
 .logout-btn { font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);background:none;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:5px 10px;cursor:pointer;transition:all .2s; }
@@ -151,8 +177,12 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
   .hero-name  { font-size:28px; }
   .subjects-grid { grid-template-columns:1fr; }
   .date-row-date { min-width:80px; }
-  .topbar-student-name { max-width:90px; }
+  .topbar-student-name { max-width:80px; }
   .page { padding:16px 12px 48px; }
+  /* On mobile, hide nav tab labels, show icons only */
+  .topbar-nav a { padding:0 10px;font-size:0;gap:0; }
+  .topbar-nav a svg { font-size:14px;opacity:.6;width:16px;height:16px; }
+  .topbar-nav a.active svg { opacity:1; }
 }
 </style>
 </head>
@@ -168,6 +198,24 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
       </svg>
     </div>
     <span class="topbar-name">ACUMEN 360°</span>
+    <!-- PAGE NAVIGATION TABS -->
+    <nav class="topbar-nav">
+      <a href="attendance.html">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <line x1="2" y1="3.5" x2="12" y2="3.5"/>
+          <line x1="2" y1="7" x2="12" y2="7"/>
+          <line x1="2" y1="10.5" x2="7" y2="10.5"/>
+        </svg>
+        Mark Attendance
+      </a>
+      <a href="student-dashboard.html" class="active">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="7" cy="5" r="2.5"/>
+          <path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5"/>
+        </svg>
+        My Attendance
+      </a>
+    </nav>
   </div>
   <div class="topbar-right">
     <span class="topbar-student-name" id="topbarName">Loading…</span>
@@ -321,10 +369,10 @@ function renderDashboard(data) {
   // Hero name + sub
   document.getElementById('heroName').textContent = s.name;
   document.getElementById('heroSub').textContent  =
-    'DOJ: ' + formatDate(s.doj) + (s.examTarget ? '  ·  Target: ' + s.examTarget : '');
+    'DOJ: ' + formatDate(s.doj) + (s.examTarget ? '  \u00b7  Target: ' + s.examTarget : '');
   document.getElementById('heroSub2').textContent =
-    'Last attended: ' + (ov.lastDate ? ov.lastDate.split('-').reverse().join('-') : '—') +
-    (s.college ? '  ·  ' + s.college : '');
+    'Last attended: ' + (ov.lastDate ? ov.lastDate.split('-').reverse().join('-') : '\u2014') +
+    (s.college ? '  \u00b7  ' + s.college : '');
 
   // Stats
   document.getElementById('statTotal').textContent    = ov.total    || 0;
@@ -348,12 +396,12 @@ function renderDashboard(data) {
   var alertArea = document.getElementById('alertArea');
   alertArea.innerHTML = '';
   if (ov.low) {
-    alertArea.innerHTML += '<div class="alert-banner low"><div class="alert-icon">⚠️</div>' +
+    alertArea.innerHTML += '<div class="alert-banner low"><div class="alert-icon">\u26a0\ufe0f</div>' +
       '<div class="alert-text">Your attendance is <strong>' + ov.pct + '%</strong>, ' +
       'below the required <strong>' + ov.threshold + '%</strong>.</div></div>';
   }
   if (ov.consecutiveFlag) {
-    alertArea.innerHTML += '<div class="alert-banner consecutive"><div class="alert-icon">🔴</div>' +
+    alertArea.innerHTML += '<div class="alert-banner consecutive"><div class="alert-icon">\ud83d\udd34</div>' +
       '<div class="alert-text">You have been absent for <strong>' + ov.consecutive +
       ' consecutive class' + (ov.consecutive === 1 ? '' : 'es') + '</strong>. Please attend soon.</div></div>';
   }
@@ -401,7 +449,7 @@ function renderSubjects(subjects) {
     var pc   = pctClass(s.pct);
     var barW = Math.min(s.pct, 100);
     var needHtml = s.needToAttend > 0
-      ? '<div class="subj-need">📈 Need ' + s.needToAttend + ' more class' + (s.needToAttend===1?'':'es') + ' to reach threshold</div>'
+      ? '<div class="subj-need">\ud83d\udcc8 Need ' + s.needToAttend + ' more class' + (s.needToAttend===1?'':'es') + ' to reach threshold</div>'
       : '';
     return '<div class="subj-card' + (s.low ? ' low-card' : '') + '">' +
       '<div class="subj-header">' +
@@ -459,7 +507,7 @@ function renderDateLog(filter) {
 
 function pctClass(p) { return p >= 75 ? 'good' : p >= 65 ? 'warn' : 'bad'; }
 function formatDate(iso) {
-  if (!iso || iso === '0000-00-00') return '—';
+  if (!iso || iso === '0000-00-00') return '\u2014';
   var p = iso.split('-');
   return p[2] + '-' + p[1] + '-' + p[0];
 }
@@ -484,9 +532,11 @@ function logout() {
   window.location.href = LOGIN_URL;
 }
 
-// FIX: JSONP with proper timeout handling — no double-callback race.
-// The cleanup function is defined once and shared; the timeout clears
-// itself; the window[id] function is set exactly once and never overwritten.
+/*
+ * JSONP with fired guard — single callback invocation guaranteed.
+ * Prevents double-callback race where timeout fires after response
+ * already arrived, or response arrives after timeout already fired.
+ */
 function jsonp(url, cb) {
   var id  = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
   var t   = null;
