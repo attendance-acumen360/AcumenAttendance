@@ -14,13 +14,12 @@
   --white:#ffffff; --off:#f7f5f2; --gray:#999490; --border:#e8e4e0;
   --green:#22c55e; --green-bg:rgba(34,197,94,0.08); --red-bg:rgba(208,38,26,0.07);
   --amber:#f59e0b; --amber-bg:rgba(245,158,11,0.08);
-  --blue:#3b82f6; --blue-bg:rgba(59,130,246,0.08);
   --card-sh:0 2px 12px rgba(0,0,0,0.06),0 1px 3px rgba(0,0,0,0.04);
 }
-html { height:100%; }
+html { height:100%; -webkit-text-size-adjust:100%; }
 body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh; color:var(--black); }
 
-/* TOPBAR */
+/* ── TOPBAR ── */
 .topbar { background:var(--black);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100; }
 .topbar-brand { display:flex;align-items:center;gap:8px; }
 .topbar-logo { width:28px;height:28px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
@@ -38,18 +37,18 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .logout-btn { font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);background:none;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:5px 10px;cursor:pointer;transition:all .2s; }
 .logout-btn:hover { color:var(--white);border-color:rgba(255,255,255,.3); }
 
-/* PAGE */
+/* ── PAGE ── */
 .page { max-width:920px;margin:0 auto;padding:24px 16px 60px; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 
-/* LOADING */
+/* ── LOADING ── */
 .full-loading { display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 56px);gap:16px; }
 .spinner-ring { width:48px;height:48px; }
 .spinner-ring svg { width:100%;height:100%;animation:spin 1s linear infinite; }
 @keyframes spin { to{transform:rotate(360deg)} }
 .loading-label { font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500; }
 
-/* HERO */
+/* ── HERO ── */
 .hero-card { background:var(--black);border-radius:20px;padding:28px 28px 24px;margin-bottom:16px;position:relative;overflow:hidden;animation:fadeUp .5s .05s cubic-bezier(.22,1,.36,1) both; }
 .hero-card::before { content:'';position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(208,38,26,.15) 0%,transparent 70%);pointer-events:none; }
 .hero-card::after { content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--red) 0%,transparent 100%); }
@@ -64,18 +63,18 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .hero-stats { display:grid;grid-template-columns:repeat(4,1fr);gap:10px; }
 .hero-stat { background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 10px;text-align:center; }
 .hero-stat-val { font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.02em;line-height:1;margin-bottom:4px;color:var(--white); }
-.hero-stat-val.good  { color:var(--green); }
-.hero-stat-val.warn  { color:var(--amber); }
-.hero-stat-val.bad   { color:var(--red-lt); }
+.hero-stat-val.good { color:var(--green); }
+.hero-stat-val.warn { color:var(--amber); }
+.hero-stat-val.bad  { color:var(--red-lt); }
 .hero-stat-label { font-size:8px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3); }
 
-/* NEED STRIP */
+/* ── NEED STRIP ── */
 .need-strip { background:rgba(208,38,26,.12);border:1px solid rgba(208,38,26,.25);border-radius:10px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px;animation:fadeUp .5s .1s cubic-bezier(.22,1,.36,1) both; }
 .need-strip-icon { font-size:16px;flex-shrink:0;line-height:1; }
 .need-strip-text { font-size:13px;color:var(--red-dk);line-height:1.5; }
 .need-strip-text strong { font-weight:700; }
 
-/* ALERTS */
+/* ── ALERTS ── */
 .alert-banner { border-radius:12px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;animation:fadeUp .5s .12s cubic-bezier(.22,1,.36,1) both; }
 .alert-banner.low { background:rgba(208,38,26,.07);border:1px solid rgba(208,38,26,.2); }
 .alert-banner.consecutive { background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2); }
@@ -87,12 +86,12 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .alert-banner.consecutive .alert-text { color:#92400e; }
 .alert-banner.ok .alert-text { color:#15803d; }
 
-/* SECTION */
+/* ── SECTION ── */
 .section-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:24px; }
 .section-title { font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.04em;color:var(--black); }
 .section-count { font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);background:var(--border);padding:3px 8px;border-radius:20px; }
 
-/* KPI STRIP */
+/* ── KPI STRIP ── */
 .kpi-strip { display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:0;animation:fadeUp .5s .14s cubic-bezier(.22,1,.36,1) both; }
 .kpi-card { background:var(--white);border-radius:14px;padding:16px;box-shadow:var(--card-sh);border:1px solid var(--border); }
 .kpi-label { font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:6px; }
@@ -106,27 +105,30 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .kpi-trend.down { background:rgba(208,38,26,.1);color:var(--red-dk); }
 .kpi-trend.flat { background:rgba(153,148,144,.1);color:var(--gray); }
 
-/* CHART CARD */
+/* ── CHART CARDS ── */
 .chart-card { background:var(--white);border-radius:14px;box-shadow:var(--card-sh);border:1px solid var(--border);padding:20px; }
 .chart-title { font-size:13px;font-weight:600;color:var(--black);margin-bottom:4px; }
 .chart-sub { font-size:11px;color:var(--gray);margin-bottom:16px; }
-.chart-row { display:grid;grid-template-columns:1fr 1fr;gap:12px;animation:fadeUp .5s .18s cubic-bezier(.22,1,.36,1) both; }
+.chart-row   { display:grid;grid-template-columns:1fr 1fr;gap:12px;animation:fadeUp .5s .18s cubic-bezier(.22,1,.36,1) both; }
 .chart-row-3 { display:grid;grid-template-columns:2fr 1fr;gap:12px;animation:fadeUp .5s .2s cubic-bezier(.22,1,.36,1) both; }
-.chart-full { animation:fadeUp .5s .22s cubic-bezier(.22,1,.36,1) both; }
+.chart-full  { animation:fadeUp .5s .22s cubic-bezier(.22,1,.36,1) both; }
 
-/* HEATMAP */
-.heatmap-grid { display:grid;grid-template-columns:repeat(53,1fr);gap:2px;margin-top:8px; }
-.heatmap-cell { aspect-ratio:1;border-radius:2px;background:var(--border);cursor:default;transition:opacity .15s;position:relative; }
+/* ── HEATMAP ── */
+.heatmap-wrap { overflow-x:auto; }
+.heatmap-inner { min-width:520px; }
+.heatmap-months-row { display:flex;font-size:9px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;position:relative;height:14px; }
+.heatmap-months-row span { position:absolute;white-space:nowrap; }
+.heatmap-grid { display:grid;grid-template-columns:repeat(53,1fr);gap:2px; }
+.heatmap-cell { aspect-ratio:1;border-radius:2px;background:var(--border);cursor:default;transition:opacity .15s; }
 .heatmap-cell:hover { opacity:.7; }
 .heatmap-cell[data-level="0"] { background:var(--border); }
 .heatmap-cell[data-level="1"] { background:rgba(34,197,94,.25); }
 .heatmap-cell[data-level="2"] { background:rgba(34,197,94,.55); }
 .heatmap-cell[data-level="3"] { background:rgba(34,197,94,.85); }
-.heatmap-months { display:flex;justify-content:space-between;font-size:9px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px; }
-.heatmap-legend { display:flex;align-items:center;gap:4px;font-size:10px;color:var(--gray);margin-top:8px; }
+.heatmap-legend { display:flex;align-items:center;gap:4px;font-size:10px;color:var(--gray);margin-top:8px;flex-wrap:wrap; }
 .heatmap-legend-cell { width:10px;height:10px;border-radius:2px;flex-shrink:0; }
 
-/* DOW CHART */
+/* ── DOW CHART ── */
 .dow-row { display:flex;align-items:center;gap:10px;margin-bottom:8px; }
 .dow-label { font-size:11px;font-weight:500;color:var(--black);width:32px;flex-shrink:0; }
 .dow-bar-bg { flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden; }
@@ -134,7 +136,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .dow-pct { font-size:11px;color:var(--gray);width:36px;text-align:right;flex-shrink:0; }
 .dow-count { font-size:10px;color:var(--gray);width:46px;text-align:right;flex-shrink:0; }
 
-/* SUBJECTS */
+/* ── SUBJECTS ── */
 .subjects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;animation:fadeUp .5s .24s cubic-bezier(.22,1,.36,1) both; }
 .subj-card { background:var(--white);border-radius:14px;padding:18px;box-shadow:var(--card-sh);border:1.5px solid var(--border);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s; }
 .subj-card:hover { transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.09); }
@@ -156,18 +158,12 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .subj-count-lbl { font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:2px; }
 .subj-need { margin-top:8px;font-size:11px;color:var(--red-dk);background:rgba(208,38,26,.06);border-radius:6px;padding:4px 8px;display:inline-block;line-height:1.4; }
 .subj-on-track { margin-top:8px;font-size:11px;color:#15803d;background:rgba(34,197,94,.06);border-radius:6px;padding:4px 8px;display:inline-block;line-height:1.4; }
-.subj-bar-wrap { display:flex;align-items:center;gap:6px;margin-top:8px; }
-.subj-bar-bg   { flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden; }
-.subj-bar-fill { height:100%;border-radius:4px; }
-.subj-bar-fill.good { background:var(--green); }
-.subj-bar-fill.warn { background:var(--amber); }
-.subj-bar-fill.bad  { background:var(--red); }
 
-/* DATE LOG */
+/* ── DATE LOG ── */
 .date-log-wrap { background:var(--white);border-radius:16px;box-shadow:var(--card-sh);border:1px solid var(--border);overflow:hidden;animation:fadeUp .5s .3s cubic-bezier(.22,1,.36,1) both; }
 .date-log-filters { padding:12px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;align-items:center; }
 .filter-btn { font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:5px 12px;border:1.5px solid var(--border);background:none;color:var(--gray);cursor:pointer;transition:all .15s; }
-.filter-btn.active { background:var(--black);border-color:var(--black);color:var(--white); }
+.filter-btn.active      { background:var(--black);border-color:var(--black);color:var(--white); }
 .filter-btn.present-btn.active { background:#15803d;border-color:#15803d; }
 .filter-btn.absent-btn.active  { background:var(--red);border-color:var(--red); }
 .date-log-list { max-height:440px;overflow-y:auto; }
@@ -188,13 +184,13 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .slot-pill.absent  { background:var(--red-bg);color:var(--red-dk);border:1px solid rgba(208,38,26,.2); }
 .date-log-empty { padding:32px;text-align:center;font-size:13px;color:var(--gray);font-style:italic; }
 
-/* INFO CARD */
+/* ── INFO CARD ── */
 .info-card { background:var(--white);border-radius:14px;box-shadow:var(--card-sh);border:1px solid var(--border);padding:18px 20px;animation:fadeUp .5s .16s cubic-bezier(.22,1,.36,1) both; }
 .info-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px; }
 .info-item-label { font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:3px; }
 .info-item-val { font-size:13px;font-weight:500;color:var(--black);line-height:1.3; }
 
-/* ERROR */
+/* ── ERROR STATE ── */
 .error-state { text-align:center;padding:60px 20px; }
 .error-state-icon { font-size:36px;margin-bottom:16px; }
 .error-state-title { font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.04em;color:var(--black);margin-bottom:8px; }
@@ -202,43 +198,38 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .btn-small { display:inline-flex;align-items:center;gap:6px;padding:12px 20px;background:var(--black);color:var(--white);border:none;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.1em;cursor:pointer;transition:background .2s;text-decoration:none; }
 .btn-small:hover { background:var(--red); }
 
-/* PROGRESS RING */
-.pct-ring-wrap { display:inline-flex;align-items:center;gap:8px; }
-.pct-ring { transform:rotate(-90deg); }
-.pct-ring-bg { fill:none;stroke:#e8e4e0;stroke-width:3; }
-.pct-ring-fill { fill:none;stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1); }
-.pct-ring-fill.good { stroke:var(--green); }
-.pct-ring-fill.warn { stroke:var(--amber); }
-.pct-ring-fill.bad  { stroke:var(--red); }
-
-/* CONSISTENCY SCORE RING */
-.score-ring-wrap { display:flex;align-items:center;gap:16px;padding:12px 0; }
-.score-label-block { flex:1; }
-.score-title { font-size:14px;font-weight:600;color:var(--black);margin-bottom:2px; }
-.score-sub { font-size:12px;color:var(--gray);line-height:1.4; }
-.score-grade { font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1; }
+/* ── CONSISTENCY SCORE ── */
+.score-grade   { font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1; }
 .score-grade.A { color:#15803d; }
 .score-grade.B { color:var(--amber); }
 .score-grade.C { color:#b45309; }
 .score-grade.D { color:var(--red); }
 
-/* TOOLTIP */
-.tooltip-wrap { position:relative;display:inline-block; }
-.tooltip-content { display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--black);color:var(--white);font-size:11px;padding:5px 9px;border-radius:6px;white-space:nowrap;z-index:50;pointer-events:none; }
-.tooltip-wrap:hover .tooltip-content { display:block; }
+/* ── REFRESH BUTTON ── */
+.refresh-btn { display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:none;border:1.5px solid var(--border);border-radius:20px;padding:5px 12px;color:var(--gray);cursor:pointer;transition:all .2s; }
+.refresh-btn:hover { border-color:var(--black);color:var(--black); }
+.refresh-btn svg { width:12px;height:12px; }
+.refresh-btn.spinning svg { animation:spin .8s linear infinite; }
 
+/* ── RESPONSIVE ── */
 @media (max-width:700px) {
-  .hero-stats { grid-template-columns:repeat(2,1fr); }
-  .hero-name  { font-size:28px; }
-  .kpi-strip  { grid-template-columns:repeat(2,1fr); }
+  .hero-stats  { grid-template-columns:repeat(2,1fr); }
+  .hero-name   { font-size:28px; }
+  .kpi-strip   { grid-template-columns:repeat(2,1fr); }
   .subjects-grid { grid-template-columns:1fr; }
-  .chart-row  { grid-template-columns:1fr; }
+  .chart-row   { grid-template-columns:1fr; }
   .chart-row-3 { grid-template-columns:1fr; }
-  .page { padding:16px 12px 48px; }
+  .page        { padding:16px 12px 48px; }
   .topbar-student-name { max-width:80px; }
   .topbar-nav a { padding:0 10px;font-size:0;gap:0; }
   .topbar-nav a svg { opacity:.6;width:16px;height:16px; }
   .topbar-nav a.active svg { opacity:1; }
+  .hero-card   { padding:20px 18px 20px; }
+  .hero-badge  { font-size:10px;padding:4px 10px; }
+}
+@media (max-width:420px) {
+  .hero-stats { grid-template-columns:repeat(2,1fr); }
+  .kpi-strip  { grid-template-columns:1fr 1fr; }
 }
 </style>
 </head>
@@ -273,6 +264,14 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
   </div>
   <div class="topbar-right">
     <span class="topbar-student-name" id="topbarName">Loading…</span>
+    <button class="refresh-btn" id="refreshBtn" onclick="refreshData()" title="Refresh data">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4H8"/>
+        <path d="M2 7a5 5 0 0 1 9.9-1L12 6"/>
+        <path d="M2 12v-4h4"/>
+        <path d="M12 7a5 5 0 0 1-9.9 1L2 8"/>
+      </svg>
+    </button>
     <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 </div>
@@ -282,13 +281,13 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
   <!-- HERO -->
   <div class="hero-card">
     <div class="hero-meta">
-      <div class="hero-badges">
+      <div class="hero-badges" id="heroBadges">
         <div class="hero-badge"><div class="hero-badge-dot"></div><span id="heroBatch">—</span></div>
-        <div class="hero-badge" id="heroBranch" style="display:none;"></div>
-        <div class="hero-badge" id="heroCenter" style="display:none;"></div>
-        <div class="hero-badge" id="heroMode"   style="display:none;"></div>
-        <div class="hero-badge" id="heroBatchCode" style="display:none;"></div>
-        <div class="hero-badge" id="heroTarget" style="display:none;"></div>
+        <div class="hero-badge" id="heroBranchBadge" style="display:none;"></div>
+        <div class="hero-badge" id="heroCenterBadge" style="display:none;"></div>
+        <div class="hero-badge" id="heroModeBadge"   style="display:none;"></div>
+        <div class="hero-badge" id="heroBatchCodeBadge" style="display:none;"></div>
+        <div class="hero-badge" id="heroTargetBadge" style="display:none;"></div>
       </div>
       <span class="freshness-note" id="freshnessNote"></span>
     </div>
@@ -330,7 +329,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
   </div>
   <div class="kpi-strip" id="kpiStrip"></div>
 
-  <!-- CHARTS ROW 1: Trend + Day-of-week -->
+  <!-- CHARTS ROW 1 -->
   <div class="section-header">
     <div class="section-title">Attendance Analytics</div>
   </div>
@@ -339,46 +338,50 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
       <div class="chart-title">Monthly Trend</div>
       <div class="chart-sub" id="trendSub">Attendance % by month</div>
       <div style="position:relative;height:180px;">
-        <canvas id="trendChart" role="img" aria-label="Monthly attendance trend line chart">Monthly attendance trend data.</canvas>
+        <canvas id="trendChart" role="img" aria-label="Monthly attendance trend"></canvas>
       </div>
     </div>
     <div class="chart-card">
       <div class="chart-title">Day-of-Week Pattern</div>
-      <div class="chart-sub">Which days you attend most</div>
+      <div class="chart-sub">Which days you attend most — based on your class history</div>
       <div id="dowChart" style="padding-top:4px;"></div>
     </div>
   </div>
 
-  <!-- CHARTS ROW 2: Subject comparison + Consistency -->
+  <!-- CHARTS ROW 2 -->
   <div class="chart-row-3" id="chartsRow2">
     <div class="chart-card">
       <div class="chart-title">Subject Attendance Comparison</div>
-      <div class="chart-sub">Attended vs total classes per subject</div>
+      <div class="chart-sub">Attended vs absent per subject</div>
       <div style="position:relative;" id="subjChartWrap">
-        <canvas id="subjChart" role="img" aria-label="Subject attendance comparison horizontal bar chart">Subject attendance data.</canvas>
+        <canvas id="subjChart" role="img" aria-label="Subject attendance comparison"></canvas>
       </div>
     </div>
     <div class="chart-card" id="consistencyCard">
       <div class="chart-title">Consistency Score</div>
-      <div class="chart-sub" id="consistencySub">Based on attendance pattern</div>
+      <div class="chart-sub" id="consistencySub">Based on your attendance pattern</div>
       <div id="consistencyContent"></div>
     </div>
   </div>
 
-  <!-- ACTIVITY HEATMAP -->
+  <!-- HEATMAP -->
   <div class="chart-full">
     <div class="chart-card">
       <div class="chart-title">Attendance Heatmap</div>
       <div class="chart-sub">Your class attendance over the year — darker = attended</div>
-      <div id="heatmapMonths" class="heatmap-months"></div>
-      <div id="heatmapGrid"   class="heatmap-grid"></div>
+      <div class="heatmap-wrap">
+        <div class="heatmap-inner">
+          <div id="heatmapMonths" class="heatmap-months-row"></div>
+          <div id="heatmapGrid"   class="heatmap-grid"></div>
+        </div>
+      </div>
       <div class="heatmap-legend">
-        <span style="font-size:10px;color:var(--gray);margin-right:4px;">Less</span>
+        <span style="margin-right:4px;">Less</span>
         <div class="heatmap-legend-cell" style="background:var(--border);"></div>
-        <div class="heatmap-legend-cell" data-level="1" style="background:rgba(34,197,94,.25);"></div>
-        <div class="heatmap-legend-cell" data-level="2" style="background:rgba(34,197,94,.55);"></div>
-        <div class="heatmap-legend-cell" data-level="3" style="background:rgba(34,197,94,.85);"></div>
-        <span style="font-size:10px;color:var(--gray);margin-left:4px;">More</span>
+        <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.25);"></div>
+        <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.55);"></div>
+        <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.85);"></div>
+        <span style="margin-left:4px;">More</span>
       </div>
     </div>
   </div>
@@ -412,7 +415,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
     <div class="date-log-list" id="dateLogList"></div>
   </div>
 
-</div>
+</div><!-- /page -->
 
 <!-- LOADING -->
 <div class="full-loading" id="fullLoading">
@@ -437,23 +440,42 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
+/* ═══════════════════════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════════════════════ */
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 var LOGIN_URL       = "student-login.html";
-var allDateLogs     = [];
-var activeFilter    = 'all';
-var chartTrend      = null;
-var chartSubj       = null;
 
-/* ─── INIT ─── */
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+var allDateLogs  = [];
+var activeFilter = 'all';
+var _charts      = {};       // keyed by canvas id
+var _currentToken = null;
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
 (function init() {
   var token = sessionStorage.getItem('student_token');
   if (!token) { window.location.href = LOGIN_URL; return; }
+  _currentToken = token;
   loadDashboard(token);
 })();
 
-function loadDashboard(token) {
-  jsonp(APPS_SCRIPT_URL + '?action=getStudentSummary&token=' + encodeURIComponent(token),
+function refreshData() {
+  if (!_currentToken) return;
+  var btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  loadDashboard(_currentToken, function() { btn.classList.remove('spinning'); });
+}
+
+function loadDashboard(token, onDone) {
+  jsonp(
+    APPS_SCRIPT_URL + '?action=getStudentSummary&token=' + encodeURIComponent(token),
     function(data) {
+      if (onDone) onDone();
       document.getElementById('fullLoading').style.display = 'none';
       if (!data) {
         showError('Connection Failed', 'Could not load your data. Please check your connection and try again.');
@@ -472,86 +494,84 @@ function loadDashboard(token) {
   );
 }
 
-/* ─── MAIN RENDER ─── */
+/* ═══════════════════════════════════════════════════════════
+   MAIN RENDER
+═══════════════════════════════════════════════════════════ */
 function renderDashboard(data) {
-  var s  = data.student;
-  var ov = data.overview;
+  var s  = data.student  || {};
+  var ov = data.overview || {};
 
-  document.getElementById('topbarName').textContent = s.name.split(' ')[0];
+  document.getElementById('topbarName').textContent = (s.name || '').split(' ')[0] || 'Student';
 
   /* Hero badges */
-  document.getElementById('heroBatch').textContent = s.batch;
-  function setBadge(id, val) {
-    if (val) { var el = document.getElementById(id); el.textContent = val; el.style.display = 'flex'; }
+  document.getElementById('heroBatch').textContent = s.batch || '—';
+  setBadge('heroBranchBadge',    s.branch);
+  setBadge('heroCenterBadge',    s.center);
+  setBadge('heroModeBadge',      s.mode);
+  setBadge('heroBatchCodeBadge', s.batchCode ? 'Code: ' + s.batchCode : '');
+  setBadge('heroTargetBadge',    s.examTarget ? 'Target: ' + s.examTarget : '');
+
+  if (data.generatedAt) {
+    document.getElementById('freshnessNote').textContent = 'Updated ' + data.generatedAt;
   }
-  setBadge('heroBranch',    s.branch);
-  setBadge('heroCenter',    s.center);
-  setBadge('heroMode',      s.mode);
-  setBadge('heroBatchCode', s.batchCode ? ('Code: ' + s.batchCode) : '');
-  setBadge('heroTarget',    s.examTarget ? ('Target: ' + s.examTarget) : '');
 
-  if (data.generatedAt) document.getElementById('freshnessNote').textContent = 'Data as of ' + data.generatedAt;
-
-  document.getElementById('heroName').textContent = s.name;
+  document.getElementById('heroName').textContent = s.name || '—';
   document.getElementById('heroSub').textContent  =
-    'DOJ: ' + formatDate(s.doj) +
-    (s.examTarget ? '  ·  Target: ' + s.examTarget : '') +
-    (s.mode       ? '  ·  ' + s.mode                : '');
+    ['DOJ: ' + formatDate(s.doj), s.examTarget, s.mode].filter(Boolean).join('  ·  ');
   document.getElementById('heroSub2').textContent =
-    'Last attended: ' + (ov.lastDate ? formatDate(ov.lastDate) : '—') +
-    (s.college    ? '  ·  ' + s.college    : '') +
-    (s.nativeCity ? '  ·  ' + s.nativeCity : '');
+    ['Last attended: ' + (ov.lastDate ? formatDate(ov.lastDate) : '—'), s.college, s.nativeCity].filter(Boolean).join('  ·  ');
 
   /* Hero stats */
+  var pct = ov.pct || 0;
   document.getElementById('statTotal').textContent    = ov.total    || 0;
   document.getElementById('statAttended').textContent = ov.attended || 0;
   document.getElementById('statAbsent').textContent   = ov.absent   || 0;
   var pctEl = document.getElementById('statPct');
-  pctEl.textContent = (ov.pct || 0) + '%';
-  pctEl.className   = 'hero-stat-val ' + pctClass(ov.pct);
+  pctEl.textContent = pct + '%';
+  pctEl.className   = 'hero-stat-val ' + pctClass(pct);
 
   /* Need strip */
-  if (ov.needToAttend > 0) {
+  if ((ov.needToAttend || 0) > 0) {
     document.getElementById('needStripText').innerHTML =
       'You need to attend <strong>' + ov.needToAttend + ' more consecutive class' +
       (ov.needToAttend === 1 ? '' : 'es') +
-      '</strong> without any absence to reach <strong>' + ov.threshold + '%</strong> attendance.';
+      '</strong> without any absence to reach <strong>' + (ov.threshold || 65) + '%</strong>.';
     document.getElementById('needStrip').style.display = 'flex';
+  } else {
+    document.getElementById('needStrip').style.display = 'none';
   }
 
   /* Alerts */
   var alertArea = document.getElementById('alertArea');
   alertArea.innerHTML = '';
   if (ov.low) {
-    alertArea.innerHTML += '<div class="alert-banner low"><div class="alert-icon">⚠️</div>' +
-      '<div class="alert-text">Overall attendance is <strong>' + ov.pct + '%</strong> — below the required <strong>' +
-      ov.threshold + '%</strong>. ' +
-      (ov.needToAttend > 0 ? 'Attend <strong>' + ov.needToAttend + ' more class' + (ov.needToAttend===1?'':'es') + '</strong> consecutively to recover.' : '') +
-      '</div></div>';
+    alertArea.innerHTML += makeAlert('low', '⚠️',
+      'Overall attendance is <strong>' + pct + '%</strong> — below the required <strong>' +
+      (ov.threshold || 65) + '%</strong>.' +
+      ((ov.needToAttend || 0) > 0
+        ? ' Attend <strong>' + ov.needToAttend + ' more class' + (ov.needToAttend === 1 ? '' : 'es') + '</strong> consecutively to recover.'
+        : ''));
   }
   if (ov.consecutiveFlag) {
-    alertArea.innerHTML += '<div class="alert-banner consecutive"><div class="alert-icon">🔴</div>' +
-      '<div class="alert-text">You have been absent for <strong>' + ov.consecutive +
-      ' consecutive class' + (ov.consecutive===1?'':'es') +
-      '</strong>. Please attend your next class as soon as possible.</div></div>';
+    alertArea.innerHTML += makeAlert('consecutive', '🔴',
+      'You have been absent for <strong>' + ov.consecutive + ' consecutive class' +
+      (ov.consecutive === 1 ? '' : 'es') +
+      '</strong>. Please attend your next class as soon as possible.');
   }
-  if (!ov.low && !ov.consecutiveFlag && ov.total > 0) {
-    alertArea.innerHTML += '<div class="alert-banner ok"><div class="alert-icon">✅</div>' +
-      '<div class="alert-text">Attendance is <strong>' + ov.pct + '%</strong> — above the ' +
-      ov.threshold + '% threshold. Keep it up!</div></div>';
+  if (!ov.low && !ov.consecutiveFlag && (ov.total || 0) > 0) {
+    alertArea.innerHTML += makeAlert('ok', '✅',
+      'Attendance is <strong>' + pct + '%</strong> — above the ' +
+      (ov.threshold || 65) + '% threshold. Keep it up!');
   }
 
-  /* Compute derived analytics from dateLogs */
-  var logs     = data.dateLogs || [];
-  var subjects = data.subjects  || [];
+  /* Analytics */
+  var logs     = Array.isArray(data.dateLogs) ? data.dateLogs : [];
+  var subjects = Array.isArray(data.subjects)  ? data.subjects  : [];
   allDateLogs  = logs;
 
   var analytics = computeAnalytics(logs, ov, subjects);
 
-  /* KPI strip */
   renderKPI(analytics, ov);
-
-  /* Charts */
   renderTrendChart(analytics.monthlyTrend);
   renderDowChart(analytics.dowStats);
   renderSubjChart(subjects);
@@ -578,42 +598,63 @@ function renderDashboard(data) {
 
   renderSubjects(subjects);
 
-  document.getElementById('dateLogCount').textContent = logs.length + ' Class' + (logs.length===1?'':'es');
+  document.getElementById('dateLogCount').textContent =
+    logs.length + ' Class' + (logs.length === 1 ? '' : 'es');
   renderDateLog('all');
 
   document.getElementById('mainPage').style.display = 'block';
 }
 
-/* ─── ANALYTICS ENGINE ─── */
+/* ═══════════════════════════════════════════════════════════
+   ANALYTICS ENGINE
+   FIX: DoW now counts each individual date-log entry's slots
+   properly, not just one hit per day.
+═══════════════════════════════════════════════════════════ */
 function computeAnalytics(logs, ov, subjects) {
   var monthlyMap = {};
-  var dowMap     = { 0:{ total:0, present:0 }, 1:{ total:0, present:0 }, 2:{ total:0, present:0 },
-                     3:{ total:0, present:0 }, 4:{ total:0, present:0 }, 5:{ total:0, present:0 },
-                     6:{ total:0, present:0 } };
-  var heatmapData = {};
-  var recentDays  = 30;
-  var recentTotal = 0;
-  var recentAtt   = 0;
-  var now         = new Date();
-  var recentCutoff = new Date(now.getTime() - recentDays * 86400000);
+  /* DoW: track present-slots and total-slots separately */
+  var dowMap = {};
+  for (var di = 0; di < 7; di++) dowMap[di] = { present: 0, total: 0 };
+  var heatmapData  = {};
+  var recentAtt    = 0;
+  var recentTotal  = 0;
+  var now          = new Date();
+  var recentCutoff = new Date(now.getTime() - 30 * 86400000);
 
   for (var i = 0; i < logs.length; i++) {
     var r   = logs[i];
     var iso = r.dateIso;
     if (!iso) continue;
+
     var d   = new Date(iso + 'T12:00:00');
     var dow = d.getDay();
-    var mKey = iso.slice(0,7);
+    var mKey = iso.slice(0, 7);
 
-    if (!monthlyMap[mKey]) monthlyMap[mKey] = { total:0, present:0 };
+    /* Count each slot individually for DoW accuracy */
+    var slots      = Array.isArray(r.slots) ? r.slots : [];
+    var slotTotal  = slots.length || 1;   /* fallback: 1 class per day-entry */
+    var slotPresent = 0;
+    if (slots.length > 0) {
+      for (var si = 0; si < slots.length; si++) {
+        if (slots[si].present) slotPresent++;
+      }
+    } else {
+      slotPresent = r.present ? 1 : 0;
+    }
+
+    /* Monthly — based on day-level present/absent */
+    if (!monthlyMap[mKey]) monthlyMap[mKey] = { total: 0, present: 0 };
     monthlyMap[mKey].total++;
     if (r.present) monthlyMap[mKey].present++;
 
-    dowMap[dow].total++;
-    if (r.present) dowMap[dow].present++;
+    /* DoW uses slot-level counts */
+    dowMap[dow].total   += slotTotal;
+    dowMap[dow].present += slotPresent;
 
+    /* Heatmap */
     heatmapData[iso] = r.present ? 3 : 1;
 
+    /* Recent 30-day */
     if (d >= recentCutoff) {
       recentTotal++;
       if (r.present) recentAtt++;
@@ -622,85 +663,86 @@ function computeAnalytics(logs, ov, subjects) {
 
   /* Monthly trend sorted */
   var monthKeys = Object.keys(monthlyMap).sort();
-  var monthLabels = [];
-  var monthPcts   = [];
-  for (var mi = 0; mi < monthKeys.length; mi++) {
-    var mk = monthKeys[mi];
+  var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var monthLabels = monthKeys.map(function(mk) {
+    var p = mk.split('-');
+    return mNames[parseInt(p[1], 10) - 1] + ' ' + p[0].slice(2);
+  });
+  var monthPcts = monthKeys.map(function(mk) {
     var mv = monthlyMap[mk];
-    var parts = mk.split('-');
-    var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    monthLabels.push(mNames[parseInt(parts[1],10)-1] + ' ' + parts[0].slice(2));
-    monthPcts.push(mv.total > 0 ? parseFloat((mv.present/mv.total*100).toFixed(1)) : 0);
-  }
+    return mv.total > 0 ? parseFloat((mv.present / mv.total * 100).toFixed(1)) : 0;
+  });
 
-  /* Recent trend vs overall */
-  var recentPct  = recentTotal > 0 ? parseFloat((recentAtt/recentTotal*100).toFixed(1)) : 0;
+  var recentPct  = recentTotal > 0 ? parseFloat((recentAtt / recentTotal * 100).toFixed(1)) : 0;
   var overallPct = ov.pct || 0;
   var trendDir   = recentPct > overallPct + 2 ? 'up' : recentPct < overallPct - 2 ? 'down' : 'flat';
 
-  /* Best / worst subject */
+  /* Best / worst subject — require at least 2 classes */
   var bestSubj  = null, worstSubj = null;
-  for (var si = 0; si < subjects.length; si++) {
-    var sub = subjects[si];
-    if (sub.total < 2) continue;
+  for (var sj = 0; sj < subjects.length; sj++) {
+    var sub = subjects[sj];
+    if ((sub.total || 0) < 2) continue;
     if (!bestSubj  || sub.pct > bestSubj.pct)  bestSubj  = sub;
     if (!worstSubj || sub.pct < worstSubj.pct) worstSubj = sub;
   }
 
-  /* Longest absence streak (from logs oldest→newest) */
-  var sortedLogs = logs.slice().sort(function(a,b){ return a.dateIso < b.dateIso ? -1 : 1; });
+  /* Longest absence streak */
+  var sortedLogs = logs.slice().sort(function(a, b) {
+    return a.dateIso < b.dateIso ? -1 : 1;
+  });
   var maxStreak = 0, curStreak = 0;
   for (var li = 0; li < sortedLogs.length; li++) {
     if (!sortedLogs[li].present) { curStreak++; maxStreak = Math.max(maxStreak, curStreak); }
     else { curStreak = 0; }
   }
 
-  /* Consistency score 0-100 */
-  var presentCount = logs.filter(function(r){ return r.present; }).length;
-  var total        = logs.length;
-  var rawPct       = total > 0 ? presentCount/total : 0;
+  /* Consistency score */
+  var presentCount  = logs.filter(function(r) { return r.present; }).length;
+  var total         = logs.length;
+  var rawPct        = total > 0 ? presentCount / total : 0;
   var streakPenalty = Math.min(maxStreak * 3, 20);
-  var consecBonus   = ov.consecutive === 0 ? 5 : 0;
+  var consecBonus   = (ov.consecutive || 0) === 0 ? 5 : 0;
+  var trendBonus    = trendDir === 'up' ? 5 : trendDir === 'down' ? -5 : 0;
   var consistencyScore = Math.min(100, Math.max(0,
-    Math.round(rawPct * 100 - streakPenalty + consecBonus + (trendDir==='up'?5:trendDir==='down'?-5:0))
+    Math.round(rawPct * 100 - streakPenalty + consecBonus + trendBonus)
   ));
 
   return {
-    monthlyTrend: { labels: monthLabels, pcts: monthPcts },
-    dowStats:     dowMap,
-    heatmapData:  heatmapData,
-    recentPct:    recentPct,
-    trendDir:     trendDir,
-    bestSubj:     bestSubj,
-    worstSubj:    worstSubj,
-    maxStreak:    maxStreak,
-    consistencyScore: consistencyScore,
-    recentTotal:  recentTotal,
-    recentAtt:    recentAtt
+    monthlyTrend:     { labels: monthLabels, pcts: monthPcts },
+    dowStats:         dowMap,
+    heatmapData:      heatmapData,
+    recentPct:        recentPct,
+    recentTotal:      recentTotal,
+    recentAtt:        recentAtt,
+    trendDir:         trendDir,
+    bestSubj:         bestSubj,
+    worstSubj:        worstSubj,
+    maxStreak:        maxStreak,
+    consistencyScore: consistencyScore
   };
 }
 
-/* ─── KPI STRIP ─── */
+/* ═══════════════════════════════════════════════════════════
+   KPI STRIP
+═══════════════════════════════════════════════════════════ */
 function renderKPI(analytics, ov) {
-  var trendLabel = analytics.trendDir === 'up'   ? '▲ Improving'  :
-                   analytics.trendDir === 'down'  ? '▼ Declining'  : '● Steady';
-  var trendCls   = analytics.trendDir === 'up'   ? 'up'   :
-                   analytics.trendDir === 'down'  ? 'down' : 'flat';
-
+  var trendLabel = analytics.trendDir === 'up'   ? '▲ Improving'
+                 : analytics.trendDir === 'down'  ? '▼ Declining' : '● Steady';
+  var trendCls   = analytics.trendDir === 'up'   ? 'up'
+                 : analytics.trendDir === 'down'  ? 'down' : 'flat';
   var recentClass = pctClass(analytics.recentPct);
-  var bestName    = analytics.bestSubj  ? analytics.bestSubj.subject.split(' ').slice(0,2).join(' ')  : '—';
-  var worstName   = analytics.worstSubj ? analytics.worstSubj.subject.split(' ').slice(0,2).join(' ') : '—';
+  var bestName    = analytics.bestSubj  ? truncate(analytics.bestSubj.subject, 22)  : '—';
+  var worstName   = analytics.worstSubj ? truncate(analytics.worstSubj.subject, 22) : '—';
 
   document.getElementById('kpiStrip').innerHTML =
-    kpiCard('Recent 30-day',  analytics.recentPct + '%', recentClass,
+    kpiCard('Recent 30-day', analytics.recentPct + '%', recentClass,
       analytics.recentTotal + ' classes in period',
       '<span class="kpi-trend ' + trendCls + '">' + trendLabel + ' vs overall</span>') +
-    kpiCard('Best Subject',   analytics.bestSubj  ? analytics.bestSubj.pct  + '%' : '—', 'good',
-      bestName, '') +
+    kpiCard('Best Subject',  analytics.bestSubj  ? analytics.bestSubj.pct  + '%' : '—', 'good', bestName, '') +
     kpiCard('Needs Attention', analytics.worstSubj ? analytics.worstSubj.pct + '%' : '—',
-      analytics.worstSubj ? pctClass(analytics.worstSubj.pct) : '',
-      worstName, '') +
-    kpiCard('Max Absent Streak', analytics.maxStreak + (analytics.maxStreak===1?' class':' classes'),
+      analytics.worstSubj ? pctClass(analytics.worstSubj.pct) : '', worstName, '') +
+    kpiCard('Max Absent Streak',
+      analytics.maxStreak + (analytics.maxStreak === 1 ? ' class' : ' classes'),
       analytics.maxStreak >= 5 ? 'bad' : analytics.maxStreak >= 3 ? 'warn' : 'good',
       'Longest consecutive absent run', '');
 }
@@ -708,25 +750,26 @@ function renderKPI(analytics, ov) {
 function kpiCard(label, val, cls, sub, extra) {
   return '<div class="kpi-card">' +
     '<div class="kpi-label">' + esc(label) + '</div>' +
-    '<div class="kpi-val' + (cls ? ' ' + cls : '') + '">' + esc(val) + '</div>' +
+    '<div class="kpi-val' + (cls ? ' ' + cls : '') + '">' + esc(String(val)) + '</div>' +
     (sub   ? '<div class="kpi-sub">' + esc(sub) + '</div>' : '') +
     (extra ? extra : '') +
   '</div>';
 }
 
-/* ─── TREND CHART ─── */
+/* ═══════════════════════════════════════════════════════════
+   TREND CHART
+═══════════════════════════════════════════════════════════ */
 function renderTrendChart(trend) {
+  destroyChart('trendChart');
   if (!trend.labels.length) {
     document.getElementById('trendSub').textContent = 'No data yet';
     return;
   }
   document.getElementById('trendSub').textContent =
-    trend.labels[0] + ' – ' + trend.labels[trend.labels.length-1];
-
-  if (chartTrend) { chartTrend.destroy(); chartTrend = null; }
+    trend.labels[0] + ' – ' + trend.labels[trend.labels.length - 1];
 
   var ctx = document.getElementById('trendChart').getContext('2d');
-  chartTrend = new Chart(ctx, {
+  _charts['trendChart'] = new Chart(ctx, {
     type: 'line',
     data: {
       labels: trend.labels,
@@ -736,7 +779,9 @@ function renderTrendChart(trend) {
         borderColor: '#D0261A',
         backgroundColor: 'rgba(208,38,26,0.06)',
         borderWidth: 2,
-        pointBackgroundColor: trend.pcts.map(function(p){ return p>=75?'#22c55e':p>=65?'#f59e0b':'#D0261A'; }),
+        pointBackgroundColor: trend.pcts.map(function(p) {
+          return p >= 75 ? '#22c55e' : p >= 65 ? '#f59e0b' : '#D0261A';
+        }),
         pointRadius: trend.labels.length > 12 ? 2 : 4,
         pointHoverRadius: 6,
         fill: true,
@@ -748,11 +793,7 @@ function renderTrendChart(trend) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) { return ' ' + ctx.raw + '%'; }
-          }
-        }
+        tooltip: { callbacks: { label: function(ctx) { return ' ' + ctx.raw + '%'; } } }
       },
       scales: {
         y: {
@@ -760,8 +801,7 @@ function renderTrendChart(trend) {
           grid: { color: 'rgba(0,0,0,0.05)' },
           ticks: {
             font: { size: 10, family: "'Outfit', sans-serif" },
-            color: '#999490',
-            stepSize: 25,
+            color: '#999490', stepSize: 25,
             callback: function(v) { return v + '%'; }
           }
         },
@@ -769,10 +809,7 @@ function renderTrendChart(trend) {
           grid: { display: false },
           ticks: {
             font: { size: 10, family: "'Outfit', sans-serif" },
-            color: '#999490',
-            maxRotation: 45,
-            autoSkip: true,
-            maxTicksLimit: 8
+            color: '#999490', maxRotation: 45, autoSkip: true, maxTicksLimit: 8
           }
         }
       }
@@ -780,10 +817,13 @@ function renderTrendChart(trend) {
   });
 }
 
-/* ─── DAY-OF-WEEK CHART ─── */
+/* ═══════════════════════════════════════════════════════════
+   DAY-OF-WEEK CHART
+   FIX: Uses slot-level totals from computeAnalytics, giving
+   accurate per-weekday attendance rates.
+═══════════════════════════════════════════════════════════ */
 function renderDowChart(dowMap) {
   var dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  var bars     = '';
   var maxPct   = 0;
   for (var d = 0; d < 7; d++) {
     if (dowMap[d].total > 0) {
@@ -793,9 +833,10 @@ function renderDowChart(dowMap) {
   }
   if (maxPct === 0) maxPct = 100;
 
+  var bars = '';
   for (var d2 = 0; d2 < 7; d2++) {
     var dm   = dowMap[d2];
-    var pct  = dm.total > 0 ? parseFloat((dm.present/dm.total*100).toFixed(0)) : 0;
+    var pct  = dm.total > 0 ? parseFloat((dm.present / dm.total * 100).toFixed(0)) : 0;
     var barW = dm.total > 0 ? Math.round(pct / maxPct * 100) : 0;
     var col  = pct >= 75 ? '#22c55e' : pct >= 65 ? '#f59e0b' : pct > 0 ? '#D0261A' : '#e8e4e0';
     bars +=
@@ -803,46 +844,46 @@ function renderDowChart(dowMap) {
         '<div class="dow-label">' + dayNames[d2] + '</div>' +
         '<div class="dow-bar-bg"><div class="dow-bar-fill" style="width:' + barW + '%;background:' + col + ';"></div></div>' +
         '<div class="dow-pct">' + (dm.total > 0 ? pct + '%' : '—') + '</div>' +
-        '<div class="dow-count" style="font-size:10px;color:var(--gray);">' + (dm.present + '/' + dm.total) + '</div>' +
+        '<div class="dow-count">' + dm.present + '/' + dm.total + '</div>' +
       '</div>';
   }
-  document.getElementById('dowChart').innerHTML = bars || '<div style="font-size:12px;color:var(--gray);padding:12px 0;">No data yet</div>';
+  document.getElementById('dowChart').innerHTML =
+    bars || '<div style="font-size:12px;color:var(--gray);padding:12px 0;">No data yet</div>';
 }
 
-/* ─── SUBJECT COMPARISON CHART ─── */
+/* ═══════════════════════════════════════════════════════════
+   SUBJECT COMPARISON CHART
+   FIX: Canvas height set explicitly so Chart.js respects it
+   on mobile without distortion.
+═══════════════════════════════════════════════════════════ */
 function renderSubjChart(subjects) {
-  if (!subjects.length) return;
+  destroyChart('subjChart');
+  var wrap = document.getElementById('subjChartWrap');
+  if (!subjects.length) {
+    wrap.innerHTML = '<p style="font-size:12px;color:var(--gray);padding:8px 0;">No subject data yet.</p>';
+    return;
+  }
 
-  var sorted   = subjects.slice().sort(function(a,b){ return a.pct - b.pct; });
-  var labels   = sorted.map(function(s){ return s.subject.length > 20 ? s.subject.slice(0,18)+'…' : s.subject; });
-  var attended = sorted.map(function(s){ return s.attended; });
-  var absent   = sorted.map(function(s){ return s.absent; });
-  var barH     = Math.max(sorted.length * 44 + 60, 120);
+  /* Re-create canvas fresh (avoids stale Chart.js context issues) */
+  wrap.innerHTML = '<canvas id="subjChart" role="img" aria-label="Subject attendance comparison"></canvas>';
 
-  document.getElementById('subjChartWrap').style.height = barH + 'px';
+  var sorted   = subjects.slice().sort(function(a, b) { return a.pct - b.pct; });
+  var labels   = sorted.map(function(s) { return truncate(s.subject, 22); });
+  var attended = sorted.map(function(s) { return s.attended; });
+  var absent   = sorted.map(function(s) { return s.absent; });
+  var barH     = Math.max(sorted.length * 48 + 60, 120);
 
-  if (chartSubj) { chartSubj.destroy(); chartSubj = null; }
+  wrap.style.height = barH + 'px';
+  document.getElementById('subjChart').style.height = barH + 'px';
 
   var ctx = document.getElementById('subjChart').getContext('2d');
-  chartSubj = new Chart(ctx, {
+  _charts['subjChart'] = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
       datasets: [
-        {
-          label: 'Attended',
-          data: attended,
-          backgroundColor: 'rgba(34,197,94,0.75)',
-          borderRadius: 3,
-          borderSkipped: false
-        },
-        {
-          label: 'Absent',
-          data: absent,
-          backgroundColor: 'rgba(208,38,26,0.3)',
-          borderRadius: 3,
-          borderSkipped: false
-        }
+        { label: 'Attended', data: attended, backgroundColor: 'rgba(34,197,94,0.75)',  borderRadius: 3, borderSkipped: false },
+        { label: 'Absent',   data: absent,   backgroundColor: 'rgba(208,38,26,0.3)',   borderRadius: 3, borderSkipped: false }
       ]
     },
     options: {
@@ -854,47 +895,41 @@ function renderSubjChart(subjects) {
         tooltip: {
           callbacks: {
             label: function(ctx) {
-              var total = ctx.chart.data.datasets[0].data[ctx.dataIndex] +
-                          ctx.chart.data.datasets[1].data[ctx.dataIndex];
-              return ' ' + ctx.dataset.label + ': ' + ctx.raw + ' of ' + total;
+              var tot = ctx.chart.data.datasets[0].data[ctx.dataIndex] +
+                        ctx.chart.data.datasets[1].data[ctx.dataIndex];
+              return ' ' + ctx.dataset.label + ': ' + ctx.raw + ' of ' + tot;
             }
           }
         }
       },
       scales: {
-        x: {
-          stacked: true,
-          grid: { color: 'rgba(0,0,0,0.04)' },
-          ticks: { font: { size: 10, family: "'Outfit', sans-serif" }, color: '#999490' }
-        },
-        y: {
-          stacked: true,
-          grid: { display: false },
-          ticks: { font: { size: 10, family: "'Outfit', sans-serif" }, color: '#0a0a0a' }
-        }
+        x: { stacked: true, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10, family: "'Outfit', sans-serif" }, color: '#999490' } },
+        y: { stacked: true, grid: { display: false }, ticks: { font: { size: 10, family: "'Outfit', sans-serif" }, color: '#0a0a0a' } }
       }
     }
   });
 }
 
-/* ─── CONSISTENCY SCORE ─── */
+/* ═══════════════════════════════════════════════════════════
+   CONSISTENCY SCORE
+═══════════════════════════════════════════════════════════ */
 function renderConsistency(analytics, ov) {
   var score = analytics.consistencyScore;
   var grade = score >= 85 ? 'A' : score >= 70 ? 'B' : score >= 55 ? 'C' : 'D';
-  var gradeDesc = { A:'Excellent consistency', B:'Good consistency', C:'Room to improve', D:'Needs attention' };
+  var desc  = { A: 'Excellent', B: 'Good', C: 'Room to improve', D: 'Needs attention' };
 
-  var circumference = 2 * Math.PI * 28;
-  var offset = circumference * (1 - score/100);
-  var strokeColor = score>=75?'#22c55e':score>=60?'#f59e0b':'#D0261A';
+  var circ   = 2 * Math.PI * 28;
+  var offset = circ * (1 - score / 100);
+  var stroke = score >= 75 ? '#22c55e' : score >= 60 ? '#f59e0b' : '#D0261A';
 
   document.getElementById('consistencyContent').innerHTML =
     '<div style="display:flex;align-items:center;gap:16px;padding:10px 0;">' +
       '<div style="position:relative;flex-shrink:0;">' +
         '<svg width="72" height="72" viewBox="0 0 72 72" style="transform:rotate(-90deg);">' +
           '<circle cx="36" cy="36" r="28" fill="none" stroke="#e8e4e0" stroke-width="5"/>' +
-          '<circle cx="36" cy="36" r="28" fill="none" stroke="' + strokeColor + '" stroke-width="5"' +
+          '<circle cx="36" cy="36" r="28" fill="none" stroke="' + stroke + '" stroke-width="5"' +
             ' stroke-linecap="round"' +
-            ' stroke-dasharray="' + circumference.toFixed(1) + '"' +
+            ' stroke-dasharray="' + circ.toFixed(1) + '"' +
             ' stroke-dashoffset="' + offset.toFixed(1) + '"/>' +
         '</svg>' +
         '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">' +
@@ -902,9 +937,9 @@ function renderConsistency(analytics, ov) {
         '</div>' +
       '</div>' +
       '<div>' +
-        '<div style="font-size:22px;font-family:\'Bebas Neue\',sans-serif;letter-spacing:.02em;color:var(--black);line-height:1;">' + score + ' / 100</div>' +
-        '<div style="font-size:12px;font-weight:600;color:var(--gray);margin-top:2px;">' + esc(gradeDesc[grade]) + '</div>' +
-        '<div style="font-size:11px;color:var(--gray);margin-top:6px;line-height:1.5;">' +
+        '<div style="font-size:22px;font-family:\'Bebas Neue\',sans-serif;letter-spacing:.02em;line-height:1;">' + score + ' / 100</div>' +
+        '<div style="font-size:12px;font-weight:600;color:var(--gray);margin-top:2px;">' + esc(desc[grade]) + '</div>' +
+        '<div style="font-size:11px;color:var(--gray);margin-top:6px;line-height:1.6;">' +
           'Max streak: ' + analytics.maxStreak + ' absent<br>' +
           'Recent 30d: ' + analytics.recentPct + '%' +
         '</div>' +
@@ -912,14 +947,18 @@ function renderConsistency(analytics, ov) {
     '</div>';
 }
 
-/* ─── ACTIVITY HEATMAP ─── */
+/* ═══════════════════════════════════════════════════════════
+   HEATMAP
+   FIX: Month labels use absolute positioning within a fixed-
+   height container that is separate from the scrollable grid
+   wrapper, preventing overlap on small screens.
+═══════════════════════════════════════════════════════════ */
 function renderHeatmap(heatmapData) {
-  /* Build a 52-week grid ending today */
-  var today  = new Date();
-  today.setHours(12,0,0,0);
-  var start  = new Date(today);
+  var today = new Date();
+  today.setHours(12, 0, 0, 0);
+  var start = new Date(today);
   start.setDate(start.getDate() - 364);
-  start.setDate(start.getDate() - start.getDay()); /* align to Sunday */
+  start.setDate(start.getDate() - start.getDay()); // align to Sunday
 
   var cells   = '';
   var months  = [];
@@ -931,44 +970,36 @@ function renderHeatmap(heatmapData) {
       var iso    = fmtISO(cursor);
       var level  = heatmapData[iso] || 0;
       var future = cursor > today;
+      var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
       var mon    = cursor.getMonth();
       if (mon !== lastMon && d === 0) {
-        var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         months.push({ week: w, name: mNames[mon] });
         lastMon = mon;
       }
       cells += '<div class="heatmap-cell" data-level="' + (future ? 0 : level) +
-               '" title="' + iso + (level===3?' · Present':level===1?' · Absent':'') + '"></div>';
+               '" title="' + iso + (level === 3 ? ' · Present' : level === 1 ? ' · Absent' : '') + '"></div>';
       cursor.setDate(cursor.getDate() + 1);
     }
   }
 
   document.getElementById('heatmapGrid').innerHTML = cells;
 
-  /* Month labels — positioned proportionally */
-  var monthsHtml = '';
-  var total = 53;
-  for (var i = 0; i < months.length; i++) {
-    monthsHtml += '<span style="position:absolute;left:' + (months[i].week/total*100).toFixed(1) + '%;">' + months[i].name + '</span>';
-  }
-  var mWrap = document.getElementById('heatmapMonths');
-  mWrap.style.position = 'relative';
-  mWrap.style.height   = '16px';
-  mWrap.innerHTML      = monthsHtml;
+  /* Month labels */
+  var mHtml = '';
+  months.forEach(function(m) {
+    var leftPct = parseFloat((m.week / 53 * 100).toFixed(1));
+    mHtml += '<span style="left:' + leftPct + '%;">' + m.name + '</span>';
+  });
+  document.getElementById('heatmapMonths').innerHTML = mHtml;
 }
 
-function fmtISO(d) {
-  var y  = d.getFullYear();
-  var m  = String(d.getMonth()+1).padStart(2,'0');
-  var dd = String(d.getDate()).padStart(2,'0');
-  return y + '-' + m + '-' + dd;
-}
-
-/* ─── SUBJECTS GRID ─── */
+/* ═══════════════════════════════════════════════════════════
+   SUBJECTS GRID
+═══════════════════════════════════════════════════════════ */
 function renderSubjects(subjects) {
   var grid = document.getElementById('subjectsGrid');
   document.getElementById('subjectCount').textContent =
-    subjects.length + ' Subject' + (subjects.length!==1?'s':'');
+    subjects.length + ' Subject' + (subjects.length !== 1 ? 's' : '');
 
   if (!subjects.length) {
     grid.innerHTML = '<div style="color:var(--gray);font-size:13px;padding:16px 0;">No subjects found.</div>';
@@ -978,35 +1009,37 @@ function renderSubjects(subjects) {
   grid.innerHTML = subjects.map(function(s) {
     var pc   = pctClass(s.pct);
     var barW = Math.min(s.pct, 100);
-    var circumference = 2 * Math.PI * 14;
-    var dashoffset    = circumference * (1 - barW / 100);
+    var circ = 2 * Math.PI * 14;
+    var dash = circ * (1 - barW / 100);
 
     var statusHtml = '';
-    if (s.needToAttend > 0) {
+    if ((s.needToAttend || 0) > 0) {
       statusHtml = '<div class="subj-need">Need ' + s.needToAttend + ' more class' +
-        (s.needToAttend===1?'':'es') + ' to reach threshold</div>';
-    } else if (s.total > 0) {
+        (s.needToAttend === 1 ? '' : 'es') + ' to reach threshold</div>';
+    } else if ((s.total || 0) > 0) {
       statusHtml = '<div class="subj-on-track">On track — ' + s.pct + '% attendance</div>';
     }
 
     return '<div class="subj-card' + (s.low ? ' low-card' : '') + '">' +
       '<div class="subj-header">' +
         '<div class="subj-name">' + esc(s.subject) + '</div>' +
-        '<div class="pct-ring-wrap">' +
-          '<svg class="pct-ring" width="36" height="36" viewBox="0 0 36 36">' +
-            '<circle class="pct-ring-bg" cx="18" cy="18" r="14"/>' +
-            '<circle class="pct-ring-fill ' + pc + '" cx="18" cy="18" r="14"' +
-              ' stroke-dasharray="' + circumference.toFixed(1) + '"' +
-              ' stroke-dashoffset="' + dashoffset.toFixed(1) + '"/>' +
+        '<div style="display:flex;align-items:center;gap:6px;">' +
+          '<svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg);">' +
+            '<circle cx="18" cy="18" r="14" fill="none" stroke="#e8e4e0" stroke-width="3"/>' +
+            '<circle cx="18" cy="18" r="14" fill="none" stroke="' +
+              (pc === 'good' ? '#22c55e' : pc === 'warn' ? '#f59e0b' : '#D0261A') + '" stroke-width="3"' +
+              ' stroke-linecap="round"' +
+              ' stroke-dasharray="' + circ.toFixed(1) + '"' +
+              ' stroke-dashoffset="' + dash.toFixed(1) + '"/>' +
           '</svg>' +
           '<span class="subj-pct-badge ' + pc + '">' + s.pct + '%</span>' +
         '</div>' +
       '</div>' +
-      '<div class="subj-faculty">' + esc(s.faculty) + '</div>' +
+      '<div class="subj-faculty">' + esc(s.faculty || '—') + '</div>' +
       '<div class="subj-counts">' +
-        '<div class="subj-count-item"><div class="subj-count-num">' + s.total    + '</div><div class="subj-count-lbl">Total</div></div>' +
-        '<div class="subj-count-item"><div class="subj-count-num">' + s.attended + '</div><div class="subj-count-lbl">Present</div></div>' +
-        '<div class="subj-count-item"><div class="subj-count-num">' + s.absent   + '</div><div class="subj-count-lbl">Absent</div></div>' +
+        '<div class="subj-count-item"><div class="subj-count-num">' + (s.total    || 0) + '</div><div class="subj-count-lbl">Total</div></div>' +
+        '<div class="subj-count-item"><div class="subj-count-num">' + (s.attended || 0) + '</div><div class="subj-count-lbl">Present</div></div>' +
+        '<div class="subj-count-item"><div class="subj-count-num">' + (s.absent   || 0) + '</div><div class="subj-count-lbl">Absent</div></div>' +
       '</div>' +
       statusHtml +
       '<div class="subj-pct-bar ' + pc + '" style="width:' + barW + '%"></div>' +
@@ -1014,12 +1047,14 @@ function renderSubjects(subjects) {
   }).join('');
 }
 
-/* ─── DATE LOG ─── */
+/* ═══════════════════════════════════════════════════════════
+   DATE LOG
+═══════════════════════════════════════════════════════════ */
 function setFilter(f) {
   activeFilter = f;
-  document.getElementById('filterAll').className     = 'filter-btn'             + (f==='all'    ?' active':'');
-  document.getElementById('filterPresent').className = 'filter-btn present-btn' + (f==='present'?' active':'');
-  document.getElementById('filterAbsent').className  = 'filter-btn absent-btn'  + (f==='absent' ?' active':'');
+  document.getElementById('filterAll').className     = 'filter-btn'             + (f === 'all'     ? ' active' : '');
+  document.getElementById('filterPresent').className = 'filter-btn present-btn' + (f === 'present' ? ' active' : '');
+  document.getElementById('filterAbsent').className  = 'filter-btn absent-btn'  + (f === 'absent'  ? ' active' : '');
   renderDateLog(f);
 }
 
@@ -1036,23 +1071,25 @@ function renderDateLog(filter) {
   }
   list.innerHTML = rows.map(function(r) {
     var ind   = r.present ? 'present' : 'absent';
-    var slots = (r.slots||[]).map(function(sl) {
-      return '<span class="slot-pill ' + (sl.present?'present':'absent') + '">' + esc(sl.subject) + '</span>';
+    var slots = (Array.isArray(r.slots) ? r.slots : []).map(function(sl) {
+      return '<span class="slot-pill ' + (sl.present ? 'present' : 'absent') + '">' + esc(sl.subject) + '</span>';
     }).join('');
     return '<div class="date-row">' +
       '<div class="date-row-indicator ' + ind + '"></div>' +
       '<div class="date-row-content">' +
         '<div>' +
-          '<div class="date-row-date">'     + esc(r.dateDisp)       + '</div>' +
-          '<div class="date-row-date-sub">' + getDayName(r.dateIso) + '</div>' +
+          '<div class="date-row-date">'     + esc(r.dateDisp || r.dateIso || '') + '</div>' +
+          '<div class="date-row-date-sub">' + esc(getDayName(r.dateIso))         + '</div>' +
         '</div>' +
-        '<div class="date-row-slots">' + slots + '</div>' +
+        '<div class="date-row-slots">' + (slots || (r.present ? '<span class="slot-pill present">Present</span>' : '<span class="slot-pill absent">Absent</span>')) + '</div>' +
       '</div>' +
     '</div>';
   }).join('');
 }
 
-/* ─── HELPERS ─── */
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════════ */
 function pctClass(p) { return p >= 75 ? 'good' : p >= 65 ? 'warn' : 'bad'; }
 
 function formatDate(iso) {
@@ -1070,8 +1107,43 @@ function getDayName(iso) {
   } catch(e) { return ''; }
 }
 
+function fmtISO(d) {
+  var y  = d.getFullYear();
+  var m  = pad2(d.getMonth() + 1);
+  var dd = pad2(d.getDate());
+  return y + '-' + m + '-' + dd;
+}
+
+function pad2(n) { return n < 10 ? '0' + n : String(n); }
+
+function truncate(s, n) {
+  var str = String(s || '');
+  return str.length > n ? str.slice(0, n - 1) + '…' : str;
+}
+
 function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function setBadge(id, val) {
+  var el = document.getElementById(id);
+  if (val && el) { el.textContent = val; el.style.display = 'flex'; }
+}
+
+function makeAlert(type, icon, html) {
+  return '<div class="alert-banner ' + type + '">' +
+    '<div class="alert-icon">' + icon + '</div>' +
+    '<div class="alert-text">' + html + '</div>' +
+  '</div>';
+}
+
+function destroyChart(id) {
+  if (_charts[id]) {
+    try { _charts[id].destroy(); } catch(e) {}
+    _charts[id] = null;
+  }
 }
 
 function showError(title, sub) {
@@ -1081,12 +1153,15 @@ function showError(title, sub) {
 }
 
 function logout() {
+  if (!confirm('Log out of your attendance portal?')) return;
   sessionStorage.removeItem('student_token');
   sessionStorage.removeItem('student_phone');
   window.location.href = LOGIN_URL;
 }
 
-/* ─── JSONP (fired-guard, unchanged from original) ─── */
+/* ═══════════════════════════════════════════════════════════
+   JSONP  — fired-guard, timeout 25 s
+═══════════════════════════════════════════════════════════ */
 function jsonp(url, cb) {
   var id    = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
   var t     = null;
@@ -1113,9 +1188,9 @@ function jsonp(url, cb) {
     cb(null);
   }, 25000);
 
-  var s = document.createElement('script');
-  s.id  = id;
-  s.src = url + '&callback=' + id;
+  var s   = document.createElement('script');
+  s.id    = id;
+  s.src   = url + '&callback=' + id;
   s.onerror = function() {
     if (fired) return;
     fired = true;
@@ -1125,11 +1200,11 @@ function jsonp(url, cb) {
   document.body.appendChild(s);
 }
 
-/* String.padStart polyfill for older browsers */
+/* String.padStart polyfill */
 if (!String.prototype.padStart) {
-  String.prototype.padStart = function(l,c) {
+  String.prototype.padStart = function(l, c) {
     var s = String(this);
-    while (s.length < l) s = (c||' ') + s;
+    while (s.length < l) s = (c || ' ') + s;
     return s;
   };
 }
