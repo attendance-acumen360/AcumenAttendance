@@ -18,7 +18,7 @@
 html,body { height:100%; }
 body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh; color:var(--black); }
 
-/* TOPBAR */
+/* ── TOPBAR ── */
 .topbar { background:var(--black); padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:200; }
 .topbar-brand { display:flex; align-items:center; gap:10px; }
 .topbar-logo { width:30px;height:30px;background:var(--red);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
@@ -30,7 +30,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .logout-btn { font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);background:none;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:5px 10px;cursor:pointer;transition:all .2s; }
 .logout-btn:hover { color:var(--white);border-color:rgba(255,255,255,.3); }
 
-/* LOGIN OVERLAY */
+/* ── LOGIN OVERLAY ── */
 .login-overlay { position:fixed;inset:0;background:var(--off);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px; }
 .login-card { width:100%;max-width:380px;background:var(--white);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.1);animation:cardIn .5s cubic-bezier(.22,1,.36,1) both; }
 @keyframes cardIn { from{opacity:0;transform:translateY(24px) scale(.97)} to{opacity:1;transform:none} }
@@ -41,7 +41,7 @@ body { font-family:'Outfit',sans-serif; background:var(--off); min-height:100vh;
 .login-title span { color:rgba(255,255,255,.4);font-size:26px;display:block; }
 .login-body { padding:24px; }
 .input-wrap { position:relative;margin-bottom:8px; }
-.input-icon { position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--gray);pointer-events:none;transition:color .2s;flex-shrink:0; }
+.input-icon { position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--gray);pointer-events:none;transition:color .2s; }
 .input-wrap:focus-within .input-icon { color:var(--red); }
 input[type="password"] { width:100%;padding:14px 14px 14px 42px;border:1.5px solid var(--border);border-radius:10px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:500;color:var(--black);background:var(--off);transition:border-color .2s,box-shadow .2s;-webkit-appearance:none; }
 input[type="password"]:focus { outline:none;border-color:var(--red);background:var(--white);box-shadow:0 0 0 4px rgba(208,38,26,.08); }
@@ -55,24 +55,24 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .login-btn span { position:relative;z-index:1; }
 .login-btn:disabled { opacity:.4;cursor:not-allowed; }
 
-/* LOADING */
+/* ── LOADING ── */
 .full-loading { display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 56px);gap:16px; }
 .spinner-ring { width:48px;height:48px; }
 .spinner-ring svg { width:100%;height:100%;animation:spin 1s linear infinite; }
 @keyframes spin { to{transform:rotate(360deg)} }
 .loading-label { font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);font-weight:500; }
 
-/* PAGE */
+/* ── PAGE ── */
 .page { max-width:1160px;margin:0 auto;padding:24px 20px 60px; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
 
-/* TODAY BANNER */
+/* ── TODAY BANNER ── */
 .today-banner { background:var(--black);border-radius:14px;padding:16px 20px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both; }
 .today-banner-label { font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);flex-shrink:0; }
 .today-pill { display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;color:rgba(255,255,255,.7); }
 .today-pill-dot { width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0; }
 
-/* STATS ROW */
+/* ── STATS ROW ── */
 .stats-row { display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px;animation:fadeUp .5s .05s cubic-bezier(.22,1,.36,1) both; }
 .stat-card { background:var(--white);border-radius:12px;padding:16px 12px;box-shadow:var(--card-sh);border:1px solid var(--border);text-align:center; }
 .stat-val { font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.02em;line-height:1;color:var(--black);margin-bottom:4px; }
@@ -81,14 +81,14 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .stat-val.warn    { color:var(--amber); }
 .stat-label { font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray); }
 
-/* TABS */
+/* ── TABS ── */
 .tab-nav { display:flex;gap:4px;background:var(--white);border-radius:12px;padding:4px;box-shadow:var(--card-sh);border:1px solid var(--border);margin-bottom:16px;animation:fadeUp .5s .1s cubic-bezier(.22,1,.36,1) both;overflow-x:auto; }
 .tab-btn { font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);background:none;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0; }
 .tab-btn.active { background:var(--black);color:var(--white); }
 .tab-panel { display:none;animation:fadeUp .3s cubic-bezier(.22,1,.36,1) both; }
 .tab-panel.active { display:block; }
 
-/* FILTER BAR */
+/* ── FILTER BAR ── */
 .filter-bar { background:var(--white);border-radius:12px;padding:10px 16px;box-shadow:var(--card-sh);border:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px; }
 .filter-bar label { font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray); }
 .filter-select { padding:5px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:var(--black);background:var(--off);cursor:pointer;transition:border-color .15s; }
@@ -97,7 +97,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .search-input:focus { outline:none;border-color:var(--red); }
 .filter-count { margin-left:auto;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);background:var(--off);border:1px solid var(--border);border-radius:20px;padding:3px 10px;white-space:nowrap; }
 
-/* TABLE */
+/* ── TABLE ── */
 .table-wrap { background:var(--white);border-radius:14px;box-shadow:var(--card-sh);border:1px solid var(--border);overflow:hidden; }
 .table-scroll { overflow-x:auto; }
 .table-scroll::-webkit-scrollbar { height:4px; }
@@ -105,18 +105,21 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .data-table { width:100%;border-collapse:collapse; }
 .data-table thead tr { background:var(--black); }
 .data-table thead th { padding:10px 12px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);text-align:left;white-space:nowrap; }
-.data-table tbody tr { border-bottom:1px solid var(--border);transition:background .1s; }
+.data-table tbody tr { border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer; }
 .data-table tbody tr:last-child { border-bottom:none; }
-.data-table tbody tr:hover { background:var(--off); }
+.data-table tbody tr:hover { background:#fdf4f3; }
+.data-table tbody tr:hover td:first-child { color:var(--red); }
 .data-table tbody td { padding:9px 12px;font-size:12px;color:var(--black);vertical-align:middle; }
 .data-table tbody td.muted { color:var(--gray);font-size:11px; }
 .pct-cell { font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.02em; }
 .pct-cell.good { color:var(--green); }
 .pct-cell.warn { color:var(--amber); }
 .pct-cell.bad  { color:var(--red); }
-.table-empty { padding:36px;text-align:center;font-size:13px;color:var(--gray);font-style:italic; }
+.table-empty { padding:36px;text-align:center;font-size:13px;color:var(--gray);font-style:italic;cursor:default; }
+.click-hint { font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);display:flex;align-items:center;gap:4px;margin-left:auto; }
+.click-hint svg { width:11px;height:11px; }
 
-/* FLAGS */
+/* ── FLAGS ── */
 .flag-pill { display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;letter-spacing:.04em;border-radius:20px;padding:3px 7px;white-space:nowrap; }
 .flag-pill.low         { background:rgba(208,38,26,.08);color:var(--red-dk);border:1px solid rgba(208,38,26,.2); }
 .flag-pill.consecutive { background:rgba(245,158,11,.08);color:#92400e;border:1px solid rgba(245,158,11,.2); }
@@ -124,9 +127,18 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .need-badge { display:inline-block;background:rgba(208,38,26,.08);color:var(--red-dk);border:1px solid rgba(208,38,26,.15);border-radius:6px;padding:2px 6px;font-size:10px;font-weight:600; }
 .ok-badge   { display:inline-block;background:rgba(34,197,94,.08);color:#15803d;border:1px solid rgba(34,197,94,.15);border-radius:6px;padding:2px 6px;font-size:10px;font-weight:600; }
 
-/* ABSENTEES */
+/* ── PROGRESS BAR ── */
+.pct-bar-wrap { display:flex;align-items:center;gap:6px; }
+.pct-bar-bg   { flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden;min-width:40px; }
+.pct-bar-fill { height:100%;border-radius:4px;transition:width .4s; }
+.pct-bar-fill.good { background:var(--green); }
+.pct-bar-fill.warn { background:var(--amber); }
+.pct-bar-fill.bad  { background:var(--red); }
+.student-detail { font-size:10px;color:var(--gray);margin-top:2px;line-height:1.4; }
+
+/* ── ABSENTEES ── */
 .absent-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px; }
-.absent-card { background:var(--white);border-radius:12px;border:1.5px solid rgba(208,38,26,.2);padding:14px 16px;box-shadow:var(--card-sh);transition:transform .15s; }
+.absent-card { background:var(--white);border-radius:12px;border:1.5px solid rgba(208,38,26,.2);padding:14px 16px;box-shadow:var(--card-sh);transition:transform .15s;cursor:pointer; }
 .absent-card:hover { transform:translateY(-1px); }
 .absent-name { font-size:14px;font-weight:600;color:var(--black);margin-bottom:2px; }
 .absent-meta { font-size:11px;color:var(--gray);margin-bottom:3px; }
@@ -138,17 +150,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .empty-today-icon { font-size:36px;margin-bottom:12px; }
 .empty-today-title { font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--black);margin-bottom:6px; }
 
-/* PROGRESS BAR */
-.pct-bar-wrap { display:flex;align-items:center;gap:6px; }
-.pct-bar-bg   { flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden;min-width:40px; }
-.pct-bar-fill { height:100%;border-radius:4px;transition:width .4s; }
-.pct-bar-fill.good { background:var(--green); }
-.pct-bar-fill.warn { background:var(--amber); }
-.pct-bar-fill.bad  { background:var(--red); }
-
-.student-detail { font-size:10px;color:var(--gray);margin-top:2px;line-height:1.4; }
-
-/* BATCH SUMMARY */
+/* ── BATCH CARDS ── */
 .batch-summary-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px;animation:fadeUp .3s cubic-bezier(.22,1,.36,1) both; }
 .batch-card { background:var(--white);border-radius:12px;padding:16px;box-shadow:var(--card-sh);border:1px solid var(--border); }
 .batch-card-title { font-size:12px;font-weight:600;color:var(--black);margin-bottom:2px; }
@@ -158,66 +160,160 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .batch-stat-val { font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.02em; }
 
 /* ══════════════════════════════════════════
+   STUDENT DETAIL MODAL
+══════════════════════════════════════════ */
+.modal-backdrop {
+  position:fixed;inset:0;background:rgba(10,10,10,.55);
+  backdrop-filter:blur(4px);z-index:500;
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-backdrop.open { opacity:1;pointer-events:all; }
+.modal-box {
+  background:var(--white);border-radius:20px;width:100%;max-width:760px;
+  max-height:92vh;display:flex;flex-direction:column;
+  box-shadow:0 24px 64px rgba(0,0,0,.18);
+  transform:translateY(20px) scale(.97);
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+  overflow:hidden;
+}
+.modal-backdrop.open .modal-box { transform:none; }
+
+/* Modal header */
+.modal-header {
+  background:var(--black);padding:20px 24px 18px;
+  position:relative;flex-shrink:0;
+}
+.modal-header::after { content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--red) 0%,transparent 70%); }
+.modal-close {
+  position:absolute;top:16px;right:16px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.6);transition:all .2s;
+}
+.modal-close:hover { background:rgba(255,255,255,.2);color:var(--white); }
+.modal-close svg { width:14px;height:14px; }
+.modal-student-name { font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.03em;color:var(--white);line-height:1;margin-bottom:4px; }
+.modal-badges { display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px; }
+.modal-badge { display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:500;color:rgba(255,255,255,.55); }
+.modal-badge-dot { width:4px;height:4px;border-radius:50%;flex-shrink:0; }
+.modal-badge-dot.green  { background:var(--green); }
+.modal-badge-dot.red    { background:var(--red-lt); }
+.modal-badge-dot.amber  { background:var(--amber); }
+.modal-badge-dot.gray   { background:rgba(255,255,255,.3); }
+
+/* Modal overview stats */
+.modal-overview-stats {
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+.mos-card { background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 8px;text-align:center; }
+.mos-val { font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.02em;line-height:1;margin-bottom:3px;color:var(--white); }
+.mos-val.good { color:var(--green); }
+.mos-val.warn { color:var(--amber); }
+.mos-val.bad  { color:var(--red-lt); }
+.mos-label { font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3); }
+
+/* Modal body */
+.modal-body { overflow-y:auto;flex:1;padding:20px 24px 24px; }
+.modal-body::-webkit-scrollbar { width:4px; }
+.modal-body::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
+
+/* Modal section */
+.modal-section { margin-bottom:20px; }
+.modal-section-title {
+  font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;
+  color:var(--black);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.modal-section-title::after { content:'';flex:1;height:1px;background:var(--border); }
+
+/* Modal info grid */
+.modal-info-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px; }
+.modal-info-item-label { font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:2px; }
+.modal-info-item-val   { font-size:13px;font-weight:500;color:var(--black); }
+
+/* Modal health alerts */
+.modal-alert { border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:8px;margin-bottom:8px; }
+.modal-alert.low  { background:rgba(208,38,26,.06);border:1px solid rgba(208,38,26,.2); }
+.modal-alert.warn { background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2); }
+.modal-alert.ok   { background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2); }
+.modal-alert-icon { font-size:14px;flex-shrink:0;line-height:1.2; }
+.modal-alert-text { font-size:12px;line-height:1.5; }
+.modal-alert.low  .modal-alert-text { color:var(--red-dk); }
+.modal-alert.warn .modal-alert-text { color:#92400e; }
+.modal-alert.ok   .modal-alert-text { color:#15803d; }
+
+/* Modal subject cards */
+.modal-subjects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px; }
+.modal-subj-card {
+  border-radius:10px;padding:12px 14px;
+  border:1.5px solid var(--border);background:var(--off);
+  position:relative;overflow:hidden;
+}
+.modal-subj-card.low-card { border-color:rgba(208,38,26,.3);background:rgba(208,38,26,.02); }
+.modal-subj-name { font-size:12px;font-weight:600;color:var(--black);margin-bottom:2px;line-height:1.3; }
+.modal-subj-fac  { font-size:10px;color:var(--gray);margin-bottom:8px; }
+.modal-subj-stats { display:flex;gap:4px;margin-bottom:6px; }
+.modal-subj-stat { flex:1;background:var(--white);border-radius:6px;padding:5px;text-align:center; }
+.modal-subj-stat-num { font-family:'Bebas Neue',sans-serif;font-size:15px;line-height:1; }
+.modal-subj-stat-lbl { font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:1px; }
+.modal-subj-pct-row { display:flex;align-items:center;gap:6px; }
+.modal-subj-pct-val { font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0; }
+.modal-subj-pct-val.good { color:var(--green); }
+.modal-subj-pct-val.warn { color:var(--amber); }
+.modal-subj-pct-val.bad  { color:var(--red); }
+.modal-subj-bar { flex:1;height:3px;background:var(--border);border-radius:3px;overflow:hidden; }
+.modal-subj-bar-fill { height:100%;border-radius:3px; }
+.modal-subj-bar-fill.good { background:var(--green); }
+.modal-subj-bar-fill.warn { background:var(--amber); }
+.modal-subj-bar-fill.bad  { background:var(--red); }
+.modal-subj-need { font-size:9px;color:var(--red-dk);margin-top:4px; }
+.modal-note { font-size:10px;color:var(--gray);font-style:italic;margin-top:10px;padding:8px 10px;background:var(--off);border-radius:6px;border-left:3px solid var(--border); }
+
+/* Modal monthly timeline */
+.modal-months-wrap { display:flex;flex-wrap:wrap;gap:4px; }
+.modal-month-pill {
+  display:inline-flex;align-items:center;gap:4px;
+  background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);
+  border-radius:20px;padding:3px 9px;
+  font-size:10px;font-weight:600;color:#15803d;
+}
+.modal-month-pill svg { width:8px;height:8px; }
+
+/* ══════════════════════════════════════════
    ANALYTICS TAB STYLES
 ══════════════════════════════════════════ */
-
-/* Analytics section header */
 .analytics-section { margin-bottom:28px; }
 .analytics-section-title {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:22px;
-  letter-spacing:.04em;
-  color:var(--black);
-  margin-bottom:4px;
-  display:flex;
-  align-items:center;
-  gap:10px;
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;
+  color:var(--black);margin-bottom:4px;display:flex;align-items:center;gap:10px;
 }
-.analytics-section-title::after {
-  content:'';
-  flex:1;
-  height:1px;
-  background:var(--border);
-}
-.analytics-section-sub {
-  font-size:12px;
-  color:var(--gray);
-  margin-bottom:14px;
-}
+.analytics-section-title::after { content:'';flex:1;height:1px;background:var(--border); }
+.analytics-section-sub { font-size:12px;color:var(--gray);margin-bottom:14px; }
 
-/* Chart card */
-.chart-card {
-  background:var(--white);
-  border-radius:14px;
-  box-shadow:var(--card-sh);
-  border:1px solid var(--border);
-  padding:20px;
-}
+.chart-card { background:var(--white);border-radius:14px;box-shadow:var(--card-sh);border:1px solid var(--border);padding:20px; }
 .chart-card-title { font-size:13px;font-weight:600;color:var(--black);margin-bottom:3px; }
 .chart-card-sub   { font-size:11px;color:var(--gray);margin-bottom:14px; }
 
-/* Grid layouts */
-.analytics-grid-2 { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px; }
-.analytics-grid-3 { display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px; }
+.analytics-grid-2  { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px; }
+.analytics-grid-3  { display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px; }
 .analytics-grid-12 { display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px; }
-.analytics-grid-21 { display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-bottom:12px; }
-.analytics-full   { margin-bottom:12px; }
+.analytics-full    { margin-bottom:12px; }
 
-/* KPI strip for analytics */
 .analytics-kpi-row { display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px; }
 .akpi-card { background:var(--white);border-radius:12px;padding:16px 14px;box-shadow:var(--card-sh);border:1px solid var(--border); }
 .akpi-label { font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:6px; }
 .akpi-val { font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.02em;color:var(--black);line-height:1;margin-bottom:3px; }
-.akpi-val.good  { color:#15803d; }
-.akpi-val.warn  { color:#b45309; }
-.akpi-val.bad   { color:var(--red); }
+.akpi-val.good { color:#15803d; }
+.akpi-val.warn { color:#b45309; }
+.akpi-val.bad  { color:var(--red); }
 .akpi-sub { font-size:11px;color:var(--gray); }
 .akpi-trend { display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;border-radius:20px;padding:2px 7px;margin-top:4px; }
 .akpi-trend.up   { background:rgba(34,197,94,.1);color:#15803d; }
 .akpi-trend.down { background:rgba(208,38,26,.1);color:var(--red-dk); }
 .akpi-trend.flat { background:rgba(153,148,144,.1);color:var(--gray); }
 
-/* Day-of-week chart */
 .dow-row { display:flex;align-items:center;gap:8px;margin-bottom:7px; }
 .dow-label { font-size:11px;font-weight:500;color:var(--black);width:32px;flex-shrink:0; }
 .dow-bar-bg { flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden; }
@@ -225,24 +321,22 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .dow-pct { font-size:11px;color:var(--gray);width:36px;text-align:right;flex-shrink:0; }
 .dow-count { font-size:10px;color:var(--gray);width:52px;text-align:right;flex-shrink:0; }
 
-/* Heatmap */
-.heatmap-grid { display:grid;grid-template-columns:repeat(53,1fr);gap:2px;margin-top:8px; }
+.heatmap-grid { display:grid;grid-template-columns:repeat(53,1fr);gap:2px;margin-top:8px;overflow-x:auto; }
 .heatmap-cell { aspect-ratio:1;border-radius:2px;background:var(--border);cursor:default; }
 .heatmap-cell[data-level="0"] { background:var(--border); }
 .heatmap-cell[data-level="1"] { background:rgba(34,197,94,.25); }
 .heatmap-cell[data-level="2"] { background:rgba(34,197,94,.55); }
 .heatmap-cell[data-level="3"] { background:rgba(34,197,94,.85); }
-.heatmap-months { position:relative;height:16px;margin-bottom:4px; }
+.heatmap-months { position:relative;height:16px;margin-bottom:4px;overflow:hidden; }
+.heatmap-months span { position:absolute;font-size:9px;color:var(--gray);white-space:nowrap; }
 .heatmap-legend { display:flex;align-items:center;gap:4px;font-size:10px;color:var(--gray);margin-top:8px; }
 .heatmap-legend-cell { width:10px;height:10px;border-radius:2px;flex-shrink:0; }
 
-/* Batch selector for analytics */
 .batch-selector-wrap { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px; }
 .batch-selector-btn { font-size:11px;font-weight:600;letter-spacing:.05em;border-radius:20px;padding:5px 12px;border:1.5px solid var(--border);background:none;color:var(--gray);cursor:pointer;transition:all .15s;white-space:nowrap; }
 .batch-selector-btn.active { background:var(--black);border-color:var(--black);color:var(--white); }
 .batch-selector-btn:hover:not(.active) { border-color:var(--black);color:var(--black); }
 
-/* Student spotlight table inside analytics */
 .spotlight-table-wrap { background:var(--white);border-radius:12px;border:1px solid var(--border);box-shadow:var(--card-sh);overflow:hidden; }
 .spotlight-header { padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between; }
 .spotlight-title { font-size:13px;font-weight:600;color:var(--black); }
@@ -250,7 +344,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .spotlight-list { max-height:320px;overflow-y:auto; }
 .spotlight-list::-webkit-scrollbar { width:3px; }
 .spotlight-list::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
-.spotlight-row { display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--border);transition:background .1s; }
+.spotlight-row { display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer; }
 .spotlight-row:last-child { border-bottom:none; }
 .spotlight-row:hover { background:var(--off); }
 .spotlight-rank { font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gray);width:22px;flex-shrink:0;text-align:center; }
@@ -266,15 +360,11 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .spotlight-bar-fill.warn { background:var(--amber); }
 .spotlight-bar-fill.bad  { background:var(--red); }
 
-/* Donut chart */
-.donut-wrap { display:flex;align-items:center;gap:16px;padding:8px 0; }
-.donut-legend { flex:1; }
 .donut-legend-item { display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px; }
-.donut-legend-dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+.donut-legend-dot  { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
 .donut-legend-label { color:var(--gray);flex:1; }
-.donut-legend-val { font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--black); }
+.donut-legend-val  { font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--black); }
 
-/* Alert summary cards */
 .alert-summary-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px; }
 .alert-summary-card { border-radius:12px;padding:16px;border:1px solid; }
 .alert-summary-card.danger { background:rgba(208,38,26,.05);border-color:rgba(208,38,26,.2); }
@@ -290,20 +380,21 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .alert-summary-card.ok     .alert-summary-label { color:#15803d; }
 .alert-summary-sub { font-size:11px;color:var(--gray);margin-top:3px; }
 
-/* Batch comparison table (horizontal bars) */
 .batch-compare-row { display:flex;align-items:center;gap:10px;margin-bottom:10px; }
 .batch-compare-label { font-size:11px;font-weight:600;color:var(--black);width:140px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
-.batch-compare-bar-bg { flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden; }
+.batch-compare-bar-bg  { flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden; }
 .batch-compare-bar-fill { height:100%;border-radius:5px;transition:width .6s cubic-bezier(.22,1,.36,1); }
-.batch-compare-pct { font-family:'Bebas Neue',sans-serif;font-size:16px;width:44px;text-align:right;flex-shrink:0; }
+.batch-compare-pct   { font-family:'Bebas Neue',sans-serif;font-size:16px;width:44px;text-align:right;flex-shrink:0; }
 .batch-compare-count { font-size:10px;color:var(--gray);width:56px;text-align:right;flex-shrink:0; }
 
 @media (max-width:900px) {
   .stats-row { grid-template-columns:repeat(3,1fr); }
-  .analytics-grid-2,.analytics-grid-12,.analytics-grid-21 { grid-template-columns:1fr; }
+  .analytics-grid-2,.analytics-grid-12 { grid-template-columns:1fr; }
   .analytics-grid-3 { grid-template-columns:1fr 1fr; }
   .analytics-kpi-row { grid-template-columns:repeat(2,1fr); }
   .alert-summary-grid { grid-template-columns:1fr 1fr; }
+  .modal-overview-stats { grid-template-columns:repeat(2,1fr); }
+  .modal-subjects-grid  { grid-template-columns:1fr 1fr; }
 }
 @media (max-width:600px) {
   .stats-row { grid-template-columns:repeat(2,1fr); }
@@ -313,7 +404,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
   .tab-btn { font-size:10px;padding:7px 10px; }
   .page { padding:16px 12px 48px; }
   .topbar-gentime { display:none; }
-  .batch-compare-label { width:90px; }
+  .modal-overview-stats { grid-template-columns:repeat(2,1fr); }
+  .modal-subjects-grid  { grid-template-columns:1fr; }
+  .modal-box { border-radius:14px 14px 0 0;align-self:flex-end;max-height:96vh; }
+  .modal-backdrop { align-items:flex-end;padding:0; }
 }
 </style>
 </head>
@@ -373,13 +467,29 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
   <span class="loading-label" id="loadingLabel">Logging in…</span>
 </div>
 
+<!-- STUDENT DETAIL MODAL -->
+<div class="modal-backdrop" id="studentModal" onclick="handleModalBackdropClick(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header" id="modalHeader">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/>
+        </svg>
+      </button>
+      <div class="modal-student-name" id="modalName">—</div>
+      <div class="modal-badges" id="modalBadges"></div>
+      <div class="modal-overview-stats" id="modalOverviewStats"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
 <!-- DASHBOARD -->
 <div class="page" id="dashPage" style="display:none;">
 
   <div class="today-banner" id="todayBanner"></div>
   <div class="stats-row"    id="statsRow"></div>
 
-  <!-- Tabs -->
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchTab('students')">All Students</button>
     <button class="tab-btn"        onclick="switchTab('batches')">Batch Overview</button>
@@ -388,7 +498,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     <button class="tab-btn"        onclick="switchTab('analytics')">📊 Analytics</button>
   </div>
 
-  <!-- ══ STUDENTS TAB (unchanged) ══ -->
+  <!-- ══ STUDENTS TAB ══ -->
   <div class="tab-panel active" id="tab-students">
     <div class="filter-bar">
       <label>Branch</label>
@@ -408,7 +518,13 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
         <option value="ok">✅ On Track</option>
       </select>
       <input class="search-input" type="text" id="fSearch" placeholder="Search name, phone, college…" oninput="applyStudentFilters()" />
-      <span class="filter-count" id="studentFilterCount">—</span>
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
+        <span class="click-hint">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><line x1="7" y1="5" x2="7" y2="7.5"/><circle cx="7" cy="9.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          Click row for details
+        </span>
+        <span class="filter-count" id="studentFilterCount">—</span>
+      </div>
     </div>
     <div class="table-wrap">
       <div class="table-scroll">
@@ -423,12 +539,12 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     </div>
   </div>
 
-  <!-- ══ BATCH OVERVIEW TAB (unchanged) ══ -->
+  <!-- ══ BATCH OVERVIEW TAB ══ -->
   <div class="tab-panel" id="tab-batches">
     <div class="batch-summary-grid" id="batchGrid"></div>
   </div>
 
-  <!-- ══ ABSENTEES TAB (unchanged) ══ -->
+  <!-- ══ ABSENTEES TAB ══ -->
   <div class="tab-panel" id="tab-absentees">
     <div class="filter-bar">
       <label>Branch</label>
@@ -441,7 +557,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     <div id="absentContent"></div>
   </div>
 
-  <!-- ══ FACULTY TAB (unchanged) ══ -->
+  <!-- ══ FACULTY TAB ══ -->
   <div class="tab-panel" id="tab-faculty">
     <div class="filter-bar">
       <label>Branch</label>
@@ -464,21 +580,15 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     </div>
   </div>
 
-  <!-- ══ ANALYTICS TAB (NEW) ══ -->
+  <!-- ══ ANALYTICS TAB ══ -->
   <div class="tab-panel" id="tab-analytics">
 
-    <!-- ── SECTION 1: Overall Institution Analytics ── -->
+    <!-- SECTION 1: Overall -->
     <div class="analytics-section">
       <div class="analytics-section-title">Overall Analytics</div>
       <div class="analytics-section-sub">Institution-wide attendance health across all batches</div>
-
-      <!-- KPI strip -->
       <div class="analytics-kpi-row" id="analyticsKPI"></div>
-
-      <!-- Alert summary cards -->
       <div class="alert-summary-grid" id="alertSummaryCards"></div>
-
-      <!-- Row 1: Monthly trend + DoW -->
       <div class="analytics-grid-2">
         <div class="chart-card">
           <div class="chart-card-title">Monthly Attendance Trend</div>
@@ -489,12 +599,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
         </div>
         <div class="chart-card">
           <div class="chart-card-title">Day-of-Week Pattern</div>
-          <div class="chart-card-sub">Average attendance rate per weekday across all students</div>
+          <div class="chart-card-sub">Avg attendance rate per weekday across all students</div>
           <div id="overallDowChart" style="padding-top:2px;"></div>
         </div>
       </div>
-
-      <!-- Row 2: Batch comparison bar + Attendance distribution donut -->
       <div class="analytics-grid-12">
         <div class="chart-card">
           <div class="chart-card-title">Batch-wise Attendance Comparison</div>
@@ -510,26 +618,24 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
           <div id="donutLegend" style="margin-top:10px;"></div>
         </div>
       </div>
-
-      <!-- Row 3: Activity heatmap (aggregate — which days had the most attendees) -->
       <div class="analytics-full">
         <div class="chart-card">
           <div class="chart-card-title">Student Activity Heatmap</div>
-          <div class="chart-card-sub">Relative attendance volume per day across all students (darker = more students attended)</div>
+          <div class="chart-card-sub">Relative attendance volume per day (darker = more students attended)</div>
           <div class="heatmap-months" id="overallHeatmapMonths"></div>
-          <div class="heatmap-grid"   id="overallHeatmapGrid"></div>
+          <div style="overflow-x:auto;">
+            <div class="heatmap-grid" id="overallHeatmapGrid" style="min-width:520px;"></div>
+          </div>
           <div class="heatmap-legend">
-            <span style="font-size:10px;color:var(--gray);margin-right:4px;">Fewer students</span>
+            <span style="font-size:10px;color:var(--gray);margin-right:4px;">Fewer</span>
             <div class="heatmap-legend-cell" style="background:var(--border);"></div>
             <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.25);"></div>
             <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.55);"></div>
             <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.85);"></div>
-            <span style="font-size:10px;color:var(--gray);margin-left:4px;">More students</span>
+            <span style="font-size:10px;color:var(--gray);margin-left:4px;">More</span>
           </div>
         </div>
       </div>
-
-      <!-- Row 4: Top 10 at-risk + Top 10 performers -->
       <div class="analytics-grid-2">
         <div class="spotlight-table-wrap">
           <div class="spotlight-header">
@@ -548,17 +654,12 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
       </div>
     </div>
 
-    <!-- ── SECTION 2: Batch-wise Deep Dive ── -->
+    <!-- SECTION 2: Batch Deep Dive -->
     <div class="analytics-section">
       <div class="analytics-section-title">Batch-wise Deep Dive</div>
-      <div class="analytics-section-sub">Select a batch to see its detailed analytics</div>
-
+      <div class="analytics-section-sub">Select a batch to see detailed analytics</div>
       <div class="batch-selector-wrap" id="batchSelectorWrap"></div>
-
-      <!-- Batch KPIs -->
       <div class="analytics-kpi-row" id="batchKPI"></div>
-
-      <!-- Batch charts: trend + subject comparison -->
       <div class="analytics-grid-2">
         <div class="chart-card">
           <div class="chart-card-title">Monthly Attendance Trend</div>
@@ -573,12 +674,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
           <div id="batchDowChart" style="padding-top:2px;"></div>
         </div>
       </div>
-
-      <!-- Batch subject breakdown + student spotlight -->
       <div class="analytics-grid-12">
         <div class="chart-card">
           <div class="chart-card-title">Subject-wise Attendance</div>
-          <div class="chart-card-sub" id="batchSubjSub">Average attendance % per subject for selected batch</div>
+          <div class="chart-card-sub" id="batchSubjSub">Avg attendance per subject for selected batch</div>
           <div style="position:relative;" id="batchSubjChartWrap">
             <canvas id="batchSubjChart"></canvas>
           </div>
@@ -592,8 +691,6 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
           <div id="batchDonutLegend" style="margin-top:10px;"></div>
         </div>
       </div>
-
-      <!-- Batch student spotlight: bottom 10 -->
       <div class="analytics-grid-2">
         <div class="spotlight-table-wrap">
           <div class="spotlight-header">
@@ -612,11 +709,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
       </div>
     </div>
 
-    <!-- ── SECTION 3: Faculty Analytics ── -->
+    <!-- SECTION 3: Faculty -->
     <div class="analytics-section">
       <div class="analytics-section-title">Faculty Analytics</div>
       <div class="analytics-section-sub">Engagement levels per faculty member</div>
-
       <div class="analytics-grid-2">
         <div class="chart-card">
           <div class="chart-card-title">Faculty Engagement Ranking</div>
@@ -626,7 +722,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
           </div>
         </div>
         <div class="chart-card">
-          <div class="chart-card-title">Top & Bottom Faculty by Attendance</div>
+          <div class="chart-card-title">Top & Bottom Faculty</div>
           <div class="chart-card-sub">Classes conducted vs actual attendance rate</div>
           <div id="facultySpotlight"></div>
         </div>
@@ -639,18 +735,19 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
+/* ═══════════════════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════════════════ */
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 
-var _dashData        = null;
-var _isBusy          = false;
-var _selectedBatch   = null;
+var _dashData       = null;
+var _isBusy         = false;
+var _selectedBatch  = null;
+var _charts         = {};
 
-// Chart instances — kept so we can destroy before redraw
-var _charts = {};
-
-/* ────────────────────────────────────────
+/* ═══════════════════════════════════════════════════════
    LOGIN
-──────────────────────────────────────── */
+═══════════════════════════════════════════════════════ */
 (function init() {
   var saved = sessionStorage.getItem('teacher_token');
   if (saved) {
@@ -663,43 +760,37 @@ async function doLogin() {
   if (_isBusy) return;
   var pw = document.getElementById('pwInput').value.trim();
   if (!pw) return;
-
   var hashHex;
   try {
     var msgBuffer  = new TextEncoder().encode(pw);
     var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    var hashArray  = Array.from(new Uint8Array(hashBuffer));
-    hashHex = hashArray.map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
-  } catch (hashErr) {
+    hashHex = Array.from(new Uint8Array(hashBuffer))
+      .map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  } catch(e) {
     showLoginError('Your browser does not support secure login. Please use a modern browser.');
     return;
   }
-
   _isBusy = true;
   document.getElementById('loginBtn').disabled = true;
   document.getElementById('loginOverlay').style.display = 'none';
-  showLoading('Logging in\u2026');
-
-  jsonp(APPS_SCRIPT_URL + '?action=teacherLogin&password=' + encodeURIComponent(hashHex),
-    function(data) {
-      _isBusy = false;
-      hideLoading();
-      document.getElementById('loginBtn').disabled = false;
-      if (!data || !data.success) {
-        showLoginError((data && data.error) || 'Login failed. Please try again.');
-        document.getElementById('loginOverlay').style.display = 'flex';
-        return;
-      }
-      sessionStorage.setItem('teacher_token', data.token);
-      fetchDashboard(data.token);
+  showLoading('Logging in…');
+  jsonp(APPS_SCRIPT_URL + '?action=teacherLogin&password=' + encodeURIComponent(hashHex), function(data) {
+    _isBusy = false;
+    hideLoading();
+    document.getElementById('loginBtn').disabled = false;
+    if (!data || !data.success) {
+      showLoginError((data && data.error) || 'Login failed. Please try again.');
+      document.getElementById('loginOverlay').style.display = 'flex';
+      return;
     }
-  );
+    sessionStorage.setItem('teacher_token', data.token);
+    fetchDashboard(data.token);
+  });
 }
 
 function doLogout() {
   sessionStorage.removeItem('teacher_token');
-  _dashData = null;
-  _selectedBatch = null;
+  _dashData = null; _selectedBatch = null;
   document.getElementById('topbar').style.display   = 'none';
   document.getElementById('dashPage').style.display = 'none';
   document.getElementById('pwInput').value = '';
@@ -708,25 +799,19 @@ function doLogout() {
 }
 
 function fetchDashboard(token) {
-  showLoading('Loading dashboard\u2026');
-  jsonp(APPS_SCRIPT_URL + '?action=getTeacherDashboard&token=' + encodeURIComponent(token),
-    function(data) {
-      hideLoading();
-      if (!data) {
-        showLoginError('Connection failed. Please try again.');
-        document.getElementById('loginOverlay').style.display = 'flex';
-        return;
-      }
-      if (!data.success) {
-        sessionStorage.removeItem('teacher_token');
-        showLoginError(data.error || 'Session expired. Please log in again.');
-        document.getElementById('loginOverlay').style.display = 'flex';
-        return;
-      }
-      _dashData = data;
-      renderDashboard(data);
+  showLoading('Loading dashboard…');
+  jsonp(APPS_SCRIPT_URL + '?action=getTeacherDashboard&token=' + encodeURIComponent(token), function(data) {
+    hideLoading();
+    if (!data) { showLoginError('Connection failed. Please try again.'); document.getElementById('loginOverlay').style.display='flex'; return; }
+    if (!data.success) {
+      sessionStorage.removeItem('teacher_token');
+      showLoginError(data.error || 'Session expired. Please log in again.');
+      document.getElementById('loginOverlay').style.display = 'flex';
+      return;
     }
-  );
+    _dashData = data;
+    renderDashboard(data);
+  });
 }
 
 function showLoginError(msg) {
@@ -735,19 +820,15 @@ function showLoginError(msg) {
   el.classList.add('visible');
   document.getElementById('loginOverlay').style.display = 'flex';
 }
-function showLoading(msg) {
-  document.getElementById('loadingLabel').textContent = msg || 'Loading\u2026';
-  document.getElementById('fullLoading').style.display = 'flex';
-}
-function hideLoading() { document.getElementById('fullLoading').style.display = 'none'; }
+function showLoading(msg) { document.getElementById('loadingLabel').textContent = msg||'Loading…'; document.getElementById('fullLoading').style.display='flex'; }
+function hideLoading()    { document.getElementById('fullLoading').style.display='none'; }
 
-/* ────────────────────────────────────────
-   MAIN RENDER (existing tabs unchanged)
-──────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════
+   MAIN RENDER
+═══════════════════════════════════════════════════════ */
 function renderDashboard(data) {
   document.getElementById('topbar').style.display  = 'flex';
   document.getElementById('genTime').textContent   = 'Updated: ' + data.generatedAt;
-
   renderTodayBanner(data.classesToday || []);
   renderStats(data.stats);
   populateFilters(data.students, data.absentees, data.facultyStats);
@@ -755,10 +836,7 @@ function renderDashboard(data) {
   applyStudentFilters();
   applyAbsentFilters();
   applyFacFilters();
-
-  // Pre-compute and render analytics (runs once on load; tab is hidden until clicked)
   renderAnalyticsTab(data);
-
   document.getElementById('dashPage').style.display = 'block';
 }
 
@@ -772,7 +850,7 @@ function renderTodayBanner(classes) {
   }
   var pills = classes.map(function(c) {
     return '<span class="today-pill"><span class="today-pill-dot"></span>' +
-      esc(c.branch) + ' \u00b7 ' + esc(c.batch) + ' \u2014 ' + esc(c.subject) + ' (' + esc(c.faculty) + ')</span>';
+      esc(c.branch) + ' · ' + esc(c.batch) + ' — ' + esc(c.subject) + ' (' + esc(c.faculty) + ')</span>';
   }).join('');
   el.innerHTML = '<span class="today-banner-label">Today\'s Classes</span>' + pills;
 }
@@ -780,32 +858,29 @@ function renderTodayBanner(classes) {
 /* ── Stats ── */
 function renderStats(st) {
   document.getElementById('statsRow').innerHTML =
-    statCard(st.totalStudents,      'Total Students',    '') +
-    statCard(st.todayPresent,       'Present Today',     'success') +
-    statCard(st.todayAbsent,        'Absent Today',      st.todayAbsent > 0 ? 'danger' : '') +
-    statCard(st.lowAttendance,      'Low Attendance',    st.lowAttendance > 0 ? 'warn' : '') +
-    statCard(st.consecutiveAbsent,  'Consecutive Flag',  st.consecutiveAbsent > 0 ? 'warn' : '') +
-    statCard(st.classesTodayCount,  "Today's Classes",   '');
+    statCard(st.totalStudents,     'Total Students',   '') +
+    statCard(st.todayPresent,      'Present Today',    'success') +
+    statCard(st.todayAbsent,       'Absent Today',     st.todayAbsent > 0 ? 'danger' : '') +
+    statCard(st.lowAttendance,     'Low Attendance',   st.lowAttendance > 0 ? 'warn' : '') +
+    statCard(st.consecutiveAbsent, 'Consec. Flag',     st.consecutiveAbsent > 0 ? 'warn' : '') +
+    statCard(st.classesTodayCount, "Today's Classes",  '');
 }
 function statCard(val, label, cls) {
-  return '<div class="stat-card"><div class="stat-val' + (cls?' '+cls:'') + '">' + val +
-         '</div><div class="stat-label">' + label + '</div></div>';
+  return '<div class="stat-card"><div class="stat-val'+(cls?' '+cls:'')+'">' + val +
+    '</div><div class="stat-label">' + label + '</div></div>';
 }
 
-/* ── Batch Overview (unchanged) ── */
+/* ── Batch Overview ── */
 function renderBatchOverview(students) {
   var batches = {};
   students.forEach(function(s) {
-    var k = s.branch + ' \u00b7 ' + s.batch + (s.center ? ' \u00b7 ' + s.center : '');
+    var k = s.branch + ' · ' + s.batch + (s.center ? ' · ' + s.center : '');
     if (!batches[k]) batches[k] = { branch:s.branch, batch:s.batch, center:s.center, students:[] };
     batches[k].students.push(s);
   });
   var grid = document.getElementById('batchGrid');
   var keys = Object.keys(batches).sort();
-  if (!keys.length) {
-    grid.innerHTML = '<div style="color:var(--gray);font-size:13px;padding:16px;">No student data.</div>';
-    return;
-  }
+  if (!keys.length) { grid.innerHTML = '<div style="color:var(--gray);font-size:13px;padding:16px;">No student data.</div>'; return; }
   grid.innerHTML = keys.map(function(k) {
     var b      = batches[k];
     var total  = b.students.length;
@@ -817,19 +892,19 @@ function renderBatchOverview(students) {
     var ttlCls   = b.students.reduce(function(sum,s){ return sum+s.total;    },0);
     var barW     = Math.min(parseFloat(avgPct),100);
     return '<div class="batch-card">' +
-      '<div class="batch-card-title">' + esc(b.branch) + ' \u2014 ' + esc(b.batch) + '</div>' +
+      '<div class="batch-card-title">' + esc(b.branch) + ' — ' + esc(b.batch) + '</div>' +
       '<div class="batch-card-sub">'   + esc(b.center||'') + '</div>' +
       '<div class="batch-stat-row"><span class="batch-stat-label">Students</span><span class="batch-stat-val">'+total+'</span></div>' +
       '<div class="batch-stat-row"><span class="batch-stat-label">Avg Attendance</span><span class="batch-stat-val pct-cell '+pc+'">'+avgPct+'%</span></div>' +
       '<div class="pct-bar-wrap" style="margin-bottom:8px;"><div class="pct-bar-bg"><div class="pct-bar-fill '+pc+'" style="width:'+barW+'%"></div></div></div>' +
-      '<div class="batch-stat-row"><span class="batch-stat-label">Total slots attended</span><span class="batch-stat-val" style="font-size:13px;font-family:\'Outfit\',sans-serif;font-weight:600;">'+attended+' / '+ttlCls+'</span></div>' +
+      '<div class="batch-stat-row"><span class="batch-stat-label">Slots attended</span><span class="batch-stat-val" style="font-size:13px;font-family:\'Outfit\',sans-serif;font-weight:600;">'+attended+' / '+ttlCls+'</span></div>' +
       (low>0    ? '<div style="margin-top:6px;"><span class="flag-pill low">⚠️ '+low+' low</span></div>' : '') +
       (consec>0 ? '<div style="margin-top:4px;"><span class="flag-pill consecutive">🔴 '+consec+' consec.</span></div>' : '') +
     '</div>';
   }).join('');
 }
 
-/* ── Filter Population (unchanged) ── */
+/* ── Filter Population ── */
 function populateFilters(students, absentees, faculty) {
   var branches={},batches={},centers={},modes={};
   students.forEach(function(s) {
@@ -851,7 +926,7 @@ function populateFilters(students, absentees, faculty) {
   fill('facBranch',Object.keys(facBr).sort()); fill('facBatch',Object.keys(facBt).sort());
 }
 
-/* ── Students Tab (unchanged) ── */
+/* ── Students Tab ── */
 function applyStudentFilters() {
   if(!_dashData) return;
   var branch=document.getElementById('fBranch').value, batch=document.getElementById('fBatch').value;
@@ -879,15 +954,15 @@ function applyStudentFilters() {
     if(s.flag==='consecutive')flagHtml='<span class="flag-pill consecutive">🔴 '+s.consecutive+'d</span>';
     if(s.flag==='both')flagHtml='<span class="flag-pill both">⚠️+🔴 '+s.consecutive+'</span>';
     if(s.flag==='')flagHtml='<span class="ok-badge">✅</span>';
-    var needHtml=s.needToAttend>0?'<span class="need-badge">+'+s.needToAttend+'</span>':'<span class="ok-badge">\u2014</span>';
+    var needHtml=s.needToAttend>0?'<span class="need-badge">+'+s.needToAttend+'</span>':'<span class="ok-badge">—</span>';
     var lastSeen=s.lastDate?s.lastDate.split('-').reverse().join('-'):'<span style="color:var(--gray);font-style:italic;">Never</span>';
     var barW=Math.min(s.pct,100);
     var pctDisplay='<div class="pct-bar-wrap"><span class="pct-cell '+pc+'">'+s.pct+'%</span><div class="pct-bar-bg"><div class="pct-bar-fill '+pc+'" style="width:'+barW+'%"></div></div></div>';
     var batchCell=esc(s.batch)+(s.batchCode?'<div class="student-detail">'+esc(s.batchCode)+'</div>':'');
-    return '<tr>'+
+    return '<tr onclick="openStudentModal(\''+esc(s.phone.replace(/'/g,"\\'"))+'\')">'+
       '<td><strong>'+esc(s.name)+'</strong>'+(s.college?'<div class="student-detail">'+esc(s.college)+'</div>':'')+(s.nativeCity?'<div class="student-detail">'+esc(s.nativeCity)+'</div>':'')+'</td>'+
       '<td class="muted">'+esc(s.branch)+'</td><td class="muted">'+batchCell+'</td>'+
-      '<td class="muted">'+esc(s.center||'\u2014')+'</td><td class="muted">'+esc(s.mode||'\u2014')+'</td>'+
+      '<td class="muted">'+esc(s.center||'—')+'</td><td class="muted">'+esc(s.mode||'—')+'</td>'+
       '<td>'+s.total+'</td><td>'+s.attended+'</td><td>'+pctDisplay+'</td>'+
       '<td>'+needHtml+'</td>'+
       '<td class="muted" style="text-align:center;">'+(s.consecutive>0?'<span style="color:'+(s.consecutive>=3?'var(--red)':'var(--amber)')+';font-weight:600;">'+s.consecutive+'</span>':'<span style="color:var(--green);">0</span>')+'</td>'+
@@ -896,7 +971,7 @@ function applyStudentFilters() {
   }).join('');
 }
 
-/* ── Absentees Tab (unchanged) ── */
+/* ── Absentees Tab ── */
 function applyAbsentFilters() {
   if(!_dashData) return;
   var branch=document.getElementById('abBranch').value, batch=document.getElementById('abBatch').value;
@@ -922,18 +997,24 @@ function applyAbsentFilters() {
   content.innerHTML='<div class="absent-grid">'+
     Object.keys(byStudent).sort().map(function(k){
       var st=byStudent[k], stu=studentFlagMap[k]||null;
-      var tags=st.subjects.map(function(su){ return '<span class="absent-subject">\u274c '+esc(su.subject)+' <span style="opacity:.6;font-size:9px;">('+esc(su.faculty)+')</span></span>'; }).join('');
+      var tags=st.subjects.map(function(su){ return '<span class="absent-subject">✗ '+esc(su.subject)+' <span style="opacity:.6;font-size:9px;">('+esc(su.faculty)+')</span></span>'; }).join('');
       var flagHtml='';
       if(stu){
         if(stu.flag==='low'||stu.flag==='both')flagHtml+='<span class="flag-pill low" style="font-size:9px;">⚠️ '+stu.pct+'%</span>';
         if(stu.flag==='consecutive'||stu.flag==='both')flagHtml+='<span class="flag-pill consecutive" style="font-size:9px;">🔴 '+stu.consecutive+' consec.</span>';
         if(stu.needToAttend>0)flagHtml+='<span class="need-badge" style="font-size:9px;">+'+stu.needToAttend+' to recover</span>';
       }
-      return '<div class="absent-card"><div class="absent-name">'+esc(st.name)+'</div><div class="absent-meta">'+esc(st.branch)+' \u00b7 '+esc(st.batch)+'</div><div class="absent-phone">'+esc(st.phone)+'</div><div class="absent-tags">'+tags+'</div>'+(flagHtml?'<div class="absent-flag-row">'+flagHtml+'</div>':'')+'</div>';
+      return '<div class="absent-card" onclick="openStudentModal(\''+esc(st.phone.replace(/'/g,"\\'"))+'\')">' +
+        '<div class="absent-name">'+esc(st.name)+'</div>' +
+        '<div class="absent-meta">'+esc(st.branch)+' · '+esc(st.batch)+'</div>' +
+        '<div class="absent-phone">'+esc(st.phone)+'</div>' +
+        '<div class="absent-tags">'+tags+'</div>' +
+        (flagHtml?'<div class="absent-flag-row">'+flagHtml+'</div>':'') +
+      '</div>';
     }).join('')+'</div>';
 }
 
-/* ── Faculty Tab (unchanged) ── */
+/* ── Faculty Tab ── */
 function applyFacFilters() {
   if(!_dashData) return;
   var branch=document.getElementById('facBranch').value, batch=document.getElementById('facBatch').value;
@@ -949,7 +1030,7 @@ function applyFacFilters() {
   if(_dashData.students) _dashData.students.forEach(function(s){ var bk=s.branch+'||'+s.batch; batchStudentCount[bk]=(batchStudentCount[bk]||0)+1; });
   tbody.innerHTML=filtered.map(function(f){
     var pc=pctClass(f.avgPct), barW=Math.min(f.avgPct,100);
-    var stuCount=batchStudentCount[f.branch+'||'+f.batch]||'\u2014';
+    var stuCount=batchStudentCount[f.branch+'||'+f.batch]||'—';
     return '<tr>'+
       '<td><strong>'+esc(f.faculty)+'</strong></td><td>'+esc(f.subject)+'</td>'+
       '<td class="muted">'+esc(f.branch)+'</td><td class="muted">'+esc(f.batch)+'</td>'+
@@ -960,135 +1041,239 @@ function applyFacFilters() {
   }).join('');
 }
 
-/* ════════════════════════════════════════
-   ANALYTICS TAB — MAIN ENTRY
-════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   STUDENT DETAIL MODAL
+═══════════════════════════════════════════════════════ */
+function openStudentModal(phone) {
+  if (!_dashData || !_dashData.studentDetails) return;
+  var detail  = _dashData.studentDetails[phone];
+  var student = null;
+  for (var i=0; i<_dashData.students.length; i++) {
+    if (_dashData.students[i].phone === phone) { student = _dashData.students[i]; break; }
+  }
+  if (!student) return;
+
+  // Header
+  document.getElementById('modalName').textContent = student.name;
+
+  // Badges
+  var pc = pctClass(student.pct);
+  var dotColor = pc==='good'?'green':pc==='warn'?'amber':'red';
+  var badges = [
+    student.branch && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.branch)+'</div>',
+    student.batch  && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.batch)+'</div>',
+    student.center && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.center)+'</div>',
+    student.mode   && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.mode)+'</div>',
+    student.examTarget && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.examTarget)+'</div>',
+    student.phone  && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.phone)+'</div>'
+  ].filter(Boolean).join('');
+  document.getElementById('modalBadges').innerHTML = badges;
+
+  // Overview stats
+  document.getElementById('modalOverviewStats').innerHTML =
+    mosCard(student.total,    'Total Classes', '') +
+    mosCard(student.attended, 'Attended',      '') +
+    mosCard(student.absent,   'Absent',        student.absent > 0 ? 'bad' : '') +
+    mosCard(student.pct+'%',  'Overall %',     pc);
+
+  // Body
+  var bodyHtml = '';
+
+  // Health alerts
+  bodyHtml += '<div class="modal-section"><div class="modal-section-title">Attendance Health</div>';
+  if (student.pct < 65) {
+    bodyHtml += makeModalAlert('low', '⚠️',
+      'Overall attendance <strong>' + student.pct + '%</strong> — below the 65% threshold.' +
+      (student.needToAttend > 0 ? ' Needs <strong>' + student.needToAttend + ' more consecutive class' + (student.needToAttend===1?'':'es') + '</strong> to recover.' : ''));
+  }
+  if (student.consecutive >= 3) {
+    bodyHtml += makeModalAlert('warn', '🔴',
+      'Absent for <strong>' + student.consecutive + ' consecutive class' + (student.consecutive===1?'':'es') + '</strong>. Immediate follow-up recommended.');
+  }
+  if (student.pct >= 65 && student.consecutive < 3) {
+    bodyHtml += makeModalAlert('ok', '✅', 'Attendance is healthy at <strong>' + student.pct + '%</strong> and no consecutive absence flag.');
+  }
+  bodyHtml += '</div>';
+
+  // Student info
+  var infoItems = [
+    { label:'College',     val:student.college    },
+    { label:'City',        val:student.nativeCity },
+    { label:'Batch Code',  val:student.batchCode  },
+    { label:'Date of Joining', val:student.doj ? student.doj.split('-').reverse().join('-') : null },
+    { label:'Last Attended', val:student.lastDate ? student.lastDate.split('-').reverse().join('-') : 'Never' }
+  ].filter(function(it){ return it.val && it.val !== '—'; });
+
+  if (infoItems.length) {
+    bodyHtml += '<div class="modal-section"><div class="modal-section-title">Student Info</div>';
+    bodyHtml += '<div class="modal-info-grid">' +
+      infoItems.map(function(it){
+        return '<div><div class="modal-info-item-label">'+esc(it.label)+'</div>' +
+               '<div class="modal-info-item-val">'+esc(it.val)+'</div></div>';
+      }).join('') + '</div></div>';
+  }
+
+  // Subject breakdown (from studentDetails, cache-derived)
+  if (detail && detail.subjects && detail.subjects.length) {
+    bodyHtml += '<div class="modal-section"><div class="modal-section-title">Subject Breakdown</div>';
+    bodyHtml += '<div class="modal-subjects-grid">' +
+      detail.subjects.map(function(s) {
+        var spc = pctClass(s.pct);
+        var barW = Math.min(s.pct, 100);
+        return '<div class="modal-subj-card' + (s.low ? ' low-card' : '') + '">' +
+          '<div class="modal-subj-name">' + esc(s.subject) + '</div>' +
+          '<div class="modal-subj-fac">'  + esc(s.faculty || '—') + '</div>' +
+          '<div class="modal-subj-stats">' +
+            '<div class="modal-subj-stat"><div class="modal-subj-stat-num">' + s.total    + '</div><div class="modal-subj-stat-lbl">Total</div></div>' +
+            '<div class="modal-subj-stat"><div class="modal-subj-stat-num">' + s.attended + '</div><div class="modal-subj-stat-lbl">Present</div></div>' +
+            '<div class="modal-subj-stat"><div class="modal-subj-stat-num">' + s.absent   + '</div><div class="modal-subj-stat-lbl">Absent</div></div>' +
+          '</div>' +
+          '<div class="modal-subj-pct-row">' +
+            '<span class="modal-subj-pct-val ' + spc + '">' + s.pct + '%</span>' +
+            '<div class="modal-subj-bar"><div class="modal-subj-bar-fill ' + spc + '" style="width:' + barW + '%"></div></div>' +
+          '</div>' +
+          (s.needToAttend > 0 ? '<div class="modal-subj-need">Need ' + s.needToAttend + ' more to reach threshold</div>' : '') +
+        '</div>';
+      }).join('') +
+    '</div>';
+    bodyHtml += '<div class="modal-note">Subject figures are cache-derived estimates. For exact per-subject counts, ask the student to check their portal.</div>';
+    bodyHtml += '</div>';
+  } else {
+    bodyHtml += '<div class="modal-section"><div class="modal-section-title">Subject Breakdown</div>';
+    bodyHtml += '<div style="font-size:12px;color:var(--gray);font-style:italic;">No subject data available for this student yet.</div></div>';
+  }
+
+  // Active months
+  if (detail && detail.attendedMonths && detail.attendedMonths.length) {
+    var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    bodyHtml += '<div class="modal-section"><div class="modal-section-title">Active Months</div>';
+    bodyHtml += '<div class="modal-months-wrap">' +
+      detail.attendedMonths.map(function(mk) {
+        var parts = mk.split('-');
+        var label = mNames[parseInt(parts[1],10)-1] + ' ' + parts[0].slice(2);
+        return '<div class="modal-month-pill">' +
+          '<svg viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="#22c55e"/></svg>' +
+          label + '</div>';
+      }).join('') +
+    '</div>';
+    bodyHtml += '<div class="modal-note" style="margin-top:8px;">Months where this student\'s batch had classes and the student was marked present at least once.</div>';
+    bodyHtml += '</div>';
+  }
+
+  document.getElementById('modalBody').innerHTML = bodyHtml;
+
+  // Open
+  document.getElementById('studentModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('studentModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleModalBackdropClick(e) {
+  if (e.target === document.getElementById('studentModal')) closeModal();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+function mosCard(val, label, cls) {
+  return '<div class="mos-card"><div class="mos-val' + (cls?' '+cls:'') + '">' + esc(String(val)) +
+    '</div><div class="mos-label">' + esc(label) + '</div></div>';
+}
+function makeModalAlert(type, icon, html) {
+  return '<div class="modal-alert ' + type + '"><div class="modal-alert-icon">' + icon + '</div>' +
+    '<div class="modal-alert-text">' + html + '</div></div>';
+}
+
+/* ═══════════════════════════════════════════════════════
+   ANALYTICS TAB
+═══════════════════════════════════════════════════════ */
 function renderAnalyticsTab(data) {
   var students     = data.students     || [];
   var facultyStats = data.facultyStats || [];
-
+  var details      = data.studentDetails || {};
   if (!students.length) return;
-
-  /* ── Pre-compute per-student "date-based" analytics from
-        what the teacher dashboard API provides.
-
-     The teacher API does NOT include individual dateLogs per student
-     (that's student-portal-only). However, it gives us:
-       - s.attended, s.total, s.pct — overall counts
-       - s.lastDate — last attendance ISO date
-       - s.flag, s.consecutive — health flags
-       - s.branch, s.batch, s.doj
-
-     For monthly trend and DoW we can build a PROXY from the
-     facultyStats (which are by faculty+subject+branch+batch) and
-     the per-student attended/total counts.
-
-     For the heatmap we build it from lastDate signals plus
-     we reconstruct a coarse "was active in month M" signal.
-
-     For exact monthly/DoW charts we use the facultyStats
-     to infer which months had classes, weighted by avg attendance.
-  ── */
-
-  renderOverallAnalytics(students, facultyStats);
-  renderBatchSelectorAndInit(students, facultyStats);
+  renderOverallAnalytics(students, facultyStats, details);
+  renderBatchSelectorAndInit(students, facultyStats, details);
   renderFacultyAnalytics(facultyStats, students);
 }
 
-/* ════════════════════════════════════════
-   SECTION 1: OVERALL ANALYTICS
-════════════════════════════════════════ */
-function renderOverallAnalytics(students, facultyStats) {
-  var total      = students.length;
-  var low        = students.filter(function(s){ return s.flag==='low'||s.flag==='both'; }).length;
-  var consec     = students.filter(function(s){ return s.flag==='consecutive'||s.flag==='both'; }).length;
-  var onTrack    = students.filter(function(s){ return s.flag===''; }).length;
-  var sumPct     = students.reduce(function(a,s){ return a+s.pct; },0);
-  var avgPct     = total > 0 ? parseFloat((sumPct/total).toFixed(1)) : 0;
-  var sumAtt     = students.reduce(function(a,s){ return a+s.attended; },0);
-  var sumTotal   = students.reduce(function(a,s){ return a+s.total;    },0);
-  var overallPct = sumTotal > 0 ? parseFloat((sumAtt/sumTotal*100).toFixed(1)) : 0;
+/* ── Overall Analytics ── */
+function renderOverallAnalytics(students, facultyStats, details) {
+  var total    = students.length;
+  var low      = students.filter(function(s){ return s.flag==='low'||s.flag==='both'; }).length;
+  var consec   = students.filter(function(s){ return s.flag==='consecutive'||s.flag==='both'; }).length;
+  var onTrack  = students.filter(function(s){ return s.flag===''; }).length;
+  var sumPct   = students.reduce(function(a,s){ return a+s.pct; },0);
+  var avgPct   = total > 0 ? parseFloat((sumPct/total).toFixed(1)) : 0;
+  var sumAtt   = students.reduce(function(a,s){ return a+s.attended; },0);
+  var sumTot   = students.reduce(function(a,s){ return a+s.total;    },0);
+  var ovPct    = sumTot > 0 ? parseFloat((sumAtt/sumTot*100).toFixed(1)) : 0;
 
-  // Compute recent trend: students with lastDate in last 14 days
-  var today      = new Date();
-  var recent14   = new Date(today.getTime() - 14*86400000);
-  var recentActive = students.filter(function(s){ return s.lastDate && new Date(s.lastDate+'T12:00:00') >= recent14; }).length;
-  var trendDir   = recentActive > total*0.7 ? 'up' : recentActive < total*0.4 ? 'down' : 'flat';
+  // Recent trend: students active in last 14 days
+  var today   = new Date();
+  var cut14   = new Date(today.getTime() - 14*86400000);
+  var recentActive = students.filter(function(s){ return s.lastDate && new Date(s.lastDate+'T12:00:00')>=cut14; }).length;
+  var trendDir = recentActive>total*0.7?'up':recentActive<total*0.4?'down':'flat';
 
-  // KPIs
-  var kpiEl = document.getElementById('analyticsKPI');
-  kpiEl.innerHTML =
+  document.getElementById('analyticsKPI').innerHTML =
     akpiCard('Avg Attendance', avgPct+'%', pctClass(avgPct), 'Per-student average', '') +
-    akpiCard('Overall Rate',   overallPct+'%', pctClass(overallPct), sumAtt+' of '+sumTotal+' slots taken', '') +
-    akpiCard('Active (14d)',   recentActive, recentActive>total*0.7?'good':'warn', 'Students seen in last 14 days', '<span class="akpi-trend '+trendDir+'">'+(trendDir==='up'?'▲ Active':'trendDir'==='down'?'▼ Dipping':'● Stable')+'</span>') +
-    akpiCard('On Track',       onTrack, onTrack===total?'good':'warn', 'Meeting '+65+'% threshold', '');
+    akpiCard('Overall Rate',   ovPct+'%',  pctClass(ovPct),  sumAtt+' of '+sumTot+' slots', '') +
+    akpiCard('Active (14d)',   recentActive, recentActive>total*0.7?'good':'warn', 'Students seen in last 14 days', '<span class="akpi-trend '+trendDir+'">'+(trendDir==='up'?'▲ Active':trendDir==='down'?'▼ Dipping':'● Stable')+'</span>') +
+    akpiCard('On Track',       onTrack, onTrack===total?'good':'warn', 'Meeting 65% threshold', '');
 
-  // Alert summary cards
   document.getElementById('alertSummaryCards').innerHTML =
-    alertSummaryCard('Low Attendance', low, 'danger', 'Students below 65%') +
-    alertSummaryCard('Consecutive Absent', consec, 'warn', 'Flagged for streak') +
-    alertSummaryCard('On Track', onTrack, 'ok', 'Above threshold');
+    alertSCard('Low Attendance',     low,     'danger', 'Students below 65%') +
+    alertSCard('Consecutive Absent', consec,  'warn',   'Flagged for streak') +
+    alertSCard('On Track',           onTrack, 'ok',     'Above threshold');
 
-  // Monthly trend chart (from facultyStats: subject-level data has avgPct per month inferred)
-  renderOverallTrendChart(facultyStats);
-
-  // DoW chart: use facultyStats to infer day-of-week patterns
-  renderOverallDowChart(facultyStats);
-
-  // Batch comparison bars
+  // Monthly trend — built from studentDetails.attendedMonths (real data)
+  renderOverallTrendChart(students, details);
+  renderOverallDowChart(students, details);
   renderBatchCompareChart(students);
-
-  // Distribution donut
   renderDistributionDonut(students, 'distributionDonut', 'donutLegend');
+  renderOverallHeatmap(students, details);
 
-  // Activity heatmap (aggregate from lastDate signals)
-  renderOverallHeatmap(students);
-
-  // At-risk (bottom 10 with enough classes)
   var eligible = students.filter(function(s){ return s.total >= 3; });
   var atRisk   = eligible.slice().sort(function(a,b){ return a.pct-b.pct; }).slice(0,15);
   var topPerf  = eligible.slice().sort(function(a,b){ return b.pct-a.pct; }).slice(0,15);
-
   document.getElementById('atRiskBadge').textContent       = low + ' students';
   document.getElementById('topPerformersBadge').textContent = onTrack + ' students';
   renderSpotlightList('atRiskList',        atRisk, true);
   renderSpotlightList('topPerformersList', topPerf, false);
 }
 
-function renderOverallTrendChart(facultyStats) {
-  // Build month-level data from facultyStats avgPct weighted by totalPoss
+/* ── Monthly Trend (uses real attendedMonths from studentDetails) ── */
+function renderOverallTrendChart(students, details) {
+  // Build month → { sumPct, count } from students whose lastDate
+  // falls in that month AND we have attendedMonths data for them.
+  // attendedMonths is the array of months a student was active in.
   var monthMap = {};
-  facultyStats.forEach(function(f) {
-    // We don't have per-month data in facultyStats, so we use the teacher
-    // API's available fields: faculty session counts don't have dates.
-    // We proxy by treating all sessions as "this data period" — showing
-    // faculty engagement ranking instead of a time series here.
-    // For the trend we build from student lastDate distribution.
+  students.forEach(function(s) {
+    var det = details[s.phone];
+    if (!det || !det.attendedMonths) return;
+    det.attendedMonths.forEach(function(mk) {
+      if (!monthMap[mk]) monthMap[mk] = { sumPct:0, count:0 };
+      monthMap[mk].sumPct += s.pct;
+      monthMap[mk].count++;
+    });
   });
 
-  // Build monthly student-count distribution from lastDate
-  var monthStudents = {};
-  if (_dashData && _dashData.students) {
-    _dashData.students.forEach(function(s) {
-      if (!s.lastDate) return;
-      var mKey = s.lastDate.slice(0,7); // yyyy-MM
-      if (!monthStudents[mKey]) monthStudents[mKey] = { sumPct:0, count:0 };
-      monthStudents[mKey].sumPct += s.pct;
-      monthStudents[mKey].count++;
-    });
-  }
-
-  var monthKeys   = Object.keys(monthStudents).sort();
-  var mNames      = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var labels      = monthKeys.map(function(k){ var p=k.split('-'); return mNames[parseInt(p[1],10)-1]+' '+p[0].slice(2); });
-  var avgPcts     = monthKeys.map(function(k){ var m=monthStudents[k]; return parseFloat((m.sumPct/m.count).toFixed(1)); });
-  var activeCnts  = monthKeys.map(function(k){ return monthStudents[k].count; });
-
-  if (labels.length < 2) {
-    document.getElementById('overallTrendSub').textContent = 'Not enough data for trend (need 2+ months)';
+  var monthKeys = Object.keys(monthMap).sort();
+  if (monthKeys.length < 2) {
+    document.getElementById('overallTrendSub').textContent = 'Not enough monthly data yet';
     return;
   }
-  document.getElementById('overallTrendSub').textContent = labels[0] + ' – ' + labels[labels.length-1] + ' · ' + _dashData.students.length + ' students';
+  var mNames  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var labels  = monthKeys.map(function(k){ var p=k.split('-'); return mNames[parseInt(p[1],10)-1]+' '+p[0].slice(2); });
+  var avgPcts = monthKeys.map(function(k){ var m=monthMap[k]; return parseFloat((m.sumPct/m.count).toFixed(1)); });
+  var cnts    = monthKeys.map(function(k){ return monthMap[k].count; });
+
+  document.getElementById('overallTrendSub').textContent = labels[0]+' – '+labels[labels.length-1]+' · '+students.length+' students';
 
   destroyChart('overallTrendChart');
   var ctx = document.getElementById('overallTrendChart').getContext('2d');
@@ -1097,150 +1282,110 @@ function renderOverallTrendChart(facultyStats) {
     data:{
       labels:labels,
       datasets:[
-        {
-          label:'Avg Attendance %',
-          data:avgPcts,
-          borderColor:'#D0261A',
-          backgroundColor:'rgba(208,38,26,0.06)',
-          borderWidth:2,
+        { label:'Avg %', data:avgPcts, borderColor:'#D0261A', backgroundColor:'rgba(208,38,26,0.06)', borderWidth:2,
           pointBackgroundColor:avgPcts.map(function(p){ return p>=75?'#22c55e':p>=65?'#f59e0b':'#D0261A'; }),
-          pointRadius:labels.length>12?2:4,
-          fill:true,
-          tension:0.35,
-          yAxisID:'y'
-        },
-        {
-          label:'Active Students',
-          data:activeCnts,
-          borderColor:'rgba(59,130,246,0.6)',
-          backgroundColor:'rgba(59,130,246,0.04)',
-          borderWidth:1.5,
-          borderDash:[4,3],
-          pointRadius:0,
-          fill:false,
-          tension:0.35,
-          yAxisID:'y2'
-        }
+          pointRadius:labels.length>12?2:4, fill:true, tension:0.35, yAxisID:'y' },
+        { label:'Active Students', data:cnts, borderColor:'rgba(59,130,246,.6)', backgroundColor:'rgba(59,130,246,.04)',
+          borderWidth:1.5, borderDash:[4,3], pointRadius:0, fill:false, tension:0.35, yAxisID:'y2' }
       ]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:function(ctx){ return ctx.dataset.label+': '+(ctx.datasetIndex===0?ctx.raw+'%':ctx.raw+' students'); } } } },
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(ctx){ return ctx.dataset.label+': '+(ctx.datasetIndex===0?ctx.raw+'%':ctx.raw+' students'); }}} },
       scales:{
-        y:{ min:0,max:100, grid:{color:'rgba(0,0,0,0.04)'}, ticks:{ font:{size:10,family:"'Outfit',sans-serif"},color:'#999490',callback:function(v){ return v+'%'; } } },
-        y2:{ position:'right', grid:{display:false}, ticks:{ font:{size:10,family:"'Outfit',sans-serif"},color:'rgba(59,130,246,0.5)' } },
-        x:{ grid:{display:false}, ticks:{ font:{size:10,family:"'Outfit',sans-serif"},color:'#999490',maxRotation:45,autoSkip:true,maxTicksLimit:8 } }
+        y:{ min:0,max:100, grid:{color:'rgba(0,0,0,.04)'}, ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#999490',callback:function(v){return v+'%';}} },
+        y2:{ position:'right', grid:{display:false}, ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'rgba(59,130,246,.5)'} },
+        x:{ grid:{display:false}, ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#999490',maxRotation:45,autoSkip:true,maxTicksLimit:8} }
       }
     }
   });
 }
 
-function renderOverallDowChart(facultyStats) {
-  // Since we don't have individual day-level logs, we compute DoW from
-  // facultyStats: each faculty record's avgPct is an engagement proxy.
-  // We use student data's lastDate to build a coarse DoW distribution.
+/* ── DoW chart (uses attendedMonths to infer day-of-week) ── */
+function renderOverallDowChart(students, details) {
+  // For each student, the lastDate tells us which day they LAST attended.
+  // For a richer DoW signal we use all months in attendedMonths and
+  // approximate: pick the lastDate's day-of-week per student as their
+  // primary signal, then weight by their overall pct.
   var dowMap = {0:{pct:0,cnt:0},1:{pct:0,cnt:0},2:{pct:0,cnt:0},3:{pct:0,cnt:0},4:{pct:0,cnt:0},5:{pct:0,cnt:0},6:{pct:0,cnt:0}};
-  if (_dashData && _dashData.students) {
-    _dashData.students.forEach(function(s) {
-      if (!s.lastDate) return;
-      try {
-        var d = new Date(s.lastDate + 'T12:00:00');
-        var dow = d.getDay();
-        dowMap[dow].pct += s.pct;
-        dowMap[dow].cnt++;
-      } catch(e) {}
-    });
-  }
+  students.forEach(function(s) {
+    if (!s.lastDate) return;
+    try {
+      var d   = new Date(s.lastDate+'T12:00:00');
+      var dow = d.getDay();
+      dowMap[dow].pct += s.pct;
+      dowMap[dow].cnt++;
+    } catch(e) {}
+  });
+  renderDowChartInto('overallDowChart', dowMap);
+}
+
+function renderDowChartInto(elId, dowMap) {
   var dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var maxAvg = 0;
-  for (var d=0;d<7;d++) {
-    var avg = dowMap[d].cnt > 0 ? dowMap[d].pct/dowMap[d].cnt : 0;
-    if (avg > maxAvg) maxAvg = avg;
-  }
-  if (maxAvg === 0) maxAvg = 100;
-  var html = '';
+  for (var d=0;d<7;d++) { if(dowMap[d].cnt>0){ var a=dowMap[d].pct/dowMap[d].cnt; if(a>maxAvg)maxAvg=a; } }
+  if (maxAvg===0) maxAvg=100;
+  var html='';
   for (var d2=0;d2<7;d2++) {
-    var avg2  = dowMap[d2].cnt > 0 ? parseFloat((dowMap[d2].pct/dowMap[d2].cnt).toFixed(0)) : 0;
-    var barW  = dowMap[d2].cnt > 0 ? Math.round(avg2/maxAvg*100) : 0;
-    var col   = avg2>=75?'#22c55e':avg2>=65?'#f59e0b':avg2>0?'#D0261A':'#e8e4e0';
+    var avg2 = dowMap[d2].cnt>0 ? parseFloat((dowMap[d2].pct/dowMap[d2].cnt).toFixed(0)) : 0;
+    var barW = dowMap[d2].cnt>0 ? Math.round(avg2/maxAvg*100) : 0;
+    var col  = avg2>=75?'#22c55e':avg2>=65?'#f59e0b':avg2>0?'#D0261A':'#e8e4e0';
     html += '<div class="dow-row">' +
       '<div class="dow-label">'+dayNames[d2]+'</div>' +
-      '<div class="dow-bar-bg"><div class="dow-bar-fill" style="width:'+barW+'%;background:'+col+';"></div></div>' +
+      '<div class="dow-bar-bg"><div class="dow-bar-fill" style="width:'+barW+'%;background:'+col+'"></div></div>' +
       '<div class="dow-pct">'+(dowMap[d2].cnt>0?avg2+'%':'—')+'</div>' +
       '<div class="dow-count">'+dowMap[d2].cnt+' stu.</div>' +
     '</div>';
   }
-  document.getElementById('overallDowChart').innerHTML = html || '<div style="font-size:12px;color:var(--gray);padding:12px 0;">No data yet</div>';
+  document.getElementById(elId).innerHTML = html || '<div style="font-size:12px;color:var(--gray);padding:12px 0;">No data yet</div>';
 }
 
+/* ── Batch comparison bars ── */
 function renderBatchCompareChart(students) {
-  // Build batch avg pct
   var batches = {};
   students.forEach(function(s) {
-    var k = s.branch + ' · ' + s.batch;
-    if (!batches[k]) batches[k] = { sum:0, count:0, low:0 };
-    batches[k].sum   += s.pct;
-    batches[k].count++;
-    if (s.flag==='low'||s.flag==='both') batches[k].low++;
+    var k = s.branch+' · '+s.batch;
+    if (!batches[k]) batches[k]={sum:0,count:0};
+    batches[k].sum += s.pct; batches[k].count++;
   });
-  var sorted = Object.keys(batches).sort(function(a,b){
-    return (batches[b].sum/batches[b].count) - (batches[a].sum/batches[a].count);
-  });
-  if (!sorted.length) { document.getElementById('batchCompareChart').innerHTML = '<div style="font-size:12px;color:var(--gray);">No data</div>'; return; }
-  var maxPct = parseFloat(((batches[sorted[0]].sum/batches[sorted[0]].count)).toFixed(1));
-  if (maxPct === 0) maxPct = 100;
-  var html = sorted.map(function(k) {
-    var b    = batches[k];
-    var avg  = parseFloat((b.sum/b.count).toFixed(1));
-    var barW = Math.round(avg/maxPct*100);
-    var col  = avg>=75?'#22c55e':avg>=65?'#f59e0b':'#D0261A';
-    var pc   = pctClass(avg);
+  var sorted = Object.keys(batches).sort(function(a,b){ return (batches[b].sum/batches[b].count)-(batches[a].sum/batches[a].count); });
+  if (!sorted.length) { document.getElementById('batchCompareChart').innerHTML='<div style="font-size:12px;color:var(--gray);">No data</div>'; return; }
+  var maxPct = parseFloat((batches[sorted[0]].sum/batches[sorted[0]].count).toFixed(1));
+  if (maxPct===0) maxPct=100;
+  document.getElementById('batchCompareChart').innerHTML = sorted.map(function(k) {
+    var b=batches[k], avg=parseFloat((b.sum/b.count).toFixed(1)), barW=Math.round(avg/maxPct*100);
+    var col=avg>=75?'#22c55e':avg>=65?'#f59e0b':'#D0261A', pc=pctClass(avg);
     return '<div class="batch-compare-row">' +
       '<div class="batch-compare-label" title="'+esc(k)+'">'+esc(k)+'</div>' +
-      '<div class="batch-compare-bar-bg"><div class="batch-compare-bar-fill" style="width:'+barW+'%;background:'+col+';"></div></div>' +
+      '<div class="batch-compare-bar-bg"><div class="batch-compare-bar-fill" style="width:'+barW+'%;background:'+col+'"></div></div>' +
       '<div class="batch-compare-pct '+pc+'">'+avg+'%</div>' +
       '<div class="batch-compare-count">'+b.count+' stu.</div>' +
     '</div>';
   }).join('');
-  document.getElementById('batchCompareChart').innerHTML = html;
 }
 
+/* ── Distribution Donut ── */
 function renderDistributionDonut(students, canvasId, legendId) {
-  var excellent = students.filter(function(s){ return s.pct >= 85; }).length;
-  var good      = students.filter(function(s){ return s.pct >= 75 && s.pct < 85; }).length;
-  var warn      = students.filter(function(s){ return s.pct >= 65 && s.pct < 75; }).length;
-  var low       = students.filter(function(s){ return s.pct < 65; }).length;
+  var excellent = students.filter(function(s){ return s.pct>=85; }).length;
+  var good      = students.filter(function(s){ return s.pct>=75&&s.pct<85; }).length;
+  var warn      = students.filter(function(s){ return s.pct>=65&&s.pct<75; }).length;
+  var low       = students.filter(function(s){ return s.pct<65; }).length;
   var total     = students.length;
-
   destroyChart(canvasId);
   var ctx = document.getElementById(canvasId).getContext('2d');
   _charts[canvasId] = new Chart(ctx, {
     type:'doughnut',
-    data:{
-      labels:['Excellent ≥85%','Good ≥75%','At Risk ≥65%','Low <65%'],
-      datasets:[{
-        data:[excellent,good,warn,low],
-        backgroundColor:['#22c55e','#86efac','#f59e0b','#D0261A'],
-        borderWidth:2,
-        borderColor:'#ffffff'
-      }]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,cutout:'65%',
-      plugins:{
-        legend:{display:false},
-        tooltip:{ callbacks:{ label:function(ctx){ return ' '+ctx.label+': '+ctx.raw+' ('+parseFloat((ctx.raw/total*100).toFixed(1))+'%)'; } } }
-      }
-    }
+    data:{ labels:['Excellent ≥85%','Good ≥75%','At Risk ≥65%','Low <65%'],
+      datasets:[{ data:[excellent,good,warn,low], backgroundColor:['#22c55e','#86efac','#f59e0b','#D0261A'], borderWidth:2, borderColor:'#ffffff' }] },
+    options:{ responsive:true,maintainAspectRatio:false,cutout:'65%',
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(ctx){ return ' '+ctx.label+': '+ctx.raw+' ('+parseFloat((ctx.raw/total*100).toFixed(1))+'%)'; }}} } }
   });
-
-  var items = [
+  document.getElementById(legendId).innerHTML = [
     {color:'#22c55e',label:'Excellent ≥85%',val:excellent},
     {color:'#86efac',label:'Good ≥75%',     val:good},
     {color:'#f59e0b',label:'At Risk ≥65%',  val:warn},
     {color:'#D0261A',label:'Low <65%',       val:low}
-  ];
-  document.getElementById(legendId).innerHTML = items.map(function(it){
+  ].map(function(it){
     return '<div class="donut-legend-item">' +
       '<div class="donut-legend-dot" style="background:'+it.color+'"></div>' +
       '<span class="donut-legend-label">'+esc(it.label)+'</span>' +
@@ -1249,8 +1394,20 @@ function renderDistributionDonut(students, canvasId, legendId) {
   }).join('');
 }
 
-function renderOverallHeatmap(students) {
-  // Aggregate: count how many students have lastDate on each day (proxy for activity)
+/* ── Overall Heatmap (uses attendedMonths for real data) ── */
+function renderOverallHeatmap(students, details) {
+  // Build day-count map from attendedMonths: mark each month's dates
+  // proportional to the number of students active that month.
+  var monthStudentCount = {};
+  students.forEach(function(s) {
+    var det = details[s.phone];
+    if (!det || !det.attendedMonths) return;
+    det.attendedMonths.forEach(function(mk) {
+      monthStudentCount[mk] = (monthStudentCount[mk]||0) + 1;
+    });
+  });
+
+  // Also use lastDate signals for day-level precision
   var dayCount = {};
   students.forEach(function(s) {
     if (s.lastDate) dayCount[s.lastDate] = (dayCount[s.lastDate]||0) + 1;
@@ -1261,36 +1418,41 @@ function renderOverallHeatmap(students) {
   var start = new Date(today); start.setDate(start.getDate()-364);
   start.setDate(start.getDate()-start.getDay());
 
-  var cells   = '';
-  var months  = [];
-  var lastMon = -1;
-  var cursor  = new Date(start);
+  var cells='', months=[], lastMon=-1, cursor=new Date(start);
+  var mNamesH = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
   for (var w=0;w<53;w++) {
     for (var d=0;d<7;d++) {
       var iso    = fmtISO(cursor);
       var cnt    = dayCount[iso]||0;
+      var mKey   = iso.slice(0,7);
+      var mCnt   = monthStudentCount[mKey]||0;
       var future = cursor > today;
-      var level  = future ? 0 : cnt===0 ? 0 : cnt<=maxCount*0.33 ? 1 : cnt<=maxCount*0.66 ? 2 : 3;
+      // Level: day-level signal takes priority; fall back to month-level
+      var level;
+      if (future)       level = 0;
+      else if (cnt > 0) level = cnt <= maxCount*0.33 ? 1 : cnt <= maxCount*0.66 ? 2 : 3;
+      else if (mCnt > 0) level = 1;
+      else               level = 0;
+
       var mon = cursor.getMonth();
-      if (mon!==lastMon && d===0) { var mN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; months.push({week:w,name:mN[mon]}); lastMon=mon; }
+      if (mon!==lastMon && d===0) { months.push({week:w,name:mNamesH[mon]}); lastMon=mon; }
       cells += '<div class="heatmap-cell" data-level="'+level+'" title="'+iso+(cnt?' · '+cnt+' student'+(cnt===1?'':'s'):'')+'"></div>';
       cursor.setDate(cursor.getDate()+1);
     }
   }
   document.getElementById('overallHeatmapGrid').innerHTML = cells;
-
-  var mHtml='', total53=53;
-  months.forEach(function(m){ mHtml+='<span style="position:absolute;left:'+parseFloat((m.week/total53*100).toFixed(1))+'%;">'+m.name+'</span>'; });
+  var mHtml='';
+  months.forEach(function(m){ mHtml+='<span style="left:'+parseFloat((m.week/53*100).toFixed(1))+'%">'+m.name+'</span>'; });
   document.getElementById('overallHeatmapMonths').innerHTML = mHtml;
 }
 
 function renderSpotlightList(elId, students, isRisk) {
   var el = document.getElementById(elId);
-  if (!students.length) { el.innerHTML = '<div style="padding:20px;text-align:center;font-size:12px;color:var(--gray);">No data</div>'; return; }
+  if (!students.length) { el.innerHTML='<div style="padding:20px;text-align:center;font-size:12px;color:var(--gray);">No data</div>'; return; }
   el.innerHTML = students.map(function(s,i){
     var pc = pctClass(s.pct);
-    return '<div class="spotlight-row">' +
+    return '<div class="spotlight-row" onclick="openStudentModal(\''+esc(s.phone.replace(/'/g,"\\'"))+'\')">' +
       '<div class="spotlight-rank">'+(i+1)+'</div>' +
       '<div><div class="spotlight-name">'+esc(s.name)+'</div><div class="spotlight-meta">'+esc(s.branch)+' · '+esc(s.batch)+'</div></div>' +
       '<div class="spotlight-bar"><div class="spotlight-bar-fill '+pc+'" style="width:'+Math.min(s.pct,100)+'%"></div></div>' +
@@ -1299,47 +1461,37 @@ function renderSpotlightList(elId, students, isRisk) {
   }).join('');
 }
 
-/* ════════════════════════════════════════
-   SECTION 2: BATCH-WISE DEEP DIVE
-════════════════════════════════════════ */
-function renderBatchSelectorAndInit(students, facultyStats) {
-  // Build unique batch keys
+/* ══════════════════════════════════════════
+   BATCH DEEP DIVE
+══════════════════════════════════════════ */
+function renderBatchSelectorAndInit(students, facultyStats, details) {
   var batchMap = {};
   students.forEach(function(s) {
-    var k = s.branch + '|||' + s.batch;
-    if (!batchMap[k]) batchMap[k] = { branch:s.branch, batch:s.batch, label:s.branch+' · '+s.batch, students:[] };
+    var k = s.branch+'|||'+s.batch;
+    if (!batchMap[k]) batchMap[k]={branch:s.branch,batch:s.batch,label:s.branch+' · '+s.batch,students:[]};
     batchMap[k].students.push(s);
   });
-
   var batchKeys = Object.keys(batchMap).sort();
   if (!batchKeys.length) return;
-
   var wrap = document.getElementById('batchSelectorWrap');
-  wrap.innerHTML = batchKeys.map(function(k,i) {
-    return '<button class="batch-selector-btn'+(i===0?' active':'') +
-      '" data-key="'+esc(k)+'" onclick="selectBatch(\''+esc(k.replace(/'/g,"\\'"))+'\')">'+
-      esc(batchMap[k].label)+'</button>';
+  wrap.innerHTML = batchKeys.map(function(k,i){
+    return '<button class="batch-selector-btn'+(i===0?' active':'')+'" data-key="'+esc(k)+'" onclick="selectBatch(\''+esc(k.replace(/\\/g,'\\\\').replace(/'/g,"\\\'"))+'\')">'+esc(batchMap[k].label)+'</button>';
   }).join('');
-
-  // Initialise with first batch
-  _selectedBatch = batchKeys[0];
-  renderBatchDeepDive(batchMap[batchKeys[0]], facultyStats);
-
-  // Store batch map globally so selectBatch can access it
   window._batchMapGlobal = batchMap;
+  _selectedBatch = batchKeys[0];
+  renderBatchDeepDive(batchMap[batchKeys[0]], facultyStats, details);
 }
 
 function selectBatch(key) {
   if (!window._batchMapGlobal || !window._batchMapGlobal[key]) return;
   _selectedBatch = key;
-  // Update button states
-  document.querySelectorAll('.batch-selector-btn').forEach(function(btn) {
-    btn.classList.toggle('active', btn.getAttribute('data-key') === key);
+  document.querySelectorAll('.batch-selector-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn.getAttribute('data-key')===key);
   });
-  renderBatchDeepDive(window._batchMapGlobal[key], _dashData.facultyStats || []);
+  renderBatchDeepDive(window._batchMapGlobal[key], _dashData.facultyStats||[], _dashData.studentDetails||{});
 }
 
-function renderBatchDeepDive(batchObj, facultyStats) {
+function renderBatchDeepDive(batchObj, facultyStats, details) {
   var students = batchObj.students;
   var total    = students.length;
   var sumPct   = students.reduce(function(a,s){ return a+s.pct; },0);
@@ -1350,37 +1502,41 @@ function renderBatchDeepDive(batchObj, facultyStats) {
   var sumTot   = students.reduce(function(a,s){ return a+s.total;    },0);
 
   document.getElementById('batchKPI').innerHTML =
-    akpiCard('Students',       total,   '',                    batchObj.branch+' · '+batchObj.batch, '') +
-    akpiCard('Avg Attendance', avgPct+'%', pctClass(avgPct),   sumAtt+' of '+sumTot+' slots', '') +
-    akpiCard('Low Attendance', low,       low>0?'bad':'good',  'Below 65% threshold', '') +
-    akpiCard('On Track',       onTrack,   onTrack===total?'good':'warn', 'Meeting threshold', '');
+    akpiCard('Students',       total,     '',             batchObj.branch+' · '+batchObj.batch, '') +
+    akpiCard('Avg Attendance', avgPct+'%', pctClass(avgPct), sumAtt+' of '+sumTot+' slots', '') +
+    akpiCard('Low Attendance', low,        low>0?'bad':'good', 'Below 65% threshold', '') +
+    akpiCard('On Track',       onTrack,    onTrack===total?'good':'warn', 'Meeting threshold', '');
 
-  // Trend from lastDate distribution within batch
-  var monthMap = {};
+  // Monthly trend for this batch (from studentDetails.attendedMonths)
+  var bMonthMap = {};
   students.forEach(function(s) {
-    if (!s.lastDate) return;
-    var mk = s.lastDate.slice(0,7);
-    if (!monthMap[mk]) monthMap[mk] = { sumPct:0, cnt:0 };
-    monthMap[mk].sumPct += s.pct;
-    monthMap[mk].cnt++;
+    var det = details[s.phone];
+    if (!det || !det.attendedMonths) return;
+    det.attendedMonths.forEach(function(mk) {
+      if (!bMonthMap[mk]) bMonthMap[mk]={sumPct:0,cnt:0};
+      bMonthMap[mk].sumPct += s.pct;
+      bMonthMap[mk].cnt++;
+    });
   });
-  var mKeys  = Object.keys(monthMap).sort();
-  var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var mKeys   = Object.keys(bMonthMap).sort();
+  var mNames  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var mLabels = mKeys.map(function(k){ var p=k.split('-'); return mNames[parseInt(p[1],10)-1]+' '+p[0].slice(2); });
-  var mAvgPcts = mKeys.map(function(k){ return parseFloat((monthMap[k].sumPct/monthMap[k].cnt).toFixed(1)); });
+  var mAvg    = mKeys.map(function(k){ return parseFloat((bMonthMap[k].sumPct/bMonthMap[k].cnt).toFixed(1)); });
 
-  document.getElementById('batchTrendSub').textContent = batchObj.label + (mLabels.length>=2 ? ' · '+mLabels[0]+' – '+mLabels[mLabels.length-1] : '');
+  document.getElementById('batchTrendSub').textContent = batchObj.label + (mLabels.length>=2?' · '+mLabels[0]+' – '+mLabels[mLabels.length-1]:'');
   destroyChart('batchTrendChart');
   if (mLabels.length >= 2) {
     var ctx2 = document.getElementById('batchTrendChart').getContext('2d');
     _charts['batchTrendChart'] = new Chart(ctx2, {
       type:'line',
-      data:{ labels:mLabels, datasets:[{ label:'Avg %', data:mAvgPcts, borderColor:'#D0261A', backgroundColor:'rgba(208,38,26,0.06)', borderWidth:2, pointRadius:mLabels.length>12?2:4, fill:true, tension:0.35, pointBackgroundColor:mAvgPcts.map(function(p){ return p>=75?'#22c55e':p>=65?'#f59e0b':'#D0261A'; }) }] },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,ticks:{callback:function(v){return v+'%'},font:{size:10,family:"'Outfit',sans-serif"},color:'#999490'},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#999490',maxRotation:45,autoSkip:true,maxTicksLimit:8}}}}
+      data:{ labels:mLabels, datasets:[{ label:'Avg %', data:mAvg, borderColor:'#D0261A', backgroundColor:'rgba(208,38,26,.06)',
+        borderWidth:2, pointRadius:mLabels.length>12?2:4, fill:true, tension:0.35,
+        pointBackgroundColor:mAvg.map(function(p){ return p>=75?'#22c55e':p>=65?'#f59e0b':'#D0261A'; }) }] },
+      options:{ responsive:true,maintainAspectRatio:false,
+        plugins:{ legend:{display:false} },
+        scales:{ y:{min:0,max:100,ticks:{callback:function(v){return v+'%'},font:{size:10,family:"'Outfit',sans-serif"},color:'#999490'},grid:{color:'rgba(0,0,0,.04)'}}, x:{grid:{display:false},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#999490',maxRotation:45,autoSkip:true,maxTicksLimit:8}} }
+      }
     });
-  } else {
-    document.getElementById('batchTrendChart').getContext('2d').clearRect(0,0,999,999);
-    document.getElementById('batchTrendSub').textContent += ' · Not enough months for trend';
   }
 
   // DoW for this batch
@@ -1389,133 +1545,99 @@ function renderBatchDeepDive(batchObj, facultyStats) {
     if (!s.lastDate) return;
     try { var d=new Date(s.lastDate+'T12:00:00'); bDow[d.getDay()].pct+=s.pct; bDow[d.getDay()].cnt++; } catch(e){}
   });
-  var dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  var bMaxAvg=0;
-  for(var dd=0;dd<7;dd++){ var a=bDow[dd].cnt>0?bDow[dd].pct/bDow[dd].cnt:0; if(a>bMaxAvg)bMaxAvg=a; }
-  if(bMaxAvg===0)bMaxAvg=100;
-  var bDowHtml='';
-  for(var dd2=0;dd2<7;dd2++){
-    var avg=bDow[dd2].cnt>0?parseFloat((bDow[dd2].pct/bDow[dd2].cnt).toFixed(0)):0;
-    var bw=bDow[dd2].cnt>0?Math.round(avg/bMaxAvg*100):0;
-    var col=avg>=75?'#22c55e':avg>=65?'#f59e0b':avg>0?'#D0261A':'#e8e4e0';
-    bDowHtml+='<div class="dow-row"><div class="dow-label">'+dayNames[dd2]+'</div><div class="dow-bar-bg"><div class="dow-bar-fill" style="width:'+bw+'%;background:'+col+';"></div></div><div class="dow-pct">'+(bDow[dd2].cnt>0?avg+'%':'—')+'</div><div class="dow-count">'+bDow[dd2].cnt+' stu.</div></div>';
-  }
-  document.getElementById('batchDowChart').innerHTML = bDowHtml;
+  renderDowChartInto('batchDowChart', bDow);
 
-  // Subject chart for this batch (from facultyStats filtered by branch+batch)
+  // Subject chart for this batch
   var batchFaculty = facultyStats.filter(function(f){ return f.branch===batchObj.branch && f.batch===batchObj.batch; });
   var subjMap = {};
   batchFaculty.forEach(function(f) {
-    if (!subjMap[f.subject]) subjMap[f.subject] = { conducted:0, possible:0, actual:0, faculty:f.faculty };
+    if (!subjMap[f.subject]) subjMap[f.subject]={conducted:0,possible:0,actual:0,faculty:f.faculty};
     subjMap[f.subject].conducted += f.conducted;
     subjMap[f.subject].possible  += f.totalPoss;
     subjMap[f.subject].actual    += f.actual;
   });
   var subjKeys = Object.keys(subjMap).sort();
-
-  document.getElementById('batchSubjSub').textContent = batchObj.label + ' · ' + subjKeys.length + ' subjects';
-
+  document.getElementById('batchSubjSub').textContent = batchObj.label+' · '+subjKeys.length+' subjects';
   destroyChart('batchSubjChart');
+  var bSubjWrap = document.getElementById('batchSubjChartWrap');
   if (subjKeys.length > 0) {
-    var subjPcts = subjKeys.map(function(k){ var s=subjMap[k]; return s.possible>0?parseFloat((s.actual/s.possible*100).toFixed(1)):0; });
     var subjBarH = Math.max(subjKeys.length*44+60, 100);
-    document.getElementById('batchSubjChartWrap').style.height = subjBarH + 'px';
+    bSubjWrap.style.height = subjBarH+'px';
+    // Recreate canvas to avoid stale context
+    bSubjWrap.innerHTML = '<canvas id="batchSubjChart" style="height:'+subjBarH+'px"></canvas>';
     var ctx3 = document.getElementById('batchSubjChart').getContext('2d');
     _charts['batchSubjChart'] = new Chart(ctx3, {
       type:'bar',
-      data:{
-        labels:subjKeys.map(function(k){ return k.length>22?k.slice(0,20)+'…':k; }),
+      data:{ labels:subjKeys.map(function(k){ return k.length>22?k.slice(0,20)+'…':k; }),
         datasets:[
-          { label:'Attended', data:subjKeys.map(function(k){ return subjMap[k].actual; }), backgroundColor:'rgba(34,197,94,0.75)', borderRadius:3, borderSkipped:false },
-          { label:'Absent',   data:subjKeys.map(function(k){ return Math.max(0, subjMap[k].possible - subjMap[k].actual); }), backgroundColor:'rgba(208,38,26,0.3)', borderRadius:3, borderSkipped:false }
-        ]
-      },
-      options:{
-        responsive:true,maintainAspectRatio:false,indexAxis:'y',
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){ var tot=ctx.chart.data.datasets[0].data[ctx.dataIndex]+(ctx.chart.data.datasets[1]?ctx.chart.data.datasets[1].data[ctx.dataIndex]:0); return ' '+ctx.dataset.label+': '+ctx.raw+' of '+tot; }}}},
-        scales:{x:{stacked:true,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#999490'}},y:{stacked:true,grid:{display:false},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#0a0a0a'}}}
-      }
+          { label:'Attended', data:subjKeys.map(function(k){ return subjMap[k].actual; }),    backgroundColor:'rgba(34,197,94,.75)', borderRadius:3, borderSkipped:false },
+          { label:'Absent',   data:subjKeys.map(function(k){ return Math.max(0,subjMap[k].possible-subjMap[k].actual); }), backgroundColor:'rgba(208,38,26,.3)', borderRadius:3, borderSkipped:false }
+        ] },
+      options:{ responsive:true,maintainAspectRatio:false,indexAxis:'y',
+        plugins:{ legend:{display:false} },
+        scales:{ x:{stacked:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#999490'}},
+                 y:{stacked:true,grid:{display:false},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#0a0a0a'}} } }
     });
   } else {
-    document.getElementById('batchSubjChartWrap').style.height = '60px';
-    document.getElementById('batchSubjChartWrap').innerHTML = '<div style="font-size:12px;color:var(--gray);padding:12px;">No subject data for this batch.</div>';
+    bSubjWrap.style.height='60px';
+    bSubjWrap.innerHTML='<div style="font-size:12px;color:var(--gray);padding:12px;">No subject data for this batch.</div>';
   }
 
-  // Distribution donut for this batch
   renderDistributionDonut(students, 'batchDistDonut', 'batchDonutLegend');
 
-  // Spotlight lists
-  var eligible = students.filter(function(s){ return s.total >= 2; });
+  var eligible = students.filter(function(s){ return s.total>=2; });
   var bAtRisk  = eligible.slice().sort(function(a,b){ return a.pct-b.pct; }).slice(0,10);
   var bTop     = eligible.slice().sort(function(a,b){ return b.pct-a.pct; }).slice(0,10);
-  document.getElementById('batchAtRiskBadge').textContent = low + ' students';
-  document.getElementById('batchTopBadge').textContent    = onTrack + ' on track';
+  document.getElementById('batchAtRiskBadge').textContent = low+' students';
+  document.getElementById('batchTopBadge').textContent    = onTrack+' on track';
   renderSpotlightList('batchAtRiskList', bAtRisk, true);
   renderSpotlightList('batchTopList',    bTop,    false);
 }
 
-/* ════════════════════════════════════════
-   SECTION 3: FACULTY ANALYTICS
-════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   FACULTY ANALYTICS
+══════════════════════════════════════════ */
 function renderFacultyAnalytics(facultyStats, students) {
   if (!facultyStats.length) {
-    document.getElementById('facultyChartWrap').innerHTML = '<div style="font-size:12px;color:var(--gray);padding:12px;">No faculty data.</div>';
+    document.getElementById('facultyChartWrap').innerHTML='<div style="font-size:12px;color:var(--gray);padding:12px;">No faculty data.</div>';
     return;
   }
-
-  // Aggregate by faculty name
   var facMap = {};
   facultyStats.forEach(function(f) {
-    if (!facMap[f.faculty]) facMap[f.faculty] = { conducted:0, possible:0, actual:0, subjects:[] };
+    if (!facMap[f.faculty]) facMap[f.faculty]={conducted:0,possible:0,actual:0,subjects:[]};
     facMap[f.faculty].conducted += f.conducted;
     facMap[f.faculty].possible  += f.totalPoss;
     facMap[f.faculty].actual    += f.actual;
-    if (facMap[f.faculty].subjects.indexOf(f.subject) === -1) facMap[f.faculty].subjects.push(f.subject);
+    if (facMap[f.faculty].subjects.indexOf(f.subject)===-1) facMap[f.faculty].subjects.push(f.subject);
   });
-
   var facNames = Object.keys(facMap).sort(function(a,b){
-    var pa = facMap[a].possible>0?facMap[a].actual/facMap[a].possible:0;
-    var pb = facMap[b].possible>0?facMap[b].actual/facMap[b].possible:0;
+    var pa=facMap[a].possible>0?facMap[a].actual/facMap[a].possible:0;
+    var pb=facMap[b].possible>0?facMap[b].actual/facMap[b].possible:0;
     return pb-pa;
   });
-
   var facPcts = facNames.map(function(n){ var f=facMap[n]; return f.possible>0?parseFloat((f.actual/f.possible*100).toFixed(1)):0; });
   var barH    = Math.max(facNames.length*44+60, 100);
-
-  document.getElementById('facultyChartWrap').style.height = barH + 'px';
+  document.getElementById('facultyChartWrap').style.height = barH+'px';
   destroyChart('facultyChart');
   var ctx = document.getElementById('facultyChart').getContext('2d');
   _charts['facultyChart'] = new Chart(ctx, {
     type:'bar',
-    data:{
-      labels:facNames.map(function(n){ return n.length>20?n.slice(0,18)+'…':n; }),
-      datasets:[{
-        label:'Avg Attendance %',
-        data:facPcts,
-        backgroundColor:facPcts.map(function(p){ return p>=75?'rgba(34,197,94,0.75)':p>=65?'rgba(245,158,11,0.75)':'rgba(208,38,26,0.75)'; }),
-        borderRadius:4,
-        borderSkipped:false
-      }]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,indexAxis:'y',
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){ return ' Avg: '+ctx.raw+'%'; }}}},
-      scales:{x:{min:0,max:100,grid:{color:'rgba(0,0,0,0.04)'},ticks:{callback:function(v){return v+'%'},font:{size:10,family:"'Outfit',sans-serif"},color:'#999490'}},y:{grid:{display:false},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#0a0a0a'}}}
-    }
+    data:{ labels:facNames.map(function(n){ return n.length>20?n.slice(0,18)+'…':n; }),
+      datasets:[{ label:'Avg %', data:facPcts, backgroundColor:facPcts.map(function(p){ return p>=75?'rgba(34,197,94,.75)':p>=65?'rgba(245,158,11,.75)':'rgba(208,38,26,.75)'; }), borderRadius:4, borderSkipped:false }] },
+    options:{ responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(ctx){ return ' Avg: '+ctx.raw+'%'; }}} },
+      scales:{ x:{min:0,max:100,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'},font:{size:10,family:"'Outfit',sans-serif"},color:'#999490'}},
+               y:{grid:{display:false},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#0a0a0a'}} } }
   });
 
-  // Faculty spotlight: top 5 and bottom 5
-  var sorted   = facNames.slice();
-  var top5     = sorted.slice(0, Math.min(5, sorted.length));
-  var bottom5  = sorted.slice(Math.max(0, sorted.length-5)).reverse();
-
+  var sorted  = facNames.slice();
+  var top5    = sorted.slice(0, Math.min(5, sorted.length));
+  var bottom5 = sorted.slice(Math.max(0, sorted.length-5)).reverse();
   var spotHtml = '<div style="margin-bottom:16px;">' +
     '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">🏆 Top Engaging</div>';
   top5.forEach(function(n,i) {
-    var f = facMap[n];
-    var pct = f.possible>0?parseFloat((f.actual/f.possible*100).toFixed(1)):0;
-    var pc = pctClass(pct);
-    spotHtml += '<div class="spotlight-row">' +
+    var f=facMap[n], pct=f.possible>0?parseFloat((f.actual/f.possible*100).toFixed(1)):0, pc=pctClass(pct);
+    spotHtml += '<div class="spotlight-row" style="cursor:default;">' +
       '<div class="spotlight-rank">'+(i+1)+'</div>' +
       '<div><div class="spotlight-name">'+esc(n)+'</div><div class="spotlight-meta">'+f.subjects.slice(0,2).map(esc).join(', ')+(f.subjects.length>2?' +more':'')+'</div></div>' +
       '<div class="spotlight-bar"><div class="spotlight-bar-fill '+pc+'" style="width:'+Math.min(pct,100)+'%"></div></div>' +
@@ -1523,14 +1645,11 @@ function renderFacultyAnalytics(facultyStats, students) {
     '</div>';
   });
   spotHtml += '</div>';
-
   if (bottom5.length && bottom5[0] !== top5[top5.length-1]) {
     spotHtml += '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">⚠️ Needs Improvement</div>';
     bottom5.forEach(function(n,i) {
-      var f = facMap[n];
-      var pct = f.possible>0?parseFloat((f.actual/f.possible*100).toFixed(1)):0;
-      var pc = pctClass(pct);
-      spotHtml += '<div class="spotlight-row">' +
+      var f=facMap[n], pct=f.possible>0?parseFloat((f.actual/f.possible*100).toFixed(1)):0, pc=pctClass(pct);
+      spotHtml += '<div class="spotlight-row" style="cursor:default;">' +
         '<div class="spotlight-rank" style="color:var(--red);">'+(i+1)+'</div>' +
         '<div><div class="spotlight-name">'+esc(n)+'</div><div class="spotlight-meta">'+esc(f.subjects[0]||'')+'</div></div>' +
         '<div class="spotlight-bar"><div class="spotlight-bar-fill '+pc+'" style="width:'+Math.min(pct,100)+'%"></div></div>' +
@@ -1538,24 +1657,25 @@ function renderFacultyAnalytics(facultyStats, students) {
       '</div>';
     });
   }
-
   document.getElementById('facultySpotlight').innerHTML = spotHtml;
 }
 
-/* ════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    TABS
-════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 function switchTab(tab) {
-  var tabs = ['students','batches','absentees','faculty','analytics'];
-  var btns = document.querySelectorAll('.tab-btn');
-  tabs.forEach(function(t,i) { btns[i].className='tab-btn'+(t===tab?' active':''); });
+  var tabs=['students','batches','absentees','faculty','analytics'];
+  var btns=document.querySelectorAll('.tab-btn');
+  tabs.forEach(function(t,i){ btns[i].className='tab-btn'+(t===tab?' active':''); });
   document.querySelectorAll('.tab-panel').forEach(function(p){ p.className='tab-panel'; });
   document.getElementById('tab-'+tab).className='tab-panel active';
 }
 
-/* ════════════════════════════════════════
-   HELPER BUILDERS
-════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════ */
+function pctClass(p) { return p>=75?'good':p>=65?'warn':'bad'; }
+
 function akpiCard(label, val, cls, sub, extra) {
   return '<div class="akpi-card">' +
     '<div class="akpi-label">'+esc(label)+'</div>' +
@@ -1564,7 +1684,7 @@ function akpiCard(label, val, cls, sub, extra) {
     (extra ? extra : '') +
   '</div>';
 }
-function alertSummaryCard(label, val, type, sub) {
+function alertSCard(label, val, type, sub) {
   return '<div class="alert-summary-card '+type+'">' +
     '<div class="alert-summary-num">'+val+'</div>' +
     '<div class="alert-summary-label">'+esc(label)+'</div>' +
@@ -1572,25 +1692,20 @@ function alertSummaryCard(label, val, type, sub) {
   '</div>';
 }
 
-/* ════════════════════════════════════════
-   SHARED HELPERS
-════════════════════════════════════════ */
-function pctClass(p) { return p>=75?'good':p>=65?'warn':'bad'; }
-
 function destroyChart(id) {
   if (_charts[id]) { try { _charts[id].destroy(); } catch(e){} _charts[id]=null; }
 }
 
 function fmtISO(d) {
-  var y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), dd=String(d.getDate()).padStart(2,'0');
-  return y+'-'+m+'-'+dd;
+  return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
 }
+function pad2(n) { return n<10?'0'+n:String(n); }
 
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* JSONP with fired guard (unchanged) */
+/* JSONP with fired guard */
 function jsonp(url, cb) {
   var id='cb_'+Date.now()+'_'+Math.floor(Math.random()*99999), t=null, fired=false;
   function cleanup() {
@@ -1606,7 +1721,6 @@ function jsonp(url, cb) {
   document.body.appendChild(s);
 }
 
-/* String.padStart polyfill */
 if(!String.prototype.padStart){ String.prototype.padStart=function(l,c){ var s=String(this); while(s.length<l)s=(c||' ')+s; return s; }; }
 </script>
 </body>
