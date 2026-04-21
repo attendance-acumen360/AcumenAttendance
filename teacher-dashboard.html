@@ -314,24 +314,6 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .akpi-trend.down { background:rgba(208,38,26,.1);color:var(--red-dk); }
 .akpi-trend.flat { background:rgba(153,148,144,.1);color:var(--gray); }
 
-.dow-row { display:flex;align-items:center;gap:8px;margin-bottom:7px; }
-.dow-label { font-size:11px;font-weight:500;color:var(--black);width:32px;flex-shrink:0; }
-.dow-bar-bg { flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden; }
-.dow-bar-fill { height:100%;border-radius:4px;transition:width .5s cubic-bezier(.22,1,.36,1); }
-.dow-pct { font-size:11px;color:var(--gray);width:36px;text-align:right;flex-shrink:0; }
-.dow-count { font-size:10px;color:var(--gray);width:52px;text-align:right;flex-shrink:0; }
-
-.heatmap-grid { display:grid;grid-template-columns:repeat(53,1fr);gap:2px;margin-top:8px;overflow-x:auto; }
-.heatmap-cell { aspect-ratio:1;border-radius:2px;background:var(--border);cursor:default; }
-.heatmap-cell[data-level="0"] { background:var(--border); }
-.heatmap-cell[data-level="1"] { background:rgba(34,197,94,.25); }
-.heatmap-cell[data-level="2"] { background:rgba(34,197,94,.55); }
-.heatmap-cell[data-level="3"] { background:rgba(34,197,94,.85); }
-.heatmap-months { position:relative;height:16px;margin-bottom:4px;overflow:hidden; }
-.heatmap-months span { position:absolute;font-size:9px;color:var(--gray);white-space:nowrap; }
-.heatmap-legend { display:flex;align-items:center;gap:4px;font-size:10px;color:var(--gray);margin-top:8px; }
-.heatmap-legend-cell { width:10px;height:10px;border-radius:2px;flex-shrink:0; }
-
 .batch-selector-wrap { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px; }
 .batch-selector-btn { font-size:11px;font-weight:600;letter-spacing:.05em;border-radius:20px;padding:5px 12px;border:1.5px solid var(--border);background:none;color:var(--gray);cursor:pointer;transition:all .15s;white-space:nowrap; }
 .batch-selector-btn.active { background:var(--black);border-color:var(--black);color:var(--white); }
@@ -589,18 +571,14 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
       <div class="analytics-section-sub">Institution-wide attendance health across all batches</div>
       <div class="analytics-kpi-row" id="analyticsKPI"></div>
       <div class="alert-summary-grid" id="alertSummaryCards"></div>
-      <div class="analytics-grid-2">
+      <!-- Monthly trend: full width since DoW is removed -->
+      <div class="analytics-full" style="margin-bottom:12px;">
         <div class="chart-card">
           <div class="chart-card-title">Monthly Attendance Trend</div>
           <div class="chart-card-sub" id="overallTrendSub">All students combined</div>
           <div style="position:relative;height:190px;">
             <canvas id="overallTrendChart"></canvas>
           </div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-card-title">Day-of-Week Pattern</div>
-          <div class="chart-card-sub">Avg attendance rate per weekday across all students</div>
-          <div id="overallDowChart" style="padding-top:2px;"></div>
         </div>
       </div>
       <div class="analytics-grid-12">
@@ -616,24 +594,6 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
             <canvas id="distributionDonut"></canvas>
           </div>
           <div id="donutLegend" style="margin-top:10px;"></div>
-        </div>
-      </div>
-      <div class="analytics-full">
-        <div class="chart-card">
-          <div class="chart-card-title">Student Activity Heatmap</div>
-          <div class="chart-card-sub">Relative attendance volume per day (darker = more students attended)</div>
-          <div class="heatmap-months" id="overallHeatmapMonths"></div>
-          <div style="overflow-x:auto;">
-            <div class="heatmap-grid" id="overallHeatmapGrid" style="min-width:520px;"></div>
-          </div>
-          <div class="heatmap-legend">
-            <span style="font-size:10px;color:var(--gray);margin-right:4px;">Fewer</span>
-            <div class="heatmap-legend-cell" style="background:var(--border);"></div>
-            <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.25);"></div>
-            <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.55);"></div>
-            <div class="heatmap-legend-cell" style="background:rgba(34,197,94,.85);"></div>
-            <span style="font-size:10px;color:var(--gray);margin-left:4px;">More</span>
-          </div>
         </div>
       </div>
       <div class="analytics-grid-2">
@@ -660,18 +620,14 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
       <div class="analytics-section-sub">Select a batch to see detailed analytics</div>
       <div class="batch-selector-wrap" id="batchSelectorWrap"></div>
       <div class="analytics-kpi-row" id="batchKPI"></div>
-      <div class="analytics-grid-2">
+      <!-- Monthly trend: full width since DoW is removed -->
+      <div class="analytics-full" style="margin-bottom:12px;">
         <div class="chart-card">
           <div class="chart-card-title">Monthly Attendance Trend</div>
           <div class="chart-card-sub" id="batchTrendSub">Select a batch above</div>
           <div style="position:relative;height:190px;">
             <canvas id="batchTrendChart"></canvas>
           </div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-card-title">Day-of-Week Pattern</div>
-          <div class="chart-card-sub">Which days this batch attends best</div>
-          <div id="batchDowChart" style="padding-top:2px;"></div>
         </div>
       </div>
       <div class="analytics-grid-12">
@@ -722,7 +678,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
           </div>
         </div>
         <div class="chart-card">
-          <div class="chart-card-title">Top & Bottom Faculty</div>
+          <div class="chart-card-title">Top &amp; Bottom Faculty</div>
           <div class="chart-card-sub">Classes conducted vs actual attendance rate</div>
           <div id="facultySpotlight"></div>
         </div>
@@ -1053,12 +1009,9 @@ function openStudentModal(phone) {
   }
   if (!student) return;
 
-  // Header
   document.getElementById('modalName').textContent = student.name;
 
-  // Badges
   var pc = pctClass(student.pct);
-  var dotColor = pc==='good'?'green':pc==='warn'?'amber':'red';
   var badges = [
     student.branch && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.branch)+'</div>',
     student.batch  && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.batch)+'</div>',
@@ -1069,17 +1022,14 @@ function openStudentModal(phone) {
   ].filter(Boolean).join('');
   document.getElementById('modalBadges').innerHTML = badges;
 
-  // Overview stats
   document.getElementById('modalOverviewStats').innerHTML =
     mosCard(student.total,    'Total Classes', '') +
     mosCard(student.attended, 'Attended',      '') +
     mosCard(student.absent,   'Absent',        student.absent > 0 ? 'bad' : '') +
     mosCard(student.pct+'%',  'Overall %',     pc);
 
-  // Body
   var bodyHtml = '';
 
-  // Health alerts
   bodyHtml += '<div class="modal-section"><div class="modal-section-title">Attendance Health</div>';
   if (student.pct < 65) {
     bodyHtml += makeModalAlert('low', '⚠️',
@@ -1095,7 +1045,6 @@ function openStudentModal(phone) {
   }
   bodyHtml += '</div>';
 
-  // Student info
   var infoItems = [
     { label:'College',     val:student.college    },
     { label:'City',        val:student.nativeCity },
@@ -1113,7 +1062,6 @@ function openStudentModal(phone) {
       }).join('') + '</div></div>';
   }
 
-  // Subject breakdown (from studentDetails, cache-derived)
   if (detail && detail.subjects && detail.subjects.length) {
     bodyHtml += '<div class="modal-section"><div class="modal-section-title">Subject Breakdown</div>';
     bodyHtml += '<div class="modal-subjects-grid">' +
@@ -1136,14 +1084,13 @@ function openStudentModal(phone) {
         '</div>';
       }).join('') +
     '</div>';
-    bodyHtml += '<div class="modal-note">Subject figures are cache-derived estimates. For exact per-subject counts, ask the student to check their portal.</div>';
+    bodyHtml += '<div class="modal-note">Subject figures are from the Student Subject Cache and are updated in real time on each scan.</div>';
     bodyHtml += '</div>';
   } else {
     bodyHtml += '<div class="modal-section"><div class="modal-section-title">Subject Breakdown</div>';
     bodyHtml += '<div style="font-size:12px;color:var(--gray);font-style:italic;">No subject data available for this student yet.</div></div>';
   }
 
-  // Active months
   if (detail && detail.attendedMonths && detail.attendedMonths.length) {
     var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     bodyHtml += '<div class="modal-section"><div class="modal-section-title">Active Months</div>';
@@ -1161,8 +1108,6 @@ function openStudentModal(phone) {
   }
 
   document.getElementById('modalBody').innerHTML = bodyHtml;
-
-  // Open
   document.getElementById('studentModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1214,7 +1159,6 @@ function renderOverallAnalytics(students, facultyStats, details) {
   var sumTot   = students.reduce(function(a,s){ return a+s.total;    },0);
   var ovPct    = sumTot > 0 ? parseFloat((sumAtt/sumTot*100).toFixed(1)) : 0;
 
-  // Recent trend: students active in last 14 days
   var today   = new Date();
   var cut14   = new Date(today.getTime() - 14*86400000);
   var recentActive = students.filter(function(s){ return s.lastDate && new Date(s.lastDate+'T12:00:00')>=cut14; }).length;
@@ -1231,12 +1175,9 @@ function renderOverallAnalytics(students, facultyStats, details) {
     alertSCard('Consecutive Absent', consec,  'warn',   'Flagged for streak') +
     alertSCard('On Track',           onTrack, 'ok',     'Above threshold');
 
-  // Monthly trend — built from studentDetails.attendedMonths (real data)
   renderOverallTrendChart(students, details);
-  renderOverallDowChart(students, details);
   renderBatchCompareChart(students);
   renderDistributionDonut(students, 'distributionDonut', 'donutLegend');
-  renderOverallHeatmap(students, details);
 
   var eligible = students.filter(function(s){ return s.total >= 3; });
   var atRisk   = eligible.slice().sort(function(a,b){ return a.pct-b.pct; }).slice(0,15);
@@ -1247,11 +1188,8 @@ function renderOverallAnalytics(students, facultyStats, details) {
   renderSpotlightList('topPerformersList', topPerf, false);
 }
 
-/* ── Monthly Trend (uses real attendedMonths from studentDetails) ── */
+/* ── Monthly Trend ── */
 function renderOverallTrendChart(students, details) {
-  // Build month → { sumPct, count } from students whose lastDate
-  // falls in that month AND we have attendedMonths data for them.
-  // attendedMonths is the array of months a student was active in.
   var monthMap = {};
   students.forEach(function(s) {
     var det = details[s.phone];
@@ -1299,45 +1237,6 @@ function renderOverallTrendChart(students, details) {
       }
     }
   });
-}
-
-/* ── DoW chart (uses attendedMonths to infer day-of-week) ── */
-function renderOverallDowChart(students, details) {
-  // For each student, the lastDate tells us which day they LAST attended.
-  // For a richer DoW signal we use all months in attendedMonths and
-  // approximate: pick the lastDate's day-of-week per student as their
-  // primary signal, then weight by their overall pct.
-  var dowMap = {0:{pct:0,cnt:0},1:{pct:0,cnt:0},2:{pct:0,cnt:0},3:{pct:0,cnt:0},4:{pct:0,cnt:0},5:{pct:0,cnt:0},6:{pct:0,cnt:0}};
-  students.forEach(function(s) {
-    if (!s.lastDate) return;
-    try {
-      var d   = new Date(s.lastDate+'T12:00:00');
-      var dow = d.getDay();
-      dowMap[dow].pct += s.pct;
-      dowMap[dow].cnt++;
-    } catch(e) {}
-  });
-  renderDowChartInto('overallDowChart', dowMap);
-}
-
-function renderDowChartInto(elId, dowMap) {
-  var dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  var maxAvg = 0;
-  for (var d=0;d<7;d++) { if(dowMap[d].cnt>0){ var a=dowMap[d].pct/dowMap[d].cnt; if(a>maxAvg)maxAvg=a; } }
-  if (maxAvg===0) maxAvg=100;
-  var html='';
-  for (var d2=0;d2<7;d2++) {
-    var avg2 = dowMap[d2].cnt>0 ? parseFloat((dowMap[d2].pct/dowMap[d2].cnt).toFixed(0)) : 0;
-    var barW = dowMap[d2].cnt>0 ? Math.round(avg2/maxAvg*100) : 0;
-    var col  = avg2>=75?'#22c55e':avg2>=65?'#f59e0b':avg2>0?'#D0261A':'#e8e4e0';
-    html += '<div class="dow-row">' +
-      '<div class="dow-label">'+dayNames[d2]+'</div>' +
-      '<div class="dow-bar-bg"><div class="dow-bar-fill" style="width:'+barW+'%;background:'+col+'"></div></div>' +
-      '<div class="dow-pct">'+(dowMap[d2].cnt>0?avg2+'%':'—')+'</div>' +
-      '<div class="dow-count">'+dowMap[d2].cnt+' stu.</div>' +
-    '</div>';
-  }
-  document.getElementById(elId).innerHTML = html || '<div style="font-size:12px;color:var(--gray);padding:12px 0;">No data yet</div>';
 }
 
 /* ── Batch comparison bars ── */
@@ -1392,59 +1291,6 @@ function renderDistributionDonut(students, canvasId, legendId) {
       '<span class="donut-legend-val">'+it.val+'</span>' +
     '</div>';
   }).join('');
-}
-
-/* ── Overall Heatmap (uses attendedMonths for real data) ── */
-function renderOverallHeatmap(students, details) {
-  // Build day-count map from attendedMonths: mark each month's dates
-  // proportional to the number of students active that month.
-  var monthStudentCount = {};
-  students.forEach(function(s) {
-    var det = details[s.phone];
-    if (!det || !det.attendedMonths) return;
-    det.attendedMonths.forEach(function(mk) {
-      monthStudentCount[mk] = (monthStudentCount[mk]||0) + 1;
-    });
-  });
-
-  // Also use lastDate signals for day-level precision
-  var dayCount = {};
-  students.forEach(function(s) {
-    if (s.lastDate) dayCount[s.lastDate] = (dayCount[s.lastDate]||0) + 1;
-  });
-  var maxCount = Math.max.apply(null, Object.values(dayCount).concat([1]));
-
-  var today = new Date(); today.setHours(12,0,0,0);
-  var start = new Date(today); start.setDate(start.getDate()-364);
-  start.setDate(start.getDate()-start.getDay());
-
-  var cells='', months=[], lastMon=-1, cursor=new Date(start);
-  var mNamesH = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
-  for (var w=0;w<53;w++) {
-    for (var d=0;d<7;d++) {
-      var iso    = fmtISO(cursor);
-      var cnt    = dayCount[iso]||0;
-      var mKey   = iso.slice(0,7);
-      var mCnt   = monthStudentCount[mKey]||0;
-      var future = cursor > today;
-      // Level: day-level signal takes priority; fall back to month-level
-      var level;
-      if (future)       level = 0;
-      else if (cnt > 0) level = cnt <= maxCount*0.33 ? 1 : cnt <= maxCount*0.66 ? 2 : 3;
-      else if (mCnt > 0) level = 1;
-      else               level = 0;
-
-      var mon = cursor.getMonth();
-      if (mon!==lastMon && d===0) { months.push({week:w,name:mNamesH[mon]}); lastMon=mon; }
-      cells += '<div class="heatmap-cell" data-level="'+level+'" title="'+iso+(cnt?' · '+cnt+' student'+(cnt===1?'':'s'):'')+'"></div>';
-      cursor.setDate(cursor.getDate()+1);
-    }
-  }
-  document.getElementById('overallHeatmapGrid').innerHTML = cells;
-  var mHtml='';
-  months.forEach(function(m){ mHtml+='<span style="left:'+parseFloat((m.week/53*100).toFixed(1))+'%">'+m.name+'</span>'; });
-  document.getElementById('overallHeatmapMonths').innerHTML = mHtml;
 }
 
 function renderSpotlightList(elId, students, isRisk) {
@@ -1507,7 +1353,7 @@ function renderBatchDeepDive(batchObj, facultyStats, details) {
     akpiCard('Low Attendance', low,        low>0?'bad':'good', 'Below 65% threshold', '') +
     akpiCard('On Track',       onTrack,    onTrack===total?'good':'warn', 'Meeting threshold', '');
 
-  // Monthly trend for this batch (from studentDetails.attendedMonths)
+  /* Monthly trend for this batch */
   var bMonthMap = {};
   students.forEach(function(s) {
     var det = details[s.phone];
@@ -1539,15 +1385,7 @@ function renderBatchDeepDive(batchObj, facultyStats, details) {
     });
   }
 
-  // DoW for this batch
-  var bDow = {0:{pct:0,cnt:0},1:{pct:0,cnt:0},2:{pct:0,cnt:0},3:{pct:0,cnt:0},4:{pct:0,cnt:0},5:{pct:0,cnt:0},6:{pct:0,cnt:0}};
-  students.forEach(function(s) {
-    if (!s.lastDate) return;
-    try { var d=new Date(s.lastDate+'T12:00:00'); bDow[d.getDay()].pct+=s.pct; bDow[d.getDay()].cnt++; } catch(e){}
-  });
-  renderDowChartInto('batchDowChart', bDow);
-
-  // Subject chart for this batch
+  /* Subject chart for this batch */
   var batchFaculty = facultyStats.filter(function(f){ return f.branch===batchObj.branch && f.batch===batchObj.batch; });
   var subjMap = {};
   batchFaculty.forEach(function(f) {
@@ -1563,7 +1401,6 @@ function renderBatchDeepDive(batchObj, facultyStats, details) {
   if (subjKeys.length > 0) {
     var subjBarH = Math.max(subjKeys.length*44+60, 100);
     bSubjWrap.style.height = subjBarH+'px';
-    // Recreate canvas to avoid stale context
     bSubjWrap.innerHTML = '<canvas id="batchSubjChart" style="height:'+subjBarH+'px"></canvas>';
     var ctx3 = document.getElementById('batchSubjChart').getContext('2d');
     _charts['batchSubjChart'] = new Chart(ctx3, {
