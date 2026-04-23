@@ -179,7 +179,6 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 }
 .modal-backdrop.open .modal-box { transform:none; }
 
-/* Modal header */
 .modal-header {
   background:var(--black);padding:20px 24px 18px;
   position:relative;flex-shrink:0;
@@ -197,13 +196,8 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .modal-student-name { font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.03em;color:var(--white);line-height:1;margin-bottom:4px; }
 .modal-badges { display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px; }
 .modal-badge { display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:500;color:rgba(255,255,255,.55); }
-.modal-badge-dot { width:4px;height:4px;border-radius:50%;flex-shrink:0; }
-.modal-badge-dot.green  { background:var(--green); }
-.modal-badge-dot.red    { background:var(--red-lt); }
-.modal-badge-dot.amber  { background:var(--amber); }
-.modal-badge-dot.gray   { background:rgba(255,255,255,.3); }
+.modal-badge-dot { width:4px;height:4px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.3); }
 
-/* Modal overview stats */
 .modal-overview-stats {
   display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
 }
@@ -214,12 +208,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .mos-val.bad  { color:var(--red-lt); }
 .mos-label { font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3); }
 
-/* Modal body */
 .modal-body { overflow-y:auto;flex:1;padding:20px 24px 24px; }
 .modal-body::-webkit-scrollbar { width:4px; }
 .modal-body::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
 
-/* Modal section */
 .modal-section { margin-bottom:20px; }
 .modal-section-title {
   font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;
@@ -228,12 +220,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 }
 .modal-section-title::after { content:'';flex:1;height:1px;background:var(--border); }
 
-/* Modal info grid */
 .modal-info-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px; }
 .modal-info-item-label { font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:2px; }
 .modal-info-item-val   { font-size:13px;font-weight:500;color:var(--black); }
 
-/* Modal health alerts */
 .modal-alert { border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:8px;margin-bottom:8px; }
 .modal-alert.low  { background:rgba(208,38,26,.06);border:1px solid rgba(208,38,26,.2); }
 .modal-alert.warn { background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2); }
@@ -244,13 +234,8 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .modal-alert.warn .modal-alert-text { color:#92400e; }
 .modal-alert.ok   .modal-alert-text { color:#15803d; }
 
-/* Modal subject cards */
 .modal-subjects-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px; }
-.modal-subj-card {
-  border-radius:10px;padding:12px 14px;
-  border:1.5px solid var(--border);background:var(--off);
-  position:relative;overflow:hidden;
-}
+.modal-subj-card { border-radius:10px;padding:12px 14px;border:1.5px solid var(--border);background:var(--off);position:relative;overflow:hidden; }
 .modal-subj-card.low-card { border-color:rgba(208,38,26,.3);background:rgba(208,38,26,.02); }
 .modal-subj-name { font-size:12px;font-weight:600;color:var(--black);margin-bottom:2px;line-height:1.3; }
 .modal-subj-fac  { font-size:10px;color:var(--gray);margin-bottom:8px; }
@@ -271,36 +256,37 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .modal-subj-need { font-size:9px;color:var(--red-dk);margin-top:4px; }
 .modal-note { font-size:10px;color:var(--gray);font-style:italic;margin-top:10px;padding:8px 10px;background:var(--off);border-radius:6px;border-left:3px solid var(--border); }
 
-/* Modal monthly timeline */
 .modal-months-wrap { display:flex;flex-wrap:wrap;gap:4px; }
-.modal-month-pill {
-  display:inline-flex;align-items:center;gap:4px;
-  background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);
-  border-radius:20px;padding:3px 9px;
-  font-size:10px;font-weight:600;color:#15803d;
-}
-.modal-month-pill svg { width:8px;height:8px; }
+.modal-month-pill { display:inline-flex;align-items:center;gap:4px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:600;color:#15803d; }
 
-/* ══════════════════════════════════════════
-   ANALYTICS TAB STYLES
-══════════════════════════════════════════ */
+/* ── MODAL LOADING SKELETON ── */
+.modal-skeleton { padding:20px 24px 24px; }
+.skel { background:linear-gradient(90deg,var(--border) 25%,var(--off) 50%,var(--border) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.skel-line { height:12px;margin-bottom:10px; }
+.skel-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-top:16px; }
+.skel-card { height:120px;border-radius:10px; }
+
+/* ── MODAL ERROR STATE ── */
+.modal-error-state { padding:48px 24px;text-align:center; }
+.modal-error-icon { font-size:32px;margin-bottom:12px; }
+.modal-error-title { font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--black);margin-bottom:8px; }
+.modal-error-sub { font-size:13px;color:var(--gray);line-height:1.5; }
+.modal-retry-btn { display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:10px 18px;background:var(--black);color:var(--white);border:none;border-radius:9px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.08em;cursor:pointer;transition:background .2s; }
+.modal-retry-btn:hover { background:var(--red); }
+
+/* ── ANALYTICS ── */
 .analytics-section { margin-bottom:28px; }
-.analytics-section-title {
-  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;
-  color:var(--black);margin-bottom:4px;display:flex;align-items:center;gap:10px;
-}
+.analytics-section-title { font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:var(--black);margin-bottom:4px;display:flex;align-items:center;gap:10px; }
 .analytics-section-title::after { content:'';flex:1;height:1px;background:var(--border); }
 .analytics-section-sub { font-size:12px;color:var(--gray);margin-bottom:14px; }
-
 .chart-card { background:var(--white);border-radius:14px;box-shadow:var(--card-sh);border:1px solid var(--border);padding:20px; }
 .chart-card-title { font-size:13px;font-weight:600;color:var(--black);margin-bottom:3px; }
 .chart-card-sub   { font-size:11px;color:var(--gray);margin-bottom:14px; }
-
 .analytics-grid-2  { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px; }
 .analytics-grid-3  { display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px; }
 .analytics-grid-12 { display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px; }
 .analytics-full    { margin-bottom:12px; }
-
 .analytics-kpi-row { display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px; }
 .akpi-card { background:var(--white);border-radius:12px;padding:16px 14px;box-shadow:var(--card-sh);border:1px solid var(--border); }
 .akpi-label { font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:6px; }
@@ -313,12 +299,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .akpi-trend.up   { background:rgba(34,197,94,.1);color:#15803d; }
 .akpi-trend.down { background:rgba(208,38,26,.1);color:var(--red-dk); }
 .akpi-trend.flat { background:rgba(153,148,144,.1);color:var(--gray); }
-
 .batch-selector-wrap { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px; }
 .batch-selector-btn { font-size:11px;font-weight:600;letter-spacing:.05em;border-radius:20px;padding:5px 12px;border:1.5px solid var(--border);background:none;color:var(--gray);cursor:pointer;transition:all .15s;white-space:nowrap; }
 .batch-selector-btn.active { background:var(--black);border-color:var(--black);color:var(--white); }
 .batch-selector-btn:hover:not(.active) { border-color:var(--black);color:var(--black); }
-
 .spotlight-table-wrap { background:var(--white);border-radius:12px;border:1px solid var(--border);box-shadow:var(--card-sh);overflow:hidden; }
 .spotlight-header { padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between; }
 .spotlight-title { font-size:13px;font-weight:600;color:var(--black); }
@@ -341,12 +325,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .spotlight-bar-fill.good { background:var(--green); }
 .spotlight-bar-fill.warn { background:var(--amber); }
 .spotlight-bar-fill.bad  { background:var(--red); }
-
 .donut-legend-item { display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px; }
 .donut-legend-dot  { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
 .donut-legend-label { color:var(--gray);flex:1; }
 .donut-legend-val  { font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--black); }
-
 .alert-summary-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px; }
 .alert-summary-card { border-radius:12px;padding:16px;border:1px solid; }
 .alert-summary-card.danger { background:rgba(208,38,26,.05);border-color:rgba(208,38,26,.2); }
@@ -361,7 +343,6 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 .alert-summary-card.warn   .alert-summary-label { color:#92400e; }
 .alert-summary-card.ok     .alert-summary-label { color:#15803d; }
 .alert-summary-sub { font-size:11px;color:var(--gray);margin-top:3px; }
-
 .batch-compare-row { display:flex;align-items:center;gap:10px;margin-bottom:10px; }
 .batch-compare-label { font-size:11px;font-weight:600;color:var(--black);width:140px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
 .batch-compare-bar-bg  { flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden; }
@@ -459,9 +440,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
         </svg>
       </button>
       <div class="modal-student-name" id="modalName">—</div>
-      <div class="modal-badges" id="modalBadges"></div>
+      <div class="modal-badges"        id="modalBadges"></div>
       <div class="modal-overview-stats" id="modalOverviewStats"></div>
     </div>
+    <!-- Body is either skeleton, error, or rendered content -->
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
@@ -480,7 +462,6 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     <button class="tab-btn"        onclick="switchTab('analytics')">📊 Analytics</button>
   </div>
 
-  <!-- ══ STUDENTS TAB ══ -->
   <div class="tab-panel active" id="tab-students">
     <div class="filter-bar">
       <label>Branch</label>
@@ -521,12 +502,10 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     </div>
   </div>
 
-  <!-- ══ BATCH OVERVIEW TAB ══ -->
   <div class="tab-panel" id="tab-batches">
     <div class="batch-summary-grid" id="batchGrid"></div>
   </div>
 
-  <!-- ══ ABSENTEES TAB ══ -->
   <div class="tab-panel" id="tab-absentees">
     <div class="filter-bar">
       <label>Branch</label>
@@ -539,7 +518,6 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     <div id="absentContent"></div>
   </div>
 
-  <!-- ══ FACULTY TAB ══ -->
   <div class="tab-panel" id="tab-faculty">
     <div class="filter-bar">
       <label>Branch</label>
@@ -562,23 +540,17 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
     </div>
   </div>
 
-  <!-- ══ ANALYTICS TAB ══ -->
   <div class="tab-panel" id="tab-analytics">
-
-    <!-- SECTION 1: Overall -->
     <div class="analytics-section">
       <div class="analytics-section-title">Overall Analytics</div>
       <div class="analytics-section-sub">Institution-wide attendance health across all batches</div>
       <div class="analytics-kpi-row" id="analyticsKPI"></div>
       <div class="alert-summary-grid" id="alertSummaryCards"></div>
-      <!-- Monthly trend: full width since DoW is removed -->
       <div class="analytics-full" style="margin-bottom:12px;">
         <div class="chart-card">
           <div class="chart-card-title">Monthly Attendance Trend</div>
           <div class="chart-card-sub" id="overallTrendSub">All students combined</div>
-          <div style="position:relative;height:190px;">
-            <canvas id="overallTrendChart"></canvas>
-          </div>
+          <div style="position:relative;height:190px;"><canvas id="overallTrendChart"></canvas></div>
         </div>
       </div>
       <div class="analytics-grid-12">
@@ -590,82 +562,59 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
         <div class="chart-card">
           <div class="chart-card-title">Attendance Distribution</div>
           <div class="chart-card-sub">Student breakdown by attendance health</div>
-          <div style="position:relative;height:180px;">
-            <canvas id="distributionDonut"></canvas>
-          </div>
+          <div style="position:relative;height:180px;"><canvas id="distributionDonut"></canvas></div>
           <div id="donutLegend" style="margin-top:10px;"></div>
         </div>
       </div>
       <div class="analytics-grid-2">
         <div class="spotlight-table-wrap">
-          <div class="spotlight-header">
-            <span class="spotlight-title">⚠️ At-Risk Students</span>
-            <span class="spotlight-badge" id="atRiskBadge">—</span>
-          </div>
+          <div class="spotlight-header"><span class="spotlight-title">⚠️ At-Risk Students</span><span class="spotlight-badge" id="atRiskBadge">—</span></div>
           <div class="spotlight-list" id="atRiskList"></div>
         </div>
         <div class="spotlight-table-wrap">
-          <div class="spotlight-header">
-            <span class="spotlight-title">🏆 Top Performers</span>
-            <span class="spotlight-badge" id="topPerformersBadge">—</span>
-          </div>
+          <div class="spotlight-header"><span class="spotlight-title">🏆 Top Performers</span><span class="spotlight-badge" id="topPerformersBadge">—</span></div>
           <div class="spotlight-list" id="topPerformersList"></div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 2: Batch Deep Dive -->
     <div class="analytics-section">
       <div class="analytics-section-title">Batch-wise Deep Dive</div>
       <div class="analytics-section-sub">Select a batch to see detailed analytics</div>
       <div class="batch-selector-wrap" id="batchSelectorWrap"></div>
       <div class="analytics-kpi-row" id="batchKPI"></div>
-      <!-- Monthly trend: full width since DoW is removed -->
       <div class="analytics-full" style="margin-bottom:12px;">
         <div class="chart-card">
           <div class="chart-card-title">Monthly Attendance Trend</div>
           <div class="chart-card-sub" id="batchTrendSub">Select a batch above</div>
-          <div style="position:relative;height:190px;">
-            <canvas id="batchTrendChart"></canvas>
-          </div>
+          <div style="position:relative;height:190px;"><canvas id="batchTrendChart"></canvas></div>
         </div>
       </div>
       <div class="analytics-grid-12">
         <div class="chart-card">
           <div class="chart-card-title">Subject-wise Attendance</div>
           <div class="chart-card-sub" id="batchSubjSub">Avg attendance per subject for selected batch</div>
-          <div style="position:relative;" id="batchSubjChartWrap">
-            <canvas id="batchSubjChart"></canvas>
-          </div>
+          <div style="position:relative;" id="batchSubjChartWrap"><canvas id="batchSubjChart"></canvas></div>
         </div>
         <div class="chart-card">
           <div class="chart-card-title">Distribution</div>
           <div class="chart-card-sub">Student attendance health in this batch</div>
-          <div style="position:relative;height:180px;">
-            <canvas id="batchDistDonut"></canvas>
-          </div>
+          <div style="position:relative;height:180px;"><canvas id="batchDistDonut"></canvas></div>
           <div id="batchDonutLegend" style="margin-top:10px;"></div>
         </div>
       </div>
       <div class="analytics-grid-2">
         <div class="spotlight-table-wrap">
-          <div class="spotlight-header">
-            <span class="spotlight-title">⚠️ Needs Attention</span>
-            <span class="spotlight-badge" id="batchAtRiskBadge">—</span>
-          </div>
+          <div class="spotlight-header"><span class="spotlight-title">⚠️ Needs Attention</span><span class="spotlight-badge" id="batchAtRiskBadge">—</span></div>
           <div class="spotlight-list" id="batchAtRiskList"></div>
         </div>
         <div class="spotlight-table-wrap">
-          <div class="spotlight-header">
-            <span class="spotlight-title">🏆 Best in Batch</span>
-            <span class="spotlight-badge" id="batchTopBadge">—</span>
-          </div>
+          <div class="spotlight-header"><span class="spotlight-title">🏆 Best in Batch</span><span class="spotlight-badge" id="batchTopBadge">—</span></div>
           <div class="spotlight-list" id="batchTopList"></div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 3: Faculty -->
     <div class="analytics-section">
       <div class="analytics-section-title">Faculty Analytics</div>
       <div class="analytics-section-sub">Engagement levels per faculty member</div>
@@ -673,9 +622,7 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
         <div class="chart-card">
           <div class="chart-card-title">Faculty Engagement Ranking</div>
           <div class="chart-card-sub">Average student attendance % per faculty</div>
-          <div style="position:relative;" id="facultyChartWrap">
-            <canvas id="facultyChart"></canvas>
-          </div>
+          <div style="position:relative;" id="facultyChartWrap"><canvas id="facultyChart"></canvas></div>
         </div>
         <div class="chart-card">
           <div class="chart-card-title">Top &amp; Bottom Faculty</div>
@@ -684,10 +631,9 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
         </div>
       </div>
     </div>
+  </div>
 
-  </div><!-- /tab-analytics -->
-
-</div><!-- /page -->
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
@@ -696,10 +642,20 @@ input[type="password"]:focus { outline:none;border-color:var(--red);background:v
 ═══════════════════════════════════════════════════════ */
 var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJFsZHidHzFcDu4aJeaRzBgWyHO8AQ-teo4v-AXPV_aFqzjQTo7WnAuyw1S0kV-fol/exec";
 
-var _dashData       = null;
-var _isBusy         = false;
-var _selectedBatch  = null;
-var _charts         = {};
+/* ═══════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════ */
+var _dashData             = null;
+var _isBusy               = false;
+var _selectedBatch        = null;
+var _charts               = {};
+var _currentTeacherToken  = null;
+
+// ── Modal lazy-load state ──────────────────────────────
+// Tracks which phone is currently being fetched so a second
+// click while a request is in flight cancels the first one.
+var _modalCurrentPhone    = null;
+var _modalCancelFn        = null;   // cancels the in-flight JSONP call
 
 /* ═══════════════════════════════════════════════════════
    LOGIN
@@ -707,6 +663,7 @@ var _charts         = {};
 (function init() {
   var saved = sessionStorage.getItem('teacher_token');
   if (saved) {
+    _currentTeacherToken = saved;
     document.getElementById('loginOverlay').style.display = 'none';
     fetchDashboard(saved);
   }
@@ -739,6 +696,7 @@ async function doLogin() {
       document.getElementById('loginOverlay').style.display = 'flex';
       return;
     }
+    _currentTeacherToken = data.token;
     sessionStorage.setItem('teacher_token', data.token);
     fetchDashboard(data.token);
   });
@@ -746,7 +704,7 @@ async function doLogin() {
 
 function doLogout() {
   sessionStorage.removeItem('teacher_token');
-  _dashData = null; _selectedBatch = null;
+  _dashData = null; _selectedBatch = null; _currentTeacherToken = null;
   document.getElementById('topbar').style.display   = 'none';
   document.getElementById('dashPage').style.display = 'none';
   document.getElementById('pwInput').value = '';
@@ -781,6 +739,10 @@ function hideLoading()    { document.getElementById('fullLoading').style.display
 
 /* ═══════════════════════════════════════════════════════
    MAIN RENDER
+   Note: studentDetails is no longer in _dashData (v2.7).
+   The analytics tab now uses studentAttendedMonths which
+   is a lightweight map (phone → months[]) included in
+   the dashboard response.
 ═══════════════════════════════════════════════════════ */
 function renderDashboard(data) {
   document.getElementById('topbar').style.display  = 'flex';
@@ -998,27 +960,45 @@ function applyFacFilters() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   STUDENT DETAIL MODAL
+   STUDENT DETAIL MODAL  (v2.7 — lazy-loaded)
+   ─────────────────────────────────────────────────────
+   Flow:
+   1. openStudentModal(phone) is called (row click or absent card).
+   2. Header is populated immediately from _dashData.students
+      (no network needed — name, batch, overview stats are there).
+   3. Modal opens with a shimmer skeleton in the body.
+   4. A JSONP call fires to getStudentDetail?token=…&phone=…
+   5. On success → renderModalBody(detail).
+   6. On failure → renderModalError(phone) with a Retry button.
+   7. A second click while a call is in flight: the in-flight
+      call is abandoned via the cancel function returned by
+      jsonpCancellable(), and a new call starts immediately.
 ═══════════════════════════════════════════════════════ */
 function openStudentModal(phone) {
-  if (!_dashData || !_dashData.studentDetails) return;
-  var detail  = _dashData.studentDetails[phone];
+  if (!_dashData) return;
+
+  // Find student in the already-loaded list
   var student = null;
-  for (var i=0; i<_dashData.students.length; i++) {
+  for (var i = 0; i < _dashData.students.length; i++) {
     if (_dashData.students[i].phone === phone) { student = _dashData.students[i]; break; }
   }
   if (!student) return;
 
+  // Cancel any in-flight request for a previous student
+  if (_modalCancelFn) { _modalCancelFn(); _modalCancelFn = null; }
+  _modalCurrentPhone = phone;
+
+  // ── Populate header immediately (no network needed) ──
   document.getElementById('modalName').textContent = student.name;
 
   var pc = pctClass(student.pct);
   var badges = [
-    student.branch && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.branch)+'</div>',
-    student.batch  && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.batch)+'</div>',
-    student.center && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.center)+'</div>',
-    student.mode   && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.mode)+'</div>',
-    student.examTarget && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.examTarget)+'</div>',
-    student.phone  && '<div class="modal-badge"><div class="modal-badge-dot gray"></div>'+esc(student.phone)+'</div>'
+    student.branch    && '<div class="modal-badge"><div class="modal-badge-dot"></div>'+esc(student.branch)+'</div>',
+    student.batch     && '<div class="modal-badge"><div class="modal-badge-dot"></div>'+esc(student.batch)+'</div>',
+    student.center    && '<div class="modal-badge"><div class="modal-badge-dot"></div>'+esc(student.center)+'</div>',
+    student.mode      && '<div class="modal-badge"><div class="modal-badge-dot"></div>'+esc(student.mode)+'</div>',
+    student.examTarget && '<div class="modal-badge"><div class="modal-badge-dot"></div>'+esc(student.examTarget)+'</div>',
+    student.phone     && '<div class="modal-badge"><div class="modal-badge-dot"></div>'+esc(student.phone)+'</div>'
   ].filter(Boolean).join('');
   document.getElementById('modalBadges').innerHTML = badges;
 
@@ -1028,8 +1008,39 @@ function openStudentModal(phone) {
     mosCard(student.absent,   'Absent',        student.absent > 0 ? 'bad' : '') +
     mosCard(student.pct+'%',  'Overall %',     pc);
 
+  // ── Show skeleton in body while fetching ────────────
+  document.getElementById('modalBody').innerHTML = modalSkeletonHtml();
+
+  // ── Open modal ───────────────────────────────────────
+  document.getElementById('studentModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // ── Fire the lazy-load request ───────────────────────
+  if (!_currentTeacherToken) { renderModalError(phone, 'No active session.'); return; }
+
+  var url = APPS_SCRIPT_URL +
+    '?action=getStudentDetail' +
+    '&token=' + encodeURIComponent(_currentTeacherToken) +
+    '&phone=' + encodeURIComponent(phone);
+
+  _modalCancelFn = jsonpCancellable(url, function(data) {
+    _modalCancelFn = null;
+    // Guard: user may have opened a different student before this resolved
+    if (_modalCurrentPhone !== phone) return;
+
+    if (!data || !data.success) {
+      renderModalError(phone, (data && data.error) || 'Could not load student details.');
+      return;
+    }
+    renderModalBody(student, data);
+  });
+}
+
+/* Renders the subject breakdown and info once detail arrives */
+function renderModalBody(student, detail) {
   var bodyHtml = '';
 
+  // Health alerts
   bodyHtml += '<div class="modal-section"><div class="modal-section-title">Attendance Health</div>';
   if (student.pct < 65) {
     bodyHtml += makeModalAlert('low', '⚠️',
@@ -1045,12 +1056,13 @@ function openStudentModal(phone) {
   }
   bodyHtml += '</div>';
 
+  // Student info
   var infoItems = [
-    { label:'College',     val:student.college    },
-    { label:'City',        val:student.nativeCity },
-    { label:'Batch Code',  val:student.batchCode  },
+    { label:'College',       val:student.college      },
+    { label:'City',          val:student.nativeCity   },
+    { label:'Batch Code',    val:student.batchCode    },
     { label:'Date of Joining', val:student.doj ? student.doj.split('-').reverse().join('-') : null },
-    { label:'Last Attended', val:student.lastDate ? student.lastDate.split('-').reverse().join('-') : 'Never' }
+    { label:'Last Attended',   val:student.lastDate ? student.lastDate.split('-').reverse().join('-') : 'Never' }
   ].filter(function(it){ return it.val && it.val !== '—'; });
 
   if (infoItems.length) {
@@ -1062,7 +1074,8 @@ function openStudentModal(phone) {
       }).join('') + '</div></div>';
   }
 
-  if (detail && detail.subjects && detail.subjects.length) {
+  // Subjects
+  if (detail.subjects && detail.subjects.length) {
     bodyHtml += '<div class="modal-section"><div class="modal-section-title">Subject Breakdown</div>';
     bodyHtml += '<div class="modal-subjects-grid">' +
       detail.subjects.map(function(s) {
@@ -1082,16 +1095,16 @@ function openStudentModal(phone) {
           '</div>' +
           (s.needToAttend > 0 ? '<div class="modal-subj-need">Need ' + s.needToAttend + ' more to reach threshold</div>' : '') +
         '</div>';
-      }).join('') +
-    '</div>';
-    bodyHtml += '<div class="modal-note">Subject figures are from the Student Subject Cache and are updated in real time on each scan.</div>';
+      }).join('') + '</div>';
+    bodyHtml += '<div class="modal-note">Subject figures are from the Student Subject Cache — updated on every scan.</div>';
     bodyHtml += '</div>';
   } else {
     bodyHtml += '<div class="modal-section"><div class="modal-section-title">Subject Breakdown</div>';
-    bodyHtml += '<div style="font-size:12px;color:var(--gray);font-style:italic;">No subject data available for this student yet.</div></div>';
+    bodyHtml += '<div style="font-size:12px;color:var(--gray);font-style:italic;">No subject data yet. Run ♻️ Recalculate Student Subject Cache from the menu.</div></div>';
   }
 
-  if (detail && detail.attendedMonths && detail.attendedMonths.length) {
+  // Active months
+  if (detail.attendedMonths && detail.attendedMonths.length) {
     var mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     bodyHtml += '<div class="modal-section"><div class="modal-section-title">Active Months</div>';
     bodyHtml += '<div class="modal-months-wrap">' +
@@ -1099,31 +1112,51 @@ function openStudentModal(phone) {
         var parts = mk.split('-');
         var label = mNames[parseInt(parts[1],10)-1] + ' ' + parts[0].slice(2);
         return '<div class="modal-month-pill">' +
-          '<svg viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="#22c55e"/></svg>' +
+          '<svg viewBox="0 0 8 8" fill="none" width="8" height="8"><circle cx="4" cy="4" r="3" fill="#22c55e"/></svg>' +
           label + '</div>';
-      }).join('') +
-    '</div>';
-    bodyHtml += '<div class="modal-note" style="margin-top:8px;">Months where this student\'s batch had classes and the student was marked present at least once.</div>';
+      }).join('') + '</div>';
+    bodyHtml += '<div class="modal-note" style="margin-top:8px;">Months where this student\'s batch had classes and the student attended at least once.</div>';
     bodyHtml += '</div>';
   }
 
   document.getElementById('modalBody').innerHTML = bodyHtml;
-  document.getElementById('studentModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+}
+
+function renderModalError(phone, msg) {
+  document.getElementById('modalBody').innerHTML =
+    '<div class="modal-error-state">' +
+      '<div class="modal-error-icon">⚠️</div>' +
+      '<div class="modal-error-title">Could Not Load</div>' +
+      '<div class="modal-error-sub">' + esc(msg || 'Something went wrong.') + '</div>' +
+      '<button class="modal-retry-btn" onclick="openStudentModal(\'' + esc(phone) + '\')">Retry</button>' +
+    '</div>';
+}
+
+function modalSkeletonHtml() {
+  return '<div class="modal-skeleton">' +
+    '<div class="skel skel-line" style="width:60%;margin-bottom:14px;"></div>' +
+    '<div class="skel skel-line" style="width:40%;margin-bottom:20px;"></div>' +
+    '<div class="skel skel-line" style="width:80%;"></div>' +
+    '<div class="skel skel-line" style="width:65%;"></div>' +
+    '<div class="skel skel-grid">' +
+      '<div class="skel skel-card"></div>' +
+      '<div class="skel skel-card"></div>' +
+      '<div class="skel skel-card"></div>' +
+      '<div class="skel skel-card"></div>' +
+    '</div>' +
+  '</div>';
 }
 
 function closeModal() {
+  if (_modalCancelFn) { _modalCancelFn(); _modalCancelFn = null; }
+  _modalCurrentPhone = null;
   document.getElementById('studentModal').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function handleModalBackdropClick(e) {
   if (e.target === document.getElementById('studentModal')) closeModal();
 }
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
-});
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
 
 function mosCard(val, label, cls) {
   return '<div class="mos-card"><div class="mos-val' + (cls?' '+cls:'') + '">' + esc(String(val)) +
@@ -1136,28 +1169,29 @@ function makeModalAlert(type, icon, html) {
 
 /* ═══════════════════════════════════════════════════════
    ANALYTICS TAB
+   Uses studentAttendedMonths (from dashboard response) for
+   the monthly trend charts. studentDetails is gone in v2.7.
 ═══════════════════════════════════════════════════════ */
 function renderAnalyticsTab(data) {
-  var students     = data.students     || [];
-  var facultyStats = data.facultyStats || [];
-  var details      = data.studentDetails || {};
+  var students            = data.students            || [];
+  var facultyStats        = data.facultyStats        || [];
+  var studentAttMonths    = data.studentAttendedMonths || {};
   if (!students.length) return;
-  renderOverallAnalytics(students, facultyStats, details);
-  renderBatchSelectorAndInit(students, facultyStats, details);
+  renderOverallAnalytics(students, facultyStats, studentAttMonths);
+  renderBatchSelectorAndInit(students, facultyStats, studentAttMonths);
   renderFacultyAnalytics(facultyStats, students);
 }
 
-/* ── Overall Analytics ── */
-function renderOverallAnalytics(students, facultyStats, details) {
-  var total    = students.length;
-  var low      = students.filter(function(s){ return s.flag==='low'||s.flag==='both'; }).length;
-  var consec   = students.filter(function(s){ return s.flag==='consecutive'||s.flag==='both'; }).length;
-  var onTrack  = students.filter(function(s){ return s.flag===''; }).length;
-  var sumPct   = students.reduce(function(a,s){ return a+s.pct; },0);
-  var avgPct   = total > 0 ? parseFloat((sumPct/total).toFixed(1)) : 0;
-  var sumAtt   = students.reduce(function(a,s){ return a+s.attended; },0);
-  var sumTot   = students.reduce(function(a,s){ return a+s.total;    },0);
-  var ovPct    = sumTot > 0 ? parseFloat((sumAtt/sumTot*100).toFixed(1)) : 0;
+function renderOverallAnalytics(students, facultyStats, studentAttMonths) {
+  var total   = students.length;
+  var low     = students.filter(function(s){ return s.flag==='low'||s.flag==='both'; }).length;
+  var consec  = students.filter(function(s){ return s.flag==='consecutive'||s.flag==='both'; }).length;
+  var onTrack = students.filter(function(s){ return s.flag===''; }).length;
+  var sumPct  = students.reduce(function(a,s){ return a+s.pct; },0);
+  var avgPct  = total > 0 ? parseFloat((sumPct/total).toFixed(1)) : 0;
+  var sumAtt  = students.reduce(function(a,s){ return a+s.attended; },0);
+  var sumTot  = students.reduce(function(a,s){ return a+s.total;    },0);
+  var ovPct   = sumTot > 0 ? parseFloat((sumAtt/sumTot*100).toFixed(1)) : 0;
 
   var today   = new Date();
   var cut14   = new Date(today.getTime() - 14*86400000);
@@ -1168,14 +1202,14 @@ function renderOverallAnalytics(students, facultyStats, details) {
     akpiCard('Avg Attendance', avgPct+'%', pctClass(avgPct), 'Per-student average', '') +
     akpiCard('Overall Rate',   ovPct+'%',  pctClass(ovPct),  sumAtt+' of '+sumTot+' slots', '') +
     akpiCard('Active (14d)',   recentActive, recentActive>total*0.7?'good':'warn', 'Students seen in last 14 days', '<span class="akpi-trend '+trendDir+'">'+(trendDir==='up'?'▲ Active':trendDir==='down'?'▼ Dipping':'● Stable')+'</span>') +
-    akpiCard('On Track',       onTrack, onTrack===total?'good':'warn', 'Meeting 65% threshold', '');
+    akpiCard('On Track', onTrack, onTrack===total?'good':'warn', 'Meeting 65% threshold', '');
 
   document.getElementById('alertSummaryCards').innerHTML =
     alertSCard('Low Attendance',     low,     'danger', 'Students below 65%') +
     alertSCard('Consecutive Absent', consec,  'warn',   'Flagged for streak') +
     alertSCard('On Track',           onTrack, 'ok',     'Above threshold');
 
-  renderOverallTrendChart(students, details);
+  renderOverallTrendChart(students, studentAttMonths);
   renderBatchCompareChart(students);
   renderDistributionDonut(students, 'distributionDonut', 'donutLegend');
 
@@ -1184,17 +1218,16 @@ function renderOverallAnalytics(students, facultyStats, details) {
   var topPerf  = eligible.slice().sort(function(a,b){ return b.pct-a.pct; }).slice(0,15);
   document.getElementById('atRiskBadge').textContent       = low + ' students';
   document.getElementById('topPerformersBadge').textContent = onTrack + ' students';
-  renderSpotlightList('atRiskList',        atRisk, true);
+  renderSpotlightList('atRiskList',        atRisk,  true);
   renderSpotlightList('topPerformersList', topPerf, false);
 }
 
-/* ── Monthly Trend ── */
-function renderOverallTrendChart(students, details) {
+/* Monthly trend — uses studentAttendedMonths instead of studentDetails */
+function renderOverallTrendChart(students, studentAttMonths) {
   var monthMap = {};
   students.forEach(function(s) {
-    var det = details[s.phone];
-    if (!det || !det.attendedMonths) return;
-    det.attendedMonths.forEach(function(mk) {
+    var months = studentAttMonths[s.phone] || [];
+    months.forEach(function(mk) {
       if (!monthMap[mk]) monthMap[mk] = { sumPct:0, count:0 };
       monthMap[mk].sumPct += s.pct;
       monthMap[mk].count++;
@@ -1212,7 +1245,6 @@ function renderOverallTrendChart(students, details) {
   var cnts    = monthKeys.map(function(k){ return monthMap[k].count; });
 
   document.getElementById('overallTrendSub').textContent = labels[0]+' – '+labels[labels.length-1]+' · '+students.length+' students';
-
   destroyChart('overallTrendChart');
   var ctx = document.getElementById('overallTrendChart').getContext('2d');
   _charts['overallTrendChart'] = new Chart(ctx, {
@@ -1229,7 +1261,7 @@ function renderOverallTrendChart(students, details) {
     },
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(ctx){ return ctx.dataset.label+': '+(ctx.datasetIndex===0?ctx.raw+'%':ctx.raw+' students'); }}} },
+      plugins:{ legend:{display:false} },
       scales:{
         y:{ min:0,max:100, grid:{color:'rgba(0,0,0,.04)'}, ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#999490',callback:function(v){return v+'%';}} },
         y2:{ position:'right', grid:{display:false}, ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'rgba(59,130,246,.5)'} },
@@ -1239,7 +1271,6 @@ function renderOverallTrendChart(students, details) {
   });
 }
 
-/* ── Batch comparison bars ── */
 function renderBatchCompareChart(students) {
   var batches = {};
   students.forEach(function(s) {
@@ -1263,7 +1294,6 @@ function renderBatchCompareChart(students) {
   }).join('');
 }
 
-/* ── Distribution Donut ── */
 function renderDistributionDonut(students, canvasId, legendId) {
   var excellent = students.filter(function(s){ return s.pct>=85; }).length;
   var good      = students.filter(function(s){ return s.pct>=75&&s.pct<85; }).length;
@@ -1277,7 +1307,7 @@ function renderDistributionDonut(students, canvasId, legendId) {
     data:{ labels:['Excellent ≥85%','Good ≥75%','At Risk ≥65%','Low <65%'],
       datasets:[{ data:[excellent,good,warn,low], backgroundColor:['#22c55e','#86efac','#f59e0b','#D0261A'], borderWidth:2, borderColor:'#ffffff' }] },
     options:{ responsive:true,maintainAspectRatio:false,cutout:'65%',
-      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(ctx){ return ' '+ctx.label+': '+ctx.raw+' ('+parseFloat((ctx.raw/total*100).toFixed(1))+'%)'; }}} } }
+      plugins:{ legend:{display:false} } }
   });
   document.getElementById(legendId).innerHTML = [
     {color:'#22c55e',label:'Excellent ≥85%',val:excellent},
@@ -1307,10 +1337,8 @@ function renderSpotlightList(elId, students, isRisk) {
   }).join('');
 }
 
-/* ══════════════════════════════════════════
-   BATCH DEEP DIVE
-══════════════════════════════════════════ */
-function renderBatchSelectorAndInit(students, facultyStats, details) {
+/* ── Batch Deep Dive (uses studentAttMonths, no studentDetails) ── */
+function renderBatchSelectorAndInit(students, facultyStats, studentAttMonths) {
   var batchMap = {};
   students.forEach(function(s) {
     var k = s.branch+'|||'+s.batch;
@@ -1323,9 +1351,10 @@ function renderBatchSelectorAndInit(students, facultyStats, details) {
   wrap.innerHTML = batchKeys.map(function(k,i){
     return '<button class="batch-selector-btn'+(i===0?' active':'')+'" data-key="'+esc(k)+'" onclick="selectBatch(\''+esc(k.replace(/\\/g,'\\\\').replace(/'/g,"\\\'"))+'\')">'+esc(batchMap[k].label)+'</button>';
   }).join('');
-  window._batchMapGlobal = batchMap;
+  window._batchMapGlobal        = batchMap;
+  window._studentAttMonthsGlobal = studentAttMonths;
   _selectedBatch = batchKeys[0];
-  renderBatchDeepDive(batchMap[batchKeys[0]], facultyStats, details);
+  renderBatchDeepDive(batchMap[batchKeys[0]], facultyStats, studentAttMonths);
 }
 
 function selectBatch(key) {
@@ -1334,10 +1363,10 @@ function selectBatch(key) {
   document.querySelectorAll('.batch-selector-btn').forEach(function(btn){
     btn.classList.toggle('active', btn.getAttribute('data-key')===key);
   });
-  renderBatchDeepDive(window._batchMapGlobal[key], _dashData.facultyStats||[], _dashData.studentDetails||{});
+  renderBatchDeepDive(window._batchMapGlobal[key], _dashData.facultyStats||[], window._studentAttMonthsGlobal||{});
 }
 
-function renderBatchDeepDive(batchObj, facultyStats, details) {
+function renderBatchDeepDive(batchObj, facultyStats, studentAttMonths) {
   var students = batchObj.students;
   var total    = students.length;
   var sumPct   = students.reduce(function(a,s){ return a+s.pct; },0);
@@ -1348,17 +1377,16 @@ function renderBatchDeepDive(batchObj, facultyStats, details) {
   var sumTot   = students.reduce(function(a,s){ return a+s.total;    },0);
 
   document.getElementById('batchKPI').innerHTML =
-    akpiCard('Students',       total,     '',             batchObj.branch+' · '+batchObj.batch, '') +
+    akpiCard('Students',       total,      '',              batchObj.branch+' · '+batchObj.batch, '') +
     akpiCard('Avg Attendance', avgPct+'%', pctClass(avgPct), sumAtt+' of '+sumTot+' slots', '') +
     akpiCard('Low Attendance', low,        low>0?'bad':'good', 'Below 65% threshold', '') +
     akpiCard('On Track',       onTrack,    onTrack===total?'good':'warn', 'Meeting threshold', '');
 
-  /* Monthly trend for this batch */
+  // Monthly trend for this batch
   var bMonthMap = {};
   students.forEach(function(s) {
-    var det = details[s.phone];
-    if (!det || !det.attendedMonths) return;
-    det.attendedMonths.forEach(function(mk) {
+    var months = (studentAttMonths && studentAttMonths[s.phone]) || [];
+    months.forEach(function(mk) {
       if (!bMonthMap[mk]) bMonthMap[mk]={sumPct:0,cnt:0};
       bMonthMap[mk].sumPct += s.pct;
       bMonthMap[mk].cnt++;
@@ -1385,7 +1413,7 @@ function renderBatchDeepDive(batchObj, facultyStats, details) {
     });
   }
 
-  /* Subject chart for this batch */
+  // Subject chart
   var batchFaculty = facultyStats.filter(function(f){ return f.branch===batchObj.branch && f.batch===batchObj.batch; });
   var subjMap = {};
   batchFaculty.forEach(function(f) {
@@ -1423,17 +1451,13 @@ function renderBatchDeepDive(batchObj, facultyStats, details) {
   renderDistributionDonut(students, 'batchDistDonut', 'batchDonutLegend');
 
   var eligible = students.filter(function(s){ return s.total>=2; });
-  var bAtRisk  = eligible.slice().sort(function(a,b){ return a.pct-b.pct; }).slice(0,10);
-  var bTop     = eligible.slice().sort(function(a,b){ return b.pct-a.pct; }).slice(0,10);
   document.getElementById('batchAtRiskBadge').textContent = low+' students';
   document.getElementById('batchTopBadge').textContent    = onTrack+' on track';
-  renderSpotlightList('batchAtRiskList', bAtRisk, true);
-  renderSpotlightList('batchTopList',    bTop,    false);
+  renderSpotlightList('batchAtRiskList', eligible.slice().sort(function(a,b){ return a.pct-b.pct; }).slice(0,10), true);
+  renderSpotlightList('batchTopList',    eligible.slice().sort(function(a,b){ return b.pct-a.pct; }).slice(0,10), false);
 }
 
-/* ══════════════════════════════════════════
-   FACULTY ANALYTICS
-══════════════════════════════════════════ */
+/* ── Faculty Analytics ── */
 function renderFacultyAnalytics(facultyStats, students) {
   if (!facultyStats.length) {
     document.getElementById('facultyChartWrap').innerHTML='<div style="font-size:12px;color:var(--gray);padding:12px;">No faculty data.</div>';
@@ -1462,39 +1486,36 @@ function renderFacultyAnalytics(facultyStats, students) {
     data:{ labels:facNames.map(function(n){ return n.length>20?n.slice(0,18)+'…':n; }),
       datasets:[{ label:'Avg %', data:facPcts, backgroundColor:facPcts.map(function(p){ return p>=75?'rgba(34,197,94,.75)':p>=65?'rgba(245,158,11,.75)':'rgba(208,38,26,.75)'; }), borderRadius:4, borderSkipped:false }] },
     options:{ responsive:true,maintainAspectRatio:false,indexAxis:'y',
-      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:function(ctx){ return ' Avg: '+ctx.raw+'%'; }}} },
+      plugins:{ legend:{display:false} },
       scales:{ x:{min:0,max:100,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'},font:{size:10,family:"'Outfit',sans-serif"},color:'#999490'}},
                y:{grid:{display:false},ticks:{font:{size:10,family:"'Outfit',sans-serif"},color:'#0a0a0a'}} } }
   });
 
-  var sorted  = facNames.slice();
-  var top5    = sorted.slice(0, Math.min(5, sorted.length));
-  var bottom5 = sorted.slice(Math.max(0, sorted.length-5)).reverse();
-  var spotHtml = '<div style="margin-bottom:16px;">' +
-    '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">🏆 Top Engaging</div>';
+  var sorted = facNames.slice();
+  var top5   = sorted.slice(0, Math.min(5, sorted.length));
+  var bot5   = sorted.slice(Math.max(0, sorted.length-5)).reverse();
+  var html   = '<div style="margin-bottom:16px;"><div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">🏆 Top Engaging</div>';
   top5.forEach(function(n,i) {
     var f=facMap[n], pct=f.possible>0?parseFloat((f.actual/f.possible*100).toFixed(1)):0, pc=pctClass(pct);
-    spotHtml += '<div class="spotlight-row" style="cursor:default;">' +
-      '<div class="spotlight-rank">'+(i+1)+'</div>' +
-      '<div><div class="spotlight-name">'+esc(n)+'</div><div class="spotlight-meta">'+f.subjects.slice(0,2).map(esc).join(', ')+(f.subjects.length>2?' +more':'')+'</div></div>' +
-      '<div class="spotlight-bar"><div class="spotlight-bar-fill '+pc+'" style="width:'+Math.min(pct,100)+'%"></div></div>' +
-      '<div class="spotlight-pct '+pc+'">'+pct+'%</div>' +
-    '</div>';
+    html += '<div class="spotlight-row" style="cursor:default;">'+
+      '<div class="spotlight-rank">'+(i+1)+'</div>'+
+      '<div><div class="spotlight-name">'+esc(n)+'</div><div class="spotlight-meta">'+f.subjects.slice(0,2).map(esc).join(', ')+(f.subjects.length>2?' +more':'')+'</div></div>'+
+      '<div class="spotlight-bar"><div class="spotlight-bar-fill '+pc+'" style="width:'+Math.min(pct,100)+'%"></div></div>'+
+      '<div class="spotlight-pct '+pc+'">'+pct+'%</div></div>';
   });
-  spotHtml += '</div>';
-  if (bottom5.length && bottom5[0] !== top5[top5.length-1]) {
-    spotHtml += '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">⚠️ Needs Improvement</div>';
-    bottom5.forEach(function(n,i) {
+  html += '</div>';
+  if (bot5.length && bot5[0] !== top5[top5.length-1]) {
+    html += '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">⚠️ Needs Improvement</div>';
+    bot5.forEach(function(n,i) {
       var f=facMap[n], pct=f.possible>0?parseFloat((f.actual/f.possible*100).toFixed(1)):0, pc=pctClass(pct);
-      spotHtml += '<div class="spotlight-row" style="cursor:default;">' +
-        '<div class="spotlight-rank" style="color:var(--red);">'+(i+1)+'</div>' +
-        '<div><div class="spotlight-name">'+esc(n)+'</div><div class="spotlight-meta">'+esc(f.subjects[0]||'')+'</div></div>' +
-        '<div class="spotlight-bar"><div class="spotlight-bar-fill '+pc+'" style="width:'+Math.min(pct,100)+'%"></div></div>' +
-        '<div class="spotlight-pct '+pc+'">'+pct+'%</div>' +
-      '</div>';
+      html += '<div class="spotlight-row" style="cursor:default;">'+
+        '<div class="spotlight-rank" style="color:var(--red);">'+(i+1)+'</div>'+
+        '<div><div class="spotlight-name">'+esc(n)+'</div><div class="spotlight-meta">'+esc(f.subjects[0]||'')+'</div></div>'+
+        '<div class="spotlight-bar"><div class="spotlight-bar-fill '+pc+'" style="width:'+Math.min(pct,100)+'%"></div></div>'+
+        '<div class="spotlight-pct '+pc+'">'+pct+'%</div></div>';
     });
   }
-  document.getElementById('facultySpotlight').innerHTML = spotHtml;
+  document.getElementById('facultySpotlight').innerHTML = html;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1517,7 +1538,7 @@ function akpiCard(label, val, cls, sub, extra) {
   return '<div class="akpi-card">' +
     '<div class="akpi-label">'+esc(label)+'</div>' +
     '<div class="akpi-val'+(cls?' '+cls:'')+'">'+esc(String(val))+'</div>' +
-    (sub  ? '<div class="akpi-sub">'+esc(sub)+'</div>' : '') +
+    (sub   ? '<div class="akpi-sub">'+esc(sub)+'</div>' : '') +
     (extra ? extra : '') +
   '</div>';
 }
@@ -1528,37 +1549,73 @@ function alertSCard(label, val, type, sub) {
     '<div class="alert-summary-sub">'+esc(sub)+'</div>' +
   '</div>';
 }
-
 function destroyChart(id) {
   if (_charts[id]) { try { _charts[id].destroy(); } catch(e){} _charts[id]=null; }
 }
-
-function fmtISO(d) {
-  return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
-}
-function pad2(n) { return n<10?'0'+n:String(n); }
-
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* JSONP with fired guard */
+/* ═══════════════════════════════════════════════════════
+   JSONP — standard (fire-and-forget, 30s timeout)
+   and cancellable variant for the modal lazy-load.
+═══════════════════════════════════════════════════════ */
 function jsonp(url, cb) {
-  var id='cb_'+Date.now()+'_'+Math.floor(Math.random()*99999), t=null, fired=false;
-  function cleanup() {
-    if(t){clearTimeout(t);t=null;}
-    var s=document.getElementById(id); if(s){try{document.body.removeChild(s);}catch(e){}}
-    try{delete window[id];}catch(e){window[id]=undefined;}
-  }
-  window[id]=function(data){ if(fired)return; fired=true; cleanup(); cb(data); };
-  t=setTimeout(function(){ if(fired)return; fired=true; cleanup(); cb(null); },30000);
-  var s=document.createElement('script'); s.id=id;
-  s.src=url+'&callback='+id;
-  s.onerror=function(){ if(fired)return; fired=true; cleanup(); cb(null); };
-  document.body.appendChild(s);
+  var cancel = jsonpCancellable(url, cb);
+  return cancel;
 }
 
-if(!String.prototype.padStart){ String.prototype.padStart=function(l,c){ var s=String(this); while(s.length<l)s=(c||' ')+s; return s; }; }
+/* Returns a cancel() function. If called before the response
+   arrives, the callback is suppressed and the script tag is
+   removed. Safe to call after resolution (no-op). */
+function jsonpCancellable(url, cb) {
+  var id    = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
+  var t     = null;
+  var fired = false;
+
+  function cleanup() {
+    if (t) { clearTimeout(t); t = null; }
+    var s = document.getElementById(id);
+    if (s) { try { document.body.removeChild(s); } catch(e) {} }
+    try { delete window[id]; } catch(e) { window[id] = undefined; }
+  }
+
+  window[id] = function(data) {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(data);
+  };
+
+  t = setTimeout(function() {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(null);
+  }, 30000);
+
+  var s   = document.createElement('script');
+  s.id    = id;
+  s.src   = url + '&callback=' + id;
+  s.onerror = function() {
+    if (fired) return;
+    fired = true;
+    cleanup();
+    cb(null);
+  };
+  document.body.appendChild(s);
+
+  // Cancel function: suppress the callback and clean up
+  return function cancel() {
+    if (fired) return;
+    fired = true;
+    cleanup();
+  };
+}
+
+if (!String.prototype.padStart) {
+  String.prototype.padStart = function(l,c){ var s=String(this); while(s.length<l)s=(c||' ')+s; return s; };
+}
 </script>
 </body>
 </html>
